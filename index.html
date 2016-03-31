@@ -1,1 +1,162 @@
-test
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Urushi</title>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
+
+	<link rel="shortcut icon" href="./gh-pages-resoucres/favicon.ico" type="image/x-icon">
+
+	<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<link rel="stylesheet" href="./gh-pages-resoucres/highlight/styles/default.css">
+	<link rel="stylesheet" href="./gh-pages-resoucres/highlight/styles/rainbow.css">
+	<link rel="stylesheet" href="./gh-pages-resoucres/material.css">
+	<link rel="stylesheet" href="./gh-pages-resoucres/style.css">
+
+	<script src="./gh-pages-resoucres/highlight/highlight.pack.js"></script>
+	<script type="text/javascript">
+		hljs.initHighlightingOnLoad();
+	</script>
+</head>
+<body>
+	<header class="header hidden"></header>
+	<section class="concept">
+		<div class="row">
+			<ul class="table">
+				<li class="urushi-logo-wrapper">
+					<img class="urushi-logo" src="./gh-pages-resoucres/urushi-icon.png">
+				</li>
+				<li class="message">
+					<h1>Urushi</h1>
+					<p>
+						Urushiは、Google Material designのポリシーに則ったWeb component frameworkです。<br>
+						HTML, CSS, JavaScriptをコンポーネントとして提供します。<br>
+						インタラクティブなWeb componentを大規模開発で利用するための作成しました。<br>
+						UrushiはWeb componentの他にWeb componentを作成する機能も提供します。
+					</p>
+				</li>
+			</ul>
+			<div class="button-area">
+				<a class="button button-raised button-download"><i class="material-icons md-dark">file_download</i>GET URUSHI v0.5</a>
+				<a class="button button-raised button-github" href="https://github.com/future-architect/urushi" target="_blank"><img src="./gh-pages-resoucres/github.png">GITHUB</a>
+				<a class="button button-raised button-start" href="./" target="_blank">get started</a>
+			</div>
+		</div>
+	</section>
+	<section class="introduction">
+		<div class="row">
+			<div class="intro-box">
+				<h2>
+					<i class="material-icons md-dark md-36">card_giftcard</i>
+					<span>クリエイターのためのFramework</span>
+				</h2>
+				<p>
+					Urushiは、Web componentを作成するクリエイターのために作成しました。<br>
+					Web componentを1クラスで表現することで、より簡単にWeb applicationを作成することが可能になります。<br>
+					HTMLを定義し、CSSを記述し、JavaScriptで提供する機能を定義すれば、1パックでWeb componentを利用してもらうことが可能です。
+				</p>
+			</div>
+			<div class="intro-box">
+				<h2>
+					<i class="material-icons md-dark md-36">extension</i>
+					<span>Web component</span>
+				</h2>
+				<p>
+					Urushiが提供するWeb componentはオブジェクト指向のクラスとして提供します。<br>
+					そのため、HTML上に存在するWeb componentはすべてインスタンスとして存在します。<br>
+					インスタンスに属性、メソッドが集約されるため、大規模開発でも利用が可能となっています。
+				</p>
+			</div>
+			<div class="intro-box">
+				<h2>
+					<i class="material-icons md-dark md-36">build</i>
+					<span>カスタマイズ</span>
+				</h2>
+				<p>
+					Web component作成のために必要なHTML Template、JavaScriptのクラス機構を提供します。<br>
+					また、Template engineの設定ファイルを記述することで、作成したWeb componentを簡単に利用出来るようになります。
+				</p>
+			</div>
+		</div>
+	</section>
+	<section class="demo hidden">
+		<div class="row">
+		</div>
+	</section>
+	<section class="use reverse">
+		<div class="row">
+			<h2>Web componentの利用方法</h2>
+			<h3 class="white-text-secondary">HTML</h3>
+			<pre><code class="html">
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;meta charset="utf8"&gt;
+&lt;head&gt;
+	&lt;link href="./urushi/material/style/material.css" rel="stylesheet"&gt;
+
+	&lt;script src="./config/requireConfig.js"&gt;&lt;/script&gt;
+	&lt;script src="./lib/js/require.js" data-main="./main"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div <span class="data-urushi">data-urushi-type="panel"</span> <span class="data-urushi">data-urushi-options='{"header" : "Header title"}</span>'&gt;
+		&lt;button <span class="data-urushi">data-urushi-type="button"</span>&gt;CLICK ME&lt;/button&gt;
+	&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+			<p>
+				Urushiは、data-urushi-type属性をタグに追加することでTemplate engineによって自動的にインスタンスが作成されます。<br>
+				data-urushi-optionsにjson形式でコンストラクタ引数を指定することが可能です。
+			</p>
+			<h3 class="white-text-secondary">JavaScript</h3>
+			<pre><code class="javascript dark">
+// main.js
+require(['templateEngine'], function (templateEngine) {
+	templateEngine.renderDocument(document);
+});
+
+</code></pre>
+			<p>
+				Template engineを起動させるために、main.jsをindex.htmlと同じフォルダに作成してください。<br>
+				data-urushi-typeを指定したHTMLタグはすべてUrushiのWeb componentとして置き換わります。
+			</p>
+		</div>
+	</section>
+	<section class="browser">
+		<div class="row">
+			<h2>対応ブラウザ</h2>
+<!-- 
+			<ul class="icon-list hidden">
+				<span class="icon-cell">
+					<span class="browser-icon ie"></span>
+				</span>
+				<span class="icon-cell">
+					<span class="browser-icon ff"></span>
+				</span>
+				<span class="icon-cell">
+					<span class="browser-icon chrome"></span>
+				</span>
+			</ul>
+ -->
+			<p>
+				Microsoft Internet Exploer, Google Chrome, Mozzila Firefoxに対応します。<br>
+				今後のUpdateで、Apple Safari、Tablet向けComponentを搭載し、Androidにも対応を予定しています。
+			</p>
+		</div>
+	</section>
+	<section class="customize">
+		<div class="row">
+		</div>
+	</section>
+	<footer class="footer reverse">
+		<div class="row">
+			© 2016 Future architect inc. Auther Yuzo Hirakawa. Code licensed under the MIT License.
+		</div>
+	</footer>
+</body>
+</html>
