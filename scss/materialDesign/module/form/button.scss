@@ -1,0 +1,167 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+@import "../structure/shadow.scss";
+
+@mixin button-shadow() {
+	@extend .shadow-z-1;
+	transition : box-shadow transform $button-duration cubic-bezier(0.4, 0, 0.2, 1);
+	&:active:not(.button-link) {
+		@extend .shadow-z-3;
+	}
+
+	&:hover {
+		@extend .shadow-z-2-hover;
+	}
+}
+
+.button {
+	position : relative;
+	margin : 10px 1px;
+	border : 0;
+	padding : 8px 30px;
+	font-weight : 600;
+
+	cursor : pointer;
+	border-radius : 4px;
+	text-transform : uppercase;
+	text-decoration : none;
+	@include button-variant($button, $button-text);
+
+	&:hover:not(.button-link) {
+		@extend .shadow-z-2-hover;
+	}
+	transition : box-shadow $button-duration cubic-bezier(0.4, 0, 0.2, 1);
+	&:active:not(.button-link) {
+		@extend .shadow-z-3;
+	}
+	outline : none !important;
+
+	&.button-raised {
+		@include button-shadow();
+	}
+
+	&.button-flat {
+		box-shadow : none !important;
+		&.button-default:hover {
+			background : none;
+		}
+	}
+
+	&.button-link {
+		color : $text-light;
+		&:hover {
+			color : $text-light;
+		}
+	}
+}
+	
+.button-group,
+.button-group-vertical {
+	position : relative;
+	margin : 10px 1px;
+	border-radius : 4px;
+
+	@include button-shadow();
+	&.open .dropdown-toggle {
+		box-shadow : none;
+	}
+	&.button-group-raised {
+		@include button-shadow();
+	}
+	.button,
+	.button:active,
+	.button-group {
+		margin : 0;
+		box-shadow : none !important;
+	}
+	.button:active .caret {
+		margin-left : 1px;
+	}
+}
+.button-group-flat {
+	box-shadow : none !important;
+}
+
+.button-tab {
+	margin : 0;
+	padding : 15px;
+	width : 56px;
+	height : 56px;
+	font-size : 26px;
+
+	&,
+	&:hover {}
+	
+	&,
+	.ripple-wrapper {
+		border-radius : 100%;
+	}
+
+	&.button-mini {
+		padding : 13px;
+		width : 40px;
+		height : 40px;
+		font-size : 15px;
+	}
+}
+
+/* button classes. set button and button-default - button-primary-accent to button's 'class. */
+.button-default {
+	&:not([class~="button-flat"]) {
+		@include button-variant($button-default, $button-default-text);
+	}
+	&.button-flat {
+		@include button-variant(transparent, $button-flat-default-text);
+	}
+}
+.button-primary {
+	&:not([class~="button-flat"]) {
+		@include button-variant($button-primary, $button-primary-text);
+	}
+	&.button-flat {
+		@include button-variant(transparent, $button-flat-primary-text);
+	}
+}
+.button-success {
+	&:not([class~="button-flat"]) {
+		@include button-variant($button-success, $button-success-text);
+	}
+	&.button-flat {
+		@include button-variant(transparent, $button-flat-success-text);
+	}
+}
+.button-info {
+	&:not([class~="button-flat"]) {
+		@include button-variant($button-info, $button-info-text);
+	}
+	&.button-flat {
+		@include button-variant(transparent, $button-flat-info-text);
+	}
+}
+.button-warning {
+	&:not([class~="button-flat"]) {
+		@include button-variant($button-warning, $button-warning-text);
+	}
+	&.button-flat {
+		@include button-variant(transparent, $button-flat-warning-text);
+	}
+}
+.button-danger {
+	&:not([class~="button-flat"]) {
+		@include button-variant($button-danger, $button-danger-text);
+	}
+	&.button-flat {
+		@include button-variant(transparent, $button-flat-danger-text);
+	}
+}
+.button-accent {
+	&:not([class~="button-flat"]) {
+		@include button-variant($button-accent, $button-accent-text);
+	}
+	&.button-flat {
+		@include button-variant(transparent, $button-flat-accent-text);
+	}
+}
+.button-default-accent:not([class~="button-flat"]) {
+	@include button-variant(transparent, $button-default-accent-text);
+}

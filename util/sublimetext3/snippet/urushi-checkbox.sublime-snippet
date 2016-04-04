@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<input id="${1:}" data-urushi-type="checkbox">
+]]></content>
+	<tabTrigger>urushi-checkbox</tabTrigger>
+	<scope>text.html</scope>
+	<description>&lt;urushi-checkbox&gt;</description>
+</snippet>

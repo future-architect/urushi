@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Toggle test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link href="../../util/test/jasmine/lib/jasmine.css" rel="stylesheet">
+	<link href="../../urushi/material/style/material.css" rel="stylesheet">
+	<link href="../test.css" rel="stylesheet">
+	<style type="text/css">
+		.toggle-button {
+			margin : 24px;
+		}
+	</style>
+
+	<script src="../../util/test/jasmine/lib/jasmine.js"></script>
+	<script src="../../util/test/jasmine/lib/jasmine-html.js"></script>
+	<script src="../../util/test/testReporter.js"></script>
+
+	<script src="../../config/requireConfig.js"></script>
+	<script src="../../config/testConfig.js"></script>
+	<script src="../../lib/js/require.js" data-main="./main"></script>
+</head>
+<body>
+	<h1>Toggle unit test.</h1>
+	<div class="test-area">
+		Default<input data-urushi-type="togglebutton" checked>
+		Primary<input data-urushi-type="togglebutton" checked>
+		Success<input data-urushi-type="togglebutton">
+		Info<input data-urushi-type="togglebutton">
+		Warning<input data-urushi-type="togglebutton">
+		Danger<input data-urushi-type="togglebutton">
+		Disabled<input data-urushi-type="togglebutton" checked disabled>
+	</div>
+	<div class="test-area" id="script-modules"></div>
+</body>
+</html>

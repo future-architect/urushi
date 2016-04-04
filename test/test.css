@@ -1,0 +1,14 @@
+.test-area {
+	background-color: white;
+	padding: 16px;
+	width : 100%;
+}
+
+.jasmine_reporter .alert {
+	background-color: transparent;
+	color: inherit;
+	padding : 0;
+}
+body {
+	padding : 8px;
+}

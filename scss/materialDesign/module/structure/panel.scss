@@ -1,0 +1,49 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+@import "../structure/shadow.scss";
+
+.panel {
+	border-radius : 2px;
+	border : 0;
+	background-color : $panel-background;
+	@extend .shadow-z-1;
+
+	.panel-header {
+		border-bottom : 1px solid transparent;
+		border-top-left-radius : 3px;
+		border-top-right-radius : 3px;
+		padding : 10px 15px;
+		background-color : $panel-header-default;
+		color : $panel-header-default-text;
+	}
+	.panel-body {
+		padding : 15px;
+	}
+	.panel-footer {
+		border-top : 1px solid $panel-footer-border-top;
+		border-top-left-radius : 3px;
+		border-top-right-radius : 3px;
+		padding : 10px 15px;
+		background-color : $panel-footer;
+		color : $panel-footer-text;
+	}
+}
+
+.panel-default {
+	@include panel-variant($panel-header-default, $panel-header-default-text);
+}
+.panel-primary {
+	@include panel-variant($panel-header-primary, $panel-header-primary-text);
+}
+.panel-success {
+	@include panel-variant($panel-header-success, $panel-header-success-text);
+}
+.panel-info {
+	@include panel-variant($panel-header-info, $panel-header-info-text);
+}
+.panel-warning {
+	@include panel-variant($panel-header-warning, $panel-header-warning-text);
+}
+.panel-danger {
+	@include panel-variant($panel-header-danger, $panel-header-danger-text);
+}

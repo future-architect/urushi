@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+<select id="${1:}" data-urushi-type="dropdown">
+ <option value="${2:1}">label1</option>
+ <option value="${3:2}">label2</option>
+ <option value="${4:3}">label3</option>
+ </select>
+]]></content>
+	<tabTrigger>urushi-dropdown</tabTrigger>
+	<scope>text.html</scope>
+	<description>&lt;urushi-dropdown&gt;</description>
+</snippet>

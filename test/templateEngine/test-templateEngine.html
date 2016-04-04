@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>urushi templateEngine test.</title>
+	<meta charset=utf8>
+	<link href="../urushi/material/style/material.css" rel="stylesheet">
+	<style type="text/css">
+		body {
+			margin : 16px;
+		}
+		body > div:not([class~=modal]):not([class~=popover]) {
+			margin : 20px 4px;
+		}
+		.contextMenu-wrapper {
+			margin : auto;
+		}
+		.grid-area {
+			height : 450px;
+		}
+	</style>
+	<script src="./requirePathes.js"></script>
+	<script src="../lib/js/require.js" data-main="./test-templateEngine.js"></script>
+</head>
+<body>
+	<!-- grid -->
+	<div class='grid-area'>
+		<table id='' data-urushi-type='grid' data-urushi-options='{"rowsPerPage" : 50, "paginationArea" : "above"}'>
+			<thead>
+				<tr>
+					<th name='name1'>column1</th>
+					<th name='name2'>column2</th>
+					<th name='name3'>column3</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<!-- hamburger -->
+	<div>
+		
+	</div><span id="hamburger" data-urushi-type="hamburger"></span>
+	<!-- contextmenu -->
+	<div>
+		<select id="contextmenu" data-urushi-type="contextmenu">
+			<option id='item1' class='mdi-content-mail'>label1</option>
+			<option id='item2' class='mdi-hardware-headset'>label2</option>
+			<option id='item3' class=''>label3</option>
+		</select>
+	</div>
+	<!-- button -->
+	<div>
+		<button id="button" class="buttonClass test-class layout" data-urushi-type="button">button name</button>
+	</div>
+	<!-- checkbox -->
+	<div>
+		<input id="checkbox" class="checkboxClass" data-urushi-type="checkbox" checked>label
+	</div>
+	<!-- radiobox -->
+	<div id="test">
+		<input id="radiobox1" class="radioboxClass" data-urushi-type="radiobox" name="radioName" value="value1" >label value1
+		<input id="radiobox2" class="radioboxClass" data-urushi-type="radiobox" name="radioName" value="value2" checked>label value2
+	</div>
+	<!-- alert -->
+	<div id="alert" class="alertClass" data-urushi-type="alert" data-urushi-options='{"header" : "", "isDisplayCloseIcon" : true}'>content</div>
+	<!-- dialog -->
+	<div id="dialog" class="dialogClass" data-urushi-type="dialog" data-urushi-options='{"header" : "Dialog title", "footer" : "dialog footer message", "isDisplayCloseIcon" : true}'>
+		<!-- div[data-urushi-type="panel"]のinnerHTMLをPanel.contentに置き換える -->
+		<p>contens. test message.</p>
+		<div>
+			<span class="hoge">message 1</span>
+			<span class="hoge">message 2</span>
+		</div>
+	</div>
+	<!-- dropdown -->
+	<div>
+		<select id="dropdown" class="dropdownClass" data-urushi-type="dropdown" value="3">
+			<option value="1">label1</option>
+			<option value="2">label2</option>
+			<option value="3">label3</option>
+		</select>
+	</div>
+	<!-- input -->
+	<div>
+		<input id="input" class="inputClass" type="text" value="text" placeholder="placeholder message." data-urushi-type="input" data-urushi-options='{"hint" : ""}'>
+	</div>
+	<!-- panel -->
+	<div id="panel" class="panelClass" data-urushi-type="panel" data-urushi-options='{"header" : "Contents title", "footer" : "footer message"}'>
+		<!-- div[data-urushi-type="panel"]のinnerHTMLをPanel.contentに置き換える -->
+		<p>contens. test message.</p>
+		<div>
+			<span class="hoge">message 1</span>
+			<span class="hoge">message 2</span>
+		</div>
+		<div>
+			<button data-urushi-type="button">button in panel</button>
+		</div>
+		message.
+	</div>
+	<!-- textarea -->
+	<div>
+		<textarea id="textarea" class="textareaClass" value="text" placeholder="placeholder message." data-urushi-type="textarea" data-urushi-options='{"hint" : "test", "value" : "test text"}'></textarea>
+	</div>
+	<!-- toggleButton -->
+	<div>
+		label<input id="toggleButton1" class="toggleButtonClass" data-urushi-type="toggleButton" checked>
+	</div>
+	<div>
+		<input id="toggleButton2" class="toggleButtonClass" data-urushi-type="toggleButton">label
+	</div>
+	<!-- tooltip on buton -->
+	<div>
+		<button id="tooltipOnButton" class="buttonClass" data-urushi-type="button" data-urushi-addition-type="tooltip" data-urushi-addition-options='{"content" : "tooltip message."}'>button name</button>
+	</div>
+ </body>
+</html>

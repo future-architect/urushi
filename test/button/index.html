@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Button test</title>
+	<meta charset="utf8">
+
+	<link href="../../util/test/jasmine/lib/jasmine.css" rel="stylesheet">
+	<link href="../../urushi/material/style/material.css" rel="stylesheet">
+	<link href="../test.css" rel="stylesheet">
+
+	<script src="../../util/test/jasmine/lib/jasmine.js"></script>
+	<script src="../../util/test/jasmine/lib/jasmine-html.js"></script>
+	<script src="../../util/test/testReporter.js"></script>
+
+	<script src="../../config/requireConfig.js"></script>
+	<script src="../../config/testConfig.js"></script>
+	<script src="../../lib/js/require.js" data-main="./main"></script>
+</head>
+<body>
+	<h1>Button unit test.</h1>
+	<div class="test-area">
+		<h2>buttons</h2>
+		<button id="button1" data-urushi-type="button">Button</button>
+		<button id="button2" data-urushi-type="button" class="button-default">Default Button</button>
+		<button id="button3" data-urushi-type="button" class="button-primary">Primary Button</button>
+		<button id="button4" data-urushi-type="button" class="button-success">Success Button</button>
+		<button id="button5" data-urushi-type="button" class="button-info">Info Button</button>
+		<button id="button6" data-urushi-type="button" class="button-warning">Warning Button</button>
+		<button id="button7" data-urushi-type="button" class="button-danger">Danger Button</button>
+		<button id="button8" data-urushi-type="button" class="button-accent">Accent Button</button>
+		<button id="button9" data-urushi-type="button" class="button-default-accent">Default Accent Button</button>
+		<button id="button10" data-urushi-type="button" disabled>Disabled Button</button>
+		<button id="button11" data-urushi-type="button" class="button-primary" disabled>Disabled Primary Button</button>
+
+		<h2>flat buttons</h2>
+		<button id="button-flat1" data-urushi-type="button" class="button-flat">Flat Button</button>
+		<button id="button-flat2" data-urushi-type="button" class="button-flat button-default">Default Flat Button</button>
+		<button id="button-flat3" data-urushi-type="button" class="button-flat button-primary">Primary Flat Button</button>
+		<button id="button-flat4" data-urushi-type="button" class="button-flat button-success">Success Flat Button</button>
+		<button id="button-flat5" data-urushi-type="button" class="button-flat button-info">Info Flat Button</button>
+		<button id="button-flat6" data-urushi-type="button" class="button-flat button-warning">Warning Flat Button</button>
+		<button id="button-flat7" data-urushi-type="button" class="button-flat button-danger">Danger Flat Button</button>
+		<button id="button-flat8" data-urushi-type="button" class="button-flat button-accent">Accent Flat Button</button>
+		<button id="button-flat9" data-urushi-type="button" class="button-flat" disabled>Disabled Flat Button</button>
+		<button id="button-flat10" data-urushi-type="button" class="button-flat button-primary" disabled>Disabled Flat Primary Button</button>
+
+		<h2>raised buttons</h2>
+		<button id="button-raised1" data-urushi-type="button" class="button-raised">Raised Button</button>
+		<button id="button-raised2" data-urushi-type="button" class="button-raised button-default">Default Raised Button</button>
+		<button id="button-raised3" data-urushi-type="button" class="button-raised button-primary">Primary Raised Button</button>
+		<button id="button-raised4" data-urushi-type="button" class="button-raised button-success">Success Raised Button</button>
+		<button id="button-raised5" data-urushi-type="button" class="button-raised button-info">Info Raised Button</button>
+		<button id="button-raised6" data-urushi-type="button" class="button-raised button-warning">Warning Raised Button</button>
+		<button id="button-raised7" data-urushi-type="button" class="button-raised button-danger">Danger Raised Button</button>
+		<button id="button-raised8" data-urushi-type="button" class="button-raised button-accent">Accent Raised Button</button>
+		<button id="button-raised9" data-urushi-type="button" class="button-raised" disabled>Disabled Raised Button</button>
+		<button id="button-raised10" data-urushi-type="button" class="button-raised button-primary" disabled>Disabled Raised Primary Button</button>
+
+		<h2>buttons test</h2>
+		<button id="content-dom" data-urushi-type="button"><span style="color: red;">content dom</span></button>
+	</div>
+	<div class="test-area" id="script-modules"></div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<input id="${1:}" data-urushi-type="togglebutton">
+]]></content>
+	<tabTrigger>urushi-toggle-button</tabTrigger>
+	<scope>text.html</scope>
+	<description>&lt;urushi-toggle-button&gt;</description>
+</snippet>

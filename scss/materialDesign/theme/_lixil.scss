@@ -1,0 +1,79 @@
+@import "../base/colors.scss";
+
+$dark-900 : rgba(5, 2, 0, 0.73);
+$dark-600 : rgba(5, 2, 0, 0.50);
+
+$text-light : $light-1000;
+$text-light-secondary : $light-750;
+$text-light-hint : $light-750;
+
+$text-dark : $dark-900;
+$text-dark-secondary : $dark-600;
+$text-dark-hint : $dark-600;
+
+$icon-light : $light-1000;
+$icon-light-inactive : $light-450;
+
+$icon-dark : $dark-600;
+$icon-dark-inactive : $dark-400;
+
+$disabled-light : $light-450;
+$disabled-dark : $dark-400;
+
+$divider-light : $light-300;
+$divider-dark : $dark-300;
+
+$background-color : $gray-200;
+$backgrtound-color-inverse : $gray-800;
+
+$default-light : #D6E8F1;			// Label color must use text-dark.
+$default : #318CBB;					// Label color must use text-light.
+$default-dark : #2C7EA9;			// Label color must use text-light.
+$default-light-text : $text-dark;
+$default-text : $text-light;
+$default-dark-text : $text-light;
+
+$accent-light : $orange-A200;		// Label color must use text-dark.
+$accent : #FF9800;					// Label color must use text-dark.
+$accent-dark : #D86E00;				// Label color must use text-light.
+$accent-light-text : $text-dark;
+$accent-text : $text-light;
+$accent-dark-text : $text-light;
+
+$primary-light : $accent-light;
+$primary : $accent;
+$primary-dark : $accent-dark;
+$primary-light-text : $accent-light-text;
+$primary-text : $accent-text;
+$primary-dark-text : $accent-dark-text;
+
+$success-light : $default-light;	// Label color must use text-dark.
+$success : $default;				// Label color must use text-light.
+$success-dark : $default-dark;		// Label color must use text-light.
+$success-light-text : $default-light-text;
+$success-text : $default-text;
+$success-dark-text : $default-dark-text;
+
+// $info-light : #DCEDC8;			// Label color must use text-dark.
+// $info : #6BB03B;					// Label color must use text-light.
+// $info-dark : #619F35;			// Label color must use text-light.
+$info-light : $default-light;		// Label color must use text-dark.
+$info : $default;					// Label color must use text-light.
+$info-dark : $default-dark;			// Label color must use text-light.
+$info-light-text : $text-dark;
+$info-text : $text-light;
+$info-dark-text : $text-light;
+
+$warning-light : $accent-light;		// Label color must use text-dark.
+$warning : $accent;					// Label color must use text-dark.
+$warning-dark : $accent-dark;		// Label color must use text-light.
+$warning-light-text : $accent-light-text;
+$warning-text : $accent-text;
+$warning-dark-text : $accent-dark-text;
+
+$danger-light : $red-A100;			// Label color must use text-dark.
+$danger : #CE576D;					// Label color must use text-dark.
+$danger-dark : #BA4E62;				// Label color must use text-light.
+$danger-light-text : $text-dark;
+$danger-text : $text-light;
+$danger-dark-text : $text-light;

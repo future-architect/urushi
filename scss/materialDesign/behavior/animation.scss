@@ -1,0 +1,89 @@
+@import "../base/_variables.scss";
+@import "../base/_mixin.scss";
+
+@include keyframes(fade-in) {
+	0% {
+		display : none;
+		opacity : 0;
+	}
+	1% {
+		display : block;
+		opacity : 0;
+	}
+	100% {
+		display : block;
+		opacity : 1;
+	}
+}
+@include keyframes(fade-out) {
+	0% {
+		display : block;
+		opacity : 1;
+	}
+	99% {
+		display : block;
+		opacity : 0;
+	}
+	100% {
+		display : none;
+		opacity : 0;
+	}
+}
+
+.fade {
+	opacity : 0;
+	@include transition(opacity $duration linear);
+	&.in {
+		opacity : 1;
+	}
+}
+
+@mixin wipe($width) {
+	&.wipe {
+		opacity : 0;
+		width : 0;
+		@include transition(all $duration ease-in);
+		&.in {
+			opacity : 1;
+			width : $width;
+		}
+	}
+}
+
+@include keyframes(ripple-on) {
+	0% {
+		@include transform(scale(0));
+		opacity : 0;
+	}
+	50% {
+		@include transform(scale(1));
+		opacity : 0.2;
+	}
+	99% {
+		@include transform(scale(1));
+		opacity : 0;
+	}
+	100% {
+		@include transform(scale(0));
+		opacity : 0;
+	}
+}
+
+@include keyframes(ripple-off) {
+	0% {
+		@include transform(scale(0));
+		opacity : 0;
+	}
+	50% {
+		@include transform(scale(1));
+		opacity : 0.2;
+	}
+	99% {
+		@include transform(scale(1));
+		opacity : 0;
+	}
+	100% {
+		@include transform(scale(0));
+		opacity : 0;
+	}
+}

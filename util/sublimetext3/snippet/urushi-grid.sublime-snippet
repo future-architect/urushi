@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+<table id='' data-urushi-type='grid' data-urushi-options='{"rowsPerPage":50, "paginationArea":"above"}'>
+ <tr>
+ <th name='name1'>column1</th>
+ <th name='name2'>column2</th>
+ <th name='name3'>column3</th>
+ </tr>
+ </table>
+]]></content>
+	<tabTrigger>urushi-grid</tabTrigger>
+	<scope>text.html</scope>
+	<description>&lt;urushi-grid&gt;</description>
+</snippet>

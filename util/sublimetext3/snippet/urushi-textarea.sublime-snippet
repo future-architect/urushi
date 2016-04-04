@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<textarea id="${1:}" value="${2:}" data-urushi-type="textarea" data-urushi-options='{"hint" : "${3:hint message.}"}'></textarea>
+]]></content>
+	<tabTrigger>urushi-textarea</tabTrigger>
+	<scope>text.html</scope>
+	<description>&lt;urushi-textarea&gt;</description>
+</snippet>

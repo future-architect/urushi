@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<input id="${1:}" data-urushi-type="radiobox" name="${2:}" value="${3:}"> label title
+]]></content>
+	<tabTrigger>urushi-radiobox</tabTrigger>
+	<scope>text.html</scope>
+	<description>&lt;urushi-radiobox&gt;</description>
+</snippet>

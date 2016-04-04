@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>urushi FileInput test.</title>
+	<meta charset=utf8>
+	<link href="../../util/test/jasmine/lib/jasmine.css" rel="stylesheet">
+	<link href="../../urushi/material/style/material.css" rel="stylesheet">
+	<link href="../test.css" rel="stylesheet">
+	<style type="text/css">
+		body {
+			margin : 16px;
+		}
+		.button-layout {
+			margin : 16px;
+		}
+	</style>
+	
+	<script src="../../util/test/jasmine/lib/jasmine.js"></script>
+	<script src="../../util/test/jasmine/lib/jasmine-html.js"></script>
+	<script src="../../util/test/testReporter.js"></script>
+
+	<script src="../../config/requireConfig.js"></script>
+	<script src="../../config/testConfig.js"></script>
+	<script src="../../lib/js/require.js" data-main="./main"></script>
+</head>
+<body style="overflow: auto;">
+	<div class="test-create">
+	</div>
+	<div class="test-template-engine">
+		<h2>template engine test.</h2>
+		<input
+			id="myFileInput"
+			class="optional-class"
+			data-urushi-type="fileinput"
+			data-urushi-options='{"url" : "/upload/url.json", "allowedtypes" : "jpeg,jpg,png,gif", "label" : "Example"}'
+			></input>
+		<input
+			id="myFileInput2"
+			class="disabled"
+			data-urushi-type="fileinput"
+			data-urushi-options='{"url" : "/upload/url.json", "allowedtypes" : "jpeg,jpg,png,gif", "label" : "Disable"}'
+			></input>
+		<input
+			id="myFileInput3"
+			data-urushi-type="fileinput"
+			data-urushi-options='{"url" : "/urushi/test/uploadManagerTest.json", "label" : "No allowedtypes"}'
+			></input>
+	</div>
+</body>
+</html>

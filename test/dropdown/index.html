@@ -1,0 +1,77 @@
+<!-- このHTMLは基本的に変更しない。パスが変わる場合のみ手を加える必要がある -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dropdown test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link href="../../util/test/jasmine/lib/jasmine.css" rel="stylesheet">
+	<link href="../../urushi/material/style/material.css" rel="stylesheet">
+	<link href="../test.css" rel="stylesheet">
+	<style type="text/css">
+		.form-control-wrapper {
+			width : 320px;
+			margin : 24px;
+		}
+	</style>
+
+	<script src="../../util/test/jasmine/lib/jasmine.js"></script>
+	<script src="../../util/test/jasmine/lib/jasmine-html.js"></script>
+	<script src="../../util/test/testReporter.js"></script>
+
+	<script src="../../config/requireConfig.js"></script>
+	<script src="../../config/testConfig.js"></script>
+	<script src="../../lib/js/require.js" data-main="./main"></script>
+</head>
+<body>
+	<h1>Dropdown unit test.</h1>
+	<div class="test-area">
+		<select data-urushi-type="dropdown">
+			<option value="1">label1</option>
+			<option value="2">label2</option>
+			<option value="3">label3</option>
+		</select>
+		<select data-urushi-type="dropdown" class="dropdown-default" value="1">
+			<option value="1">label1</option>
+			<option value="2">label2</option>
+			<option value="3">label3</option>
+		</select>
+		<select data-urushi-type="dropdown" class="dropdown-primary" value="2">
+			<option value="1">label1</option>
+			<option value="2">label2</option>
+			<option value="3">label3</option>
+		</select>
+		<select data-urushi-type="dropdown" class="dropdown-success" value="3">
+			<option value="1">label1</option>
+			<option value="2">label2</option>
+			<option value="3">label3</option>
+		</select>
+		<select data-urushi-type="dropdown" class="dropdown-info">
+			<option value="1">label1</option>
+			<option value="2">label2</option>
+			<option value="3">label3</option>
+		</select>
+		<select data-urushi-type="dropdown" class="dropdown-warning">
+			<option value="1">label1</option>
+			<option value="2">label2</option>
+			<option value="3">label3</option>
+		</select>
+		<select data-urushi-type="dropdown" class="dropdown-danger">
+			<option value="1">label1</option>
+			<option value="2">label2</option>
+			<option value="3">label3</option>
+		</select>
+		<select data-urushi-type="dropdown" class="dropdown-primary" value="2" disabled>
+			<option value="1">label1</option>
+			<option value="2">label2</option>
+			<option value="3">label3</option>
+		</select>
+		<select data-urushi-type="dropdown" class="dropdown-primary" value="2" readonly>
+			<option value="1">label1</option>
+			<option value="2">label2</option>
+			<option value="3">label3</option>
+		</select>
+	</div>
+	<div class="test-area" id="script-modules"></div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<div id="${1:}" data-urushi-type="panel" data-urushi-options='{"header" : "${2:Header title}"}'></div>
+]]></content>
+	<tabTrigger>urushi-panel</tabTrigger>
+	<scope>text.html</scope>
+	<description>&lt;urushi-panel&gt;</description>
+</snippet>

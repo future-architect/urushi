@@ -1,0 +1,54 @@
+@import "../base/variables.scss";
+@import "../base/mixin.scss";
+
+.icon {}
+
+.icon,
+.icon-default {
+	&:not([class="icon-light"]) {
+		@include icon-variant($icon-default);
+	}
+	&.icon-light {
+		@include icon-variant($icon-default-light);
+	}
+}
+.icon-primary {
+	&:not([class="icon-light"]) {
+		@include icon-variant($icon-primary);
+	}
+	&.icon-light {
+		@include icon-variant($icon-primary-light);
+	}
+}
+.icon-success {
+	&:not([class="icon-light"]) {
+		@include icon-variant($icon-success);
+	}
+	&.icon-light {
+		@include icon-variant($icon-success-light);
+	}
+}
+.icon-info {
+	&:not([class="icon-light"]) {
+		@include icon-variant($icon-info);
+	}
+	&.icon-light {
+		@include icon-variant($icon-info-light);
+	}
+}
+.icon-warning {
+	&:not([class="icon-light"]) {
+		@include icon-variant($icon-warning);
+	}
+	&.icon-light {
+		@include icon-variant($icon-warning-light);
+	}
+}
+.icon-danger {
+	&:not([class="icon-light"]) {
+		@include icon-variant($icon-danger);
+	}
+	&.icon-light {
+		@include icon-variant($icon-danger-light);
+	}
+}
