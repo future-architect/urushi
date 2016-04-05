@@ -53,6 +53,46 @@ ul:after {
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
+/* Desktop font size english and japanese */
+body {
+	font-family: 'Roboto', sans-serif;
+
+	background-color: #eeeeee;
+	color: rgba(0, 0, 0, 0.86);
+
+	font-size: 13pt;
+	font-weight: 400;
+}
+body.jp {
+	font-family: 'Noto Sans Japanese', serif;
+
+	font-size: 14pt;
+}
+
+h1 {
+	font-size: 45pt;
+}
+
+h2 {
+	font-size: 24pt;
+	font-weight: 400;
+}
+h3 {
+	font-size: 15pt;
+	font-weight: 400;
+	color: rgba(0, 0, 0, 0.54);
+}
+.jp h3 {
+	font-size: 16pt;
+}
+button, .button {
+	font-size: 14pt;
+	font-weight: 500;
+}
+.jp button, .jp .button {
+	font-size: 15pt;
+}
+
 html, body {
 	width: 100%;
 	height: 100%;
@@ -235,7 +275,19 @@ ul.table > li {
 	}
 }
 @media screen and (max-width: 768px) {
-	.consept {
+	body {
+		font-size: 14pt;
+	}
+	body.jp {
+		font-size: 15pt;
+	}
+	h3 {
+		font-size: 16pt;
+	}
+	.jp h3 {
+		font-size: 17pt;
+	}
+	.concept {
 		padding-top: 42px;
 	}
 	.row {
@@ -262,33 +314,6 @@ ul.table > li {
 	}
 }
 
-/* Skin settings */
-html {
-	font-family: 'Noto Sans Japanese', serif;
-}
-body {
-	background-color: #eeeeee;
-	color: rgba(0, 0, 0, 0.86);
-
-	font-size: 14pt;
-	font-weight: 400;
-}
-h1 {
-	font-size: 45pt;
-}
-h2 {
-	font-size: 24pt;
-	font-weight: 400;
-}
-h3 {
-	font-size: 16pt;
-	font-weight: 400;
-	color: rgba(0, 0, 0, 0.54);
-}
-button, .button {
-	font-size: 15pt;
-	font-weight: 500;
-}
 
 .reverse {
 	background-color: #212121;
@@ -303,7 +328,7 @@ code .data-urushi {
 	text-decoration: underline;
 }
 
-.footer {
+.jp .footer {
 	font-size: 10.5pt;
 	font-weight: 400;
 }
