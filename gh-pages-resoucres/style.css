@@ -21,6 +21,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 	background: transparent;
 }
+header:after,
 div:after,
 ul:after {
 	content: "";
@@ -88,6 +89,24 @@ pre, code {
 	display: none!important;
 	visibility: hidden!important;
 }
+.button {
+	display: inline-block;
+}
+
+.header {
+	position: fixed;
+	z-index:1;
+	width: 100%;
+	padding: 4px 16px;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.0);
+	transition: all 500ms ease-in-out 100ms;
+
+	text-align: right;
+}
+.header.floating {
+	padding: 0px 16px;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
 
 .row {
 	margin: 0 auto;
@@ -126,7 +145,6 @@ ul.table > li {
 	text-align: center;
 }
 .concept .button-area .button {
-	display: inline-block;
 	margin: 8px 16px;
 	line-height: 24px;
 	padding-left: 16px;
@@ -274,7 +292,7 @@ button, .button {
 	color: rgba(255, 255, 255, 1);
 }
 
-.concept {
+.header, .concept {
 	background-color: #66BB6A;
 }
 
