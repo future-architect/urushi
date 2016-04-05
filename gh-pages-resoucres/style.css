@@ -235,6 +235,9 @@ ul.table > li {
 	}
 }
 @media screen and (max-width: 768px) {
+	.consept {
+		padding-top: 42px;
+	}
 	.row {
 		padding: 32px;
 	}
