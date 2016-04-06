@@ -4,6 +4,7 @@ var gulp = require('gulp'),
 	config = require('../config.js');
 
 gulp.task('js-build', function () {
+	'use strict';
 	var i, length;
 	for (i = 0, length = config.js.src.rjs.length; i < length; i++) {
 		gulp.src(config.js.src.rjs[i])
