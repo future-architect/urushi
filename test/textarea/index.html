@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Textarea test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link href="../../util/test/jasmine/lib/jasmine.css" rel="stylesheet">
+	<link href="../../urushi/material/style/material.css" rel="stylesheet">
+	<link href="../test.css" rel="stylesheet">
+	<style type="text/css">
+		.form-control-wrapper {
+			margin : 24px;
+		}
+	</style>
+
+	<script src="../../util/test/jasmine/lib/jasmine.js"></script>
+	<script src="../../util/test/jasmine/lib/jasmine-html.js"></script>
+	<script src="../../util/test/testReporter.js"></script>
+
+	<script src="../../config/requireConfig.js"></script>
+	<script src="../../config/testConfig.js"></script>
+	<script src="../../lib/js/require.js" data-main="./main"></script>
+</head>
+<body>
+	<h1>Textarea unit test.</h1>
+	<div class="test-area">
+		<textarea id="textarea1" data-urushi-type="textarea"></textarea>
+		<textarea id="textarea2" value="some value.
+test message." data-urushi-type="textarea" data-urushi-options='{"hint" : "hint message."}' placeholder="placeholder message."></textarea>
+		<textarea id="textarea3" value="" data-urushi-type="textarea" data-urushi-options='{"hint" : "hint message."}' placeholder="placeholder message."></textarea>
+	</div>
+	<div class="test-area" id="script-modules"></div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<div id="${1:}" data-urushi-type="alert" data-urushi-options='{"header" : "${2:タイトル}"}'>アラートメッセージ</div>
+]]></content>
+	<tabTrigger>urushi-alert</tabTrigger>
+	<scope>text.html</scope>
+	<description>&lt;urushi-alert&gt;</description>
+</snippet>

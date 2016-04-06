@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Checkbox test</title>
+	<meta charset="utf8">
+
+	<link href="../../util/test/jasmine/lib/jasmine.css" rel="stylesheet">
+	<link href="../../urushi/material/style/material.css" rel="stylesheet">
+	<link href="../test.css" rel="stylesheet">
+	
+	<script src="../../util/test/jasmine/lib/jasmine.js"></script>
+	<script src="../../util/test/jasmine/lib/jasmine-html.js"></script>
+	<script src="../../util/test/testReporter.js"></script>
+
+	<script src="../../config/requireConfig.js"></script>
+	<script src="../../config/testConfig.js"></script>
+	<script src="../../lib/js/require.js" data-main="./main"></script>
+</head>
+<body>
+	<h1>Checkbox unit test.</h1>
+	<div class="test-area">
+		<h2>Checkboxs</h2>
+		<input id="checkbox1" data-urushi-type="checkbox">Checkbox
+		<input id="checkbox2" class="checkbox-default" data-urushi-type="checkbox">Default
+		<input id="checkbox3" class="checkbox-primary" data-urushi-type="checkbox" checked>Primary
+		<input id="checkbox4" class="checkbox-success" data-urushi-type="checkbox">Success
+		<input id="checkbox5" class="checkbox-info" data-urushi-type="checkbox" checked>Info
+		<input id="checkbox6" class="checkbox-warning" data-urushi-type="checkbox">Warning
+		<input id="checkbox7" class="checkbox-danger" data-urushi-type="checkbox" checked>Danger
+		<input id="checkbox7" class="checkbox-default" data-urushi-type="checkbox" checked disabled>Dissabled
+	</div>
+	<div class="test-area" id="script-modules"></div>
+</body>
+</html>

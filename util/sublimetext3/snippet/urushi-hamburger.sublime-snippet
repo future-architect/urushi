@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<span id="${1:}" data-urushi-type="hamburger"></span>
+]]></content>
+	<tabTrigger>urushi-hamburger</tabTrigger>
+	<scope>text.html</scope>
+	<description>&lt;urushi-hamburger&gt;</description>
+</snippet>

@@ -1,0 +1,131 @@
+@import "../../base/_mixin.scss";
+
+@import "../../base/_colors.scss";
+@import "../../theme/_lixil.scss";
+
+$tab-text-color : $text-dark;
+$tab-text-secondary-color : $text-dark-secondary;
+$tab-hover-underline-color : $dark-300;
+$tab-active-underline-color : $text-dark;
+$tab-secondary-opacity : 1;
+
+$tab-text-color-default : $default-dark;
+$tab-text-secondary-color-default : $dark-600;
+$tab-hover-underline-color-default : rgba(44, 126, 169, .12); //#2C7EA9 ¤ÎÍ¸ß^
+$tab-active-underline-color-default : $default-dark;
+$tab-secondary-opacity-default : 1;
+
+$tab-text-color-primary : $primary;
+$tab-text-secondary-color-primary : $dark-600;
+$tab-hover-underline-color-primary : rgba(255, 152, 0, .12) ;//#FF9800 ¤ÎÍ¸ß^
+$tab-active-underline-color-primary : $primary;
+$tab-secondary-opacity-primary : 1;
+
+$tab-text-color-success : $success-dark;
+$tab-text-secondary-color-success : $dark-600;
+$tab-hover-underline-color-success : rgba(44, 126, 169, .12); //#2C7EA9 ¤ÎÍ¸ß^
+$tab-active-underline-color-success : $success-dark;
+$tab-secondary-opacity-success : 1;
+
+$tab-text-color-info : $info-dark;
+$tab-text-secondary-color-info : $dark-600;
+$tab-hover-underline-color-info : rgba(44, 126, 169, .12); //#2C7EA9 ¤ÎÍ¸ß^
+$tab-active-underline-color-info : $info-dark;
+$tab-secondary-opacity-info : 1;
+
+$tab-text-color-warning : $warning-dark;
+$tab-text-secondary-color-warning : $dark-600;
+$tab-hover-underline-color-warning : rgba(216, 110, 0, .12); //#D86E00 ¤ÎÍ¸ß^
+$tab-active-underline-color-warning : $warning-dark;
+$tab-secondary-opacity-warning : 1;
+
+$tab-text-color-danger : $danger-dark;
+$tab-text-secondary-color-danger : $dark-600;
+$tab-hover-underline-color-danger : rgba(186, 78, 98, .12); //#BA4E62 ¤ÎÍ¸ß^
+$tab-active-underline-color-danger : $danger-dark;
+$tab-secondary-opacity-danger : 1;
+
+//色設定mixin
+@mixin tab-button-color-variant($text-color, $active-underline-color, $text-secondary-color, $hover-underline-color, $secondary-opacity) {
+	.tab-bar-items-wrapper {
+		.tab-bar-items{
+			.tab-button {
+				color: $text-color;
+				&.inactive {
+					color: $text-secondary-color;
+					opacity : $secondary-opacity;
+					&:hover {
+						border-bottom-color: $hover-underline-color;
+					}
+				}
+				&.active.init-active {
+					border-bottom-color: $active-underline-color;
+				}
+			}
+		}
+		.active-tab-underline {
+			background-color: $active-underline-color;
+		}
+	}
+}
+
+.tab-bar {
+	text-align: right;
+	.tab-bar-items-wrapper {
+		display: inline-block;
+		position: relative;
+		vertical-align: bottom;
+		.tab-bar-items{
+			white-space: nowrap;
+			padding: 0;
+			margin: 0;
+			.tab-button {
+				padding: 8px 30px;
+				font-weight: 600;
+				text-transform: uppercase;
+				cursor: pointer;
+				background-color: transparent;
+				text-align: center;
+				overflow: hidden;
+				display: inline-block;
+				position: relative;
+				vertical-align: bottom;
+
+				border-bottom: solid 2px transparent;
+				transition: border-bottom-color 0.1s ease-out;
+				
+				.ripple-wrapper{
+					border-radius: 0;
+				}
+			}
+		}
+		.active-tab-underline {
+			position: absolute;
+			height: 2px;
+			margin-top: -2px;
+			transition : left 300ms ease-in-out, width 300ms ease-in-out;
+		}
+	}
+
+	//色設定
+	@include tab-button-color-variant($tab-text-color, $tab-active-underline-color, $tab-text-secondary-color, $tab-hover-underline-color, $tab-secondary-opacity);
+
+	&.tab-bar-default {
+		@include tab-button-color-variant($tab-text-color-default, $tab-active-underline-color-default, $tab-text-secondary-color-default, $tab-hover-underline-color-default, $tab-secondary-opacity-default);
+	}
+	&.tab-bar-primary {
+		@include tab-button-color-variant($tab-text-color-primary, $tab-active-underline-color-primary, $tab-text-secondary-color-primary, $tab-hover-underline-color-primary, $tab-secondary-opacity-primary);
+	}
+	&.tab-bar-success {
+		@include tab-button-color-variant($tab-text-color-success, $tab-active-underline-color-success, $tab-text-secondary-color-success, $tab-hover-underline-color-success, $tab-secondary-opacity-success);
+	}
+	&.tab-bar-info {
+		@include tab-button-color-variant($tab-text-color-info, $tab-active-underline-color-info, $tab-text-secondary-color-info, $tab-hover-underline-color-info, $tab-secondary-opacity-info);
+	}
+	&.tab-bar-warning {
+		@include tab-button-color-variant($tab-text-color-warning , $tab-active-underline-color-warning , $tab-text-secondary-color-warning , $tab-hover-underline-color-warning, $tab-secondary-opacity-warning);
+	}
+	&.tab-bar-danger {
+		@include tab-button-color-variant($tab-text-color-danger, $tab-active-underline-color-danger, $tab-text-secondary-color-danger, $tab-hover-underline-color-danger, $tab-secondary-opacity-danger);
+	}
+}

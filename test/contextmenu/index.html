@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ContextMenu test</title>
+	<meta charset="utf8">
+
+	<link href="../../util/test/jasmine/lib/jasmine.css" rel="stylesheet">
+	<link href="../../urushi/material/style/material.css" rel="stylesheet">
+	<link href="../test.css" rel="stylesheet">
+	
+	<script src="../../util/test/jasmine/lib/jasmine.js"></script>
+	<script src="../../util/test/jasmine/lib/jasmine-html.js"></script>
+	<script src="../../util/test/testReporter.js"></script>
+
+	<script src="../../config/requireConfig.js"></script>
+	<script src="../../config/testConfig.js"></script>
+	<script src="../../lib/js/require.js" data-main="./main"></script>
+
+	<style type="text/css">
+		.test-area {
+			background-color: #ddd;
+		}
+		.context-menu-wrapper {
+			margin: 30px auto;
+			/*background-color: blue;*/
+		}
+	</style>
+</head>
+<body>
+	<h1>ContextMenu unit test.</h1>
+	<div class="test-area">
+		<h2>templateEngine tests.</h2>
+		<select id="test" data-urushi-type="contextmenu">
+			<option id='item1' name='item1' class='mdi-content-mail'>label1</option>
+			<option id='item2' name='item2' class='mdi-hardware-headset'>label2</option>
+			<option id='item3' name='item3'>label3</option>
+		</select>
+	</div>
+	<div class="test-area" id="script-modules">	
+		<h2>script tests.</h2>
+	</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+@import "../../behavior/animation.scss";
+
+.alert {
+	border : 0px;
+	border-radius : 0;
+	padding : 16px;
+
+	@include wipe(600px);
+
+	> h4 {
+		margin-top : 0;
+	}
+	> p {
+		margin-bottom : 0;
+	}
+
+	a,
+	.alert-link {
+		color : $text-light;
+	}
+	.close {
+		@include modal-close-button($alert-header-close);
+	}
+
+	* {
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	&.in * {
+		overflow: inherit;
+		white-space: normal;
+	}
+}
+
+.alert,
+.alert-default {
+	@include alert-variant($alert-default, $alert-default-text);
+}
+
+.alert-primary {
+	@include alert-variant($alert-primary, $alert-primary-text);
+}
+
+.alert-success {
+	@include alert-variant($alert-success, $alert-success-text);
+}
+
+.alert-info {
+	@include alert-variant($alert-info, $alert-info-text);
+}
+
+.alert-warning {
+	@include alert-variant($alert-warning, $alert-warning-text);
+}
+
+.alert-danger {
+	@include alert-variant($alert-danger, $alert-danger-text);
+}

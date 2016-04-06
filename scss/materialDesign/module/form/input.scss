@@ -1,0 +1,306 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+@import "../../behavior/animation.scss";
+
+fieldset[disabled] .form-control,
+.form-control-wrapper .form-control,
+.form-control {
+	&,
+	&:focus,
+	&.focus {
+		&:not(textarea):not(select) {
+			height : 28px;
+		}
+		border : 0;
+		border-radius : 0;
+		border-bottom : 1px solid $input-underbar-black;
+		padding : 0;
+		float : none;
+		box-shadow : none;
+		&:disabled {
+			border-style : dashed;
+		}
+	}
+}
+
+select.form-control {
+	height : 23px;
+}
+select[multiple].form-control {
+	&,
+	&:focus,
+	&.focus {
+		height : 85px;
+	}
+}
+
+.form-control-wrapper {
+	position : relative;
+
+	.form-control:focus,
+	.form-control.focus {
+		outline : none;
+	}
+
+	.form-control {
+		background-color : $input-background;
+		display : block;
+		width : 100%;
+		font-size : 14px;
+		line-height : 1.42857143;
+	}
+
+	// hint style, layout and transition.
+	.hint {
+		position : absolute;
+		display : block;
+		font-size : 80%;
+		color : $text-dark-hint;
+		white-space : nowrap;
+
+		opacity : 0;
+		transition : opacity $input-transition-duration ease-in-out;
+	}
+	.form-control:focus ~ .hint,
+	.form-control.focus ~ .hint {
+		opacity : 1;
+	}
+
+	// floating label(placeholder) style, layout and transition.
+	.floating-label {
+		color : $text-dark-hint;
+		position : absolute;
+		pointer-events : none;
+		left : 0px;
+
+		top : 5px;
+		font-size : 14px;
+		white-space : nowrap;
+		
+		opacity : 0;
+		transition : top, font-size, opacity;
+		transition-duration : $input-transition-duration;
+		transition-timing-function : ease-in-out;
+	}
+	.form-control:focus ~ .floating-label,
+	.form-control.focus ~ .floating-label,
+	.form-control:not(.empty) ~ .floating-label {
+		top : -16px;
+		font-size : 74%;
+		opacity : 1;
+	}
+	.form-control:focus:invalid ~ .floating-label,
+	.form-control .focus:invalid ~ .floating-label {
+		color : $input-danger;
+	}
+	.form-control.empty ~ .floating-label {
+		opacity : 1;
+	}
+
+	// input style, layout and transition.
+	.form-control:focus ~ .material-input::after,
+	.form-control .focus ~ .material-input::after {
+		background-color : $input-default;
+	}
+	.form-control:focus:invalid ~ .material-input,
+	.form-control .focus:invalid ~ .material-input {
+		&::before,
+		&::after  {
+			background-color : $input-danger;
+		}
+	}
+	.material-input::before {
+		position : absolute;
+		background-color : $input-default;
+		width : 100%;
+		height : 2px;
+		left : 0;
+		bottom : -1px;
+		content : "";
+
+		@include transform(scaleX(0));
+		transition : transform $input-transition-duration ease-in-out;
+	}
+	.form-control:focus  ~ .material-input::before,
+	.form-control.focus  ~ .material-input::before {
+		@include transform(scaleX(1));
+	}
+
+	// for not support transitoin.
+	.input-transition-unit-underline {
+		position : absolute;
+		background-color : $input-default;
+		width : 0px;
+		height : 2px;
+		left : 0;
+		bottom : -1px;
+	}
+
+	/*
+	.material-input::after {
+		position : absolute;
+		margin-top : -1px;
+		width : 100px;
+		height : 18px;
+		top : 7px;
+		left : 0;
+		pointer-events : none;
+		opacity : 0.9;
+		transform-origin : left;
+		content : "";
+	}
+	*/
+	.input-lg ~ .material-input::after {
+		height : 26px;
+	}
+	textarea {
+		resize: none;
+	}
+	textarea ~ .form-control-highlight {
+		margin-top : -11px;
+	}
+
+	/* focus animation */
+	/*
+	.form-control:focus ~ .material-input::after,
+	.form-control.focus ~ .material-input::after {
+		@include animation(input-highlight $input-animation-duration ease);
+		@include animation-fill-mode(forwards);
+		opacity : 0;
+	}
+	*/
+
+	select ~ .material-input::after {
+		display : none;
+	}
+}
+
+.form-group {
+	&.has-warning {
+		.material-input::before,
+		input.form-control:focus ~ .material-input::after,
+		input.form-control .focus ~ .material-input::after {
+			background : $input-warning;
+		}
+		.control-label,
+		input.form-control:not(.empty) ~ .floating-label {
+			color: $input-warning;
+		}
+	}
+	&.has-error {
+		.material-input::before,
+		input.form-control:focus ~ .material-input::after,
+		input.form-control .focus ~ .material-input::after {
+			background : $input-danger;
+		}
+		.control-label,
+		input.form-control:not(.empty) ~ .floating-label {
+			color : $input-danger;
+		}
+	}
+	&.has-success {
+		.material-input::before,
+		input.form-control:focus ~ .material-input::after,
+		input.form-control .focus ~ .material-input::after {
+			background : $input-success;
+		}
+		.control-label,
+		input.form-control:not(.empty) ~ .floating-label {
+			color : $input-success;
+		}
+	}
+	&.has-info {
+		.material-input::before,
+		input.form-control:focus ~ .material-input::after,
+		input.form-control .focus ~ .material-input::after {
+			background : $input-info;
+		}
+		.control-label,
+		input.form-control:not(.empty) ~ .floating-label {
+			color : $input-info;
+		}
+	}
+}
+
+.input-group {
+	.form-control-wrapper {
+		.form-control {
+			float : none;
+		}
+		margin-right : 5px;
+		margin-left : 5px;
+		bottom : -10px;
+	}
+	.input-group-addon {
+		border : 0;
+	}
+	.input-group-btn .btn {
+		border-radius : 4px;
+	}
+}
+
+select.form-control {
+	border : 0;
+	border-bottom : 1px solid $input-underbar-black;
+	border-radius : 0;
+	box-shadow : none;
+	&:focus,
+	& .focus {
+		border-color : $input-underbar-black;
+		box-shadow : none;
+	}
+}
+
+@include keyframes(input-highlight) {
+	0% {
+		@include transform(scaleX(10%));
+		left : 20%;
+	}
+	98% {
+		@include transform(scaleX(0));
+		left : 0;
+		opacity : 1;
+	}
+	100% {
+		@include transform(scaleX(0));
+		left : 0;
+		opacity : 0;
+	}
+}
+
+// Input files (kinda hack)
+.form-control-wrapper input[type=file] {
+	position : absolute;
+	width : 100%;
+	height : 100%;
+	top : 0;
+	right : 0;
+	bottom : 0;
+	left : 0;
+	z-index : 100;
+	opacity : 0;
+}
+
+// If input tag on dark background pane, input has form-control-light class.
+// Then contrast of border bottom and floating texts (placeholder and hint) are up.
+fieldset[disabled] .form-control-light,
+.form-control-wrapper .form-control-light,
+.form-control-light {
+	&,
+	&:focus,
+	& .focus {
+		border-color : $input-underbar-white;
+	}
+	& ~ div.hint,
+	& ~ div.floating-label {
+		color : $text-light-hint;
+	}
+}
+
+select.form-control-light {
+	border-color : $input-underbar-white;
+	&:focus,
+	& .focus {
+		border-color : $input-underbar-white;
+	}
+}

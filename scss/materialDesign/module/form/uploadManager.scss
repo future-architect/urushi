@@ -1,0 +1,57 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+@import "input.scss";
+
+.upload-manager {
+	position: relative;
+	.filename-col {
+		width: 350px;
+	}
+	.upload-manager-li-wrapper {
+		white-space: nowrap;
+		.form-control-wrapper,.upload-manager-li-buttons {
+			display: inline-block;
+		}
+		.upload-manager-li-done-buttons {
+			display: none;
+		}
+		.form-control-wrapper {
+			.message {
+				@extend .hint;
+				opacity : 1;
+			}
+		}
+
+		&.done {
+			.upload-manager-li-done-buttons {
+				display: inline-block;
+			}
+			.upload-manager-li-buttons {
+				display: none;
+			}
+		}
+	}
+
+	.dropmessage {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		display: none;
+		background-color: rgba(255,255,255,0.8);
+		vertical-align: middle;
+		text-align: center;
+		color: #AAA;
+		font-size: 150%;
+		border: dashed #AAA 3px;
+		border-radius: 10px;
+		padding: 10px;
+	}
+}
+
+.upload-manager-dragenter {
+	.dropmessage {
+		display: block;
+	}
+}

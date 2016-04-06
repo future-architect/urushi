@@ -1,0 +1,30 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+
+.fileinput-wrapper {
+	.fileinput-inline-wrapper {
+		display: inline-block;
+		position: relative;
+		overflow: hidden;
+		white-space: nowrap;
+		vertical-align: bottom; // FireFoxバグの回避 https://bugzilla.mozilla.org/show_bug.cgi?id=491549
+
+		.form-control-wrapper {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		.fileinput-button {
+			display: inline-block;
+		}
+		input.fileinput {
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin: 0;
+			opacity: 0;
+			-ms-filter: 'alpha(opacity=0)';
+			font-size: 200px;
+		}
+	}
+}
+

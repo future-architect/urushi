@@ -1,0 +1,355 @@
+// Red colors.
+$red-50 : #FFEBEE !default;		// Label color must have low contrast.
+$red-100 : #FFCDD2 !default;	// Label color must have low contrast.
+$red-200 : #EF9A9A !default;	// Label color must have low contrast.
+$red-300 : #E57373 !default;	// Label color must have low contrast.
+$red-400 : #EF5350 !default;	// Label color must have low contrast.
+$red-500 : #F44336 !default;	// Label color must have high contrast.
+$red-600 : #E53935 !default;	// Label color must have high contrast.
+$red-700 : #D32F2F !default;	// Label color must have high contrast.
+$red-800 : #C62828 !default;	// Label color must have high contrast.
+$red-900 : #B71C1C !default;	// Label color must have high contrast.
+// Red accent colors.
+$red-A100 : #FF8A80 !default;	// Label color must have low contrast.
+$red-A200 : #FF5252 !default;	// Label color must have high contrast.
+$red-A400 : #FF1744 !default;	// Label color must have high contrast.
+$red-A700 : #D50000 !default;	// Label color must have high contrast.
+
+// Pink colors.
+$pink-50 : #FCE4EC !default;	// Label color must have row contrast.
+$pink-100 : #F8BBD0 !default;	// Label color must have row contrast.
+$pink-200 : #F48FB1 !default;	// Label color must have row contrast.
+$pink-300 : #F06292 !default;	// Label color must have row contrast.
+$pink-400 : #EC407A !default;	// Label color must have row contrast.
+$pink-500 : #E91E63 !default;	// Label color must have high contrast.
+$pink-600 : #D81B60 !default;	// Label color must have high contrast.
+$pink-700 : #C2185B !default;	// Label color must have high contrast.
+$pink-800 : #AD1457 !default;	// Label color must have high contrast.
+$pink-900 : #880E4F !default;	// Label color must have high contrast.
+// Pink accent colors.
+$pink-A100 : #FF80AB !default;	// Label color must have row contrast.
+$pink-A200 : #FF4081 !default;	// Label color must have high contrast.
+$pink-A400 : #F50057 !default;	// Label color must have high contrast.
+$pink-A700 : #C51162 !default;	// Label color must have high contrast.
+
+// Purple colors.
+$purple-50 : #F3E5F5 !default;		// Label color must have row contrast.
+$purple-100 : #E1BEE7 !default;		// Label color must have row contrast.
+$purple-200 : #CE93D8 !default;		// Label color must have row contrast.
+$purple-300 : #BA68C8 !default;		// Label color must have high contrast.
+$purple-400 : #AB47BC !default;		// Label color must have high contrast.
+$purple-500 : #9C27B0 !default;		// Label color must have high contrast.
+$purple-600 : #8E24AA !default;		// Label color must have high contrast.
+$purple-700 : #7B1FA2 !default;		// Label color must have high contrast.
+$purple-800 : #6A1B9A !default;		// Label color must have high contrast.
+$purple-900 : #4A148C !default;		// Label color must have high contrast.
+// Purple accent colors.
+$purple-A100 : #EA80FC !default;	// Label color must have row contrast.
+$purple-A200 : #E040FB !default;	// Label color must have high contrast.
+$purple-A400 : #D500F9 !default;	// Label color must have high contrast.
+$purple-A700 : #AA00FF !default;	// Label color must have high contrast.
+
+// Deep purple colors.
+$deeppurple-50 : #EDE7F6 !default;		// Label color must have row contrast.
+$deeppurple-100 : #D1C4E9 !default;		// Label color must have row contrast.
+$deeppurple-200 : #B39DDB !default;		// Label color must have row contrast.
+$deeppurple-300 : #9575CD !default;		// Label color must have high contrast.
+$deeppurple-400 : #7E57C2 !default;		// Label color must have high contrast.
+$deeppurple-500 : #673AB7 !default;		// Label color must have high contrast.
+$deeppurple-600 : #5E35B1 !default;		// Label color must have high contrast.
+$deeppurple-700 : #512DA8 !default;		// Label color must have high contrast.
+$deeppurple-800 : #4527A0 !default;		// Label color must have high contrast.
+$deeppurple-900 : #311B92 !default;		// Label color must have high contrast.
+// Deep purple accent colors.
+$deeppurple-A100 : #B388FF !default;	// Label color must have row contrast.
+$deeppurple-A200 : #7C4DFF !default;	// Label color must have high contrast.
+$deeppurple-A400 : #651FFF !default;	// Label color must have high contrast.
+$deeppurple-A700 : #6200EA !default;	// Label color must have high contrast.
+
+// Indigo colors.
+$indigo-50 : #E8EAF6 !default;		// Label color must have row contrast.
+$indigo-100 : #C5CAE9 !default;		// Label color must have row contrast.
+$indigo-200 : #9FA8DA !default;		// Label color must have row contrast.
+$indigo-300 : #7986CB !default;		// Label color must have high contrast.
+$indigo-400 : #5C6BC0 !default;		// Label color must have high contrast.
+$indigo-500 : #3F51B5 !default;		// Label color must have high contrast.
+$indigo-600 : #3949AB !default;		// Label color must have high contrast.
+$indigo-700 : #303F9F !default;		// Label color must have high contrast.
+$indigo-800 : #283593 !default;		// Label color must have high contrast.
+$indigo-900 : #1A237E !default;		// Label color must have high contrast.
+// Indigo accent colors.
+$indigo-A100 : #8C9EFF !default;	// Label color must have row contrast.
+$indigo-A200 : #536DFE !default;	// Label color must have high contrast.
+$indigo-A400 : #3D5AFE !default;	// Label color must have high contrast.
+$indigo-A700 : #304FFE !default;	// Label color must have high contrast.
+
+// Blue colors.
+$blue-50 : #E3F2FD !default;	// Label color must have row contrast.
+$blue-100 : #BBDEFB !default;	// Label color must have row contrast.
+$blue-200 : #90CAF9 !default;	// Label color must have row contrast.
+$blue-300 : #64B5F6 !default;	// Label color must have row contrast.
+$blue-400 : #42A5F5 !default;	// Label color must have row contrast.
+$blue-500 : #2196F3 !default;	// Label color must have high contrast.
+$blue-600 : #1E88E5 !default;	// Label color must have high contrast.
+$blue-700 : #1976D2 !default;	// Label color must have high contrast.
+$blue-800 : #1565C0 !default;	// Label color must have high contrast.
+$blue-900 : #0D47A1 !default;	// Label color must have high contrast.
+// Blue accent colors.
+$blue-A100 : #82B1FF !default;	// Label color must have row contrast.
+$blue-A200 : #448AFF !default;	// Label color must have high contrast.
+$blue-A400 : #2979FF !default;	// Label color must have high contrast.
+$blue-A700 : #2962FF !default;	// Label color must have high contrast.
+
+// Light blue colors.
+$lightblue-50 : #E1F5FE !default;	// Label color must have row contrast.
+$lightblue-100 : #B3E5FC !default;	// Label color must have row contrast.
+$lightblue-200 : #81D4FA !default;	// Label color must have row contrast.
+$lightblue-300 : #4FC3F7 !default;	// Label color must have row contrast.
+$lightblue-400 : #29B6F6 !default;	// Label color must have row contrast.
+$lightblue-500 : #03A9F4 !default;	// Label color must have high contrast.
+$lightblue-600 : #039BE5 !default;	// Label color must have high contrast.
+$lightblue-700 : #0288D1 !default;	// Label color must have high contrast.
+$lightblue-800 : #0277BD !default;	// Label color must have high contrast.
+$lightblue-900 : #01579B !default;	// Label color must have high contrast.
+// Light blue accent colors.
+$lightblue-A100 : #80D8FF !default;	// Label color must have row contrast.
+$lightblue-A200 : #40C4FF !default;	// Label color must have row contrast.
+$lightblue-A400 : #00B0FF !default;	// Label color must have row contrast.
+$lightblue-A700 : #0091EA !default;	// Label color must have high contrast.
+
+// Cyan colors.
+$cyan-50 : #E0F7FA !default;	// Label color must have row contrast.
+$cyan-100 : #B2EBF2 !default;	// Label color must have row contrast.
+$cyan-200 : #80DEEA !default;	// Label color must have row contrast.
+$cyan-300 : #4DD0E1 !default;	// Label color must have row contrast.
+$cyan-400 : #26C6DA !default;	// Label color must have row contrast.
+$cyan-500 : #00BCD4 !default;	// Label color must have high contrast.
+$cyan-600 : #00ACC1 !default;	// Label color must have high contrast.
+$cyan-700 : #0097A7 !default;	// Label color must have high contrast.
+$cyan-800 : #00838F !default;	// Label color must have high contrast.
+$cyan-900 : #006064 !default;	// Label color must have high contrast.
+// Cyan accent colors.
+$cyan-A100 : #84FFFF !default;	// Label color must have row contrast.
+$cyan-A200 : #18FFFF !default;	// Label color must have row contrast.
+$cyan-A400 : #00E5FF !default;	// Label color must have row contrast.
+$cyan-A700 : #00B8D4 !default;	// Label color must have row contrast.
+
+// Teal colors.
+$teal-50 : #E0F2F1 !default;	// Label color must have row contrast.
+$teal-100 : #B2DFDB !default;	// Label color must have row contrast.
+$teal-200 : #80CBC4 !default;	// Label color must have row contrast.
+$teal-300 : #4DB6AC !default;	// Label color must have row contrast.
+$teal-400 : #26A69A !default;	// Label color must have row contrast.
+$teal-500 : #009688 !default;	// Label color must have high contrast.
+$teal-600 : #00897B !default;	// Label color must have high contrast.
+$teal-700 : #00796B !default;	// Label color must have high contrast.
+$teal-800 : #00695C !default;	// Label color must have high contrast.
+$teal-900 : #004D40 !default;	// Label color must have high contrast.
+// Teal accent colors.
+$teal-A100 : #A7FFEB !default;	// Label color must have row contrast.
+$teal-A200 : #64FFDA !default;	// Label color must have row contrast.
+$teal-A400 : #1DE9B6 !default;	// Label color must have row contrast.
+$teal-A700 : #00BFA5 !default;	// Label color must have row contrast.
+
+// Green colors.
+$green-50 : #E8F5E9 !default;	// Label color must have row contrast.
+$green-100 : #C8E6C9 !default;	// Label color must have row contrast.
+$green-200 : #A5D6A7 !default;	// Label color must have row contrast.
+$green-300 : #81C784 !default;	// Label color must have row contrast.
+$green-400 : #66BB6A !default;	// Label color must have row contrast.
+$green-500 : #4CAF50 !default;	// Label color must have high contrast.
+$green-600 : #43A047 !default;	// Label color must have high contrast.
+$green-700 : #388E3C !default;	// Label color must have high contrast.
+$green-800 : #2E7D32 !default;	// Label color must have high contrast.
+$green-900 : #1B5E20 !default;	// Label color must have high contrast.
+// Green accent colors.
+$green-A100 : #B9F6CA !default;	// Label color must have row contrast.
+$green-A200 : #69F0AE !default;	// Label color must have row contrast.
+$green-A400 : #00E676 !default;	// Label color must have row contrast.
+$green-A700 : #00C853 !default;	// Label color must have row contrast.
+
+// Light green colors.
+$lightgreen-50 : #F1F8E9 !default;		// Label color must have row contrast.
+$lightgreen-100 : #DCEDC8 !default;		// Label color must have row contrast.
+$lightgreen-200 : #C5E1A5 !default;		// Label color must have row contrast.
+$lightgreen-300 : #AED581 !default;		// Label color must have row contrast.
+$lightgreen-400 : #9CCC65 !default;		// Label color must have row contrast.
+$lightgreen-500 : #8BC34A !default;		// Label color must have row contrast.
+$lightgreen-600 : #7CB342 !default;		// Label color must have row contrast.
+$lightgreen-700 : #689F38 !default;		// Label color must have row contrast.
+$lightgreen-800 : #558B2F !default;		// Label color must have high contrast.
+$lightgreen-900 : #33691E !default;		// Label color must have high contrast.
+// Light green accent colors.
+$lightgreen-A100 : #CCFF90 !default;	// Label color must have row contrast.
+$lightgreen-A200 : #B2FF59 !default;	// Label color must have row contrast.
+$lightgreen-A400 : #76FF03 !default;	// Label color must have row contrast.
+$lightgreen-A700 : #64DD17 !default;	// Label color must have row contrast.
+
+// Lime colors.
+$lime-50 : #F9FBE7 !default;	// Label color must have row contrast.
+$lime-100 : #F0F4C3 !default;	// Label color must have row contrast.
+$lime-200 : #E6EE9C !default;	// Label color must have row contrast.
+$lime-300 : #DCE775 !default;	// Label color must have row contrast.
+$lime-400 : #D4E157 !default;	// Label color must have row contrast.
+$lime-500 : #CDDC39 !default;	// Label color must have row contrast.
+$lime-600 : #C0CA33 !default;	// Label color must have row contrast.
+$lime-700 : #AFB42B !default;	// Label color must have row contrast.
+$lime-800 : #9E9D24 !default;	// Label color must have row contrast.
+$lime-900 : #827717 !default;	// Label color must have high contrast.
+// Lime accent colors.
+$lime-A100 : #F4FF81 !default;	// Label color must have row contrast.
+$lime-A200 : #EEFF41 !default;	// Label color must have row contrast.
+$lime-A400 : #C6FF00 !default;	// Label color must have row contrast.
+$lime-A700 : #AEEA00 !default;	// Label color must have row contrast.
+
+// Yellow colors.
+// Label color must have row contrast in all of yellow and accent.
+$yellow-50 : #FFFDE7 !default;
+$yellow-100 : #FFF9C4 !default;
+$yellow-200 : #FFF59D !default;
+$yellow-300 : #FFF176 !default;
+$yellow-400 : #FFEE58 !default;
+$yellow-500 : #FFEB3B !default;
+$yellow-600 : #FDD835 !default;
+$yellow-700 : #FBC02D !default;
+$yellow-800 : #F9A825 !default;
+$yellow-900 : #F57F17 !default;
+// Yellow accent colors.
+$yellow-A100 : #FFFF8D !default;
+$yellow-A200 : #FFFF00 !default;
+$yellow-A400 : #FFEA00 !default;
+$yellow-A700 : #FFD600 !default;
+
+// Amber colors.
+// Label color must have row contrast in all of amber and accent.
+$amber-50 : #FFF8E1 !default;
+$amber-100 : #FFECB3 !default;
+$amber-200 : #FFE082 !default;
+$amber-300 : #FFD54F !default;
+$amber-400 : #FFCA28 !default;
+$amber-500 : #FFC107 !default;
+$amber-600 : #FFB300 !default;
+$amber-700 : #FFA000 !default;
+$amber-800 : #FF8F00 !default;
+$amber-900 : #FF6F00 !default;
+// Amber accent colors.
+$amber-A100 : #FFE57F !default;
+$amber-A200 : #FFD740 !default;
+$amber-A400 : #FFC400 !default;
+$amber-A700 : #FFAB00 !default;
+
+// Orange colors.
+$orange-50 : #FFF3E0 !default;		// Label color must have row contrast.
+$orange-100 : #FFE0B2 !default;		// Label color must have row contrast.
+$orange-200 : #FFCC80 !default;		// Label color must have row contrast.
+$orange-300 : #FFB74D !default;		// Label color must have row contrast.
+$orange-400 : #FFA726 !default;		// Label color must have row contrast.
+$orange-500 : #FF9800 !default;		// Label color must have row contrast.
+$orange-600 : #FB8C00 !default;		// Label color must have row contrast.
+$orange-700 : #F57C00 !default;		// Label color must have row contrast.
+$orange-800 : #EF6C00 !default;		// Label color must have high contrast.
+$orange-900 : #E65100 !default;		// Label color must have high contrast.
+// Orange accent colors.
+$orange-A100 : #FFD180 !default;	// Label color must have row contrast.
+$orange-A200 : #FFAB40 !default;	// Label color must have row contrast.
+$orange-A400 : #FF9100 !default;	// Label color must have row contrast.
+$orange-A700 : #FF6D00 !default;	// Label color must have row contrast.
+
+// Deep orange colors.
+$deeporange-50 : #FBE9E7 !default;		// Label color must have row contrast.
+$deeporange-100 : #FFCCBC !default;		// Label color must have row contrast.
+$deeporange-200 : #FFAB91 !default;		// Label color must have row contrast.
+$deeporange-300 : #FF8A65 !default;		// Label color must have row contrast.
+$deeporange-400 : #FF7043 !default;		// Label color must have row contrast.
+$deeporange-500 : #FF5722 !default;		// Label color must have high contrast.
+$deeporange-600 : #F4511E !default;		// Label color must have high contrast.
+$deeporange-700 : #E64A19 !default;		// Label color must have high contrast.
+$deeporange-800 : #D84315 !default;		// Label color must have high contrast.
+$deeporange-900 : #BF360C !default;		// Label color must have high contrast.
+// Deep orange accent colors.
+$deeporange-A100 : #FF9E80 !default;	// Label color must have row contrast.
+$deeporange-A200 : #FF6E40 !default;	// Label color must have row contrast.
+$deeporange-A400 : #FF3D00 !default;	// Label color must have high contrast.
+$deeporange-A700 : #DD2C00 !default;	// Label color must have high contrast.
+
+// Brown colors.
+$brown-50 : #EFEBE9 !default;	// Label color must have row contrast.
+$brown-100 : #D7CCC8 !default;	// Label color must have row contrast.
+$brown-200 : #BCAAA4 !default;	// Label color must have row contrast.
+$brown-300 : #A1887F !default;	// Label color must have high contrast.
+$brown-400 : #8D6E63 !default;	// Label color must have high contrast.
+$brown-500 : #795548 !default;	// Label color must have high contrast.
+$brown-600 : #6D4C41 !default;	// Label color must have high contrast.
+$brown-700 : #5D4037 !default;	// Label color must have high contrast.
+$brown-800 : #4E342E !default;	// Label color must have high contrast.
+$brown-900 : #3E2723 !default;	// Label color must have high contrast.
+// Brown has no accent colors.
+// $brown-A100 : #000000 !default;
+// $brown-A200 : #000000 !default;
+// $brown-A400 : #000000 !default;
+// $brown-A700 : #000000 !default;
+
+// Gray colors.
+$gray-50 : #FAFAFA !default;	// Label color must have row contrast.
+$gray-100 : #F5F5F5 !default;	// Label color must have row contrast.
+$gray-200 : #EEEEEE !default;	// Label color must have row contrast.
+$gray-300 : #E0E0E0 !default;	// Label color must have row contrast.
+$gray-400 : #BDBDBD !default;	// Label color must have row contrast.
+$gray-500 : #9E9E9E !default;	// Label color must have row contrast.
+$gray-600 : #757575 !default;	// Label color must have high contrast.
+$gray-700 : #616161 !default;	// Label color must have high contrast.
+$gray-800 : #424242 !default;	// Label color must have high contrast.
+$gray-900 : #212121 !default;	// Label color must have high contrast.
+// Gray has no accent colors.
+// $gray-A100 : #000000 !default;
+// $gray-A200 : #000000 !default;
+// $gray-A400 : #000000 !default;
+// $gray-A700 : #000000 !default;
+
+// Blue gray colors.
+$bluegray-50 : #ECEFF1 !default;	// Label color must have row contrast.
+$bluegray-100 : #CFD8DC !default;	// Label color must have row contrast.
+$bluegray-200 : #B0BEC5 !default;	// Label color must have row contrast.
+$bluegray-300 : #90A4AE !default;	// Label color must have row contrast.
+$bluegray-400 : #78909C !default;	// Label color must have high contrast.
+$bluegray-500 : #607D8B !default;	// Label color must have high contrast.
+$bluegray-600 : #546E7A !default;	// Label color must have high contrast.
+$bluegray-700 : #455A64 !default;	// Label color must have high contrast.
+$bluegray-800 : #37474F !default;	// Label color must have high contrast.
+$bluegray-900 : #263238 !default;	// Label color must have high contrast.
+// Blue gray has no accent colors.
+// $bluegray-A100 : #000000 !default;
+// $bluegray-A200 : #000000 !default;
+// $bluegray-A400 : #000000 !default;
+// $bluegray-A700 : #000000 !default;
+
+$black : #000000 !default;
+$white : #FFFFFF !default;
+
+$dark : rgba(0, 0, 0, 1.00) !default;
+$dark-900 : rgba(0, 0, 0, 0.87) !default;	// for Text.
+$dark-600 : rgba(0, 0, 0, 0.54) !default;	// for Secondary text, Icon.
+$dark-400 : rgba(0, 0, 0, 0.26) !default;	// for Disabled, Hint text.
+$dark-300 : rgba(0, 0, 0, 0.12) !default;	// for Divider.
+
+$light : rgba(255, 255, 255, 1.00) !default;
+$light-1000 : rgba(255, 255, 255, 1.00) !default;	// for Text., Icon.
+$light-750 : rgba(255, 255, 255, 0.70) !default;	// for Secondary text.
+$light-450 : rgba(255, 255, 255, 0.30) !default;	// for Disabled, Hint text.
+$light-300 : rgba(255, 255, 255, 0.12) !default;	// for Divider.
+
+$white-text : rgba(255, 255, 255, 1.00) !default;
+$white-icon : rgba(255, 255, 255, 1.00) !default;
+$white-text-secondary : rgba(255, 255, 255, 0.70) !default;
+$white-text-hint : rgba(255, 255, 255, 0.30) !default;
+$white-disabled : rgba(255, 255, 255, 0.30) !default;
+$white-divider : rgba(255, 255, 255, 0.12) !default;
+
+$black-text : rgba(0, 0, 0, 0.87) !default;
+$black-text-secondary : rgba(0, 0, 0, 0.54) !default;
+$black-icon : rgba(0, 0, 0, 0.54) !default;
+$black-text-hint : rgba(0, 0, 0, 0.26) !default;
+$black-disabled : rgba(0, 0, 0, 0.26) !default;
+$black-divider : rgba(0, 0, 0, 0.12) !default;
+
+// $background-color : #F9F9F9;

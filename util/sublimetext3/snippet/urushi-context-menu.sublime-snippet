@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+<select id="${1:}" data-urushi-type="contextmenu">
+ <option id='item1' name='item1' class='icon-class'>label1</option>
+ <option id='item2' name='item2' class='icon-class'>label2</option>
+ <option id='item3' name='item3' class='icon-class'>label3</option>
+ </select>
+]]></content>
+	<tabTrigger>urushi-context-menu</tabTrigger>
+	<scope>text.html</scope>
+	<description>&lt;urushi-context-menu&gt;</description>
+</snippet>

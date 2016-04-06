@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Radio test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link href="../../util/test/jasmine/lib/jasmine.css" rel="stylesheet">
+	<link href="../../urushi/material/style/material.css" rel="stylesheet">
+	<link href="../test.css" rel="stylesheet">
+	<style type="text/css">
+		.form-control-wrapper {
+			margin : 24px;
+		}
+		.margin-box {
+			margin : 8px;
+		}
+	</style>
+	
+	<script src="../../util/test/jasmine/lib/jasmine.js"></script>
+	<script src="../../util/test/jasmine/lib/jasmine-html.js"></script>
+	<script src="../../util/test/testReporter.js"></script>
+
+	<script src="../../config/requireConfig.js"></script>
+	<script src="../../config/testConfig.js"></script>
+	<script src="../../lib/js/require.js" data-main="./main"></script>
+</head>
+<body>
+	<h1>Radio unit test.</h1>
+	<div class="test-area">
+		<input data-urushi-type="radiobox" name="radio1" value="1"> 1
+		<input data-urushi-type="radiobox" name="radio1" value="2" checked> 2
+		<input data-urushi-type="radiobox" name="radio1" value="3"> 3
+		<div class="margin-box"></div>
+		<input data-urushi-type="radiobox" name="radio2" value="A" class="radio-default" checked> default A
+		<input data-urushi-type="radiobox" name="radio2" value="B" class="radio-default"> default B
+		<div class="margin-box"></div>
+		<input data-urushi-type="radiobox" name="radio3" value="A" class="radio-primary" checked> primary A
+		<input data-urushi-type="radiobox" name="radio3" value="B" class="radio-primary"> primary B
+		<div class="margin-box"></div>
+		<input data-urushi-type="radiobox" name="radio4" value="A" class="radio-success" checked> success A
+		<input data-urushi-type="radiobox" name="radio4" value="B" class="radio-success"> success B
+		<div class="margin-box"></div>
+		<input data-urushi-type="radiobox" name="radio5" value="A" class="radio-info" checked> info A
+		<input data-urushi-type="radiobox" name="radio5" value="B" class="radio-info"> info B
+		<div class="margin-box"></div>
+		<input data-urushi-type="radiobox" name="radio6" value="A" class="radio-warning"> warning A
+		<input data-urushi-type="radiobox" name="radio6" value="B" class="radio-warning" checked> warning B
+		<div class="margin-box"></div>
+		<input data-urushi-type="radiobox" name="radio7" value="A" class="radio-danger"> danger A
+		<input data-urushi-type="radiobox" name="radio7" value="B" class="radio-danger" checked> danger B
+		<div class="margin-box"></div>
+		<input data-urushi-type="radiobox" name="radio8" value="A" class="radio-danger" disabled> Disabled A
+		<input data-urushi-type="radiobox" name="radio8" value="B" class="radio-danger" checked disabled> Disabled B
+		<div class="margin-box"></div>
+		<input data-urushi-type="radiobox" name="radio9" value="A" class="radio-danger" readonly> Readonly A
+		<input data-urushi-type="radiobox" name="radio9" value="B" class="radio-danger" checked readonly> Readonly B
+	</div>
+	<div class="test-area" id="script-modules"></div>
+</body>
+</html>

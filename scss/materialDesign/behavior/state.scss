@@ -1,0 +1,65 @@
+@import "../base/_variables.scss";
+
+.center-block {
+	display : block;
+	margin-right : auto;
+	margin-left : auto;
+}
+.pull-right {
+	float : right !important;
+}
+.pull-left {
+	float : left !important;
+}
+.hide {
+	display : none !important;
+}
+.show {
+	display : block !important;
+}
+.invisible {
+	visibility : hidden;
+}
+.text-hide {
+	font : 0/0 a;
+	color : transparent;
+	text-shadow : none;
+	background-color : transparent;
+	border : 0;
+}
+.hidden {
+	display : none !important;
+	visibility : hidden !important;
+}
+.affix {
+	position : fixed;
+}
+@-ms-viewport {
+	width : device-width;
+}
+.visible-xs,
+.visible-sm,
+.visible-md,
+.visible-lg {
+	display : none !important;
+}
+.visible-xs-block,
+.visible-xs-inline,
+.visible-xs-inline-block,
+.visible-sm-block,
+.visible-sm-inline,
+.visible-sm-inline-block,
+.visible-md-block,
+.visible-md-inline,
+.visible-md-inline-block,
+.visible-lg-block,
+.visible-lg-inline,
+.visible-lg-inline-block {
+	display : none !important;
+}
+
+.disabled {
+	cursor : auto;
+	pointer-events : none;
+	opacity : 0.26;
+}

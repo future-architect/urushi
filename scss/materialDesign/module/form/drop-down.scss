@@ -1,0 +1,117 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+@import "../structure/shadow.scss";
+@import "../../font/icon-material-design.scss";
+
+.dropdown {
+	position : relative;
+
+	* {
+		box-sizing : border-box;
+	}
+
+	> input {
+		width : 100%;
+		&.focus ~ ul {
+			@include transform(scale(1));
+		}
+	}
+
+	> ul {
+		position : absolute;
+		margin : 0;
+		padding : 0;
+		min-width : 200px;
+		width : 100%;
+		@include transform(scale(0));
+		z-index : $z-index-doropdown-menu;
+		background : $dropdown-background;
+		@extend .shadow-z-2-hover;
+		// ChromeでバグがあるのでJSで実装 transition : transform $dropdown-transition-duration ease-out;
+		overflow : hidden;
+		&[data-placement=top-right] {
+			@include transform-origin(top right);
+			top : 0;
+			right : 0;
+		}
+		&[data-placement=bottom-right] {
+			@include transform-origin(bottom right);
+			bottom : 0;
+			right : 0;
+		}
+
+		> li {
+			list-style : none;
+			padding : 10px 20px;
+			cursor : pointer;
+
+			&.selected,
+			&:active {
+				background-color : $dropdown-selected-default;
+				color : $dropdown-selected-default-text;
+			}
+			&:focus {
+				background-color : $dropdown-focus-default;
+				color : $dropdown-focus-default-text;
+			}
+		}
+		&.scroll {
+			overflow-y : scroll;
+			//IE9のバグ回避
+			//http://www.days.jp/blog/2013/07/ie9-box-sizingborder-box-overflowscroll/
+			//http://terurou.hateblo.jp/entry/20120607/1339044000
+			//https://social.msdn.microsoft.com/Forums/ja-JP/6eea687b-8c61-4a35-a54c-e8812b4d8b11/ie9-boxsizing-borderbox-problem
+			box-sizing : content-box;
+		}
+	}
+	> input[readonly] {
+		cursor : pointer;
+	}
+
+	&::after {
+		position : absolute;
+		right : 2px;
+		top : 2px;
+		font-family : "Material-Design-Icons";
+		content : "\e894";
+		speak : none;
+		font-size : 25px;
+		font-style : normal;
+		font-weight : 400;
+		font-variant : normal;
+		color : $icon-dark;
+		text-transform : none;
+		line-height : 1;
+		-webkit-font-smoothing : antialiased;
+		-moz-osx-font-smoothing : grayscale;
+		pointer-events : none;
+	}
+}
+select[data-dropdown][disabled] + .dropdown > input[readonly] {
+	cursor : default;
+}
+
+.dropdown-default {
+	@include dropdown-selected-variant($dropdown-selected-default, $dropdown-selected-default-text);
+	@include dropdown-focus-variant($dropdown-focus-default, $dropdown-focus-default-text);
+}
+.dropdown-primary {
+	@include dropdown-selected-variant($dropdown-selected-primary, $dropdown-selected-primary-text);
+	@include dropdown-focus-variant($dropdown-focus-primary, $dropdown-focus-primary-text);
+}
+.dropdown-success {
+	@include dropdown-selected-variant($dropdown-selected-success, $dropdown-selected-success-text);
+	@include dropdown-focus-variant($dropdown-focus-success, $dropdown-focus-success-text);
+}
+.dropdown-info {
+	@include dropdown-selected-variant($dropdown-selected-info, $dropdown-selected-info-text);
+	@include dropdown-focus-variant($dropdown-focus-info, $dropdown-focus-info-text);
+}
+.dropdown-warning {
+	@include dropdown-selected-variant($dropdown-selected-warning, $dropdown-selected-warning-text);
+	@include dropdown-focus-variant($dropdown-focus-warning, $dropdown-focus-warning-text);
+}
+.dropdown-danger {
+	@include dropdown-selected-variant($dropdown-selected-danger, $dropdown-selected-danger-text);
+	@include dropdown-focus-variant($dropdown-focus-danger, $dropdown-focus-danger-text);
+}

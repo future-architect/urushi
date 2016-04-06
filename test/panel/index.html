@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Panel test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link href="../../util/test/jasmine/lib/jasmine.css" rel="stylesheet">
+	<link href="../../urushi/material/style/material.css" rel="stylesheet">
+	<link href="../test.css" rel="stylesheet">
+	<style type="text/css">
+		.panel {
+			margin : 24px;
+		}
+	</style>
+	
+	<script src="../../util/test/jasmine/lib/jasmine.js"></script>
+	<script src="../../util/test/jasmine/lib/jasmine-html.js"></script>
+	<script src="../../util/test/testReporter.js"></script>
+
+	<script src="../../config/requireConfig.js"></script>
+	<script src="../../config/testConfig.js"></script>
+	<script src="../../lib/js/require.js" data-main="./main"></script>
+</head>
+<body>
+	<h1>Panel unit test.</h1>
+	<div class="test-area">
+		<div data-urushi-type="panel">
+			<span>Inner message.</span>
+		</div>
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Header title", "footer" : "Footer title"}'>
+			<h2>sub title</h2>
+			<div>
+				<div>test message.</div>
+				<button data-urushi-type="button">Panel button</button>
+			</div>
+		</div>
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Header default"}' class="panel-default"></div>
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Header primary"}' class="panel-primary"></div>
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Header success"}' class="panel-success"></div>
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Header info"}' class="panel-info"></div>
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Header warning"}' class="panel-warning"></div>
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Header danger"}' class="panel-danger"></div>
+	</div>
+	<div class="test-area" id="script-modules"></div>
+</body>
+</html>
