@@ -94,34 +94,26 @@ define(
 
 				expect(input._onFocus(dummyEvent)).toBe();
 
-				waits(310);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(input._onBlur(dummyEvent)).toBe();
 					expect(input._onFocus(dummyEvent)).toBe();
 					expect(input._onBlur(dummyEvent)).toBe();
-				});
+				}, 310);
 
-				waits(200);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(input._onFocus(dummyEvent)).toBe();
 					input.setValue('Test');
 					expect(input._onBlur(dummyEvent)).toBe();
-				});
+				}, 200 + 310);
 
-				waits(310);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(input._onFocus(dummyEvent)).toBe();
-				});
+				}, 200 + 310 * 2);
 
-				waits(310);
-
-				runs(function() {
+				setTimeout(function() {
 					input.destroy();
 					Urushi.hasTransitionSupport = temp;
-				});
+				}, 200 + 310 * 3);
 			});
 			it('IE placeholder on setValue', function () {
 				temp = Urushi.hasTransitionSupport;
@@ -134,31 +126,23 @@ define(
 
 				input.setValue('');
 
-				waits(310);
-
-				runs(function() {
+				setTimeout(function() {
 					input.setValue('');
 					input.setValue('value');
-				});
+				}, 310);
 
-				waits(310);
-
-				runs(function() {
+				setTimeout(function() {
 					input.setValue('value');
-				});
+				}, 310 * 2);
 
-				waits(310);
-
-				runs(function() {
+				setTimeout(function() {
 					input.setValue('');
-				});
+				}, 310 * 3);
 
-				waits(310);
-
-				runs(function() {
+				setTimeout(function() {
 					input.destroy();
 					Urushi.hasTransitionSupport = temp;
-				});
+				}, 310 * 4);
 			});
 			it('setDisabled', function () {
 				expect(input1.setDisabled()).toBe(false);
@@ -171,14 +155,22 @@ define(
 				expect(input2.destroy()).toBe();
 			});
 
-			it('template engine input test', function () {
-				templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
-					var modules = result.widgets,
-						key;
-
+			describe('Template engine', function () {
+				var flag = false;
+				beforeEach(function (done) {
+					templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
+						flag = true;
+						done();
+					}).otherwise(function (error) {
+						flag = false;
+						done();
+					});
+				});
+				it('template engine test', function () {
+					expect(flag).toBe(true);
 				});
 			});
-			
+
 			// For jscover.
 			jscoverReport();
 		});

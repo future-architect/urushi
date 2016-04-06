@@ -17,8 +17,7 @@ module.exports = {
 				'../../../urushi/material/**/*.js',
 				'../../../lib/**/*.js',
 				'../../../config/**/*.js',
-				'../../../test/**/*.js',
-				'../../../util/test/testReporter.js'
+				'../../../test/**/*.js'
 			],
 			trans : [
 				'../../../urushi/material/**/*.html',
@@ -28,7 +27,7 @@ module.exports = {
 				'../../../scss/materialDesign/font/*.woff',
 				'../../../test/**/*.html',
 				'../../../test/**/*.css',
-				'../../../util/test/jasmine/**/*.*'
+				'../../../util/jasmine/**/*.*'
 			]
 		},
 		dest : {
@@ -40,8 +39,7 @@ module.exports = {
 				'../../../dest/urushi/material',
 				'../../../dest/lib',
 				'../../../dest/config',
-				'../../../dest/test',
-				'../../../dest/util/test'
+				'../../../dest/test'
 			],
 			trans : [
 				'../../../dest/urushi/material',
@@ -51,7 +49,7 @@ module.exports = {
 				'../../../dest/urushi/material/style/font',
 				'../../../dest/test',
 				'../../../dest/test',
-				'../../../dest/util/test/jasmine'
+				'../../../dest/util/jasmine'
 			]
 		},
 		rjs : {

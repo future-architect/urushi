@@ -8,10 +8,6 @@ define(
 		describe('hamburger test', function () {
 				var parentNode = document.getElementById('script-modules');
 
-			it('template engine input test', function () {
-				templateEngine.renderDocument(document.body, templateConfig).then(function (result) {});
-			});
-
 			it('transform test', function() {
 				var hamburger = new Hamburger({});
 				parentNode.appendChild(hamburger.getRootNode());
@@ -51,10 +47,10 @@ define(
 
 				expect(hamburger.setCallback(dummyFunction)).toBe();
 				expect(hamburger._onClickHamburger(dummyEvent)).toBe();
-				waits(100);
-				runs(function() {
+
+				setTimeout(function() {
 					expect(Array.prototype.slice.call(hamburger.hamburgerLineNode.classList)).toContain('callbacked');
-				});
+				}, 200);
 				hamburger.rootNode.classList.add('disabled');
 				expect(hamburger._onClickHamburger(dummyEvent)).toBe();
 			});
@@ -63,7 +59,23 @@ define(
 				var hamburger = new Hamburger({});
 				expect(hamburger.destroy()).toBe();
 			});
-			// JSCover使用時に自動でlogをstoreさせるため、以下の記述を必須とする
+			describe('Template engine', function () {
+				var flag = false;
+				beforeEach(function (done) {
+					templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
+						flag = true;
+						done();
+					}).otherwise(function (error) {
+						flag = false;
+						done();
+					});
+				});
+				it('template engine test', function () {
+					expect(flag).toBe(true);
+				});
+			});
+
+			// For jscover.
 			jscoverReport();
 		});
 	}

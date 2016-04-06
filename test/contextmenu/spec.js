@@ -159,13 +159,11 @@ define(
 				};
 				menu.onClickContext(clickEventMock);
 
-				waits(300);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(menu.listNode.children[0].classList.contains('show')).toBe(true);
 					expect(menu.listNode.children[1].classList.contains('show')).toBe(false);
 					expect(menu.listNode.children[2].classList.contains('show')).toBe(true);
-				});
+				}, 300);
 			});
 
 			it('setupShowItems', function () {
@@ -231,12 +229,10 @@ define(
 					menu.listNode.children[i].click();
 				}
 
-				waits(200);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(defaultCallback.callCount).toBe(2);
 					expect(itemCallback.callCount).toBe(1);
-				});
+				}, 200);
 			});
 
 			it('removeItems for All', function () {
@@ -304,12 +300,10 @@ define(
 					menu.listNode.children[i].click();
 				}
 
-				waits(200);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(spy.callCount).toBe(3);
 					expect(beforeSpy.callCount).toBe(0);
-				});
+				}, 200);
 			});
 
 			it('setCallback', function () {
@@ -336,12 +330,10 @@ define(
 					menu.listNode.children[i].click();
 				}
 
-				waits(200);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(spy.callCount).toBe(2);
 					expect(beforeSpy.callCount).toBe(1);
-				});
+				}, 200);
 			});
 
 			it('empty callback', function () {
@@ -382,29 +374,25 @@ define(
 					menu.listNode.children[i].click();
 				}
 
-				waits(200);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(spy.argsForCall[0]).toEqual(['name_test1', 'A', 'B']);
 					expect(spy.argsForCall[1]).toEqual(['name_test2', 'A', 'B']);
 					expect(spy.argsForCall[2]).toEqual(['name_test3', 'A', 'B']);
-				});
+				}, 200);
 
-				runs(function() {
+				setTimeout(function() {
 					spy.reset();
 					menu.clearOnClickItemCustomArgs();
 					for (var i = 0; i < menu.listNode.children.length; i++) {
 						menu.listNode.children[i].click();
 					}
-				});
+				}, 200);
 
-				waits(200);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(spy.argsForCall[0]).toEqual(['name_test1']);
 					expect(spy.argsForCall[1]).toEqual(['name_test2']);
 					expect(spy.argsForCall[2]).toEqual(['name_test3']);
-				});
+				}, 400);
 			});
 
 			it('onClickContext', function () {
@@ -491,15 +479,10 @@ define(
 				expect(menu.itemsNode.classList.contains('items-open')).toBe(true);
 				expect(menu.itemsNode.tabIndex).toBe(0);
 				expect(menu.itemsNode).toBe(document.activeElement);
-
-				waits(200);
-
-				runs(function() {
+				setTimeout(function() {
 					menu._close();
 					menu.onClickContext(clickEventMock);
-				});
-
-				waits(200);
+				}, 200);
 			});
 
 			it('addOnClickContextCallback', function () {
@@ -590,18 +573,14 @@ define(
 				parentNode.appendChild(menu.rootNode);
 				menu.onClickContext(clickEventMock);
 
-				waits(300);
-
-				runs(function() {
+				setTimeout(function() {
 					fucusButton.focus();
-				});
+				}, 300);
 
-				waits(300);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(menu.itemsNode).not.toBe(document.activeElement);
 					expect(menu.itemsNode.tabIndex).toBe(-1);
-				});
+				}, 600);
 			});
 			it('_close for IE', function () {
 				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
@@ -627,30 +606,24 @@ define(
 				parentNode.appendChild(menu.rootNode);
 				menu.onClickContext(clickEventMock);
 
-				waits(300);
-
-				runs(function() {
+				setTimeout(function() {
 					fucusButton.focus();
-				});
+				}, 300);
 
-				waits(300);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(menu.itemsNode).not.toBe(document.activeElement);
 					expect(menu.itemsNode.tabIndex).toBe(-1);
-				});
+				}, 600);
 
-				runs(function() {
+				setTimeout(function() {
 					menu.onClickContext(clickEventMock);
 					fucusButton.focus();
-				});
+				}, 600);
 
-				waits(300);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(menu.itemsNode).not.toBe(document.activeElement);
 					expect(menu.itemsNode.tabIndex).toBe(-1);
-				});
+				}, 900);
 			});
 			it('_onCloseIconMouseEnter _onCloseIconMouseLeave for IE', function () {
 				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
@@ -674,35 +647,27 @@ define(
 				parentNode.appendChild(menu.rootNode);
 				menu.onClickContext(clickEventMock);
 
-				waits(300);
-
-				runs(function() {
+				setTimeout(function() {
 					menu._onCloseIconMouseEnter(clickEventMock);
-				});
+				}, 300);
 
-				waits(300);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(menu.closeIconNode.style[animation.STYLEKEYS.transform]).toBe('rotate(90deg)');
 					
 					menu._onCloseIconMouseLeave(clickEventMock);
-				});
+				}, 600);
 
-				waits(300);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(menu.closeIconNode.style[animation.STYLEKEYS.transform]).toBe('');
 
 					menu._onCloseIconMouseEnter(clickEventMock);
 					menu._onCloseIconMouseLeave(clickEventMock);
 					menu._onCloseIconMouseEnter(clickEventMock);
-				});
+				}, 900);
 
-				waits(300);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(menu.closeIconNode.style[animation.STYLEKEYS.transform]).toBe('rotate(90deg)');
-				});
+				}, 1200);
 			});
 
 			it('onClickClose', function () {
@@ -726,12 +691,10 @@ define(
 				parentNode.appendChild(menu.rootNode);
 				menu.onClickContext(clickEventMock);
 
-				waits(300);
-
-				runs(function() {
+				setTimeout(function() {
 					menu.onClickClose(clickEventMock);
 					expect(menu.itemsNode.tabIndex).toBe(-1);
-				});
+				}, 300);
 			});
 
 			it('bubbling', function () {
@@ -859,12 +822,10 @@ define(
 					menu.listNode.children[i].click();
 				}
 
-				waits(200);
-
-				runs(function() {
+				setTimeout(function() {
 					expect(defaultCallback.callCount).toBe(2);
 					expect(itemCallback.callCount).toBe(1);
-				});
+				}, 200);
 			});
 
 			it('_ContextMenuItem.setHidden isHidden', function () {
@@ -890,13 +851,24 @@ define(
 				expect(menu.isHiddenItem('name_test2')).toBe(false);
 				expect(menu.isHiddenItem('name_test3')).toBe(false);
 			});
-			it('template engine ContextMenu test', function () {
-				templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
-					// var menus = result.widgets,
-					// 	key;
+
+			describe('Template engine', function () {
+				var flag = false;
+				beforeEach(function (done) {
+					templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
+						flag = true;
+						done();
+					}).otherwise(function (error) {
+						flag = false;
+						done();
+					});
+				});
+				it('template engine test', function () {
+					expect(flag).toBe(true);
 				});
 			});
-			// JSCover使用時に自動でlogをstoreさせるため、以下の記述を必須とする
+
+			// For jscover.
 			jscoverReport();
 		});
 	}

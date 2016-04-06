@@ -90,10 +90,19 @@ define(
 				Urushi.hasTransitionSupport = temp;
 			});
 
-			it('template engine input test', function () {
-				templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
-					var modules = result.widgets,
-						key;
+			describe('Template engine', function () {
+				var flag = false;
+				beforeEach(function (done) {
+					templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
+						flag = true;
+						done();
+					}).otherwise(function (error) {
+						flag = false;
+						done();
+					});
+				});
+				it('template engine test', function () {
+					expect(flag).toBe(true);
 				});
 			});
 
