@@ -3,8 +3,88 @@
 <head>
 	<title>Get started</title>
 	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
+
+	<link rel="shortcut icon" href="./gh-pages-resoucres/favicon.ico" type="image/x-icon">
+
+	<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<link rel="stylesheet" href="./gh-pages-resoucres/highlight/styles/default.css">
+	<link rel="stylesheet" href="./gh-pages-resoucres/highlight/styles/rainbow.css">
+	<link rel="stylesheet" href="./gh-pages-resoucres/material.css">
+
+	<script src="./gh-pages-resoucres/highlight/highlight.pack.js"></script>
+	<script src=" ./gh-pages-resoucres/start.js"></script>
 </head>
 <body>
+	<header id="header" class="header">
+		<a class="button" href="./ja-jp/">JAPANESE</a>
+	</header>
+	<section class="hidden">
+$インストール。
+Get Zip
+解凍して配置。
 
+#利用者向けページへ
+#開発者向けページへ
+
+$利用者向けページ
+index.html
+app.js作成
+
+Httpアクセスする
+
+$開発者向けページへ
+別のZipを利用。
+
+Classの作成
+HTML作成
+CSS作成
+
+TemplateConfigを作成
+
+#利用者向けページへ。
+#デモのやり方一緒。
+
+1. node.jsのインストール。
+1.1. http://nodejs.org/ にアクセス。
+	→http://nodejs.org/dist/latest-v0.12.x/ にアクセス。
+1.2. INSTALLをクリック。
+1.3. インストールシールドに従いインストール。
+
+2. gulp.jsのインストール
+2.1. コマンドプロントを起動。
+2.2. npm config set proxy http://10.42.5.10:8000 を実行。
+※必要に応じて、グローバルインストールのprefixを変更
+（例）prefix = "C:\\uiux\\urushi\\util\\node\\gulp"
+
+2.3. npm install -g gulp を実行。
+
+3. GulpによるSCSSビルド
+3.1. ディレクトリを[urushi ROOT]/util/node/gulpに移動。
+     > cd [urushi ROOT]/util/node/gulp
+3.2. npm install を実行
+
+3.3. gulpfile.jsがproject/scss配下にチェックアウトされている事を確認。
+→[urushi ROOT]/util/node/gulp/gulpfile.js
+
+
+3.4. タスクを下記の通り実行。
+     gulp scss-build
+
+3.5. [urushi ROOT]/urushi/material/style 配下にCSSファイルが出来上がっている事を確認。
+     [urushi ROOT]/urushi/material/style/material.css
+
+4．デモ画面確認
+4.1. HTTPサーバを起動
+     [urushi ROOT]をドキュメントルートに設定
+     
+4.2. テストページにアクセス
+     http://localhost/test/index.html
+
+
+	</section>
 </body>
 </html>
