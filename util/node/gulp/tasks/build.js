@@ -1,17 +1,20 @@
 var gulp = require('gulp'),
 	rimraf = require('rimraf'),
-	config = require('../config.js');
+	config = require('../config.js'),
+	runSequence = require('run-sequence');
 
-gulp.task('build', ['scss-build-to-dest', 'js-build'], function () {
+gulp.task('build', function () {
 	'use strict';
+	return runSequence('scss-build-to-dest', 'js-build');
 });
 
 gulp.task('clean', function (cb) {
 	'use strict';
-	rimraf(config.build.dest, cb);
+	return rimraf(config.build.dest, cb);
 });
 
-gulp.task('clean-build', ['clean', 'build'], function (cb) {
+gulp.task('clean-build', function (cb) {
 	'use strict';
+	runSequence('clean', 'build');
 });
 
