@@ -17,7 +17,11 @@
 	<link rel="stylesheet" href="./gh-pages-resoucres/style.css">
 
 	<script src="./gh-pages-resoucres/highlight/highlight.pack.js"></script>
-	<script src=" ./gh-pages-resoucres/start.js"></script>
+	<script type="text/javascript">
+		window.requireRoot = './gh-pages-resoucres/';
+	</script>
+	<script type="text/javascript" src="./gh-pages-resoucres/config/requireConfig.js"></script>
+	<script type="text/javascript" src="./gh-pages-resoucres/lib/js/require.js" data-main="./gh-pages-resoucres/start.js"></script>
 </head>
 <body>
 	<header id="header" class="header">

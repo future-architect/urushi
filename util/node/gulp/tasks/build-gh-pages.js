@@ -1,33 +1,18 @@
-// Gulp
-var gulp = require('gulp');
+var gulp = require('gulp'),
+	config = require('../gh-pages-config.js'),
+	runSequence = require('run-sequence');
 
-gulp.task('prepareDest', function() {
-  var gutil = require('gulp-util'),
-      template = require('gulp-template'),
-      jsdoc = require('gulp-jsdoc'),
-      config = require('../config.js'),
-      pkg = require(config.jsdoc.jsonPath);
-  return gulp.src([
-    config.jsdoc.prepare + "/images/**",
-    config.jsdoc.prepare + "/scripts/**",
-    config.jsdoc.prepare + "/styles/**"
-  ],{base: config.jsdoc.prepare})
-  .pipe(gulp.dest(config.jsdoc.dest));
+gulp.task('copy-dest', function () {
+	'use strict';
+	var i;
+
+	for (i = 0; i < config.trans.src.length; i++) {
+		gulp.src(config.trans.src[i]).pipe(gulp.dest(config.trans.dest[i]));
+	}
 });
 
-gulp.task('jsdoc', ['prepareDest'], function() {
-  var gutil = require('gulp-util'),
-      template = require('gulp-template'),
-      jsdoc = require('gulp-jsdoc'),
-      config = require('../config.js'),
-      pkg = require(config.jsdoc.jsonPath);
-  config.jsdoc.template.systemName = pkg.name;
-  gulp.src([
-    'README.md',
-    'index.js',
-    config.jsdoc.src + "/**/*.js"
-  ])
-  .pipe(template({pkg: pkg}))
-  .pipe(jsdoc.parser())
-  .pipe(jsdoc.generator(config.jsdoc.dest, config.jsdoc.template, config.jsdoc.option));
+gulp.task('build-gh-pages', function () {
+	'use strict';
+
+	runSequence('clean-build', 'copy-dest');
 });
