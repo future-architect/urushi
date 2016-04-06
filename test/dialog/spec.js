@@ -29,21 +29,17 @@ define(
 				Urushi.removeEvent(dialog.getRootNode(), 'keydown', dialog, 'onKeydown');
 				expect(dialog.show()).toBe();
 
-				waits(100);//Waiting hasTransitionSupport
-
-				runs(function() {
+				setTimeout(function() {
 					Urushi.hasTransitionSupport = hasTransitionSupportFalse;
 					dialog.isShown = false;
 					expect(dialog.show()).toBe();
 					Urushi.removeEvent(dialog.getRootNode(), 'keydown', dialog, 'onKeydown');
 					expect(dialog.show()).toBe();
-				});
+				}, 100);
 
-				waits(100);//Waiting hasTransitionSupport
-
-				runs(function() {
+				setTimeout(function() {
 					Urushi.hasTransitionSupport = temp;
-				});
+				}, 200);
 			});
 			it('hide', function () {
 				temp = Urushi.hasTransitionSupport;
@@ -58,8 +54,6 @@ define(
 				expect(dialog.hide()).toBe();
 				
 				Urushi.hasTransitionSupport = temp;
-
-				waits(510);// Waiting coverage.
 			});
 			it('setHeader', function () {
 				expect(dialog.setHeader()).toBe();
@@ -185,17 +179,27 @@ define(
 				expect(dialog.destroy()).toBe();
 			});
 
-			it('template engine alert test', function () {
-				templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
-					var modules = result.widgets;
+			describe('Template engine', function () {
+				var flag = false;
+				beforeEach(function (done) {
+					templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
+						var modules = result.widgets;
+						Urushi.addEvent(modules.button1.getRootNode(), 'click', modules.button1, function () {
+							modules.dialog1.show();
+						});
+						Urushi.addEvent(modules.button2.getRootNode(), 'click', modules.button2, function () {
+							modules.dialog2.show();
+						});
 
-					console.warn('Ignore the following two errors.');
-					Urushi.addEvent(modules.button1.getRootNode(), 'click', modules.button1, function () {
-						modules.dialog1.show();
+						flag = true;
+						done();
+					}).otherwise(function (error) {
+						flag = false;
+						done();
 					});
-					Urushi.addEvent(modules.button2.getRootNode(), 'click', modules.button2, function () {
-						modules.dialog2.show();
-					});
+				});
+				it('template engine test', function () {
+					expect(flag).toBe(true);
 				});
 			});
 

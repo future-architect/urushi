@@ -160,27 +160,31 @@ define(
 				expect(alert.destroy()).toBe();
 			});
 
-			it('template engine alert test', function () {
-				var end = false;
-				templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
-					var alerts = result.widgets,
-						key;
+			describe('Template engine', function () {
+				var flag = false;
+				beforeEach(function (done) {
+					templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
+						var alerts = result.widgets,
+							key;
 
-					for (key in alerts) {
-						alerts[key].show();
-					}
-
-					expect(alerts['content-dom'].contentNode.innerHTML).toBe('<span style="color: red;">content dom</span>');
-
-					end = true;
+						for (key in alerts) {
+							alerts[key].show();
+						}
+						
+						flag = true;
+						done();
+					}).otherwise(function (error) {
+						flag = false;
+						done();
+					});
 				});
-
-				waitsFor(function() {
-					return end;
-				}, 5000);
+				it('template engine alert test', function () {
+					expect(flag).toBe(true);
+				});
 			});
-			// JSCover使用時に自動でlogをstoreさせるため、以下の記述を必須とする
+			// for jscover.
 			jscoverReport();
 		});
+
 	}
 );

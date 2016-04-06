@@ -142,23 +142,23 @@ define(
 				ripple.removeAttribute('data-ripple-mousedown');
 			});
 
-			it('template engine button test', function() {
-
-				var end = false;
-				templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
-					buttons = result.widgets;
-
-					expect(buttons['content-dom'].getButtonNode().innerHTML).toBe('<span style="color: red;">content dom</span>');
-
-					end = true;
+			describe('Template engine', function () {
+				var flag = false;
+				beforeEach(function (done) {
+					templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
+						flag = true;
+						done();
+					}).otherwise(function (error) {
+						flag = false;
+						done();
+					});
 				});
-
-				waitsFor(function() {
-					return end;
-				}, 5000);
+				it('template engine test', function () {
+					expect(flag).toBe(true);
+				});
 			});
 
-			// JSCover使用時に自動でlogをstoreさせるため、以下の記述を必須とする
+			// For jscover.
 			jscoverReport();
 		});
 	}

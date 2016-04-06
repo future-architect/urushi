@@ -116,29 +116,24 @@ define(
 				});
 				parentNode.appendChild(dd.rootNode);
 				dd.inputNode.focus();
-				waits(20);
-				runs(function() {
+				setTimeout(function() {
 					button.focus();
-				});
-				waits(20);
-				runs(function() {
+				}, 20);
+				setTimeout(function() {
 					dd.inputNode.focus();
-				});
-				waits(310);
-				runs(function() {
+				}, 40);
+				setTimeout(function() {
 					dd._openDropDownMenu();
 					dd._onMousedownList(dummyEvent);
 					dd._onBlurInput();
-				});
-				waits(310);
-				runs(function() {
+				}, 370);
+				setTimeout(function() {
 					button.focus();
-				});
-				waits(310);
+				}, 680);
 			});
 			it('focus pattern', function () {
 				parentNode.appendChild(document.createTextNode('focus pattern'));
-				runs(function() {
+				setTimeout(function() {
 					var dd = new DropDown({
 						items : [
 							{value : 'a', label : 'A'},
@@ -148,9 +143,8 @@ define(
 					parentNode.appendChild(dd.rootNode);
 					dd.inputNode.click();
 					dd.inputNode.focus();
-				});
-				waits(20);
-				runs(function() {
+				}, 20);
+				setTimeout(function() {
 					var dd = new DropDown({
 						items : [
 						]
@@ -158,9 +152,8 @@ define(
 					parentNode.appendChild(dd.rootNode);
 					dd.inputNode.click();
 					dd.inputNode.focus();
-				});
-				waits(20);
-				runs(function() {
+				}, 40);
+				setTimeout(function() {
 					var dd = new DropDown({
 						items : [
 							{value : 'a', label : 'A'},
@@ -172,7 +165,7 @@ define(
 					dd.inputNode.focus();
 					dd.inputNode.click();
 					dd._onClickInput(dummyEvent);
-				});
+				}, 60);
 			});
 			it('keyDown', function () {
 				var getKeyCode = urushi.getKeyCode;
@@ -187,83 +180,73 @@ define(
 				parentNode.appendChild(dd.rootNode);
 				dd.inputNode.focus();
 
-				spyOn(dd, '_onBlurInput').andCallThrough();
-				spyOn(dd, '_onClickInput').andCallThrough();
-				waits(310);
-				runs(function() {
+				spyOn(dd, '_onBlurInput').and.callThrough();
+				spyOn(dd, '_onClickInput').and.callThrough();
+
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.COMMA; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd._onBlurInput.callCount).toBe(0);
 					expect(dd._onClickInput.callCount).toBe(0);
-				});
-				waits(310);
-				runs(function() {
+				}, 310);
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.ESCAPE; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd._onBlurInput.callCount).toBe(1);
 					expect(dd._onClickInput.callCount).toBe(0);
-				});
+				}, 310 * 2);
 				dd.inputNode.focus();
-				waits(310);
-				runs(function() {
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.COMMA; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd._onBlurInput.callCount).toBe(1);
 					expect(dd._onClickInput.callCount).toBe(0);
-				});
-				waits(310);
-				runs(function() {
+				}, 310 * 3);
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.ENTER; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd._onBlurInput.callCount).toBe(1);
 					expect(dd._onClickInput.callCount).toBe(1);
-				});
-				waits(310);
-				runs(function() {
+				}, 310 * 4);
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.ENTER; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd._onBlurInput.callCount).toBe(2);
 					expect(dd._onClickInput.callCount).toBe(1);
-				});
-				waits(310);
-				runs(function() {
+				}, 310 * 5);
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.SPACE; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd._onBlurInput.callCount).toBe(2);
 					expect(dd._onClickInput.callCount).toBe(2);
-				});
-				waits(310);
-				runs(function() {
+				}, 310 * 6);
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.ESCAPE; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd._onBlurInput.callCount).toBe(3);
 					expect(dd._onClickInput.callCount).toBe(2);
-				});
-				waits(310);
-				runs(function() {
+				}, 310 * 7);
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.UP; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd.getSelectedValue()).toBe(undefined);
 					expect(dd._onBlurInput.callCount).toBe(3);
 					expect(dd._onClickInput.callCount).toBe(3);
-				});
-				waits(310);
-				runs(function() {
+				}, 310 * 8);
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.ESCAPE; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd._onBlurInput.callCount).toBe(4);
 					expect(dd._onClickInput.callCount).toBe(3);
-				});
-				waits(310);
-				runs(function() {
+				}, 310 * 9);
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.DOWN; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd.getSelectedValue()).toBe(undefined);
 					expect(dd._onBlurInput.callCount).toBe(4);
 					expect(dd._onClickInput.callCount).toBe(4);
-				});
-				waits(310);
-				runs(function() {
+				}, 310 * 10);
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.UP; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd.getSelectedValue()).toBe('99');
@@ -275,9 +258,8 @@ define(
 					});
 					parentNode.appendChild(dd.rootNode);
 					dd.inputNode.focus();
-				});
-				waits(310);
-				runs(function() {
+				}, 310 * 11);
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.DOWN; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd.getSelectedValue()).toBe('0');
@@ -287,9 +269,8 @@ define(
 					});
 					parentNode.appendChild(dd.rootNode);
 					dd.inputNode.focus();
-				});
-				waits(310);
-				runs(function() {
+				}, 310 * 12);
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.PAGE_UP; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd.getSelectedValue()).toBe('99');
@@ -299,9 +280,8 @@ define(
 					});
 					parentNode.appendChild(dd.rootNode);
 					dd.inputNode.focus();
-				});
-				waits(310);
-				runs(function() {
+				}, 310 * 13);
+				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.PAGE_DOWN; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd.getSelectedValue()).toBe('0');
@@ -340,16 +320,15 @@ define(
 					});
 					parentNode.appendChild(dd.rootNode);
 					dd.inputNode.focus();
-				});
-				waits(310);
-				runs(function() {
+				}, 310 * 14);
+				setTimeout(function() {
 					dd.setSelected('1');
 					urushi.getKeyCode = function() {return urushi.KEYCODE.UP; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd.getSelectedValue()).toBe('0');
 
 					urushi.getKeyCode = getKeyCode;
-				});
+				}, 310 * 15);
 			});
 
 			it('_initSetScrollVisibleItem', function () {
@@ -368,23 +347,19 @@ define(
 				parentNode.appendChild(space);
 				dd.setSelected('50');
 				window.scrollTo(0, 0);
-				waits(10);
-				runs(function() {
+				setTimeout(function() {
 					dd.inputNode.focus();
-				});
+				}, 10);
 
-				waits(310);
-				runs(function() {
+				setTimeout(function() {
 					button.focus();
 					window.scrollTo(0, 10000);
-				});
-				waits(10);
-				runs(function() {
+				}, 320);
+				setTimeout(function() {
 					dd.inputNode.focus();
-				});
-				waits(310);
-				runs(function() {
-				});
+				}, 330);
+				setTimeout(function() {
+				}, 640);
 			});
 
 			it('setDisabled ', function () {
@@ -507,15 +482,23 @@ define(
 				dd.destroy();
 			});
 
-			it('template engine input test', function () {
-				templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
-					// var modules = result.widgets,
-					// 	key;
+			describe('Template engine', function () {
+				var flag = false;
+				beforeEach(function (done) {
+					templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
+						flag = true;
+						done();
+					}).otherwise(function (error) {
+						flag = false;
+						done();
+					});
+				});
+				it('template engine test', function () {
+					expect(flag).toBe(true);
 				});
 			});
 
-			// for jscover.
-			// Don't delete.
+			// For jscover.
 			jscoverReport();
 		});
 	}
