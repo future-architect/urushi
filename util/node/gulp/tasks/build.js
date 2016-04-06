@@ -15,6 +15,6 @@ gulp.task('clean', function (cb) {
 
 gulp.task('clean-build', function (cb) {
 	'use strict';
-	runSequence('clean', 'build');
+	return runSequence('clean', 'build');
 });
 
