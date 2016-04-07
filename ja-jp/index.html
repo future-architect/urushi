@@ -120,8 +120,8 @@
 			<h3 class="white-text-secondary">JavaScript</h3>
 			<pre><code class="javascript dark">
 // main.js
-require(['templateEngine'], function (templateEngine) {
-	templateEngine.renderDocument(document);
+require(['templateEngine', 'templateConfig'], function (templateEngine, templateConfig) {
+	templateEngine.renderDocument(document.body, templateConfig);
 });
 
 </code></pre>
@@ -129,7 +129,7 @@ require(['templateEngine'], function (templateEngine) {
 				Template engineを起動させるために、main.jsをindex.htmlと同じフォルダに作成してください。<br>
 				data-urushi-typeを指定したHTMLタグはすべてUrushiのWeb componentとして置き換わります。
 			</p>
-			<h3 class="white-text-secondary">Preview</h3>
+			<h3 class="white-text-secondary">プレビュー</h3>
 			<div data-urushi-type="panel" data-urushi-options='{"header" : "Header title"}'>
 				<button data-urushi-type="button">CLICK ME</button>
 			</div>
