@@ -1,7 +1,8 @@
 var gulp = require('gulp'),
 	pageConfig = require('../gh-pages-config.js'),
 	rimraf = require('rimraf'),
-	runSequence = require('run-sequence');
+	runSequence = require('run-sequence'),
+	replace = require('gulp-replace');
 
 gulp.task('copy-dest', function () {
 	'use strict';
@@ -36,4 +37,17 @@ gulp.task('build-gh-pages', function () {
 		'copy-dest',
 		'clean'
 	);
+});
+
+gulp.task('remove-underscore', function () {
+	'use strict';
+	return gulp.src(pageConfig.removeUnderscore.src, {base : pageConfig.removeUnderscore.base})
+		.pipe(replace(/_Base/g, 'Base'))
+		.pipe(gulp.dest(pageConfig.removeUnderscore.dest));
+});
+
+gulp.task('replace-base-file', function () {
+	'use strict';
+	return gulp.src(pageConfig.replaceBaseFile.src)
+		.pipe(gulp.dest());
 });

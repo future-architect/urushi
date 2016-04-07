@@ -11,5 +11,17 @@ module.exports = {
 		'../../../gh-pages-resoucres/config',
 		'../../../gh-pages-resoucres/lib',
 		'../../../gh-pages-resoucres/urushi'
-	]
+	],
+	removeUnderscore : {
+		src : [
+			'../../../gh-pages-resoucres/urushi/**/*.js',
+		],
+		base : '../../../gh-pages-resoucres/urushi/',
+		dest : '../../../gh-pages-resoucres/urushi/'
+	},
+	replaceBaseFile : {
+		src : [
+			'../../../gh-pages-resoucres/urushi/material/js/_Base.js'
+		],
+	}
 };
