@@ -15,13 +15,16 @@ module.exports = {
 	removeUnderscore : {
 		src : [
 			'../../../gh-pages-resoucres/urushi/**/*.js',
+			'../../../gh-pages-resoucres/config/**/*.js',
 		],
-		base : '../../../gh-pages-resoucres/urushi/',
-		dest : '../../../gh-pages-resoucres/urushi/'
+		base : '../../../gh-pages-resoucres/',
+		dest : '../../../gh-pages-resoucres/'
 	},
-	replaceBaseFile : {
+	renameFile : {
 		src : [
 			'../../../gh-pages-resoucres/urushi/material/js/_Base.js'
 		],
+		rename : './urushi/material/js/Base.js',
+		dest : '../../../gh-pages-resoucres/'
 	}
 };
