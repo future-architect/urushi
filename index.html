@@ -18,16 +18,17 @@
 
 	<script src="./gh-pages-resoucres/highlight/highlight.pack.js"></script>
 	<script type="text/javascript">
+		window.hljs.initHighlightingOnLoad();
 		window.requireRoot = './gh-pages-resoucres/';
 	</script>
 	<script src="./gh-pages-resoucres/config/requireConfig.js"></script>
 	<script src="./gh-pages-resoucres/lib/js/require.js" data-main="./gh-pages-resoucres/start"></script>
 </head>
 <body>
-	<header id="header" class="header">
-		<a class="button" href="./ja-jp/">JAPANESE</a>
+	<header id="header" class="header md-bg-primary">
+		<a class="button" href="./ja-jp/" target="_self">JAPANESE</a>
 	</header>
-	<section class="concept">
+	<section class="concept md-bg-primary">
 		<div class="row">
 			<ul class="table">
 				<li class="urushi-logo-wrapper">
@@ -36,17 +37,17 @@
 				<li class="message">
 					<h1>Urushi</h1>
 					<p>
-						Urushi is a web component framework which conformed to the policy of Google Material design.<br>
-						It provides HTML. CSS, JavaScript as components.<br>
-						It was created for large-scale development of interactive web components.<br>
+						Urushi is a web component framework which conformed to the policy of Google Material design.
+						It provides HTML. CSS, JavaScript as components.
+						It was created for large-scale development of interactive web components.
 						Besides providding web components, Urushi also enables users to create web components.
 					</p>
 				</li>
 			</ul>
 			<div class="button-area">
-				<a class="button button-raised button-download" href="https://github.com/future-architect/urushi" target="_blank"><i class="material-icons md-dark">file_download</i>GET URUSHI v0.5</a>
-				<a class="button button-raised button-github" href="https://github.com/future-architect/urushi" target="_blank"><img src="./gh-pages-resoucres/github.png">GITHUB</a>
-				<a class="button button-raised button-start" href="./" target="_blank">get started</a>
+				<a class="button button-raised button-download" href="https://github.com/future-architect/urushi/releases/download/0.5/urushi-0.5.zip"><i class="material-icons md-dark">file_download</i>GET URUSHI v0.5</a>
+				<a class="button button-raised button-github" href="https://github.com/future-architect/urushi" target="_blank"><img src=" ./gh-pages-resoucres/github.png">GITHUB</a>
+				<a class="button button-raised button-start" href="./get-started.html" target="_blank">get started</a>
 			</div>
 		</div>
 	</section>
@@ -58,8 +59,8 @@
 					<span>Framework for creators</span>
 				</h2>
 				<p>
-					Urushi has been made with creators in mind to create web components.<br>
-					By expressing web components in one class, Web application can be easily created.<br>
+					Urushi has been made with creators in mind to create web components.
+					By expressing web components in one class, Web application can be easily created.
 					Users are able to use web components as one class based on the definition of HTML, CSS, functions in JavaScript set by creator.
 				</p>
 			</div>
@@ -69,8 +70,8 @@
 					<span>Web component</span>
 				</h2>
 				<p>
-					Urushi provides web components as object-oriented class.<br>
-					Therefore, all web components in HTML exist as instances.<br>
+					Urushi provides web components as object-oriented class.
+					Therefore, all web components in HTML exist as instances.
 					Attributes and methods are integrated in instances to make large-scale development possible.
 				</p>
 			</div>
@@ -80,7 +81,7 @@
 					<span>Customization</span>
 				</h2>
 				<p>
-					Urushi provides the required HTML Template and JavaScript class mechanism to create web components.<br>
+					Urushi provides the required HTML Template and JavaScript class mechanism to create web components.
 					Web components can be used easily by defining the configuration file of Template engine.
 				</p>
 			</div>
@@ -98,8 +99,8 @@
 &lt;!-- index.html --&gt;
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
-	&lt;meta charset="utf8"&gt;
 &lt;head&gt;
+	&lt;meta charset="utf8"&gt;
 	&lt;link href="./urushi/material/style/material.css" rel="stylesheet"&gt;
 
 	&lt;script src="./config/requireConfig.js"&gt;&lt;/script&gt;
@@ -114,7 +115,7 @@
 
 </code></pre>
 			<p>
-				By adding data-urushi-type attribute to tags, instance can be automatically created by Template engine.<br>
+				By adding data-urushi-type attribute to tags, instance can be automatically created by Template engine.
 				Users can define the constructor arguments of data-urushi-options in json format.
 			</p>
 			<h3 class="white-text-secondary">JavaScript</h3>
@@ -126,7 +127,7 @@ require(['templateEngine', 'templateConfig'], function (templateEngine, template
 
 </code></pre>
 			<p>
-				In order to start the Template engine, please create main.js and index.html in the same folder.<br>
+				In order to start the Template engine, please create main.js and index.html in the same folder.
 				All data-urushi-type specified HTML tags will be replaced with Urushi web components.
 			</p>
 			<h3 class="white-text-secondary">Preview</h3>
@@ -152,7 +153,7 @@ require(['templateEngine', 'templateConfig'], function (templateEngine, template
 			</ul>
  -->
 			<p>
-				Microsoft Internet Explorer, Google Chrome and Mozzila Firefox are supported.<br>
+				Microsoft Internet Explorer, Google Chrome and Mozzila Firefox are supported.
 				Web components for Tablet devices will be added in the future updates. Therefore Android and Apple Safari will be supported in the near future.
 			</p>
 		</div>

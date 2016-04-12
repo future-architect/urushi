@@ -29,6 +29,12 @@ ul:after {
 	clear: both;
 }
 
+.md-bg-primary { background-color: #4CAF50; }
+.md-bg-primary-dark { background-color: #388E3C; }
+.md-bg-primary-light { background-color: #C8E6C9; }
+.md-accent { color: #FF5722; }
+.md-bg-accent { background-color: #FF5722; }
+
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
@@ -119,6 +125,10 @@ p {
 }
 p:nth-last-of-type(1) {
 	margin-bottom: 0;
+}
+
+pre {
+	margin: 24px 0;
 }
 
 pre, code {
@@ -314,21 +324,77 @@ ul.table > li {
 	}
 }
 
-
 .reverse {
 	background-color: #212121;
 	color: rgba(255, 255, 255, 1);
 }
 
-.header, .concept {
-	background-color: #66BB6A;
-}
-
 code .data-urushi {
 	text-decoration: underline;
+}
+code .big {
+	font-weight: 600;
+	font-style: italic;
 }
 
 .jp .footer {
 	font-size: 10.5pt;
 	font-weight: 400;
+}
+
+/* get started */
+body.get-started section .row .intro-box {
+	border-bottom: 1px solid rgba(0,0,0,.12);
+}
+body.get-started section .row .intro-box:nth-last-of-type(1) {
+	border-bottom: 0px solid rgba(0,0,0,.12);
+}
+body.get-started .intro-box {
+	padding: 24px 0;
+}
+
+.header .logo-wrapper {
+	width: 200px;
+	float: left;
+	margin-top: 4px;
+}
+.header .logo-wrapper .urushi-logo {
+	width: 100%;
+}
+
+.urushi-directories {
+	display: inline-block;
+	margin-top: 8px;
+	border-radius: 4px;
+	padding: 8px 16px;
+	background-color: #FFF;
+}
+.urushi-directories .material-icons {
+	vertical-align: middle;
+	margin-top: -4px;
+	margin-right: 12px;
+}
+.urushi-directories div {
+	line-height: 24px;
+}
+
+.urushi-directories .top {
+
+}
+.urushi-directories .second {
+	margin-left: 28px;
+}
+.urushi-directories .third {
+	margin-left: 56px;
+}
+
+.urushi-directories .added {
+	color: ;
+}
+
+.panel-body > div {
+	margin: 24px 8px;
+}
+.get-started .intro-box  .panel {
+	margin: 24px 0;
 }

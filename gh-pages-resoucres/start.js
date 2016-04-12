@@ -3,7 +3,6 @@
 	'use strict';
 	var header, onscroll;
 	
-	window.hljs.initHighlightingOnLoad();
 	require.config(requireConfig);
 
 	header = document.getElementById('header');

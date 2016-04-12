@@ -18,16 +18,18 @@
 
 	<script src=" ./../gh-pages-resoucres/highlight/highlight.pack.js"></script>
 	<script type="text/javascript">
+		window.hljs.initHighlightingOnLoad();
 		window.requireRoot = './../gh-pages-resoucres/';
 	</script>
 	<script src="./../gh-pages-resoucres/config/requireConfig.js"></script>
 	<script src="./../gh-pages-resoucres/lib/js/require.js" data-main="./../gh-pages-resoucres/start"></script>
 </head>
 <body class="jp">
-	<header id="header" class="header">
-		<a class="button" href="./../">ENGLISH</a>
+	<header id="header" class="header md-bg-primary">
+		<a class="button" href="./get-started.html" target="_self">GET STARTED</a>
+		<a class="button" href="./../" target="_self">ENGLISH</a>
 	</header>
-	<section class="concept">
+	<section class="concept md-bg-primary">
 		<div class="row">
 			<ul class="table">
 				<li class="urushi-logo-wrapper">
@@ -44,9 +46,9 @@
 				</li>
 			</ul>
 			<div class="button-area">
-				<a class="button button-raised button-download" href="https://github.com/future-architect/urushi" target="_blank"><i class="material-icons md-dark">file_download</i>GET URUSHI v0.5</a>
+				<a class="button button-raised button-download" href="https://github.com/future-architect/urushi/releases/download/0.5/urushi-0.5.zip"><i class="material-icons md-dark">file_download</i>GET URUSHI v0.5</a>
 				<a class="button button-raised button-github" href="https://github.com/future-architect/urushi" target="_blank"><img src=" ./../gh-pages-resoucres/github.png">GITHUB</a>
-				<a class="button button-raised button-start" href="./" target="_blank">get started</a>
+				<a class="button button-raised button-start" href="./get-started.html" target="_blank">get started</a>
 			</div>
 		</div>
 	</section>
@@ -98,37 +100,29 @@
 &lt;!-- index.html --&gt;
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
-	&lt;meta charset="utf8"&gt;
 &lt;head&gt;
-	&lt;link href="./urushi/material/style/material.css" rel="stylesheet"&gt;
+    &lt;meta charset="utf8"&gt;
+    &lt;link href="./urushi/material/style/material.css" rel="stylesheet"&gt;
 
-	&lt;script src="./config/requireConfig.js"&gt;&lt;/script&gt;
-	&lt;script src="./lib/js/require.js" data-main="./main"&gt;&lt;/script&gt;
+    &lt;script src="./config/requireConfig.js"&gt;&lt;/script&gt;
+    &lt;script src="./lib/js/require.js" data-main="./main"&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
-	&lt;div <span class="data-urushi">data-urushi-type="panel"</span> <span class="data-urushi">data-urushi-options='{"header" : "Header title"}</span>'&gt;
-		&lt;button <span class="data-urushi">data-urushi-type="button"</span>&gt;CLICK ME&lt;/button&gt;
-	&lt;/div&gt;
+    &lt;div <span class="data-urushi">data-urushi-type="panel"</span> <span class="data-urushi">data-urushi-options='{"header" : "Header title"}</span>'&gt;
+        &lt;button <span class="data-urushi">data-urushi-type="button"</span>&gt;CLICK ME&lt;/button&gt;
+    &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 
 </code></pre>
-			<p>
-				data-urushi-type属性をタグに追加することでTemplate engineが自動的にインスタンスが作成されます。<br>
-				data-urushi-optionsにjson形式でコンストラクタ引数を指定することが可能です。
-			</p>
 			<h3 class="white-text-secondary">JavaScript</h3>
 			<pre><code class="javascript dark">
 // main.js
 require(['templateEngine', 'templateConfig'], function (templateEngine, templateConfig) {
-	templateEngine.renderDocument(document.body, templateConfig);
+    templateEngine.renderDocument(document.body, templateConfig);
 });
 
 </code></pre>
-			<p>
-				Template engineを起動させるために、main.jsをindex.htmlと同じフォルダに作成してください。<br>
-				data-urushi-typeを指定したHTMLタグはすべてUrushiのWeb componentとして置き換わります。
-			</p>
 			<h3 class="white-text-secondary">プレビュー</h3>
 			<div data-urushi-type="panel" data-urushi-options='{"header" : "Header title"}'>
 				<button data-urushi-type="button">CLICK ME</button>

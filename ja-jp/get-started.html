@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Urushi</title>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
+
+	<link rel="shortcut icon" href=" ./../gh-pages-resoucres/favicon.ico" type="image/x-icon">
+
+	<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<link rel="stylesheet" href=" ./../gh-pages-resoucres/highlight/styles/default.css">
+	<link rel="stylesheet" href=" ./../gh-pages-resoucres/highlight/styles/rainbow.css">
+	<link rel="stylesheet" href=" ./../gh-pages-resoucres/material.css">
+	<link rel="stylesheet" href=" ./../gh-pages-resoucres/style.css">
+
+	<script src=" ./../gh-pages-resoucres/highlight/highlight.pack.js"></script>
+	<script type="text/javascript">
+		window.hljs.initHighlightingOnLoad();
+		window.requireRoot = './../gh-pages-resoucres/';
+	</script>
+	<script src="./../gh-pages-resoucres/config/requireConfig.js"></script>
+	<script src="./../gh-pages-resoucres/lib/js/require.js" data-main="./../gh-pages-resoucres/start"></script>
+</head>
+<body class="jp get-started">
+	<header id="header" class="header md-bg-primary">
+		<div class="logo-wrapper">
+			<img class="urushi-logo" src="./../gh-pages-resoucres/urushi-logo.png">
+		</div>
+		<a class="button" href="./" target="_self">TOP PAGE</a>
+		<a class="button" href="./../get-started.html" target="_self">ENGLISH</a>
+	</header>
+	<section class="">
+		<div class="row">
+			<div class="intro-box">
+				<h1>Urushiの導入方法</h1>
+				<h2>Urushiを入手する</h2>
+				<p>
+					以下の「GET URUSHI」を押下して、zipファイルをダウンロードしてください。
+					githubから直接ダウンロードする場合は下記にアクセスしてください。<br>
+					https://github.com/future-architect/urushi/releases
+				</p>
+				<a class="button button-raised button-download" href="https://github.com/future-architect/urushi/releases/download/0.5/urushi-0.5.zip"><i class="material-icons md-dark">file_download</i>GET URUSHI v0.5</a>
+			</div>
+			<div class="intro-box">
+				<h2>Demoを見てみる</h2>
+				<p>
+					ダウンロードしたファイルを解凍してください。
+					解凍したフォルダをHTTPサーバーに下記のように配置してください。
+					ブラウザから[配置したフォルダのHTTP Path]test/にアクセスするとデモのトップページが開きます。
+					開いたトップページから任意のWeb Componentにアクセスしてください。
+				</p>
+				<div class="urushi-directories">
+					<div class="top">
+						<span class="material-icons md-dark">folder_open</span>Web site root
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>config
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>urushi
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>test
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>util
+					</div>
+				</div>
+				<h3>Urushiを組み込みにあたって</h3>
+				<p>
+					test, utilフォルダーはdemoを確認するために必要なファイル群です。
+					デモが不必要な場合は、フォルダごとtest、utilを削除してしまって構いません。
+					また、requirejsを既に利用している場合、requirejsのコンフィグファイルにurushiモジュールのパスを追記するようお願いします。
+				</p>
+			</div>
+			<div class="intro-box">
+				<h2>作成するWebサイトにUrushiを組み込む</h2>
+				<p>
+					いよいよUrushiをWebサイトに組込みます。
+					UrushiをWebサイトに組み込むには3つのステップが必要です。<br>
+					まず、HTMLにUrushiを組み込むためのscriptタグを追加します。
+					次に、JavaScriptでUrushiのTemplate Engineを起動するためのソースコードを追加します。
+					これでUrushiを利用する準備は完了です。
+					Urushiを利用するには、UrushiのWeb Componentの定義を属性としてHTMLタグに追加します。<br>
+					その前に、Urushiを組み込むHTMLファイルを作成しましょう。
+					下記フォルダ構造を参考にしてindex.htmlを新規作成してくだい。<br>
+					それでは、1ステップずつ進めていきましょう。
+				</p>
+				<div class="urushi-directories">
+					<div class="top">
+						<span class="material-icons md-dark">folder_open</span>Web site root
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>config
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>urushi
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>test
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>util
+					</div>
+					<div class="second md-accent">index.html</div>
+				</div>
+				<h3>Urushiを組み込む</h3>
+				<p>
+					headタグの中に2つのscriptタグを記述してください。
+					Urushiはrequirejsを利用しています。
+					まず、requirejsのコンフィグになるJavaScriptファイル(requireConfig.js)を読み込むためのscriptタグを記述します。
+					次に、requirejsの読み込み、及びrequirejsの初期化処理完了後に起動するJavaScriptファイル(main.js)を読み込むためのscriptタグを記述してください。
+				</p>
+				<pre><code class="html">
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf8"&gt;
+    &lt;link href="./urushi/material/style/material.css" rel="stylesheet"&gt;
+
+    <span class="big">&lt;script src="./config/requireConfig.js"&gt;&lt;/script&gt;</span>
+    <span class="big">&lt;script src="./lib/js/require.js" data-main="./main"&gt;&lt;/script&gt;</span>
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+				<h3>Urushiを起動するJavaScriptを記述する。</h3>
+				<p>
+					Urushiを起動するためのJavaScriptを記述します。
+					index.htmlと同じフォルダにmain.jsを作成してください。
+					main.jsはrequirejsの初期化処理が完了したら実行されます。
+					main.jsに以下のソースコードを記述してください。<br>
+					Template engineに対して、第1引数に指定されたDocument Treeを解析しUrushiのWeb Componentに置き換えていく処理を命令しています。
+				</p>
+				<div class="urushi-directories">
+					<div class="top">
+						<span class="material-icons md-dark">folder_open</span>Web site root
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>config
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>urushi
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>test
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>util
+					</div>
+					<div class="second">index.html</div>
+					<div class="second md-accent">main.js</div>
+				</div>
+				<pre><code class="javascript">
+// main.js
+require(['templateEngine', 'templateConfig'], function (templateEngine, templateConfig) {
+    templateEngine.renderDocument(document.body, templateConfig);
+});
+
+</code></pre>
+				<h3>UrushiのWeb ComponentをHTMLに記述する</h3>
+				<p>
+					UrushiのWeb Componentを利用するには、HTMLタグにdata-urushi-type属性を追加し、Web Component名を記述します。
+					これだけでUrushiのWeb Componentは使えます。
+					また、data-urushi-options属性を記述することで、Web Componentのコンストラクタ引数を指定可能です。<br>
+					Web ComponentのUsage一覧は現在作成中です。少々お待ちください。
+				</p>
+				<pre><code class="html">
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf8"&gt;
+    &lt;link href="./urushi/material/style/material.css" rel="stylesheet"&gt;
+
+    &lt;script src="./config/requireConfig.js"&gt;&lt;/script&gt;
+    &lt;script src="./lib/js/require.js" data-main="./main"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div <span class="big">data-urushi-type="panel"</span> <span class="big">data-urushi-options='{"header" : "Header title"}</span>'&gt;
+        &lt;button <span class="big">data-urushi-type="button"</span>&gt;CLICK ME&lt;/button&gt;
+        Toggle &lt;input <span class="big">data-urushi-type="togglebutton"</span> checked&gt;
+        &lt;input <span class="big">data-urushi-type="checkbox"</span>&gt; Check me!
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+				<h3>プレビュー</h3>
+				<p>
+					プレビューを確認してみましょう。正しく導入出来ていると以下のプレビューと同じようなプレビューを確認できます。
+				</p>
+				<div data-urushi-type="panel" data-urushi-options='{"header" : "Header title"}'>
+					<button data-urushi-type="button">CLICK ME</button>
+					Toggle <input data-urushi-type="togglebutton" checked>
+					<input data-urushi-type="checkbox">Check me!
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer class="footer reverse">
+		<div class="row">
+			© 2016 Future architect inc. Auther Yuzo Hirakawa. Code licensed under the MIT License.
+		</div>
+	</footer>
+</body>
+</html>
