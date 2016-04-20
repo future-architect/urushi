@@ -121,6 +121,7 @@
 			<h3 class="white-text-secondary">JavaScript</h3>
 			<pre><code class="javascript dark">
 // main.js
+require.config(requireConfig);
 require(['templateEngine', 'templateConfig'], function (templateEngine, templateConfig) {
 	templateEngine.renderDocument(document.body, templateConfig);
 });
