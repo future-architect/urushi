@@ -353,6 +353,22 @@ body.get-started .intro-box {
 	padding: 24px 0;
 }
 
+/* for-developers */
+body.for-developers section .row .intro-box {
+	border-bottom: 1px solid rgba(0,0,0,.12);
+}
+body.for-developers section .row .intro-box:nth-last-of-type(1) {
+	border-bottom: 0px solid rgba(0,0,0,.12);
+}
+body.for-developers .intro-box {
+	padding: 24px 0;
+}
+
+body.for-developers .intro-box img {
+	max-width: 1024px;
+	width: 100%;
+ }
+
 .header .logo-wrapper {
 	width: 200px;
 	float: left;
