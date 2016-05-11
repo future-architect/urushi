@@ -21,6 +21,7 @@
 			'hamburger',
 			'input',
 			'panel',
+			'card',
 			'radio',
 			'textarea',
 			'toast',
