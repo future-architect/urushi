@@ -39,7 +39,6 @@ window.requireConfig = {
 		Hamburger : 'urushi/material/js/Hamburger',
 		Input : 'urushi/material/js/Input',
 		Panel : 'urushi/material/js/Panel',
-		Card : 'urushi/material/js/Card',
 		Radiobox : 'urushi/material/js/Radiobox',
 		Ripple : 'urushi/material/js/Ripple',
 		Textarea : 'urushi/material/js/Textarea',
@@ -60,7 +59,6 @@ window.requireConfig = {
 		inputTemplate : 'urushi/material/template/input.html',
 		inputTransitionUnitTemplate : 'urushi/material/template/input-transition-unit.html',
 		panelTemplate : 'urushi/material/template/panel.html',
-		cardTemplate : 'urushi/material/template/card.html',
 		radioboxTemplate : 'urushi/material/template/radiobox.html',
 		textareaTemplate : 'urushi/material/template/textarea.html',
 		toastTemplate : 'urushi/material/template/toast.html',
@@ -83,10 +81,14 @@ window.requireConfig = {
 		uploadManagerTemplate : 'urushi/beta/template/uploadManager.html',
 		_UploadManagerListItem : 'urushi/beta/js/_UploadManagerListItem',
 		uploadManagerListItemTemplate : 'urushi/beta/template/uploadManagerListItem.html',
+
+		// Card
+		Card : 'urushi/material/js/Card',
+		cardTemplate : 'urushi/material/template/card.html'
 	},
 	shim : {
 		'jqueryUi' : ['jquery']
 	},
 	// Counterplan for browser cache.
-	//urlArgs : 'bust=' + (new Date()).getTime()
+	urlArgs : 'bust=' + (new Date()).getTime()
 };

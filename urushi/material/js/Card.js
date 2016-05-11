@@ -1,6 +1,6 @@
 /**
  * @fileOverView Card class definition.
- * @author Yuzo Hirakawa
+ * @author San Yamagami
  * @version 1.0
  */
 
@@ -28,16 +28,36 @@
  *		specification	: optional
  *		default value	: ''
  *		descriptoin		: Title content.
+  *	titleImg
+ *		type			: string
+ *		specification	: optional
+ *		default value	: ''
+ *		descriptoin		: Title Image.
  *	content
  *		type			: string | node | NodeList | function
  *		specification	: optional
  *		default value	: ''
  *		descriptoin		: Body contents.
- *	action
+ *  buttonClass
  *		type			: string
  *		specification	: optional
  *		default value	: ''
- *		descriptoin		: Action content.
+ *		descriptoin		: Style class of theme color of button widget.
+ *  buttonLabel
+ *		type			: string
+ *		specification	: optional
+ *		default value	: 'Button Name'
+ *		descriptoin		: Label of button.
+ *	buttonClass
+ *		type			: string
+ *		specification	: optional
+ *		default value	: ''
+ *		descriptoin		: Style class of theme color of button widget. For the theme color, read test/button/index.html.
+ *	isActionButton
+ *		type			: boolean
+ *		specification	: optional
+ *		default value	: false
+ *		descriptoin		: Specify to display button on action area.
  * </pre>
  * @example
  *	require(['Card'], function (Card) {
@@ -53,7 +73,7 @@
  *	});
  *
  * @example
- *	<div id="myCard" class="card-info" data-urushi-type="card" data-urushi-options='{"title" : "Title title", "action" : "additional messsage."}'>
+ *	<div id="myCard" class="card-info" data-urushi-type="card" data-urushi-options='{"title" : "Title title"}'>
  *		<p>contens. test message.</p>
  *		<div>
  *			<span class="hoge">message 1</span>
@@ -69,6 +89,7 @@
  * @extends module:_Base
  * @requires module:Urushi
  * @requires module:_Base
+ * @requires module:Button
  * @requires card.html
  */
 define(
@@ -97,7 +118,7 @@ define(
 		 */
 		var CONSTANTS = {
 			ID_PREFIX : 'urushi.Card',
-			EMBEDDED : {cardClass : '', additionalClass : '', title : '', content : '', action : '', buttonClass : '', buttonLabel : 'Button Name', titleImg : ''}
+			EMBEDDED : {cardClass : '', additionalClass : '', title : '', content : '', buttonClass : '', buttonLabel : 'Button Name', titleImg : ''}
 		};
 
 		/**
@@ -126,13 +147,13 @@ define(
 			 */
 			embedded : undefined,
 			/**
-	                         * <pre>
-	                         * クリアボタン
-	                         * </pre>
-	                         * @type Button
-	                         * @private
-	                         */
-	                        actionButton : null,
+             * <pre>
+             * アクションボタン
+             * </pre>
+             * @type Button
+             * @private
+             */
+            actionButton : null,
 			/**
 			 * <pre>
 			 * Initializes instance properties.
@@ -176,9 +197,17 @@ define(
 				} else {
 				}
 			},
+			/**
+			 * <pre>
+			 * Sets image to the title.
+			 * </pre>
+			 * @param {string} titleImg ImagePath.
+			 * @returns none.
+			 */
 			setTitleImg : function (/* string */ titleImg) {
 				if(titleImg){
 					this.titleSpanNode.classList.add('card-title-span-img');
+					this.titleImgNode.classList.remove('hidden');
 				} else {
 					this.titleImgNode.classList.add('hidden');
 				}
@@ -200,9 +229,9 @@ define(
 			},
 			/**
 			 * <pre>
-			 * Sets whether to display close icon or not.
+			 * Sets whether to display action button or not.
 			 * </pre>
-			 * @param {boolean} is Whether to display close icon or not.
+			 * @param {args} is Whether to display action button or not.
 			 * @returns none.
 			 */
 			actionButton : function (/* object */ args) {
