@@ -152,7 +152,7 @@ define(
              * @type Button
              * @private
              */
-            actionButton : null,
+			actionButton : null,
 			/**
 			 * <pre>
 			 * Initializes instance properties.
@@ -203,7 +203,7 @@ define(
 			 * @returns none.
 			 */
 			setTitleImg : function (/* string */ titleImg) {
-				if(titleImg){
+				if(titleImg) {
 					this.titleSpanNode.classList.add('card-title-span-img');
 					this.titleImgNode.classList.remove('hidden');
 				} else {
@@ -233,7 +233,7 @@ define(
 			 * @returns none.
 			 */
 			setActionButton : function (/* object */ args) {
-				if ('boolean' !== typeof  args.isActionButton) {
+				if ('boolean' !== typeof args.isActionButton) {
 					this.actionNode.classList.add('hidden');
 					return;
 				}
