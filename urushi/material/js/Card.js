@@ -63,11 +63,10 @@
  *	require(['Card'], function (Card) {
  *		var card = new Card({
  *			id : 'myCard',
- *			inputClass : 'card-info',
+ *			cardClass : 'card-info',
  *			additionalClass : '',
  *			title : 'Title title',
- *			content : 'main contents',
- *			action : 'additional messsage.'
+ *			content : 'main contents'
  *		});
  *		document.body.appendChild(card.getRootNode());
  *	});
@@ -168,7 +167,7 @@ define(
 			},
 			/**
 			 * <pre>
-			 * Sets contents to body, title and actionButton.
+			 * Sets contents to body, title , title image and actionButton.
 			 * </pre>
 			 * @protected
 			 * @param {object} args Constructor arguments.
@@ -194,7 +193,6 @@ define(
 					} else {
 						this.titleSpanNode.classList.add('hidden');
 					}
-				} else {
 				}
 			},
 			/**
@@ -231,7 +229,7 @@ define(
 			 * <pre>
 			 * Sets whether to display action button or not.
 			 * </pre>
-			 * @param {args} is Whether to display action button or not.
+			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
 			setActionButton : function (/* object */ args) {
@@ -252,6 +250,8 @@ define(
 			 * Creates access points of alert element nodes.
 			 *
 			 * titleNode : Title.
+			 * titleNode : Title Image.
+			 * titleSpanNode : Title Span.
 			 * contentNode : Body.
 			 * actionNode : Action.
 			 * </pre>
