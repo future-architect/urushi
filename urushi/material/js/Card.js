@@ -168,7 +168,7 @@ define(
 			},
 			/**
 			 * <pre>
-			 * Sets contents to body, title and fotter.
+			 * Sets contents to body, title and actionButton.
 			 * </pre>
 			 * @protected
 			 * @param {object} args Constructor arguments.
@@ -178,7 +178,7 @@ define(
 				this.setContent(args.content);
 				this.setTitle(args.title);
 				this.setTitleImg(args.titleImg);
-				this.actionButton(args);
+				this.setActionButton(args);
 			},
 			/**
 			 * <pre>
@@ -234,7 +234,7 @@ define(
 			 * @param {args} is Whether to display action button or not.
 			 * @returns none.
 			 */
-			actionButton : function (/* object */ args) {
+			setActionButton : function (/* object */ args) {
 				if ('boolean' !== typeof  args.isActionButton) {
 					this.actionNode.classList.add('hidden');
 					return;
