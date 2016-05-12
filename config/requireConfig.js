@@ -81,6 +81,10 @@ window.requireConfig = {
 		uploadManagerTemplate : 'urushi/beta/template/uploadManager.html',
 		_UploadManagerListItem : 'urushi/beta/js/_UploadManagerListItem',
 		uploadManagerListItemTemplate : 'urushi/beta/template/uploadManagerListItem.html',
+
+		// Card
+		Card : 'urushi/material/js/Card',
+		cardTemplate : 'urushi/material/template/card.html'
 	},
 	shim : {
 		'jqueryUi' : ['jquery']

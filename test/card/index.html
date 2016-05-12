@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Card test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link href="../../util/jasmine/jasmine.css" rel="stylesheet">
+	<link href="../../urushi/material/style/material.css" rel="stylesheet">
+	<link href="../../urushi/material/style/module/structure/card.css" rel="stylesheet">
+	<link href="../test.css" rel="stylesheet">
+	<style type="text/css">
+		.panel {
+			margin : 24px;
+		}
+	</style>
+	
+	<script src="../../util/jasmine/jasmine.js"></script>
+	<script src="../../util/jasmine/jasmine-html.js"></script>
+	<script src="../jasmine-boot.js"></script>
+
+	<script src="../testUtil.js"></script>
+
+	<script src="../../config/requireConfig.js"></script>
+	<script src="../config.js"></script>
+	<script src="../../lib/js/require.js" data-main="./main"></script>
+</head>
+<body>
+	<h1>Card unit test.</h1>
+	<div class="test-area">
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Panel Header", "footer" : "Panel Footer"}'>
+			<div data-urushi-type="card" data-urushi-options='{"buttonLabel" : "Card button" , "buttonClass" : "button-info" ,"isActionButton" : true, "titleImg" : "Desert.jpg"}'>
+				<div>Card Content</div>
+			</div>
+			<div data-urushi-type="card" data-urushi-options='{"buttonLabel" : "Card button" ,"isActionButton" : true}'>
+				<div>Card Content</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
