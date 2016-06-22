@@ -119,7 +119,7 @@ gulp scss-build
 				</p>
 
 				<div class="test-area">
-					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title" ,  "titleImg" : "./../gh-pages-resoucres/images/Desert.jpg"}'>
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title" ,  "titleImg" : "./../gh-pages-resoucres/images/sample.png"}'>
 						<div>Card Content</div>
 					</div>
 					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title"}'>
@@ -468,7 +468,7 @@ define(
 .card-warning .card-title{background-color:#FF9800;color:#fff}
 .card-danger .card-title{background-color:#CE576D;color:#fff}
 .card .card-title .card-title-span {margin-left: 10px;}
-.card .card-title .card-title-img{display: block;position: relative;width: 100%;height: auto;max-height: 200px;}
+.card .card-title .card-title-img{display: block;position: relative;width: 100%;height: auto;}
 .card .card-title .card-title-span-img{position: relative;bottom: 20px;padding: 20px,20px,0px,20px;color: white;}
 				</code></pre>
 			</div>
@@ -484,13 +484,13 @@ define(
 						<span class="material-icons md-dark">folder_open</span>Web site root
 					</div>
 					<div class="second md-accent">index.html</div>
-					<div class="second md-accent">Desert.jpg</div>
+					<div class="second md-accent">sample.png</div>
 				</div>
 
 				<h3>Card ComponentをHTMLに記述する</h3>
 				<p>
 					data-urushi-optionsの"titleImg"には、背景画像のパスを指定します。<br>
-					下記の例では、index.htmlと同階層に配置したDesert.jpgを指定しています。
+					下記の例では、index.htmlと同階層に配置したsample.pngを指定しています。
 				</p>
 				<pre><code class="html">
 &lt;!-- index.html --&gt;
@@ -506,7 +506,7 @@ define(
 &lt;/head&gt;
 &lt;body&gt;
     &lt;div class="test-area"&gt;
-	    &lt;div data-urushi-type="card" data-urushi-options='{"title" : "card-title" ,  "titleImg" : "Desert.jpg"}'&gt;
+	    &lt;div data-urushi-type="card" data-urushi-options='{"title" : "card-title" ,  "titleImg" : "sample.png"}'&gt;
 		    &lt;div&gt;Card Content&lt;/div&gt;
 	    &lt;/div&gt;
 	    &lt;div data-urushi-type="card" data-urushi-options='{"title" : "card-title"}'&gt;
@@ -523,7 +523,7 @@ define(
 					プレビューを確認してみましょう。正しく導入出来ていると以下のプレビューと同じようなプレビューを確認できます。
 				</p>
 				<div class="test-area">
-					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title" ,  "titleImg" : "./../gh-pages-resoucres/images/Desert.jpg"}'>
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title" ,  "titleImg" : "./../gh-pages-resoucres/images/sample.png"}'>
 						<div>Card Content</div>
 					</div>
 					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title"}'>

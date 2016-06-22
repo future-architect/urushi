@@ -14,5 +14,5 @@
 .card-warning .card-title{background-color:#FF9800;color:#fff}
 .card-danger .card-title{background-color:#CE576D;color:#fff}
 .card .card-title .card-title-span {margin-left: 10px;}
-.card .card-title .card-title-img{display: block;position: relative;width: 100%;height: auto;max-height: 200px;}
+.card .card-title .card-title-img{display: block;position: relative;width: 100%;height: auto;}
 .card .card-title .card-title-span-img{position: relative;bottom: 20px;padding: 20px,20px,0px,20px;color: white;}
