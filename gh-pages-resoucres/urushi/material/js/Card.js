@@ -74,7 +74,7 @@ define(
 	'Card',
 	[
 		'Urushi',
-		'_Base',
+		'Base',
 		'text!cardTemplate'
 	],
 	/**
@@ -83,7 +83,7 @@ define(
 	 * @alias module:Card
 	 * @returns {object} Card instance.
 	 */
-	function (urushi, _Base, template) {
+	function (urushi, Base, template) {
 		'use strict';
 
 		/**
@@ -106,7 +106,7 @@ define(
 		 */
 		var idNo = 0;
 
-		return _Base.extend(/** @lends module:Card.prototype */ {
+		return Base.extend(/** @lends module:Card.prototype */ {
 
 			/**
 			 * <pre>

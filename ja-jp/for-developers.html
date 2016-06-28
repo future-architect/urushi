@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href=" ./../gh-pages-resoucres/highlight/styles/rainbow.css">
 	<link rel="stylesheet" href=" ./../gh-pages-resoucres/material.css">
 	<link rel="stylesheet" href=" ./../gh-pages-resoucres/style.css">
+	<link rel="stylesheet" href="./../gh-pages-resoucres/card.css">
 
 	<script src=" ./../gh-pages-resoucres/highlight/highlight.pack.js"></script>
 	<script type="text/javascript">
@@ -116,7 +117,15 @@ gulp scss-build
 					Urushiをベースに、独自コンポーネントの作成を行います。<br>
 					以下の様なCardコンポーネントを作成していきましょう。
 				</p>
-				<img src=" ./../gh-pages-resoucres/images/card-test.png"/>
+
+				<div class="test-area">
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title" ,  "titleImg" : "./../gh-pages-resoucres/images/sample.png"}'>
+						<div>Card Content</div>
+					</div>
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title"}'>
+						<div>Card Content</div>
+					</div>
+				</div>
 			</div>
 			<div class="intro-box">
 				<h2>フォルダ構成</h2>
@@ -143,15 +152,6 @@ gulp scss-build
 						<span class="material-icons md-dark">folder_open</span>template
 					</div>
 					<div class="fifth md-accent">card.html</div>
-					<div class="second">
-						<span class="material-icons md-dark">folder_open</span>test
-					</div>
-					<div class="third md-accent">
-						<span class="material-icons md-dark">folder_open</span>card
-					</div>
-					<div class="fifth md-accent">index.html</div>
-					<div class="fifth md-accent">main.js</div>
-					<div class="fifth md-accent">spec.js</div>
 				</div>
 			</div>
 			<div class="intro-box">
@@ -244,10 +244,7 @@ define(
                     cardClass : 'getOptionalClasses',
                     title : 'getUrushiOption',
                     titleImg : 'getUrushiOption',
-                    content : 'getChildNodesFunction',
-                    buttonClass : 'getUrushiOption',
-                    buttonLabel : 'getUrushiOption',
-                    isActionButton : 'getUrushiOption'
+                    content : 'getChildNodesFunction'
                 },
                 options : {
                     id : 'id'
@@ -257,6 +254,10 @@ define(
     }
 );
 				</code></pre>
+				<p>
+					templateConfig.jsの記載方法については下記を参考にしてください。
+				</p>
+				<a class="button button-raised button-start" href="./how-to-write-templateConfig.html" target="_self">how to write templateConfig</a>
 
 				<h3>Step3. テンプレートファイルを作成する</h3>
 				<p>
@@ -338,15 +339,20 @@ define(
     [
         'Urushi',
         '_Base',
-        'Button',
         'text!cardTemplate'
     ],
-    
-    function (urushi, _Base, Button, template) {
+    /**
+     * @class
+     * @augments module:_Base
+     * @alias module:Card
+     * @returns {object} Card instance.
+     */
+    function (urushi, _Base, template) {
         'use strict';
+
         var CONSTANTS = {
             ID_PREFIX : 'urushi.Card',
-            EMBEDDED : {cardClass : '', additionalClass : '', title : '', content : '', buttonClass : '', buttonLabel : 'Button Name', titleImg : ''}
+            EMBEDDED : {cardClass : '', additionalClass : '', title : '', content : '', titleImg : ''}
         };
 
         var idNo = 0;
@@ -357,8 +363,6 @@ define(
 
             embedded : undefined,
 
-            actionButton : null,
-
             _initProperties : function (/* object */ args) {
                 this.template = template;
                 this.embedded = CONSTANTS.EMBEDDED;
@@ -368,7 +372,6 @@ define(
                 this.setContent(args.content);
                 this.setTitle(args.title);
                 this.setTitleImg(args.titleImg);
-                this.setActionButton(args);
             },
 
             setTitle : function (/* string */ title) {
@@ -399,26 +402,11 @@ define(
                 }
             },
 
-            setActionButton : function (/* object */ args) {
-                if ('boolean' !== typeof args.isActionButton) {
-                    this.actionNode.classList.add('hidden');
-                    return;
-                }
-                if (args.isActionButton) {
-                    this.actionNode.classList.remove('hidden');
-                    this.actionButton = new Button({label : args.buttonLabel, buttonClass : args.buttonClass});
-                    this.actionNode.appendChild(this.actionButton.rootNode);
-                } else {
-                    this.actionNode.classList.add('hidden');
-                }
-            },
-
             _attachNode : function () {
                 this.titleNode = this.rootNode.getElementsByClassName('card-title')[0];
                 this.titleImgNode = this.rootNode.getElementsByClassName('card-title-img')[0];
                 this.titleSpanNode = this.rootNode.getElementsByClassName('card-title-span')[0];
                 this.contentNode = this.rootNode.getElementsByClassName('card-content')[0];
-                this.actionNode = this.rootNode.getElementsByClassName('card-action')[0];
             },
 
             _getId : function () {
@@ -427,6 +415,7 @@ define(
         });
     }
 );
+
 
 
 				</code></pre>
@@ -463,24 +452,24 @@ define(
 					<div class="seventh md-accent">card.css</div>
 				</div>
 				<pre><code class="html">
-.card,.shadow-z-1{box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)}
+.card
+.shadow-z-1{box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)}
 .shadow-z-2{box-shadow:0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23)}
 .shadow-z-2-hover{box-shadow:0 3px 6px rgba(0,0,0,.2),0 3px 6px rgba(0,0,0,.28)}
 .shadow-z-3{box-shadow:0 10px 20px rgba(0,0,0,.19),0 6px 6px rgba(0,0,0,.23)}
 .shadow-z-4{box-shadow:0 14px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22)}
 .shadow-z-5{box-shadow:0 19px 38px rgba(0,0,0,.3),0 15px 12px rgba(0,0,0,.22)}
 .card{border-radius:2px;border:0;background-color:#FFF;margin: 8px;}
-.card .card-action,.card .card-title{border-top-left-radius:3px;border-top-right-radius:3px;color:rgba(5,2,0,.73)}
-.card .card-title{border-bottom:1px solid transparent;padding:10px 0px 10px 0px;}
+.card .card-title{border-top-left-radius:3px;border-top-right-radius:3px;color:rgba(5,2,0,.73);border-bottom:1px solid transparent;padding:0px 0px 10px 0px;}
 .card .card-content{padding:10px 15px 10px 15px;}
-.card .card-action{padding:10px 15px;}
 .card-default .card-title{background-color:#DDD;color:rgba(5,2,0,.73)}
 .card-primary .card-title{background-color:#FF9800;color:#fff}
 .card-info .card-title,.card-success .card-title{background-color:#318CBB;color:#fff}
 .card-warning .card-title{background-color:#FF9800;color:#fff}
 .card-danger .card-title{background-color:#CE576D;color:#fff}
-.card .card-title .card-title-img{display: block;position: relative;width: 100%;height: auto;max-height: 200px;}
-.card .card-title .card-title-span-img{position: relative;bottom: 20px;left: 0;padding: 20px,20px,0px,20px;color: white;}
+.card .card-title .card-title-span {margin-left: 10px;}
+.card .card-title .card-title-img{display: block;position: relative;width: 100%;height: auto;}
+.card .card-title .card-title-span-img{position: relative;bottom: 20px;padding: 20px,20px,0px,20px;color: white;}
 				</code></pre>
 			</div>
 
@@ -488,133 +477,59 @@ define(
 				<h2>作成したコンポーネントを利用する</h2>
 				<p>
 					作成したCardコンポーネントを利用してみましょう。<br>
-					testフォルダ配下にcardフォルダを新規に作成し、3つのファイルを作成します。
+					<a class="link" href="./get-started.html" target="_blank">get started</a> の「作成するWebサイトにUrushiを組み込む」を参考にします。
 				</p>
 				<div class="urushi-directories">
 					<div class="top">
 						<span class="material-icons md-dark">folder_open</span>Web site root
 					</div>
-					<div class="second">
-						<span class="material-icons md-dark">folder_open</span>test
-					</div>
-					<div class="third md-accent">
-						<span class="material-icons md-dark">folder_open</span>card
-					</div>
-					<div class="fifth md-accent">index.html</div>
-					<div class="fifth md-accent">main.js</div>
-					<div class="fifth md-accent">spec.js</div>
+					<div class="second md-accent">index.html</div>
+					<div class="second md-accent">sample.png</div>
 				</div>
 
-				<h3>index.html</h3>
+				<h3>Card ComponentをHTMLに記述する</h3>
 				<p>
 					data-urushi-optionsの"titleImg"には、背景画像のパスを指定します。<br>
-					下記の例では、index.htmlと同階層に配置したDesert.jpgを指定しています。
+					下記の例では、index.htmlと同階層に配置したsample.pngを指定しています。
 				</p>
 				<pre><code class="html">
 &lt;!-- index.html --&gt;
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
-    &lt;title&gt;Card test&lt;/title&gt;
-    &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+    &lt;meta charset="utf8"&gt;
+    &lt;link href="./urushi/material/style/material.css" rel="stylesheet"&gt;
+    &lt;link href="./urushi/material/style/module/structure/card.css" rel="stylesheet"&gt;
 
-    &lt;link href="../../util/jasmine/jasmine.css" rel="stylesheet"&gt;
-    &lt;link href="../../urushi/material/style/material.css" rel="stylesheet"&gt;
-    &lt;link href="../../urushi/material/style/module/structure/card.css" rel="stylesheet"&gt;
-    &lt;link href="../test.css" rel="stylesheet"&gt;
-    &lt;style type="text/css"&gt;
-        .panel {
-            margin : 24px;
-        }
-    &lt;/style&gt;
-    
-    &lt;script src="../../util/jasmine/jasmine.js"&gt;&lt;/script&gt;
-    &lt;script src="../../util/jasmine/jasmine-html.js"&gt;&lt;/script&gt;
-    &lt;script src="../jasmine-boot.js"&gt;&lt;/script&gt;
-
-    &lt;script src="../testUtil.js"&gt;&lt;/script&gt;
-
-    &lt;script src="../../config/requireConfig.js"&gt;&lt;/script&gt;
-    &lt;script src="../config.js"&gt;&lt;/script&gt;
-    &lt;script src="../../lib/js/require.js" data-main="./main"&gt;&lt;/script&gt;
+    &lt;script src="./config/requireConfig.js"&gt;&lt;/script&gt;
+    &lt;script src="./lib/js/require.js" data-main="./main"&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;h1&gt;Card unit test.&lt;/h1&gt;
     &lt;div class="test-area"&gt;
-        &lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Panel Header", "footer" : "Panel Footer"}'&gt;
-            &lt;div data-urushi-type="card" data-urushi-options='{"buttonLabel" : "Card button" , "buttonClass" : "button-info" ,"isActionButton" : true, "titleImg" : "Desert.jpg"}'&gt;
-                &lt;div&gt;Card Content&lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div data-urushi-type="card" data-urushi-options='{"buttonLabel" : "Card button" ,"isActionButton" : true}'&gt;
-                &lt;div&gt;Card Content&lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
+	    &lt;div data-urushi-type="card" data-urushi-options='{"title" : "card-title" ,  "titleImg" : "sample.png"}'&gt;
+		    &lt;div&gt;Card Content&lt;/div&gt;
+	    &lt;/div&gt;
+	    &lt;div data-urushi-type="card" data-urushi-options='{"title" : "card-title"}'&gt;
+		    &lt;div&gt;Card Content&lt;/div&gt;
+	    &lt;/div&gt;
+    &lt;/div>
 &lt;/body&gt;
 &lt;/html&gt;
 
 				</code></pre>
 
-				<h3>main.js</h3>
-				<p>
-				</p>
-				<pre><code class="javascript">
-// main.js
-require.config(requireConfig);
-
-require(['card.spec'], function () {
-    'use strict';
-    startJasmine();
-});
-
-				</code></pre>
-
-				<h3>spec.js</h3>
-				<p>
-				</p>
-				<pre><code class="javascript">
-// spec.js
-/*eslint "vars-on-top" : 0*/
-
-define(
-    'card.spec',
-    ['Urushi', 'Card', 'templateEngine', 'templateConfig'],
-    function (Urushi, Card, templateEngine, templateConfig) {
-        'use strict';
-
-        describe('Card test', function () {
-            describe('Template engine', function () {
-                var flag = false;
-                beforeEach(function (done) {
-                    templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
-                        flag = true;
-                        done();
-                    }).otherwise(function (error) {
-                        flag = false;
-                        done();
-                    });
-                });
-                it('template engine test', function () {
-                    expect(flag).toBe(true);
-                });
-            });
-
-            // For jscover.
-            jscoverReport();
-        });
-    }
-);
-				</code></pre>
-
 				<h3>プレビュー</h3>
 				<p>
-					HTTPサーバを起動し、Cardコンポーネントをプレビューします。
+					プレビューを確認してみましょう。正しく導入出来ていると以下のプレビューと同じようなプレビューを確認できます。
 				</p>
-				<a class="button button-raised button-download" target="_blank" href="http://localhost/test/card">SHOW CARD-COMPONENT</a>
-				<p>
-					以下の様な画面が表示されれば成功です！
-				</p>
-				<img src=" ./../gh-pages-resoucres/images/card-test.png"/>
+				<div class="test-area">
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title" ,  "titleImg" : "./../gh-pages-resoucres/images/sample.png"}'>
+						<div>Card Content</div>
+					</div>
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title"}'>
+						<div>Card Content</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
