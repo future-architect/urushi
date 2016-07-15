@@ -5,14 +5,11 @@
 .shadow-z-3{box-shadow:0 10px 20px rgba(0,0,0,.19),0 6px 6px rgba(0,0,0,.23)}
 .shadow-z-4{box-shadow:0 14px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22)}
 .shadow-z-5{box-shadow:0 19px 38px rgba(0,0,0,.3),0 15px 12px rgba(0,0,0,.22)}
-.card{border-radius:2px;border:0;background-color:#FFF;margin: 8px;}
-.card .card-title{border-top-left-radius:3px;border-top-right-radius:3px;color:rgba(5,2,0,.73);border-bottom:1px solid transparent;padding:0px 0px 10px 0px;}
-.card .card-content{padding:10px 15px 10px 15px;}
-.card-default .card-title{background-color:#DDD;color:rgba(5,2,0,.73)}
-.card-primary .card-title{background-color:#FF9800;color:#fff}
-.card-info .card-title,.card-success .card-title{background-color:#318CBB;color:#fff}
-.card-warning .card-title{background-color:#FF9800;color:#fff}
-.card-danger .card-title{background-color:#CE576D;color:#fff}
-.card .card-title .card-title-span {margin-left: 10px;}
-.card .card-title .card-title-img{display: block;position: relative;width: 100%;height: auto;}
-.card .card-title .card-title-span-img{position: relative;bottom: 20px;padding: 20px,20px,0px,20px;color: white;}
+.card{border-radius:2px;border:0;background-color:#FFF;margin: 15px;}
+.card {max-width: 512px;}
+.card-img:before {padding-top: 56.25%;display: block;content: "";}
+.card-img {position: relative;}
+.card-img > div {position: absolute;top: 0px;left: 0px;bottom: 0px;right: 0px;}
+.card-img > div > img {max-width: 1024px;width: 100%;height: 100%;}
+.card .card-title {padding: 24px 16px 16px 16px;font-size: 24px;}
+.card .card-content {padding: 24px 16px 16px 16px;font-size: 16px;}

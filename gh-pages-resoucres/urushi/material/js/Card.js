@@ -145,39 +145,6 @@ define(
 			 */
 			initOption : function (/* object */ args) {
 				this.setContent(args.content);
-				this.setTitle(args.title);
-				this.setTitleImg(args.titleImg);
-			},
-			/**
-			 * <pre>
-			 * Sets content to the title.
-			 * </pre>
-			 * @param {string} title Content strings.
-			 * @returns none.
-			 */
-			setTitle : function (/* string */ title) {
-				if (urushi.setDomContents(this.titleSpanNode, title)) {
-					if (this.titleSpanNode.textContent) {
-						this.titleSpanNode.classList.remove('hidden');
-					} else {
-						this.titleSpanNode.classList.add('hidden');
-					}
-				}
-			},
-			/**
-			 * <pre>
-			 * Sets image to the title.
-			 * </pre>
-			 * @param {string} titleImg ImagePath.
-			 * @returns none.
-			 */
-			setTitleImg : function (/* string */ titleImg) {
-				if(titleImg) {
-					this.titleSpanNode.classList.add('card-title-span-img');
-					this.titleImgNode.classList.remove('hidden');
-				} else {
-					this.titleImgNode.classList.add('hidden');
-				}
 			},
 			/**
 			 * <pre>
@@ -207,9 +174,8 @@ define(
 			 * @returns none.
 			 */
 			_attachNode : function () {
+				this.imgNode = this.rootNode.getElementsByClassName('card-img')[0];
 				this.titleNode = this.rootNode.getElementsByClassName('card-title')[0];
-				this.titleImgNode = this.rootNode.getElementsByClassName('card-title-img')[0];
-				this.titleSpanNode = this.rootNode.getElementsByClassName('card-title-span')[0];
 				this.contentNode = this.rootNode.getElementsByClassName('card-content')[0];
 			},
 			/**

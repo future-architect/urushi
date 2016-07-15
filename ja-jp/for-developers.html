@@ -119,11 +119,12 @@ gulp scss-build
 				</p>
 
 				<div class="test-area">
-					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title" ,  "titleImg" : "./../gh-pages-resoucres/images/sample.png"}'>
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title", "titleImg" : "./../gh-pages-resoucres/images/dahlia.jpg"}'>
 						<div>Card Content</div>
 					</div>
-					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title"}'>
-						<div>Card Content</div>
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title", "titleImg" : "./../gh-pages-resoucres/images/city.jpg"}'>
+						<a class="button" href="#" target="_self">action1</a>
+						<a class="button" href="#" target="_self">action2</a>
 					</div>
 				</div>
 			</div>
@@ -290,13 +291,16 @@ define(
 				</div>
 				<pre><code class="html">
 &lt;!-- card.html --&gt;
-&lt;div id="<%= id %>" class="card <%= cardClass %> <%= additionalClass %>"&gt;
-    &lt;div id="<%= id %>-title" class="card-title"&gt;
-        &lt;img src="<%= titleImg %>" class="card-title-img"&gt;
-        &lt;span class="card-title-span"><%= title %&gt;&lt;/span&gt;
+&lt;div id="<%= id %>" class="card shadow-z-3 <%= cardClass %> <%= additionalClass %>"&gt;
+    &lt;div id="<%= id %>-img" class="card-img">&gt;
+        &lt;div&gt;
+            &lt;img src="<%= titleImg %>"&gt;
+        &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div id="<%= id %>-content" class="card-content"><%= content %&gt;&lt;/div&gt;
-    &lt;div id="<%= id %>-action" class="card-action"&gt;&lt;/div&gt;
+    &lt;div id="<%= id %>-title" class="card-title"&gt;
+        &lt;span><%= title %>&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div id="<%= id %>-content" class="card-content"><%= content %>&lt;/div&gt;
 &lt;/div&gt;
 				</code></pre>
 
@@ -338,7 +342,7 @@ define(
     'Card',
     [
         'Urushi',
-        '_Base',
+        'Base',
         'text!cardTemplate'
     ],
     /**
@@ -347,7 +351,7 @@ define(
      * @alias module:Card
      * @returns {object} Card instance.
      */
-    function (urushi, _Base, template) {
+    function (urushi, Base, template) {
         'use strict';
 
         var CONSTANTS = {
@@ -357,42 +361,17 @@ define(
 
         var idNo = 0;
 
-        return _Base.extend(/** @lends module:Card.prototype */ {
+        return Base.extend(/** @lends module:Card.prototype */ {
 
             template : undefined,
-
             embedded : undefined,
-
             _initProperties : function (/* object */ args) {
                 this.template = template;
                 this.embedded = CONSTANTS.EMBEDDED;
             },
-
             initOption : function (/* object */ args) {
                 this.setContent(args.content);
-                this.setTitle(args.title);
-                this.setTitleImg(args.titleImg);
             },
-
-            setTitle : function (/* string */ title) {
-                if (urushi.setDomContents(this.titleSpanNode, title)) {
-                    if (this.titleSpanNode.textContent) {
-                        this.titleSpanNode.classList.remove('hidden');
-                    } else {
-                        this.titleSpanNode.classList.add('hidden');
-                    }
-                }
-            },
-
-            setTitleImg : function (/* string */ titleImg) {
-                if(titleImg) {
-                    this.titleSpanNode.classList.add('card-title-span-img');
-                    this.titleImgNode.classList.remove('hidden');
-                } else {
-                    this.titleImgNode.classList.add('hidden');
-                }
-            },
-
             setContent : function (/* string|node|NodeList|function */ contents) {
                 if ('function' === typeof contents) {
                     contents = contents();
@@ -401,23 +380,17 @@ define(
                     urushi.clearDomContents(this.contentNode);
                 }
             },
-
             _attachNode : function () {
+                this.imgNode = this.rootNode.getElementsByClassName('card-img')[0];
                 this.titleNode = this.rootNode.getElementsByClassName('card-title')[0];
-                this.titleImgNode = this.rootNode.getElementsByClassName('card-title-img')[0];
-                this.titleSpanNode = this.rootNode.getElementsByClassName('card-title-span')[0];
                 this.contentNode = this.rootNode.getElementsByClassName('card-content')[0];
             },
-
             _getId : function () {
                 return CONSTANTS.ID_PREFIX + idNo++;
             }
         });
     }
 );
-
-
-
 				</code></pre>
 
 				<p>
@@ -459,17 +432,14 @@ define(
 .shadow-z-3{box-shadow:0 10px 20px rgba(0,0,0,.19),0 6px 6px rgba(0,0,0,.23)}
 .shadow-z-4{box-shadow:0 14px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22)}
 .shadow-z-5{box-shadow:0 19px 38px rgba(0,0,0,.3),0 15px 12px rgba(0,0,0,.22)}
-.card{border-radius:2px;border:0;background-color:#FFF;margin: 8px;}
-.card .card-title{border-top-left-radius:3px;border-top-right-radius:3px;color:rgba(5,2,0,.73);border-bottom:1px solid transparent;padding:0px 0px 10px 0px;}
-.card .card-content{padding:10px 15px 10px 15px;}
-.card-default .card-title{background-color:#DDD;color:rgba(5,2,0,.73)}
-.card-primary .card-title{background-color:#FF9800;color:#fff}
-.card-info .card-title,.card-success .card-title{background-color:#318CBB;color:#fff}
-.card-warning .card-title{background-color:#FF9800;color:#fff}
-.card-danger .card-title{background-color:#CE576D;color:#fff}
-.card .card-title .card-title-span {margin-left: 10px;}
-.card .card-title .card-title-img{display: block;position: relative;width: 100%;height: auto;}
-.card .card-title .card-title-span-img{position: relative;bottom: 20px;padding: 20px,20px,0px,20px;color: white;}
+.card{border-radius:2px;border:0;background-color:#FFF;margin: 15px;}
+.card {max-width: 512px;}
+.card-img:before {padding-top: 56.25%;display: block;content: "";}
+.card-img {position: relative;}
+.card-img > div {position: absolute;top: 0px;left: 0px;bottom: 0px;right: 0px;}
+.card-img > div > img {max-width: 1024px;width: 100%;height: 100%;}
+.card .card-title {padding: 24px 16px 16px 16px;font-size: 24px;}
+.card .card-content {padding: 24px 16px 16px 16px;font-size: 16px;}
 				</code></pre>
 			</div>
 
@@ -523,11 +493,12 @@ define(
 					プレビューを確認してみましょう。正しく導入出来ていると以下のプレビューと同じようなプレビューを確認できます。
 				</p>
 				<div class="test-area">
-					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title" ,  "titleImg" : "./../gh-pages-resoucres/images/sample.png"}'>
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title", "titleImg" : "./../gh-pages-resoucres/images/dahlia.jpg"}'>
 						<div>Card Content</div>
 					</div>
-					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title"}'>
-						<div>Card Content</div>
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title", "titleImg" : "./../gh-pages-resoucres/images/city.jpg"}'>
+						<a class="button" href="#" target="_self">action1</a>
+						<a class="button" href="#" target="_self">action2</a>
 					</div>
 				</div>
 			</div>
