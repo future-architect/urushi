@@ -1,0 +1,400 @@
+* {
+	box-sizing: border-box;
+}
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+header:after,
+div:after,
+ul:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.md-bg-primary { background-color: #4CAF50; }
+.md-bg-primary-dark { background-color: #388E3C; }
+.md-bg-primary-light { background-color: #C8E6C9; }
+.md-accent { color: #FF5722; }
+.md-bg-accent { background-color: #FF5722; }
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Rules for font color. */
+.white-text-primary { color: rgba(255, 255, 255, 1.00); }
+.white-text-secondary { color: rgba(255, 255, 255, 0.70); }
+.white-text-hint, .white-disabled { color: rgba(255, 255, 255, 0.50); }
+.white-divider { color: rgba(255, 255, 255, 0.12); }
+
+.black-text-primary { color: rgba(0, 0, 0, 0.87); }
+.black-text-secondary { color: rgba(0, 0, 0, 0.54); }
+.black-text-hint, .black-disabled { color: rgba(0, 0, 0, 0.38); }
+.black-divider { color: rgba(0, 0, 0, 0.12); }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+/* Desktop font size english and japanese */
+body {
+	font-family: 'Roboto', sans-serif;
+
+	background-color: #eeeeee;
+	color: rgba(0, 0, 0, 0.86);
+
+	font-size: 13pt;
+	font-weight: 400;
+}
+body.jp {
+	font-family: 'Noto Sans Japanese', serif;
+
+	font-size: 14pt;
+}
+
+h1 {
+	font-size: 45pt;
+}
+
+h2 {
+	font-size: 24pt;
+	font-weight: 400;
+}
+h3 {
+	font-size: 15pt;
+	font-weight: 400;
+	color: rgba(0, 0, 0, 0.54);
+}
+.jp h3 {
+	font-size: 16pt;
+}
+button, .button {
+	font-size: 14pt;
+	font-weight: 500;
+}
+.jp button, .jp .button {
+	font-size: 15pt;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+body {
+	line-height: 1;
+}
+
+h2, h3 {
+	margin-top: 48px;
+	margin-bottom: 16px;
+}
+h2:first-child, h3:first-child {
+	margin-top: 0;
+}
+
+h2 > * {
+	vertical-align: middle;
+}
+
+p {
+	margin: 24px 0;
+	line-height: 32px;
+}
+p:nth-last-of-type(1) {
+	margin-bottom: 0;
+}
+
+pre {
+	margin: 24px 0;
+}
+
+pre, code {
+	border-radius: 4px;
+}
+
+.hidden {
+	display: none!important;
+	visibility: hidden!important;
+}
+.button {
+	display: inline-block;
+}
+
+.header {
+	position: fixed;
+	z-index:1;
+	width: 100%;
+	padding: 4px 16px;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.0);
+	transition: all 500ms ease-in-out 100ms;
+
+	text-align: right;
+}
+.header.floating {
+	padding: 0px 16px;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.row {
+	margin: 0 auto;
+	padding: 72px 32px;
+	max-width: 1024px;
+}
+
+ul.table {
+	display: inline-table;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: auto;
+	table-layout: fixed;
+}
+ul.table > li {
+	display: table-cell;
+	vertical-align: middle;
+	height: auto;
+}
+.concept .table .urushi-logo-wrapper {
+	width: 400px;
+}
+.concept .table .urushi-logo {
+	width: 100%;
+}
+.concept .table .message {
+	width: 100%;
+	padding-left: 24px;
+}
+.concept .message h1 {
+	font-weight: 500;
+}
+.concept .button-area {
+	margin-top: 24px;
+	text-align: center;
+}
+.concept .button-area .button {
+	margin: 8px 16px;
+	line-height: 24px;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+.button .material-icons {
+	vertical-align: middle;
+	margin-top: -4px;
+}
+.button-github img {
+	display: inline;
+	vertical-align: middle;
+	width: 22px;
+	height: 22px;
+	margin-top: -6px;
+	margin-right: 6px;
+}
+
+.introduction .intro-box {
+	border-top: 1px solid rgba(0,0,0,0.12);
+	padding: 24px 0;
+}
+.introduction .intro-box:first-child {
+	border-top: 0px;
+	padding-top: 0;
+}
+.introduction .intro-box:nth-last-of-type(1) {
+	padding-bottom: 0;
+}
+.introduction .intro-box .material-icons {
+	margin-right: 8px;
+}
+
+.browser .icon-list {
+	width: 100%;
+}
+.icon-cell {
+	position: relative;
+	float: left;
+	width: calc(100% / 3);
+	text-align: center;
+}
+.browser-icon {
+	position: relative;
+	display: inline-block;
+	height: 160px;
+	width: 160px;
+	background-size: contain;
+}
+.browser-icon.ie {
+	background-image: url("ms-ie.png");
+}
+.browser-icon.ff {
+	background-image: url("moz-ff.png");
+}
+.browser-icon.chrome {
+	background-image: url("chrome.png");
+}
+.browser-icon.ie::after {
+	position: absolute;
+	z-index: 10;
+
+	content: "9+";
+	font-size: 34pt;
+	font-weight: 600;
+
+	bottom: 6px;
+	right: 0px;
+}
+
+.footer .row {
+	padding: 16px 32px 14px 32px;
+}
+.footer .material-icons {
+	vertical-align: middle;
+	margin-top: -6px;
+	margin-right: 2px;
+}
+
+@media screen and (max-width: 1200px) {
+	.concept .table .urushi-logo-wrapper {
+		width: 320px;
+	}
+}
+@media screen and (max-width: 1024px) {
+	.concept .table .urushi-logo-wrapper {
+		width: 240px;
+	}
+}
+@media screen and (max-width: 768px) {
+	body {
+		font-size: 14pt;
+	}
+	body.jp {
+		font-size: 15pt;
+	}
+	h3 {
+		font-size: 16pt;
+	}
+	.jp h3 {
+		font-size: 17pt;
+	}
+	.concept {
+		padding-top: 42px;
+	}
+	.row {
+		padding: 32px;
+	}
+	ul.table, ul.table > li {
+		display: block;
+	}
+	.concept .table .message {
+		margin-top: 24px;
+		padding: 0;
+	}
+	.concept .table .urushi-logo-wrapper {
+		width: 320px;
+	}
+	.concept .button-area {
+		margin-top: 32px;
+		text-align: left;
+	}
+}
+@media screen and (max-width: 480px) {
+	.concept .table .urushi-logo-wrapper {
+		width: 240px;
+	}
+}
+
+.reverse {
+	background-color: #212121;
+	color: rgba(255, 255, 255, 1);
+}
+
+code .data-urushi {
+	text-decoration: underline;
+}
+code .big {
+	font-weight: 600;
+	font-style: italic;
+}
+
+.jp .footer {
+	font-size: 10.5pt;
+	font-weight: 400;
+}
+
+/* get started */
+body.get-started section .row .intro-box {
+	border-bottom: 1px solid rgba(0,0,0,.12);
+}
+body.get-started section .row .intro-box:nth-last-of-type(1) {
+	border-bottom: 0px solid rgba(0,0,0,.12);
+}
+body.get-started .intro-box {
+	padding: 24px 0;
+}
+
+.header .logo-wrapper {
+	width: 200px;
+	float: left;
+	margin-top: 4px;
+}
+.header .logo-wrapper .urushi-logo {
+	width: 100%;
+}
+
+.urushi-directories {
+	display: inline-block;
+	margin-top: 8px;
+	border-radius: 4px;
+	padding: 8px 16px;
+	background-color: #FFF;
+}
+.urushi-directories .material-icons {
+	vertical-align: middle;
+	margin-top: -4px;
+	margin-right: 12px;
+}
+.urushi-directories div {
+	line-height: 24px;
+}
+
+.urushi-directories .top {
+
+}
+.urushi-directories .second {
+	margin-left: 28px;
+}
+.urushi-directories .third {
+	margin-left: 56px;
+}
+
+.urushi-directories .added {
+	color: ;
+}
+
+.panel-body > div {
+	margin: 24px 8px;
+}
+.get-started .intro-box  .panel {
+	margin: 24px 0;
+}
