@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Radio test</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
+	<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
+<!-- cssの読み込み -->
+<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
+<link href="../../../gh-pages-resoucres/highlight/styles/rainbow.css" rel="stylesheet">
+<link href="../../../gh-pages-resoucres/urushi_style.css" rel="stylesheet">
+<link href="../../../gh-pages-resoucres/index_style.css" rel="stylesheet" type="text/css">
+<link href="../../../gh-pages-resoucres/contents.css" rel="stylesheet" type="text/css">
+<link href="../../../gh-pages-resoucres/style.css" rel="stylesheet" type="text/css">
+<link href="../../../gh-pages-resoucres/material.css" rel="stylesheet">
+<!-- jsの読み込み -->
+<script src="../../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
+<script src="../../../gh-pages-resoucres/lib/js/fire-highlightjs.js"></script>
+<script src="../../../config/requireConfig.js"></script>
+<script src="../../../lib/js/require.js" data-main="./main"></script>
+
+<style type="text/css">
+.form-control-wrapper {
+	margin: 24px;
+}
+
+.margin-box {
+	margin: 8px;
+}
+</style>
+</head>
+
+<body>
+	<header id="header" class="header md-bg-primary">
+		<div class="logo-wrapper">
+			<img class="urushi-logo" src="../../../gh-pages-resoucres/urushi-logo.png">
+		</div>
+		<a class="button" href="../../" target="_self">TOP PAGE</a>
+		<a class="button" href="../../../" target="_self">ENGLISH</a>
+	</header>
+	<div data-urushi-type="panel"
+		data-urushi-options='{"header" : "Side Menu"}' class="panel  sideBar">
+		<ul class="sideBarList idnexList">
+			<li><a href="../index.html">Index</a></li>
+		</ul>
+		<ul class="sideBarList">
+			<li><a href="../alert">Alert</a></li>
+			<li><a href="../button">Button</a></li>
+			<li><a href="../checkbox">CheckBox</a></li>
+			<li><a href="../contextmenu">ContextMenu</a></li>
+			<li><a href="../dialog">Dialog</a></li>
+			<li><a href="../dropdown">Dropdown</a></li>
+			<li><a href="../hamburger">Hamburger</a></li>
+			<li><a href="../input">Input</a></li>
+			<li><a href="../panel">Panel</a></li>
+			<li><a href="../radio">Radio</a></li>
+			<li><a href="../textarea">Textarea</a></li>
+			<li><a href="../toast">Toast</a></li>
+			<li><a href="../toggle">ToggleButton</a></li>
+			<li><a href="../tooltip">Tooltip</a></li>
+		</ul>
+	</div>
+	<div data-urushi-type="panel"
+		class="contentsArea">
+		<div class="test-area">
+			<h2>Radio</h2>
+			<input data-urushi-type="radiobox" name="radio1" value="1"> 1
+			<input data-urushi-type="radiobox" name="radio1" value="2" checked>
+			2 <input data-urushi-type="radiobox" name="radio1" value="3">
+			3
+			<div class="margin-box"></div>
+			<h3>html</h3>
+
+			<pre>
+	<code class="html hljs xml">
+&lt;input data-urushi-type="radiobox" name="radio1" value="1"> 1
+&lt;input data-urushi-type="radiobox" name="radio1" value="2" checked> 2
+&lt;input data-urushi-type="radiobox" name="radio1" value="3"> 3
+		</code>
+		</pre>
+			<input data-urushi-type="radiobox" name="radio2" value="A"
+				class="radio-default" checked> default A <input
+				data-urushi-type="radiobox" name="radio2" value="B"
+				class="radio-default"> default B
+			<div class="margin-box"></div>
+			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;input data-urushi-type="radiobox" name="radio2" value="A" class="radio-default" checked> default A
+&lt;input data-urushi-type="radiobox" name="radio2" value="B" class="radio-default"> default B
+		</code>
+		</pre>
+			<input data-urushi-type="radiobox" name="radio3" value="A"
+				class="radio-primary" checked> primary A <input
+				data-urushi-type="radiobox" name="radio3" value="B"
+				class="radio-primary"> primary B
+			<div class="margin-box"></div>
+			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;input data-urushi-type="radiobox" name="radio3" value="A" class="radio-primary" checked> primary A
+&lt;input data-urushi-type="radiobox" name="radio3" value="B" class="radio-primary"> primary B
+		</code>
+		</pre>
+			<input data-urushi-type="radiobox" name="radio4" value="A"
+				class="radio-success" checked> success A <input
+				data-urushi-type="radiobox" name="radio4" value="B"
+				class="radio-success"> success B
+			<div class="margin-box"></div>
+			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;input data-urushi-type="radiobox" name="radio4" value="A" class="radio-success" checked> success A
+&lt;input data-urushi-type="radiobox" name="radio4" value="B" class="radio-success"> success B
+		</code>
+		</pre>
+
+			<input data-urushi-type="radiobox" name="radio5" value="A"
+				class="radio-info" checked> info A <input
+				data-urushi-type="radiobox" name="radio5" value="B"
+				class="radio-info"> info B
+			<div class="margin-box"></div>
+			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;input data-urushi-type="radiobox" name="radio5" value="A" class="radio-info" checked> info A
+&lt;input data-urushi-type="radiobox" name="radio5" value="B" class="radio-info"> info B
+		</code>
+		</pre>
+			<input data-urushi-type="radiobox" name="radio6" value="A"
+				class="radio-warning"> warning A <input
+				data-urushi-type="radiobox" name="radio6" value="B"
+				class="radio-warning" checked> warning B
+			<div class="margin-box"></div>
+			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;input data-urushi-type="radiobox" name="radio6" value="A" class="radio-warning"> warning A
+&lt;input data-urushi-type="radiobox" name="radio6" value="B" class="radio-warning" checked> warning B
+		</code>
+		</pre>
+
+			<input data-urushi-type="radiobox" name="radio7" value="A"
+				class="radio-danger"> danger A <input
+				data-urushi-type="radiobox" name="radio7" value="B"
+				class="radio-danger" checked> danger B
+			<div class="margin-box"></div>
+			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;input data-urushi-type="radiobox" name="radio7" value="A" class="radio-danger"> danger A
+&lt;input data-urushi-type="radiobox" name="radio7" value="B" class="radio-danger" checked> danger B
+		</code>
+		</pre>
+
+			<input data-urushi-type="radiobox" name="radio8" value="A"
+				class="radio-danger" disabled> Disabled A <input
+				data-urushi-type="radiobox" name="radio8" value="B"
+				class="radio-danger" checked disabled> Disabled B
+			<div class="margin-box"></div>
+			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;input data-urushi-type="radiobox" name="radio8" value="A" class="radio-danger" disabled> Disabled A
+&lt;input data-urushi-type="radiobox" name="radio8" value="B" class="radio-danger" checked disabled> Disabled B
+		</code>
+		</pre>
+
+			<input data-urushi-type="radiobox" name="radio9" value="A"
+				class="radio-danger" readonly> Readonly A <input
+				data-urushi-type="radiobox" name="radio9" value="B"
+				class="radio-danger" checked readonly> Readonly B
+			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;input data-urushi-type="radiobox" name="radio9" value="A" class="radio-danger" readonly> Readonly A
+&lt;input data-urushi-type="radiobox" name="radio9" value="B" class="radio-danger" checked readonly> Readonly B
+		</code>
+		</pre>
+		</div>
+		<div class="test-area" id="script-modules"></div>
+	</div>
+	<div class="clearfix"></div>
+		<footer class="footer reverse">
+		<div class="row">
+			© 2016 Future architect inc. Auther Yuzo Hirakawa. Code licensed under the MIT License.
+		</div>
+	</footer>
+</body>
+</html>

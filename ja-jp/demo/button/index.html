@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Button test</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
+	<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
+<!-- cssの読み込み -->
+<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
+<link href="../../../gh-pages-resoucres/highlight/styles/rainbow.css" rel="stylesheet">
+<link href="../../../gh-pages-resoucres/urushi_style.css" rel="stylesheet">
+<link href="../../../gh-pages-resoucres/index_style.css" rel="stylesheet" type="text/css">
+<link href="../../../gh-pages-resoucres/contents.css" rel="stylesheet" type="text/css">
+<link href="../../../gh-pages-resoucres/style.css" rel="stylesheet" type="text/css">
+<link href="../../../gh-pages-resoucres/material.css" rel="stylesheet">
+<!-- jsの読み込み -->
+<script src="../../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
+<script src="../../../gh-pages-resoucres/lib/js/fire-highlightjs.js"></script>
+<script src="../../../config/requireConfig.js"></script>
+<script src="../../../lib/js/require.js" data-main="./main"></script>
+</head>
+<body>
+	<header id="header" class="header md-bg-primary">
+		<div class="logo-wrapper">
+			<img class="urushi-logo" src="../../../gh-pages-resoucres/urushi-logo.png">
+		</div>
+		<a class="button" href="../../" target="_self">TOP PAGE</a>
+		<a class="button" href="../../../" target="_self">ENGLISH</a>
+	</header>
+	<div data-urushi-type="panel"
+		data-urushi-options='{"header" : "Side Menu"}' class="panel  sideBar">
+		<ul class="sideBarList idnexList">
+			<li><a href="../index.html">Index</a></li>
+		</ul>
+		<ul class="sideBarList">
+			<li><a href="../alert">Alert</a></li>
+			<li><a href="../button">Button</a></li>
+			<li><a href="../checkbox">CheckBox</a></li>
+			<li><a href="../contextmenu">ContextMenu</a></li>
+			<li><a href="../dialog">Dialog</a></li>
+			<li><a href="../dropdown">Dropdown</a></li>
+			<li><a href="../hamburger">Hamburger</a></li>
+			<li><a href="../input">Input</a></li>
+			<li><a href="../panel">Panel</a></li>
+			<li><a href="../radio">Radio</a></li>
+			<li><a href="../textarea">Textarea</a></li>
+			<li><a href="../toast">Toast</a></li>
+			<li><a href="../toggle">ToggleButton</a></li>
+			<li><a href="../tooltip">Tooltip</a></li>
+		</ul>
+	</div>
+	<div data-urushi-type="panel" class="contentsArea">
+		<div class="test-area">
+			<h2>Buttons</h2>
+			<button id="button1" data-urushi-type="button">Button</button>
+			<button id="button2" data-urushi-type="button" class="button-default">Default
+				Button</button>
+			<button id="button3" data-urushi-type="button" class="button-primary">Primary
+				Button</button>
+			<button id="button4" data-urushi-type="button" class="button-success">Success
+				Button</button>
+			<button id="button5" data-urushi-type="button" class="button-info">Info
+				Button</button>
+			<button id="button6" data-urushi-type="button" class="button-warning">Warning
+				Button</button>
+			<button id="button7" data-urushi-type="button" class="button-danger">Danger
+				Button</button>
+			<button id="button8" data-urushi-type="button" class="button-accent">Accent
+				Button</button>
+			<button id="button9" data-urushi-type="button"
+				class="button-default-accent">Default Accent Button</button>
+			<button id="button10" data-urushi-type="button" disabled>Disabled
+				Button</button>
+			<button id="button11" data-urushi-type="button"
+				class="button-primary" disabled>Disabled Primary Button</button>
+			<h3>html</h3>
+			<pre>
+				<code class="html hljs xml">
+&lt;button id="button1" data-urushi-type="button">Button&lt;/button>
+&lt;button id="button2" data-urushi-type="button" class="button-default">DefaultButton&lt;/button>
+&lt;button id="button3" data-urushi-type="button" class="button-primary">PrimaryButton&lt;/button>
+&lt;button id="button4" data-urushi-type="button" class="button-success">SuccessButton&lt;/button>
+&lt;button id="button5" data-urushi-type="button" class="button-info">InfoButton&lt;/button>
+&lt;button id="button6" data-urushi-type="button" class="button-warning">WarningButton&lt;/button>
+&lt;button id="button7" data-urushi-type="button" class="button-danger">DangerButton&lt;/button>
+&lt;button id="button8" data-urushi-type="button" class="button-accent">AccentButton&lt;/button>
+&lt;button id="button9" data-urushi-type="button" class="button-default-accent">Default Accent Button&lt;/button>
+&lt;button id="button10" data-urushi-type="button" disabled>DisabledButton&lt;/button>
+&lt;button id="button11" data-urushi-type="button" class="button-primary" disabled>Disabled Primary Button&lt;/button>
+
+</code>
+			</pre>
+
+			<h2>flat buttons</h2>
+			<button id="button-flat1" data-urushi-type="button"
+				class="button-flat">Flat Button</button>
+			<button id="button-flat2" data-urushi-type="button"
+				class="button-flat button-default">Default Flat Button</button>
+			<button id="button-flat3" data-urushi-type="button"
+				class="button-flat button-primary">Primary Flat Button</button>
+			<button id="button-flat4" data-urushi-type="button"
+				class="button-flat button-success">Success Flat Button</button>
+			<button id="button-flat5" data-urushi-type="button"
+				class="button-flat button-info">Info Flat Button</button>
+			<button id="button-flat6" data-urushi-type="button"
+				class="button-flat button-warning">Warning Flat Button</button>
+			<button id="button-flat7" data-urushi-type="button"
+				class="button-flat button-danger">Danger Flat Button</button>
+			<button id="button-flat8" data-urushi-type="button"
+				class="button-flat button-accent">Accent Flat Button</button>
+			<button id="button-flat9" data-urushi-type="button"
+				class="button-flat" disabled>Disabled Flat Button</button>
+			<button id="button-flat10" data-urushi-type="button"
+				class="button-flat button-primary" disabled>Disabled Flat
+				Primary Button</button>
+			<h3>html</h3>
+			<pre>
+				<code class="html hljs xml">
+&lt;button id="button-flat1" data-urushi-type="button" class="button-flat">Flat Button&lt;/button>
+&lt;button id="button-flat2" data-urushi-type="button" class="button-flat button-default">Default Flat Button&lt;/button>
+&lt;button id="button-flat3" data-urushi-type="button" class="button-flat button-primary">Primary Flat Button&lt;/button>
+&lt;button id="button-flat4" data-urushi-type="button" class="button-flat button-success">Success Flat Button&lt;/button>
+&lt;button id="button-flat5" data-urushi-type="button" class="button-flat button-info">Info Flat Button&lt;/button>
+&lt;button id="button-flat6" data-urushi-type="button" class="button-flat button-warning">Warning Flat Button&lt;/button>
+&lt;button id="button-flat7" data-urushi-type="button" class="button-flat button-danger">Danger Flat Button&lt;/button>
+&lt;button id="button-flat8" data-urushi-type="button" class="button-flat button-accent">Accent Flat Button&lt;/button>
+&lt;button id="button-flat9" data-urushi-type="button" class="button-flat" disabled>Disabled Flat Button&lt;/button>
+&lt;button id="button-flat10" data-urushi-type="button" class="button-flat button-primary" disabled>Disabled Flat Primary Button&lt;/button>
+
+</code>
+			</pre>
+			<h2>raised buttons</h2>
+			<button id="button-raised1" data-urushi-type="button"
+				class="button-raised">Raised Button</button>
+			<button id="button-raised2" data-urushi-type="button"
+				class="button-raised button-default">Default Raised Button</button>
+			<button id="button-raised3" data-urushi-type="button"
+				class="button-raised button-primary">Primary Raised Button</button>
+			<button id="button-raised4" data-urushi-type="button"
+				class="button-raised button-success">Success Raised Button</button>
+			<button id="button-raised5" data-urushi-type="button"
+				class="button-raised button-info">Info Raised Button</button>
+			<button id="button-raised6" data-urushi-type="button"
+				class="button-raised button-warning">Warning Raised Button</button>
+			<button id="button-raised7" data-urushi-type="button"
+				class="button-raised button-danger">Danger Raised Button</button>
+			<button id="button-raised8" data-urushi-type="button"
+				class="button-raised button-accent">Accent Raised Button</button>
+			<button id="button-raised9" data-urushi-type="button"
+				class="button-raised" disabled>Disabled Raised Button</button>
+			<button id="button-raised10" data-urushi-type="button"
+				class="button-raised button-primary" disabled>Disabled
+				Raised Primary Button</button>
+			<h3>html</h3>
+			<pre>
+				<code class="html hljs xml">
+&lt;button id="button-raised1" data-urushi-type="button" class="button-raised">Raised Button&lt;/button>
+&lt;button id="button-raised2" data-urushi-type="button" class="button-raised button-default">Default Raised Button&lt;/button>
+&lt;button id="button-raised3" data-urushi-type="button" class="button-raised button-primary">Primary Raised Button&lt;/button>
+&lt;button id="button-raised4" data-urushi-type="button" class="button-raised button-success">Success Raised Button&lt;/button>
+&lt;button id="button-raised5" data-urushi-type="button" class="button-raised button-info">Info Raised Button&lt;/button>
+&lt;button id="button-raised6" data-urushi-type="button" class="button-raised button-warning">Warning Raised Button&lt;/button>
+&lt;button id="button-raised7" data-urushi-type="button" class="button-raised button-danger">Danger Raised Button&lt;/button>
+&lt;button id="button-raised8" data-urushi-type="button" class="button-raised button-accent">Accent Raised Button&lt;/button>
+&lt;button id="button-raised9" data-urushi-type="button" class="button-raised" disabled>Disabled Raised Button&lt;/button>
+&lt;button id="button-raised10" data-urushi-type="button"class="button-raised button-primary" disabled>Disabled Raised Primary Button&lt;/button>
+
+</code>
+			</pre>
+			<h2>buttons test</h2>
+			<button id="content-dom" data-urushi-type="button">
+				<span style="color: red;">content dom</span>
+			</button>
+			<h3>html</h3>
+			<pre>
+				<code class="html hljs xml">
+&lt;button id="content-dom" data-urushi-type="button">
+    &lt;span style="color: red;">content dom&lt;/span>
+&lt;/button>
+				</code>
+			</pre>
+
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<footer class="footer reverse">
+	<div class="row">
+			© 2016 Future architect inc. Auther Yuzo Hirakawa. Code licensed under the MIT License.
+	</div>
+	</footer>
+</body>
+</html>

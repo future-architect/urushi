@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
+	<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
+<!-- cssの読み込み -->
+<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
+<link href="../../../gh-pages-resoucres/highlight/styles/rainbow.css" rel="stylesheet">
+<link href="../../../gh-pages-resoucres/urushi_style.css" rel="stylesheet">
+<link href="../../../gh-pages-resoucres/index_style.css" rel="stylesheet" type="text/css">
+<link href="../../../gh-pages-resoucres/contents.css" rel="stylesheet" type="text/css">
+<link href="../../../gh-pages-resoucres/style.css" rel="stylesheet" type="text/css">
+<link href="../../../gh-pages-resoucres/material.css" rel="stylesheet">
+<!-- jsの読み込み -->
+<script src="../../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
+<script src="../../../gh-pages-resoucres/lib/js/fire-highlightjs.js"></script>
+<script src="../../../config/requireConfig.js"></script>
+<script src="../../../lib/js/require.js" data-main="./main"></script>
+<style type="text/css">
+.toggle-button {
+	margin: 24px;
+}
+</style>
+</head>
+<body>
+	<header id="header" class="header md-bg-primary">
+		<div class="logo-wrapper">
+			<img class="urushi-logo" src="../../../gh-pages-resoucres/urushi-logo.png">
+		</div>
+		<a class="button" href="../../" target="_self">TOP PAGE</a>
+		<a class="button" href="../../../" target="_self">ENGLISH</a>
+	</header>
+	<div data-urushi-type="panel"
+		data-urushi-options='{"header" : "Side Menu"}' class="panel  sideBar">
+		<ul class="sideBarList idnexList">
+			<li><a href="../index.html">Index</a></li>
+		</ul>
+		<ul class="sideBarList">
+			<li><a href="../alert">Alert</a></li>
+			<li><a href="../button">Button</a></li>
+			<li><a href="../checkbox">CheckBox</a></li>
+			<li><a href="../contextmenu">ContextMenu</a></li>
+			<li><a href="../dialog">Dialog</a></li>
+			<li><a href="../dropdown">Dropdown</a></li>
+			<li><a href="../hamburger">Hamburger</a></li>
+			<li><a href="../input">Input</a></li>
+			<li><a href="../panel">Panel</a></li>
+			<li><a href="../radio">Radio</a></li>
+			<li><a href="../textarea">Textarea</a></li>
+			<li><a href="../toast">Toast</a></li>
+			<li><a href="../toggle">ToggleButton</a></li>
+			<li><a href="../tooltip">Tooltip</a></li>
+		</ul>
+	</div>
+	<div data-urushi-type="panel"class="contentsArea">
+		<div class="test-area">
+			<h2>Toggle</h2>
+			Default<input data-urushi-type="togglebutton" checked>
+			Primary<input data-urushi-type="togglebutton" checked>
+			Success<input data-urushi-type="togglebutton"> Info<input
+				data-urushi-type="togglebutton"> Warning<input
+				data-urushi-type="togglebutton"> Danger<input
+				data-urushi-type="togglebutton"> Disabled<input
+				data-urushi-type="togglebutton" checked disabled>
+			<h3>html</h3>
+			<pre>
+				<code class="html hljs xml">
+Default&lt;input data-urushi-type="togglebutton" checked>
+Primary&lt;input data-urushi-type="togglebutton" checked>
+Success&lt;input data-urushi-type="togglebutton">
+Info&lt;input data-urushi-type="togglebutton">
+Warning&lt;input data-urushi-type="togglebutton">
+Danger&lt;input data-urushi-type="togglebutton">
+Disabled&lt;input data-urushi-type="togglebutton" checked disabled>
+	</code>
+	</pre>
+		</div>
+		<div class="test-area" id="script-modules"></div>
+	</div>
+	<div class="clearfix"></div>
+		<footer class="footer reverse">
+		<div class="row">
+			© 2016 Future architect inc. Auther Yuzo Hirakawa. Code licensed under the MIT License.
+		</div>
+	</footer>
+</body>
+</html>

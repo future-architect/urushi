@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Alert Test</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
-	<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
+<title>Panel test</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
+<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
 <!-- cssの読み込み -->
 <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
 <link href="../../../gh-pages-resoucres/highlight/styles/rainbow.css" rel="stylesheet">
@@ -42,98 +42,111 @@
 			<li><a href="../hamburger">Hamburger</a></li>
 			<li><a href="../input">Input</a></li>
 			<li><a href="../panel">Panel</a></li>
-			<li><a href="../radio">Radio</a></li>
 			<li><a href="../textarea">Textarea</a></li>
+			<li><a href="../radio">Radio</a></li>
 			<li><a href="../toast">Toast</a></li>
 			<li><a href="../toggle">ToggleButton</a></li>
 			<li><a href="../tooltip">Tooltip</a></li>
 		</ul>
 	</div>
-	<div data-urushi-type="panel"class="contentsArea">
+	<div data-urushi-type="panel"
+		class="contentsArea">
 		<div class="test-area">
-
-			<h2>Alerts</h2>
-			<div id="alert1" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert","isDisplayCloseIcon" : false}'>Test
-				message.</div>
-			<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert1" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="alert2" class="alert-default" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert", "isDisplayCloseIcon" : true}'>Test
-				message.</div>
-			<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert2" class="alert-default" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert", "isDisplayCloseIcon" : true}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="alert3" class="alert-primary" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert"}'>Test message.</div>
-						<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert3" class="alert-primary" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="alert4" class="alert-success" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert"}'>Test message.</div>
-							<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert4" class="alert-success" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="alert5" class="alert-info" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert"}'>Test message.</div>
-			<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert5" class="alert-info" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="alert6" class="alert-warning" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert"}'>Test message.</div>
-			<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert6" class="alert-warning" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="alert7" class="alert-danger" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert"}'>Test message.</div>
-			<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert7" class="alert-danger" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="content-dom" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert"}'>
-				<span style="color: red;">content dom</span>
+			<h2>Panel</h2>
+			<div data-urushi-type="panel">
+				<span>Inner message.</span>
 			</div>
 			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;div data-urushi-type="panel">
+    &lt;span>Inner message.&lt;/span>
+&lt;/div>
+		</code>
+		</pre>
+			<div data-urushi-type="panel"
+				data-urushi-options='{"header" : "Header title", "footer" : "Footer title"}'>
+				<h2>sub title</h2>
+				<div>
+					<div>test message.</div>
+					<button data-urushi-type="button">Panel button</button>
+				</div>
+			</div>
+			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Header title", "footer" : "Footer title"}'>
+    &lt;h2>sub title&lt;/h2>
+    &lt;div>
+        &lt;div>test message.&lt;/div>
+        &lt;button data-urushi-type="button">Panel button&lt;/button>
+    &lt;/div>
+&lt;/div>
+		</code>
+		</pre>
+			<div data-urushi-type="panel"
+				data-urushi-options='{"header" : "Header default"}'
+				class="panel-default"></div>
+			<h3>html</h3>
 
 			<pre>
 	<code class="html hljs xml">
-&lt;div id="content-dom" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >&lt;span style="color: red;">content dom&lt;/span>&lt;/div>
-</code>
+&lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Header default"}' class="panel-default">&lt;/div>
+		</code>
+		</pre>
+			<div data-urushi-type="panel"
+				data-urushi-options='{"header" : "Header primary"}'
+				class="panel-primary"></div>
+			<h3>html</h3>
+
+			<pre>
+	<code class="html hljs xml">
+&lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Header primary"}' class="panel-primary">&lt;/div>
+		</code>
+		</pre>
+			<div data-urushi-type="panel"
+				data-urushi-options='{"header" : "Header success"}'
+				class="panel-success"></div>
+			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Header success"}' class="panel-success">&lt;/div>
+		</code>
+		</pre>
+			<div data-urushi-type="panel"
+				data-urushi-options='{"header" : "Header info"}' class="panel-info"></div>
+			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Header info"}' class="panel-info">&lt;/div>
+		</code>
+		</pre>
+			<div data-urushi-type="panel"
+				data-urushi-options='{"header" : "Header warning"}'
+				class="panel-warning"></div>
+			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Header warning"}' class="panel-warning">&lt;/div>
+		</code>
+		</pre>
+			<div data-urushi-type="panel"
+				data-urushi-options='{"header" : "Header danger"}'
+				class="panel-danger"></div>
+			<h3>html</h3>
+			<pre>
+	<code class="html hljs xml">
+&lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Header danger"}' class="panel-danger">&lt;/div>
+		</code>
 		</pre>
 		</div>
 		<div class="test-area" id="script-modules"></div>
-
 	</div>
-
 	<div class="clearfix"></div>
 		<footer class="footer reverse">
 		<div class="row">
 			© 2016 Future architect inc. Auther Yuzo Hirakawa. Code licensed under the MIT License.
 		</div>
 	</footer>
-
 </body>
-
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Alert Test</title>
+<title>Checkbox test</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
 	<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
@@ -49,91 +49,82 @@
 			<li><a href="../tooltip">Tooltip</a></li>
 		</ul>
 	</div>
-	<div data-urushi-type="panel"class="contentsArea">
+	<div data-urushi-type="panel"
+		class="contentsArea">
 		<div class="test-area">
+			<h2>Checkboxs</h2>
+			<input id="checkbox1" data-urushi-type="checkbox">Checkbox
+			<h3>html</h3>
+			<pre>
+		<code class="html hljs xml">
+&lt;input id="checkbox1" data-urushi-type="checkbox">Checkbox
+		</code>
+		</pre>
+			<input id="checkbox2" class="checkbox-default"
+				data-urushi-type="checkbox">Default
+			<h3>html</h3>
+			<pre>
+		<code class="html hljs xml">
+&lt;input id="checkbox2" class="checkbox-default" data-urushi-type="checkbox">Default
+		</code>
+		</pre>
+			<input id="checkbox3" class="checkbox-primary"
+				data-urushi-type="checkbox" checked>Primary
+			<h3>html</h3>
+			<pre>
+		<code class="html hljs xml">
+&lt;input id="checkbox3" class="checkbox-primary" data-urushi-type="checkbox" checked>Primary
+		</code>
+		</pre>
+			<input id="checkbox4" class="checkbox-success"
+				data-urushi-type="checkbox">Success
+			<h3>html</h3>
+			<pre>
+		<code class="html hljs xml">
+&lt;input id="checkbox4" class="checkbox-success" data-urushi-type="checkbox">Success
+		</code>
+		</pre>
+			<input id="checkbox5" class="checkbox-info"
+				data-urushi-type="checkbox" checked>Info
+			<h3>html</h3>
+			<pre>
+		<code class="html hljs xml">
+&lt;input id="checkbox5" class="checkbox-info" data-urushi-type="checkbox" checked>Info
+		</code>
+		</pre>
+			<input id="checkbox6" class="checkbox-warning"
+				data-urushi-type="checkbox">Warning
+			<h3>html</h3>
+			<pre>
+		<code class="html hljs xml">
+&lt;input id="checkbox6" class="checkbox-warning" data-urushi-type="checkbox">Warning
+		</code>
+		</pre>
+			<input id="checkbox7" class="checkbox-danger"
+				data-urushi-type="checkbox" checked>Danger
+			<h3>html</h3>
+			<pre>
+		<code class="html hljs xml">
+&lt;input id="checkbox7" class="checkbox-danger" data-urushi-type="checkbox" checked>Danger
+		</code>
+		</pre>
+			<input id="checkbox7" class="checkbox-default"
+				data-urushi-type="checkbox" checked disabled>Dissabled
+			<h3>html</h3>
+			<pre>
+		<code class="html hljs xml">
+&lt;input id="checkbox7" class="checkbox-default" data-urushi-type="checkbox" checked disabled>Dissabled
+		</code>
+		</pre>
 
-			<h2>Alerts</h2>
-			<div id="alert1" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert","isDisplayCloseIcon" : false}'>Test
-				message.</div>
-			<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert1" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="alert2" class="alert-default" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert", "isDisplayCloseIcon" : true}'>Test
-				message.</div>
-			<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert2" class="alert-default" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert", "isDisplayCloseIcon" : true}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="alert3" class="alert-primary" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert"}'>Test message.</div>
-						<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert3" class="alert-primary" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="alert4" class="alert-success" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert"}'>Test message.</div>
-							<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert4" class="alert-success" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="alert5" class="alert-info" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert"}'>Test message.</div>
-			<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert5" class="alert-info" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="alert6" class="alert-warning" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert"}'>Test message.</div>
-			<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert6" class="alert-warning" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="alert7" class="alert-danger" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert"}'>Test message.</div>
-			<h3>html</h3>
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="alert7" class="alert-danger" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >Test message.&lt;/div>
-		</code>
-		</pre>
-			<div id="content-dom" data-urushi-type="alert"
-				data-urushi-options='{"header" : "Test Alert"}'>
-				<span style="color: red;">content dom</span>
-			</div>
-			<h3>html</h3>
-
-			<pre>
-	<code class="html hljs xml">
-&lt;div id="content-dom" data-urushi-type="alert" data-urushi-options='{"header" : "Test Alert"}' >&lt;span style="color: red;">content dom&lt;/span>&lt;/div>
-</code>
-		</pre>
 		</div>
 		<div class="test-area" id="script-modules"></div>
-
 	</div>
-
 	<div class="clearfix"></div>
-		<footer class="footer reverse">
-		<div class="row">
+	<footer class="footer reverse">
+	<div class="row">
 			© 2016 Future architect inc. Auther Yuzo Hirakawa. Code licensed under the MIT License.
-		</div>
+	</div>
 	</footer>
-
 </body>
-
 </html>

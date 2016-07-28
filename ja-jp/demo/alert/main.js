@@ -1,4 +1,4 @@
-window.requireConfig.baseUrl = '../../../';
+window.requireConfig.baseUrl = '../../../../';
 require.config(requireConfig);
 require(['Urushi','Alert', 'templateEngine', 'templateConfig'], function(Urushi,Alert,templateEngine,
 		templateConfig) {
