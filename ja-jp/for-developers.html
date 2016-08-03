@@ -30,8 +30,13 @@
 		<div class="logo-wrapper">
 			<img class="urushi-logo" src="./../gh-pages-resoucres/urushi-logo.png">
 		</div>
-		<a class="button" href="./" target="_self">TOP PAGE</a>
-		<a class="button" href="./../for-developers.html" target="_self">ENGLISH</a>
+		<div id="headerContextMenu" class="headerContextWide">
+			<a class="button" href="./" target="_self">TOP PAGE</a>
+			<a class="button" href="./get-started.html" target="_self">GET STARTED</a>
+			<a class="button" href="./../for-developers.html" target="_self">ENGLISH</a>
+		</div>
+		<div id="headerContextMenu" class="headerContextNarrow">
+ 		</div>
 	</header>
 	<section class="">
 		<div class="row">
@@ -49,11 +54,9 @@
 				<p>
 					以下のコマンドを実行し、Gulpをインストールしてください。
 				</p>
-				<pre>
-					<code class="command">
+				<pre><code class="bash">
 npm install -g gulp
-					</code>
-				</pre>
+				</code></pre>
 				
 			</div>
 			<div class="intro-box">
@@ -62,35 +65,29 @@ npm install -g gulp
 				<p>
 					[Urushi-ROOT]/util/node/gulpに移動してください。
 				</p>
-				<pre>
-					<code class="command">
+				<pre><code class="bash">
 cd  [Urushi-ROOT]/util/node/gulp
-					</code>
-				</pre>
+				</code></pre>
 
 				<h3>パッケージインストール</h3>
 				<p>
 					以下のコマンドを実行し、パッケージをインストールしてください。
 				</p>
-				<pre>
-					<code class="command">
+				<pre><code class="bash">
 npm install 
-					</code>
-				</pre>
+				</code></pre>
 			</div>
 			<div class="intro-box">
 				<h2>Gulpタスクを実行する</h2>
 				<p>
 					以下のコマンドを実行し、Gulpタスクを実行して下さい。
 				</p>
-				<pre>
-					<code class="command">
+				<pre><code class="bash">
 gulp scss-build
-					</code>
-				</pre>
-				<p>
+				</code></pre>
+				<p style="word-break:break-all;">
 					以下のファイルが生成されていることを確認して下さい。<br>
-					[Urushi-ROOT]/urushi/material/style/material.css 
+					[Urushi-ROOT]/urushi/material/style/material.css
 				</p>
 			</div>
 			<div class="intro-box">

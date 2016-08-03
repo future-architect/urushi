@@ -151,14 +151,14 @@ pre, code {
 	padding: 4px 16px;
 	box-shadow: 0 2px 6px rgba(0,0,0,0.0);
 	transition: all 500ms ease-in-out 100ms;
-
-	text-align: right;
 }
 .header.floating {
 	padding: 0px 16px;
 	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
-
+.header .context-menu-wrapper {
+	float: right;
+}
 .row {
 	margin: 0 auto;
 	padding: 72px 32px;
@@ -275,6 +275,14 @@ ul.table > li {
 	margin-right: 2px;
 }
 
+.headerContextWide {
+	text-align: right;
+	display: block;
+}
+.headerContextNarrow {
+	display: none!important;
+}
+
 @media screen and (max-width: 1200px) {
 	.concept .table .urushi-logo-wrapper {
 		width: 320px;
@@ -283,6 +291,12 @@ ul.table > li {
 @media screen and (max-width: 1024px) {
 	.concept .table .urushi-logo-wrapper {
 		width: 240px;
+	}
+	.headerContextWide {
+		display: none!important;
+	}
+	.headerContextNarrow {
+		display: block!important;
 	}
 }
 @media screen and (max-width: 768px) {
@@ -380,11 +394,12 @@ body.for-developers .intro-box img {
 }
 
 .urushi-directories {
-	display: inline-block;
+	display: block;
 	margin-top: 8px;
 	border-radius: 4px;
 	padding: 8px 16px;
 	background-color: #FFF;
+	overflow-x: auto;
 }
 .urushi-directories .material-icons {
 	vertical-align: middle;

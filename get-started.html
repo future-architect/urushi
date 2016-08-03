@@ -14,13 +14,28 @@
 	<link rel="stylesheet" href="./gh-pages-resoucres/highlight/styles/default.css">
 	<link rel="stylesheet" href="./gh-pages-resoucres/highlight/styles/rainbow.css">
 	<link rel="stylesheet" href="./gh-pages-resoucres/material.css">
+	<link rel="stylesheet" href="./gh-pages-resoucres/style.css">
 
 	<script src="./gh-pages-resoucres/highlight/highlight.pack.js"></script>
-	<script src=" ./gh-pages-resoucres/start.js"></script>
+	<script type="text/javascript">
+		window.hljs.initHighlightingOnLoad();
+		window.requireRoot = './gh-pages-resoucres/';
+	</script>
+	<script src="./gh-pages-resoucres/config/requireConfig.js"></script>
+	<script src="./gh-pages-resoucres/lib/js/require.js" data-main="./gh-pages-resoucres/start"></script>
 </head>
 <body>
-	<header id="header" class="header">
-		<a class="button" href="./ja-jp/">JAPANESE</a>
+	<header id="header" class="header md-bg-primary">
+		<div class="logo-wrapper">
+			<img class="urushi-logo" src="./gh-pages-resoucres/urushi-logo.png">
+		</div>
+		<div id="headerContextMenu" class="headerContextWide">
+			<a class="button" href="./" target="_self">TOP PAGE</a>
+			<a class="button" href="./for-developers.html" target="_self">FOR DEVELOPERS</a>
+			<a class="button" href="./ja-jp/get-started.html" target="_self">JAPANESE</a>
+		</div>
+		<div id="headerContextMenu" class="headerContextNarrow">
+ 		</div>
 	</header>
 	<section class="hidden">
 $インストール。
