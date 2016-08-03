@@ -77,6 +77,16 @@
 
 	require.config(requireConfig);
 
+	// コンテキストメニュー作成
+	require(['ContextMenu'], function (ContextMenu) {
+		var contextMenu = new ContextMenu({
+			id : 'headerContextMenu',
+			additionalClass : '',
+			items : contextItems
+		});
+		document.querySelector('.headerContextNarrow').appendChild(contextMenu.getRootNode());
+	});
+
 	header = document.getElementById('header');
 
 	onscroll = function () {
@@ -95,20 +105,6 @@
 	}
 
 	require(['templateEngine', 'templateConfig'], function (templateEngine, templateConfig) {
-		templateEngine.renderDocument(document.body, templateConfig).then(
-			function (result) {
-				// コンテキストメニュー作成
-				require(['ContextMenu'], function (ContextMenu) {
-					var contextMenu = new ContextMenu({
-						id : 'headerContextMenu',
-						additionalClass : '',
-						items : contextItems
-					});
-					document.querySelector('.headerContextNarrow').appendChild(contextMenu.getRootNode());
-				});
-			}).otherwise(function (error) {
-				console.log(error);
-			}
-		);
+		templateEngine.renderDocument(document.body, templateConfig);
 	});
 })();
