@@ -8,19 +8,19 @@
 		'index' : {
 			'id' : 'index',
 			'name' : 'TOP PAGE',
-			'path' : '/',
+			'path' : './',
 			'screenFileNm' : 'index'
 		},
 		'get-started' : {
 			'id' : 'getStarted',
 			'name' : 'GET STARTED',
-			'path' : '/get-started.html',
+			'path' : './get-started.html',
 			'screenFileNm' : 'get-started'
 		},
 		'for-developers' : {
 			'id' : 'forDevelopers',
 			'name' : 'FOR DEVELOPERS',
-			'path' : '/for-developers.html',
+			'path' : './for-developers.html',
 			'screenFileNm' : 'for-developers'
 		}
 	};
@@ -40,11 +40,8 @@
 	}
 
 	// コンテキストアイテムのコールバック関数を返す
-	itemCallback = function (path, isLocaleJa) {
+	itemCallback = function (path) {
 		return function() {
-			if(isLocaleJa) {
-				path = '/' + LOCALE_JA_JP + path;
-			}
 			location.href = path;
 		};
 	};
@@ -55,16 +52,18 @@
 	if(isLocaleJa) {
 		localeChangeItem.name = 'ENGLISH';
 		localeChangeItem.label = 'ENGLISH';
+		localeChangeItem.path = './../' + screens[screenFileNm].path;
 	} else {
 		localeChangeItem.name = 'JAPANESE';
 		localeChangeItem.label = 'JAPANESE';
+		localeChangeItem.path = './' + LOCALE_JA_JP + screens[screenFileNm].path.replace(/./, '');
 	}
-	localeChangeItem.callback = itemCallback(screens[screenFileNm].path, !isLocaleJa);
+	localeChangeItem.callback = itemCallback(localeChangeItem.path);
 
 	contextItems = [];
 	for(key in screens) {
 		if(key !== screenFileNm) {
-			callbackFnc = itemCallback(screens[key].path, isLocaleJa);
+			callbackFnc = itemCallback(screens[key].path);
 			contextItem = {
 				id : screens[key].id,
 				name : screens[key].name,
