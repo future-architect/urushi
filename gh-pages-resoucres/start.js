@@ -25,7 +25,7 @@
 		}
 	};
 	var isLocaleJa = false;
-	var LOCALE_JA_JP = 'ja-JP';
+	var LOCALE_JA_JP = 'ja-jp';
 
 	// URLからファイル名取得
 	var screenFileNm = window.location.href.split('/').pop().split('.')[0];
