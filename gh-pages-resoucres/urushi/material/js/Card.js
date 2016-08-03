@@ -65,9 +65,9 @@
  * @snippet-description urushi-card
  *
  * @module Card
- * @extends module:_Base
+ * @extends module:Base
  * @requires module:Urushi
- * @requires module:_Base
+ * @requires module:Base
  * @requires card.html
  */
 define(
@@ -79,7 +79,7 @@ define(
 	],
 	/**
 	 * @class
-	 * @augments module:_Base
+	 * @augments module:Base
 	 * @alias module:Card
 	 * @returns {object} Card instance.
 	 */
@@ -118,7 +118,7 @@ define(
 			 */
 			template : undefined,
 			/**
-			 * @see {@link module:_Base}#embedded
+			 * @see {@link module:Base}#embedded
 			 * @type object
 			 * @private
 			 */
@@ -179,7 +179,7 @@ define(
 				this.contentNode = this.rootNode.getElementsByClassName('card-content')[0];
 			},
 			/**
-			 * @see {@link module:_Base}#_getId
+			 * @see {@link module:Base}#_getId
 			 * @protected
 			 * @returns {string} Instance id.
 			 */
