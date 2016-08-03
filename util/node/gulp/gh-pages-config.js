@@ -25,7 +25,8 @@ module.exports = {
 			'../../../gh-pages-resoucres/urushi/material/js/_Base.js',
 			'../../../gh-pages-resoucres/urushi/material/js/_CollectionItemBase.js',
 			'../../../gh-pages-resoucres/urushi/material/js/_CollectionWidgetBase.js',
-			'../../../gh-pages-resoucres/urushi/material/js/_ContextMenuItem.js'
+			'../../../gh-pages-resoucres/urushi/material/js/_ContextMenuItem.js',
+			'../../../gh-pages-resoucres/urushi/material/js/_collectionMixin.js'
 		],
 		dest : '../../../gh-pages-resoucres/urushi/material/js'
 	}

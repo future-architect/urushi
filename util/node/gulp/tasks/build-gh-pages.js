@@ -47,6 +47,7 @@ gulp.task('remove-underscore', function () {
 		.pipe(replace(/_CollectionItemBase/g, 'CollectionItemBase'))
 		.pipe(replace(/_CollectionWidgetBase/g, 'CollectionWidgetBase'))
 		.pipe(replace(/_ContextMenuItem/g, 'ContextMenuItem'))
+		.pipe(replace(/_collectionMixin/g, 'collectionMixin'))
 		.pipe(gulp.dest(pageConfig.removeUnderscore.dest));
 });
 
