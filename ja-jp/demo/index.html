@@ -1,46 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Urushi</title>
+	<title>Urushi Demo Page</title>
 	<meta charset="utf-8">
-
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
 
 	<link rel="shortcut icon" href="../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
-
 	<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
 	<link rel="stylesheet" href=" ../../gh-pages-resoucres/highlight/styles/default.css">
 	<link rel="stylesheet" href=" ../../gh-pages-resoucres/highlight/styles/rainbow.css">
 	<link rel="stylesheet" href=" ../../gh-pages-resoucres/material.css">
 	<link rel="stylesheet" href=" ../../gh-pages-resoucres/style.css">
-	<!-- 
-	<link href="styles/demopage_style.css" rel="stylesheet" type="text/css">
-	 -->
 	<link rel="stylesheet" href=" ../../gh-pages-resoucres/urushi_style.css">
 	<link rel="stylesheet" href=" ../../gh-pages-resoucres/index_style.css">
 	<link rel="stylesheet" href=" ../../gh-pages-resoucres/contents.css">
+	<link href="../../gh-pages-resoucres/media.css" rel="stylesheet" type="text/css">
 
-
-
-	<script src="../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
-	<script type="text/javascript">
-		window.hljs.initHighlightingOnLoad();
-		window.requireRoot = '../../gh-pages-resoucres/';
-	</script>
-	<script src="../../gh-pages-resoucres/config/requireConfig.js"></script>
-	<script src="../../gh-pages-resoucres/lib/js/require.js" data-main="../../gh-pages-resoucres/start"></script>
-
+	<script src="/../../config/requireConfig.js"></script>
+	<script src="/../../lib/js/require.js" data-main="contextmenu/main"></script>
 
 </head>
 <body>
-	<header id="header" class="header md-bg-primary">
+	<header id="header" class="header md-bg-primary floating">
 		<div class="logo-wrapper">
 			<img class="urushi-logo" src="../../gh-pages-resoucres/urushi-logo.png">
 		</div>
 		<a class="button" href="../" target="_self">TOP PAGE</a>
 		<a class="button" href="../../" target="_self">ENGLISH</a>
+		<div class="spmenu">
+			<select id="test" data-urushi-type="contextmenu">
+				<option id='item1' name='item1'><a class="button" href="../../" target="_self">TOP PAGE</a></option>
+				<option id='item2' name='item2'><a class="button" href="../../../" target="_self">ENGLISH</a></option>
+			</select>
+		</div>
 	</header>
 	<div class="contents clearfix">
 		<a href="alert" target="_blank"><span class="box card card-v1"><h2>Alert</h2>アラートのデモを表示します。</span></a>
@@ -60,7 +53,7 @@
 	</div>
 	<footer class="footer reverse">
 		<div class="row">
-			© 2016 Future architect inc. Auther Yuzo Hirakawa. Code licensed under the MIT License.
+			© 2016 Future architect inc. Code licensed under the MIT License.
 		</div>
 	</footer>
 </body>

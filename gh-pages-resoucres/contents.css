@@ -77,3 +77,29 @@ footer {
 	opacity: 1;
 	width: 600px;
 }
+
+button, .button {
+	font-size: 15pt;
+}
+body{
+	font-family: 'Noto Sans Japanese', serif;
+}
+.spmenu{
+	display:none;
+}
+
+@media screen and (max-width: 640px){
+	.sideBar{
+		display:none;
+	}
+	.button{
+		display:none;
+	}
+	.spmenu{
+		display:block;
+		float:right;
+	}
+	.context-menu-wrapper>.context-menu>.context-menu-dot:before {
+    right: 0px;
+	}
+}

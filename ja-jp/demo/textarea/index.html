@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Input test</title>
+<title>Textarea test</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
 <link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
@@ -48,9 +47,9 @@
 			<li><a href="../dropdown">Dropdown</a></li>
 			<li><a href="../hamburger">Hamburger</a></li>
 			<li><a href="../input">Input</a></li>
-			<li><a href="../textarea">Textarea</a></li>
 			<li><a href="../panel">Panel</a></li>
 			<li><a href="../radio">Radio</a></li>
+			<li><a href="../textarea">Textarea</a></li>
 			<li><a href="../toast">Toast</a></li>
 			<li><a href="../toggle">ToggleButton</a></li>
 			<li><a href="../tooltip">Tooltip</a></li>
@@ -58,29 +57,30 @@
 	</div>
 	<div data-urushi-type="panel"
 		class="contentsArea">
-
-		<div class="test-area">
-			<h2>Input</h2>
-			<input id="input1" data-urushi-type="input"> <input
-				id="input2" data-urushi-type="input" placeholder="example value."
-				data-urushi-options="{&quot;hint&quot; : &quot;hint&quot;}">
-			<input id="input2" data-urushi-type="input" disabled=""
-				value="some message"> <input id="input2"
-				data-urushi-type="input" readonly="" value="some message">
-			<h3>html</h3>
+	<div class="test-area">
+	<h2>Textarea</h2>
+		<textarea id="textarea1" data-urushi-type="textarea"></textarea>
+		<textarea id="textarea2" value="some value.
+test message."
+			data-urushi-type="textarea"
+			data-urushi-options='{"hint" : "hint message."}'
+			placeholder="placeholder message."></textarea>
+		<textarea id="textarea3" value="" data-urushi-type="textarea"
+			data-urushi-options='{"hint" : "hint message."}'
+			placeholder="placeholder message."></textarea>
 			<pre>
-	<code class="html hljs xml">
-&lt;input id="input1" data-urushi-type="input">
-&lt;input id="input2" data-urushi-type="input" placeholder="example value." data-urushi-options="{&quot;hint&quot; : &quot;hint&quot;}">
-&lt;input id="input2" data-urushi-type="input" disabled="" value="some message">
-&lt;input id="input2" data-urushi-type="input" readonly="" value="some message">
-	</code>
-	</pre>
-		</div>
-		<div class="test-area"></div>
+<h3>html</h3>
+<code class="html hljs xml">
+&lt;textarea id="textarea1" data-urushi-type="textarea"></textarea>
+&lt;textarea id="textarea2" value="some value. test message." data-urushi-type="textarea" data-urushi-options='{"hint" : "hint message."}' placeholder="placeholder message."></textarea>
+&lt;textarea id="textarea3" value="" data-urushi-type="textarea" data-urushi-options='{"hint" : "hint message."}' placeholder="placeholder message."></textarea>
 
+</code>
+</pre>
 
 	</div>
+	<div class="test-area" id="script-modules"></div>
+</div>
 	<div class="clearfix"></div>
 		<footer class="footer reverse">
 		<div class="row">
