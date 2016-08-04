@@ -280,6 +280,8 @@ ul.table > li {
 	display: block;
 }
 .headerContextNarrow {
+	margin-bottom: 10px;
+	margin-top: 10px;
 	display: none!important;
 }
 
@@ -298,6 +300,15 @@ ul.table > li {
 	.headerContextNarrow {
 		display: block!important;
 	}
+	.header {
+		padding-right: 0px!important;
+	}
+	.header .logo-wrapper {
+		margin-top: 10px!important;
+	}
+	section {
+		padding-top: 20px;
+	}
 }
 @media screen and (max-width: 768px) {
 	body {
@@ -313,7 +324,7 @@ ul.table > li {
 		font-size: 17pt;
 	}
 	.concept {
-		padding-top: 42px;
+		padding-top: 50px;
 	}
 	.row {
 		padding: 32px;

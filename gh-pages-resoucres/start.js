@@ -84,7 +84,7 @@
 			additionalClass : '',
 			items : contextItems
 		});
-		document.querySelector('.headerContextNarrow').appendChild(contextMenu.getRootNode());
+		document.querySelector('#headerContextNarrow').appendChild(contextMenu.getRootNode());
 	});
 
 	header = document.getElementById('header');
