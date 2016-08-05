@@ -62,6 +62,7 @@ define(
 				parentNode.appendChild(document.createTextNode('Empty arg init'));
 				var menu = new ContextMenu();
 				parentNode.appendChild(menu.rootNode);
+				expect(menu.listNode.children.length).toBe(0);
 			});
 
 			it('Exception init', function () {
@@ -121,7 +122,7 @@ define(
 				expect(menu.isHiddenItem('name_test3')).toBe(true);
 			});
 
-			it('setHiddenItem', function () {
+			it('setHiddenItem', function (done) {
 				parentNode.appendChild(document.createTextNode('setHiddenItem'));
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
@@ -163,6 +164,7 @@ define(
 					expect(menu.listNode.children[0].classList.contains('show')).toBe(true);
 					expect(menu.listNode.children[1].classList.contains('show')).toBe(false);
 					expect(menu.listNode.children[2].classList.contains('show')).toBe(true);
+					done();
 				}, 300);
 			});
 
@@ -195,7 +197,7 @@ define(
 			});
 
 
-			it('addItems', function () {
+			it('addItems', function (done) {
 				parentNode.appendChild(document.createTextNode('addItems'));
 				var defaultCallback = jasmine.createSpy();
 				var option = {
@@ -230,8 +232,9 @@ define(
 				}
 
 				setTimeout(function() {
-					expect(defaultCallback.callCount).toBe(2);
-					expect(itemCallback.callCount).toBe(1);
+					expect(defaultCallback.calls.count()).toBe(2);
+					expect(itemCallback.calls.count()).toBe(1);
+					done();
 				}, 200);
 			});
 
@@ -278,7 +281,7 @@ define(
 				menu.removeItems('name_test1', 'name_test2', 'ignore');
 				expect(menu.listNode.children.length).toBe(1);
 			});
-			it('setCallback for All', function () {
+			it('setCallback for All', function (done) {
 				parentNode.appendChild(document.createTextNode('setCallback for All'));
 				var beforeSpy = jasmine.createSpy();
 				var option = {
@@ -292,6 +295,7 @@ define(
 
 				var menu = new ContextMenu(option);
 				parentNode.appendChild(menu.rootNode);
+				expect(menu.listNode.children.length).toBe(3);
 
 				var spy = jasmine.createSpy();
 
@@ -301,12 +305,13 @@ define(
 				}
 
 				setTimeout(function() {
-					expect(spy.callCount).toBe(3);
-					expect(beforeSpy.callCount).toBe(0);
+					expect(spy.calls.count()).toBe(3);
+					expect(beforeSpy.calls.count()).toBe(0);
+					done();
 				}, 200);
 			});
 
-			it('setCallback', function () {
+			it('setCallback', function (done) {
 				parentNode.appendChild(document.createTextNode('setCallback'));
 				var beforeSpy = jasmine.createSpy();
 				var option = {
@@ -320,6 +325,7 @@ define(
 
 				var menu = new ContextMenu(option);
 				parentNode.appendChild(menu.rootNode);
+				expect(menu.listNode.children.length).toBe(3);
 
 				var spy = jasmine.createSpy();
 
@@ -331,8 +337,9 @@ define(
 				}
 
 				setTimeout(function() {
-					expect(spy.callCount).toBe(2);
-					expect(beforeSpy.callCount).toBe(1);
+					expect(spy.calls.count()).toBe(2);
+					expect(beforeSpy.calls.count()).toBe(1);
+					done();
 				}, 200);
 			});
 
@@ -348,13 +355,14 @@ define(
 
 				var menu = new ContextMenu(option);
 				parentNode.appendChild(menu.rootNode);
+				expect(menu.listNode.children.length).toBe(3);
 
 				for (var i = 0; i < menu.listNode.children.length; i++) {
 					menu.listNode.children[i].click();
 				}
 			});
 
-			it('addOnClickItemCustomArgs', function () {
+			it('addOnClickItemCustomArgs', function (done) {
 				parentNode.appendChild(document.createTextNode('addOnClickItemCustomArgs'));
 				var spy = jasmine.createSpy();
 				var option = {
@@ -368,6 +376,7 @@ define(
 
 				var menu = new ContextMenu(option);
 				parentNode.appendChild(menu.rootNode);
+				expect(menu.listNode.children.length).toBe(3);
 				menu.addOnClickItemCustomArgs('A', 'B');
 
 				for (var i = 0; i < menu.listNode.children.length; i++) {
@@ -375,13 +384,13 @@ define(
 				}
 
 				setTimeout(function() {
-					expect(spy.argsForCall[0]).toEqual(['name_test1', 'A', 'B']);
-					expect(spy.argsForCall[1]).toEqual(['name_test2', 'A', 'B']);
-					expect(spy.argsForCall[2]).toEqual(['name_test3', 'A', 'B']);
+					expect(spy.calls.argsFor(0)).toEqual(['name_test1', 'A', 'B']);
+					expect(spy.calls.argsFor(1)).toEqual(['name_test2', 'A', 'B']);
+					expect(spy.calls.argsFor(2)).toEqual(['name_test3', 'A', 'B']);
 				}, 200);
 
 				setTimeout(function() {
-					spy.reset();
+					spy.calls.reset();
 					menu.clearOnClickItemCustomArgs();
 					for (var i = 0; i < menu.listNode.children.length; i++) {
 						menu.listNode.children[i].click();
@@ -389,9 +398,10 @@ define(
 				}, 200);
 
 				setTimeout(function() {
-					expect(spy.argsForCall[0]).toEqual(['name_test1']);
-					expect(spy.argsForCall[1]).toEqual(['name_test2']);
-					expect(spy.argsForCall[2]).toEqual(['name_test3']);
+					expect(spy.calls.argsFor(0)).toEqual(['name_test1']);
+					expect(spy.calls.argsFor(1)).toEqual(['name_test2']);
+					expect(spy.calls.argsFor(2)).toEqual(['name_test3']);
+					done();
 				}, 400);
 			});
 
@@ -423,7 +433,7 @@ define(
 
 				menu.onClickContext(clickEventMock);//coverage
 
-				clickEventMock.stopPropagation.reset();
+				clickEventMock.stopPropagation.calls.reset();
 				menu = new ContextMenu(option);
 				parentNode.appendChild(menu.rootNode);
 				menu.setDisabled(true);
@@ -434,7 +444,7 @@ define(
 				expect(menu.itemsNode.tabIndex).toBe(-1);
 				expect(menu.itemsNode).not.toBe(document.activeElement);
 
-				clickEventMock.stopPropagation.reset();
+				clickEventMock.stopPropagation.calls.reset();
 				menu = new ContextMenu(option);
 				parentNode.appendChild(menu.rootNode);
 				menu.disabled = true;
@@ -444,7 +454,7 @@ define(
 				expect(menu.itemsNode.tabIndex).toBe(-1);
 				expect(menu.itemsNode).not.toBe(document.activeElement);
 
-				clickEventMock.stopPropagation.reset();
+				clickEventMock.stopPropagation.calls.reset();
 				menu = new ContextMenu();//empty
 				parentNode.appendChild(menu.rootNode);
 				menu.onClickContext(clickEventMock);
@@ -479,10 +489,8 @@ define(
 				expect(menu.itemsNode.classList.contains('items-open')).toBe(true);
 				expect(menu.itemsNode.tabIndex).toBe(0);
 				expect(menu.itemsNode).toBe(document.activeElement);
-				setTimeout(function() {
-					menu._close();
-					menu.onClickContext(clickEventMock);
-				}, 200);
+				menu._close();
+				menu.onClickContext(clickEventMock);
 			});
 
 			it('addOnClickContextCallback', function () {
@@ -571,16 +579,11 @@ define(
 
 				var menu = new ContextMenu(option);
 				parentNode.appendChild(menu.rootNode);
+				expect(menu.listNode.children.length).toBe(1);
 				menu.onClickContext(clickEventMock);
-
-				setTimeout(function() {
-					fucusButton.focus();
-				}, 300);
-
-				setTimeout(function() {
-					expect(menu.itemsNode).not.toBe(document.activeElement);
-					expect(menu.itemsNode.tabIndex).toBe(-1);
-				}, 600);
+				fucusButton.focus();
+				expect(menu.itemsNode).not.toBe(document.activeElement);
+				expect(menu.itemsNode.tabIndex).toBe(-1);
 			});
 			it('_close for IE', function () {
 				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
@@ -604,28 +607,21 @@ define(
 
 				var menu = new ContextMenu(option);
 				parentNode.appendChild(menu.rootNode);
+				expect(menu.listNode.children.length).toBe(1);
 				menu.onClickContext(clickEventMock);
 
-				setTimeout(function() {
-					fucusButton.focus();
-				}, 300);
+				fucusButton.focus();
 
-				setTimeout(function() {
-					expect(menu.itemsNode).not.toBe(document.activeElement);
-					expect(menu.itemsNode.tabIndex).toBe(-1);
-				}, 600);
+				expect(menu.itemsNode).not.toBe(document.activeElement);
+				expect(menu.itemsNode.tabIndex).toBe(-1);
 
-				setTimeout(function() {
-					menu.onClickContext(clickEventMock);
-					fucusButton.focus();
-				}, 600);
+				menu.onClickContext(clickEventMock);
+				fucusButton.focus();
 
-				setTimeout(function() {
-					expect(menu.itemsNode).not.toBe(document.activeElement);
-					expect(menu.itemsNode.tabIndex).toBe(-1);
-				}, 900);
+				expect(menu.itemsNode).not.toBe(document.activeElement);
+				expect(menu.itemsNode.tabIndex).toBe(-1);
 			});
-			it('_onCloseIconMouseEnter _onCloseIconMouseLeave for IE', function () {
+			it('_onCloseIconMouseEnter _onCloseIconMouseLeave for IE', function (done) {
 				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
 				parentNode.appendChild(document.createTextNode('_onCloseIconMouseEnter _onCloseIconMouseLeave for IE'));
 
@@ -645,17 +641,18 @@ define(
 
 				var menu = new ContextMenu(option);
 				parentNode.appendChild(menu.rootNode);
+				expect(menu.listNode.children.length).toBe(1);
 				menu.onClickContext(clickEventMock);
 
 				setTimeout(function() {
 					menu._onCloseIconMouseEnter(clickEventMock);
-				}, 300);
+				}, 500);
 
 				setTimeout(function() {
 					expect(menu.closeIconNode.style[animation.STYLEKEYS.transform]).toBe('rotate(90deg)');
 					
 					menu._onCloseIconMouseLeave(clickEventMock);
-				}, 600);
+				}, 500 * 2);
 
 				setTimeout(function() {
 					expect(menu.closeIconNode.style[animation.STYLEKEYS.transform]).toBe('');
@@ -663,11 +660,12 @@ define(
 					menu._onCloseIconMouseEnter(clickEventMock);
 					menu._onCloseIconMouseLeave(clickEventMock);
 					menu._onCloseIconMouseEnter(clickEventMock);
-				}, 900);
+				}, 500 * 3);
 
 				setTimeout(function() {
 					expect(menu.closeIconNode.style[animation.STYLEKEYS.transform]).toBe('rotate(90deg)');
-				}, 1200);
+					done();
+				}, 500 * 4);
 			});
 
 			it('onClickClose', function () {
@@ -689,12 +687,11 @@ define(
 
 				var menu = new ContextMenu(option);
 				parentNode.appendChild(menu.rootNode);
+				expect(menu.listNode.children.length).toBe(1);
 				menu.onClickContext(clickEventMock);
 
-				setTimeout(function() {
-					menu.onClickClose(clickEventMock);
-					expect(menu.itemsNode.tabIndex).toBe(-1);
-				}, 300);
+				menu.onClickClose(clickEventMock);
+				expect(menu.itemsNode.tabIndex).toBe(-1);
 			});
 
 			it('bubbling', function () {
@@ -794,10 +791,11 @@ define(
 				parentNode.appendChild(menu.rootNode);
 
 				menu.destroy();
+				expect(menu.subItemList.length).toBe(0);
 
 			});
 
-			it('_ContextMenuItem.setCallback', function () {
+			it('_ContextMenuItem.setCallback', function (done) {
 				parentNode.appendChild(document.createTextNode('_ContextMenuItem.setCallback'));
 				var defaultCallback = jasmine.createSpy();
 				var option = {
@@ -823,8 +821,9 @@ define(
 				}
 
 				setTimeout(function() {
-					expect(defaultCallback.callCount).toBe(2);
-					expect(itemCallback.callCount).toBe(1);
+					expect(defaultCallback.calls.count()).toBe(2);
+					expect(itemCallback.calls.count()).toBe(1);
+					done();
 				}, 200);
 			});
 

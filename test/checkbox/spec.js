@@ -12,7 +12,7 @@ define(
 				legacyCheckbox,
 				parentNode = document.getElementById('script-modules');
 
-			it('init', function () {
+			beforeEach(function(){
 				var cb = new Checkbox({label : 'optional label'});
 				cb.destroy();
 

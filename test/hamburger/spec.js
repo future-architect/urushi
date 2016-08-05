@@ -39,7 +39,7 @@ define(
 				expect(hamburger.setCallback(dummyFunction)).toBe();
 			});
 
-			it('_onClickHamburger test', function() {
+			it('_onClickHamburger test', function(done) {
 				var hamburger = new Hamburger({});
 				parentNode.appendChild(hamburger.getRootNode());
 				var dummyEvent = {stopPropagation : function () {}};
@@ -50,6 +50,7 @@ define(
 
 				setTimeout(function() {
 					expect(Array.prototype.slice.call(hamburger.hamburgerLineNode.classList)).toContain('callbacked');
+					done();
 				}, 200);
 				hamburger.rootNode.classList.add('disabled');
 				expect(hamburger._onClickHamburger(dummyEvent)).toBe();

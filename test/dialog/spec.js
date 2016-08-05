@@ -13,7 +13,7 @@ define(
 			var dialog,
 				parentNode = document.getElementById('script-modules');
 
-			it('init', function () {
+			beforeEach(function(){
 				(new Dialog({content : 'content'})).destroy();
 				(new Dialog({content : 'content', parentNode : document.body})).destroy();
 				(new Dialog({content : 'content', isDisplayCloseIcon : false})).destroy();
@@ -21,24 +21,24 @@ define(
 
 				dialog = new Dialog({header : 'head', footer : 'foot', content : 'content'});
 			});
-			it('show', function () {
+			it('show on True', function (done) {
 				temp = Urushi.hasTransitionSupport;
 				Urushi.hasTransitionSupport = hasTransitionSupportTrue;
 				dialog.isShown = false;
 				expect(dialog.show()).toBe();
 				Urushi.removeEvent(dialog.getRootNode(), 'keydown', dialog, 'onKeydown');
 				expect(dialog.show()).toBe();
-
-				setTimeout(function() {
-					Urushi.hasTransitionSupport = hasTransitionSupportFalse;
-					dialog.isShown = false;
-					expect(dialog.show()).toBe();
-					Urushi.removeEvent(dialog.getRootNode(), 'keydown', dialog, 'onKeydown');
-					expect(dialog.show()).toBe();
-				}, 100);
-
+				done();
+			});
+			it('show on False', function (done) {
+				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
+				dialog.isShown = false;
+				expect(dialog.show()).toBe();
+				Urushi.removeEvent(dialog.getRootNode(), 'keydown', dialog, 'onKeydown');
+				expect(dialog.show()).toBe();
 				setTimeout(function() {
 					Urushi.hasTransitionSupport = temp;
+					done();
 				}, 200);
 			});
 			it('hide', function () {

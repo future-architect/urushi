@@ -58,16 +58,10 @@ define(
 				expect(tooltip1.setOn('')).toBe();
 				expect(tooltip1.setOn('click')).toBe();
 			});
-			it('_clearOn', function () {
-				// tested in setOn
-			});
 			it('setOff', function () {
 				expect(tooltip1.setOff()).toBe();
 				expect(tooltip1.setOff('')).toBe();
 				expect(tooltip1.setOff('click')).toBe();
-			});
-			it('_clearOff', function () {
-				// tested in setOff
 			});
 			it('setContent', function () {
 				expect(function () {
@@ -124,12 +118,6 @@ define(
 				expect(tooltip1._calculatePosition()).toEqual({top : '', left : ''});
 
 				tooltip1.position = position;
-			});
-			it('_calculateParentRect', function () {
-				// tested in _calculatePosition
-			});
-			it('_calculateParentOffsetPos', function () {
-				// tested in _calculatePosition
 			});
 			it('getDuration', function () {
 				expect(tooltip2.getDuration()).toBe(200);
