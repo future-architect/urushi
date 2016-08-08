@@ -14,7 +14,7 @@ define(
 				parentNode = document.getElementById('script-modules'),
 				dummyEvent = {stopPropagation : function () {}};
 
-			it('init', function () {
+			beforeEach(function(){
 				(new Input({placeholder : 'input sample'})).destroy();
 				(new Input({hint : 'hint message'})).destroy();
 
@@ -41,9 +41,6 @@ define(
 				expect(input1.setValue('aaa')).toBe();
 				expect(input1.clear()).toBe();
 				expect(input1.getValue()).toBe('');
-			});
-			it('_onInput', function () {
-				// Tested with setValue.
 			});
 			it('_onClickFloatingLabel', function () {
 				temp = Urushi.hasTransitionSupport;
@@ -82,7 +79,7 @@ define(
 
 				Urushi.hasTransitionSupport = temp;
 			});
-			it('IE placeholder', function () {
+			it('IE placeholder', function (done) {
 				temp = Urushi.hasTransitionSupport;
 				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
 
@@ -113,9 +110,10 @@ define(
 				setTimeout(function() {
 					input.destroy();
 					Urushi.hasTransitionSupport = temp;
+					done();
 				}, 200 + 310 * 3);
 			});
-			it('IE placeholder on setValue', function () {
+			it('IE placeholder on setValue', function (done) {
 				temp = Urushi.hasTransitionSupport;
 				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
 
@@ -128,7 +126,7 @@ define(
 
 				setTimeout(function() {
 					input.setValue('');
-					input.setValue('value');
+					expect(input.setValue('value')).toBe();
 				}, 310);
 
 				setTimeout(function() {
@@ -142,6 +140,7 @@ define(
 				setTimeout(function() {
 					input.destroy();
 					Urushi.hasTransitionSupport = temp;
+					done();
 				}, 310 * 4);
 			});
 			it('setDisabled', function () {

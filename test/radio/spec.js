@@ -56,12 +56,6 @@ define(
 
 				Urushi.hasTransitionSupport = temp;
 			});
-			it('_checkOn', function () {
-				// tested in setChecked
-			});
-			it('_checkOff', function () {
-				// tested in setChecked
-			});
 			it('_onClick', function () {
 				temp = Urushi.hasTransitionSupport;
 				Urushi.hasTransitionSupport = hasTransitionSupportTrue;
