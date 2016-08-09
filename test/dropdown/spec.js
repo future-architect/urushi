@@ -106,7 +106,7 @@ define(
 				expect(dd.getSelectedValue()).toBe('b');
 				expect(dd.getSelectedNode()).toBe(dd.listNode.childNodes[1]);
 			});
-			it('focus blur', function () {
+			it('focus blur', function (done) {
 				parentNode.appendChild(document.createTextNode('focus blur'));
 				var dd = new DropDown({
 					items : [
@@ -115,7 +115,7 @@ define(
 					]
 				});
 				parentNode.appendChild(dd.rootNode);
-				dd.inputNode.focus();
+				expect(dd.inputNode.focus()).toBe();
 				setTimeout(function() {
 					button.focus();
 				}, 20);
@@ -129,11 +129,11 @@ define(
 				}, 370);
 				setTimeout(function() {
 					button.focus();
+					done();
 				}, 680);
 			});
-			it('focus pattern', function () {
+			it('focus pattern', function (done) {
 				parentNode.appendChild(document.createTextNode('focus pattern'));
-				setTimeout(function() {
 					var dd = new DropDown({
 						items : [
 							{value : 'a', label : 'A'},
@@ -143,7 +143,7 @@ define(
 					parentNode.appendChild(dd.rootNode);
 					dd.inputNode.click();
 					dd.inputNode.focus();
-				}, 20);
+					expect($(dd.inputNode).hasClass('focus')).toBe(true);
 				setTimeout(function() {
 					var dd = new DropDown({
 						items : [
@@ -165,9 +165,10 @@ define(
 					dd.inputNode.focus();
 					dd.inputNode.click();
 					dd._onClickInput(dummyEvent);
+					done();
 				}, 60);
 			});
-			it('keyDown', function () {
+			it('keyDown', function (done) {
 				var getKeyCode = urushi.getKeyCode;
 				parentNode.appendChild(document.createTextNode('keyDown'));
 				var items = [];
@@ -186,72 +187,72 @@ define(
 				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.COMMA; };
 					dd._onKeydownInput(dummyEvent);
-					expect(dd._onBlurInput.callCount).toBe(0);
-					expect(dd._onClickInput.callCount).toBe(0);
+					expect(dd._onBlurInput.calls.count()).toBe(0);
+					expect(dd._onClickInput.calls.count()).toBe(0);
 				}, 310);
 				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.ESCAPE; };
 					dd._onKeydownInput(dummyEvent);
-					expect(dd._onBlurInput.callCount).toBe(1);
-					expect(dd._onClickInput.callCount).toBe(0);
+					expect(dd._onBlurInput.calls.count()).toBe(1);
+					expect(dd._onClickInput.calls.count()).toBe(0);
 				}, 310 * 2);
 				dd.inputNode.focus();
 				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.COMMA; };
 					dd._onKeydownInput(dummyEvent);
-					expect(dd._onBlurInput.callCount).toBe(1);
-					expect(dd._onClickInput.callCount).toBe(0);
+					expect(dd._onBlurInput.calls.count()).toBe(1);
+					expect(dd._onClickInput.calls.count()).toBe(0);
 				}, 310 * 3);
 				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.ENTER; };
 					dd._onKeydownInput(dummyEvent);
-					expect(dd._onBlurInput.callCount).toBe(1);
-					expect(dd._onClickInput.callCount).toBe(1);
+					expect(dd._onBlurInput.calls.count()).toBe(1);
+					expect(dd._onClickInput.calls.count()).toBe(1);
 				}, 310 * 4);
 				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.ENTER; };
 					dd._onKeydownInput(dummyEvent);
-					expect(dd._onBlurInput.callCount).toBe(2);
-					expect(dd._onClickInput.callCount).toBe(1);
+					expect(dd._onBlurInput.calls.count()).toBe(2);
+					expect(dd._onClickInput.calls.count()).toBe(1);
 				}, 310 * 5);
 				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.SPACE; };
 					dd._onKeydownInput(dummyEvent);
-					expect(dd._onBlurInput.callCount).toBe(2);
-					expect(dd._onClickInput.callCount).toBe(2);
+					expect(dd._onBlurInput.calls.count()).toBe(2);
+					expect(dd._onClickInput.calls.count()).toBe(2);
 				}, 310 * 6);
 				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.ESCAPE; };
 					dd._onKeydownInput(dummyEvent);
-					expect(dd._onBlurInput.callCount).toBe(3);
-					expect(dd._onClickInput.callCount).toBe(2);
+					expect(dd._onBlurInput.calls.count()).toBe(3);
+					expect(dd._onClickInput.calls.count()).toBe(2);
 				}, 310 * 7);
 				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.UP; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd.getSelectedValue()).toBe(undefined);
-					expect(dd._onBlurInput.callCount).toBe(3);
-					expect(dd._onClickInput.callCount).toBe(3);
+					expect(dd._onBlurInput.calls.count()).toBe(3);
+					expect(dd._onClickInput.calls.count()).toBe(3);
 				}, 310 * 8);
 				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.ESCAPE; };
 					dd._onKeydownInput(dummyEvent);
-					expect(dd._onBlurInput.callCount).toBe(4);
-					expect(dd._onClickInput.callCount).toBe(3);
+					expect(dd._onBlurInput.calls.count()).toBe(4);
+					expect(dd._onClickInput.calls.count()).toBe(3);
 				}, 310 * 9);
 				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.DOWN; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd.getSelectedValue()).toBe(undefined);
-					expect(dd._onBlurInput.callCount).toBe(4);
-					expect(dd._onClickInput.callCount).toBe(4);
+					expect(dd._onBlurInput.calls.count()).toBe(4);
+					expect(dd._onClickInput.calls.count()).toBe(4);
 				}, 310 * 10);
 				setTimeout(function() {
 					urushi.getKeyCode = function() {return urushi.KEYCODE.UP; };
 					dd._onKeydownInput(dummyEvent);
 					expect(dd.getSelectedValue()).toBe('99');
-					expect(dd._onBlurInput.callCount).toBe(4);
-					expect(dd._onClickInput.callCount).toBe(4);
+					expect(dd._onBlurInput.calls.count()).toBe(4);
+					expect(dd._onClickInput.calls.count()).toBe(4);
 
 					dd = new DropDown({
 						items : items
@@ -328,6 +329,7 @@ define(
 					expect(dd.getSelectedValue()).toBe('0');
 
 					urushi.getKeyCode = getKeyCode;
+					done();
 				}, 310 * 15);
 			});
 
@@ -346,6 +348,7 @@ define(
 				space.style.height = '1000px';
 				parentNode.appendChild(space);
 				dd.setSelected('50');
+				expect(dd.getSelectedValue()).toBe('50');
 				window.scrollTo(0, 0);
 				setTimeout(function() {
 					dd.inputNode.focus();
@@ -358,8 +361,6 @@ define(
 				setTimeout(function() {
 					dd.inputNode.focus();
 				}, 330);
-				setTimeout(function() {
-				}, 640);
 			});
 
 			it('setDisabled ', function () {
@@ -472,6 +473,7 @@ define(
 			});
 
 			it('destroy', function () {
+				parentNode.appendChild(document.createTextNode('destroy'));
 				var dd = new DropDown({
 					items : [
 						{value : 'a', label : 'A'},
@@ -479,7 +481,7 @@ define(
 					]
 				});
 				parentNode.appendChild(dd.rootNode);
-				dd.destroy();
+				expect(dd.destroy()).toBe();
 			});
 
 			describe('Template engine', function () {

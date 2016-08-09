@@ -17,7 +17,7 @@ define(
 
 			var parentNode = document.getElementById('script-modules');
 
-			it('init', function () {
+			beforeEach(function(){
 				parentNode.appendChild($('<br>')[0]);
 				var alert = new Alert({header : 'init', content : 'init test'});
 				parentNode.appendChild(alert.getRootNode());

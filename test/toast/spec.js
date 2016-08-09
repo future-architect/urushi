@@ -143,11 +143,12 @@ define(
 				expect(toastManager.getToastNode('error')).toBe(null);
 				expect(toastManager.getToastNode(id1)).not.toBe(null);
 			});
-			it('toastManager.hide', function () {
+			it('toastManager.hide', function (done) {
 				expect(toastManager.hide()).toBe();
 				expect(toastManager.hide('error')).toBe();
 				setTimeout(function () {
 					expect(toastManager.hide(id1)).toBe();
+					done();
 				}, 50);
 			});
 			it('toastManager._deleteToast', function () {
