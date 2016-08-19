@@ -10,6 +10,9 @@ body{
 }
 
 @media screen and (max-width: 640px){
+	.contentsArea{
+		width:90%;
+	}
 	.sideBar{
 		display:none;
 	}
