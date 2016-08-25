@@ -22,9 +22,12 @@ module.exports = {
 	},
 	renameFile : {
 		src : [
-			'../../../gh-pages-resoucres/urushi/material/js/_Base.js'
+			'../../../gh-pages-resoucres/urushi/material/js/_Base.js',
+			'../../../gh-pages-resoucres/urushi/material/js/_CollectionItemBase.js',
+			'../../../gh-pages-resoucres/urushi/material/js/_CollectionWidgetBase.js',
+			'../../../gh-pages-resoucres/urushi/material/js/_ContextMenuItem.js',
+			'../../../gh-pages-resoucres/urushi/material/js/_collectionMixin.js'
 		],
-		rename : './urushi/material/js/Base.js',
-		dest : '../../../gh-pages-resoucres/'
+		dest : '../../../gh-pages-resoucres/urushi/material/js'
 	}
 };

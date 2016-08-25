@@ -44,12 +44,18 @@ gulp.task('remove-underscore', function () {
 	'use strict';
 	return gulp.src(pageConfig.removeUnderscore.src, {base : pageConfig.removeUnderscore.base})
 		.pipe(replace(/_Base/g, 'Base'))
+		.pipe(replace(/_CollectionItemBase/g, 'CollectionItemBase'))
+		.pipe(replace(/_CollectionWidgetBase/g, 'CollectionWidgetBase'))
+		.pipe(replace(/_ContextMenuItem/g, 'ContextMenuItem'))
+		.pipe(replace(/_collectionMixin/g, 'collectionMixin'))
 		.pipe(gulp.dest(pageConfig.removeUnderscore.dest));
 });
 
 gulp.task('rename-file', function () {
 	'use strict';
 	return gulp.src(pageConfig.renameFile.src)
-		.pipe(rename(pageConfig.renameFile.rename))
+		.pipe(rename(function (path) {
+			path.basename = path.basename.replace(/_/g, '');
+		}))
 		.pipe(gulp.dest(pageConfig.renameFile.dest));
 });

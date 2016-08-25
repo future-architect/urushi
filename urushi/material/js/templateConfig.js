@@ -424,6 +424,24 @@ define(
 					ignore : []
 				}
 			},
+			card : {
+				name : 'Card',
+				className : 'card',
+				requires : [],
+				method : {
+					id : 'getField',
+					cardClass : 'getOptionalClasses',
+					title : 'getUrushiOption',
+					titleImg : 'getUrushiOption',
+					content : 'getChildNodesFunction',
+					buttonClass : 'getUrushiOption',
+					buttonLabel : 'getUrushiOption',
+					isActionButton : 'getUrushiOption'
+				},
+				options : {
+					id : 'id'
+				}
+			}
 		};
 	}
 );

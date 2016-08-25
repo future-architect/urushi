@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href=" ./../gh-pages-resoucres/highlight/styles/rainbow.css">
 	<link rel="stylesheet" href=" ./../gh-pages-resoucres/material.css">
 	<link rel="stylesheet" href=" ./../gh-pages-resoucres/style.css">
+	<link rel="stylesheet" href="./../gh-pages-resoucres/card.css">
 
 	<script src=" ./../gh-pages-resoucres/highlight/highlight.pack.js"></script>
 	<script type="text/javascript">
@@ -29,8 +30,13 @@
 		<div class="logo-wrapper">
 			<img class="urushi-logo" src="./../gh-pages-resoucres/urushi-logo.png">
 		</div>
-		<a class="button" href="./" target="_self">TOP PAGE</a>
-		<a class="button" href="./../for-developers.html" target="_self">ENGLISH</a>
+		<div id="headerContextWide" class="headerContextWide">
+			<a class="button" href="./" target="_self">TOP PAGE</a>
+			<a class="button" href="./get-started.html" target="_self">GET STARTED</a>
+			<a class="button" href="./../for-developers.html" target="_self">ENGLISH</a>
+		</div>
+		<div id="headerContextNarrow" class="headerContextNarrow">
+ 		</div>
 	</header>
 	<section class="">
 		<div class="row">
@@ -48,11 +54,9 @@
 				<p>
 					以下のコマンドを実行し、Gulpをインストールしてください。
 				</p>
-				<pre>
-					<code class="command">
+				<pre><code class="bash">
 npm install -g gulp
-					</code>
-				</pre>
+				</code></pre>
 				
 			</div>
 			<div class="intro-box">
@@ -61,35 +65,29 @@ npm install -g gulp
 				<p>
 					[Urushi-ROOT]/util/node/gulpに移動してください。
 				</p>
-				<pre>
-					<code class="command">
+				<pre><code class="bash">
 cd  [Urushi-ROOT]/util/node/gulp
-					</code>
-				</pre>
+				</code></pre>
 
 				<h3>パッケージインストール</h3>
 				<p>
 					以下のコマンドを実行し、パッケージをインストールしてください。
 				</p>
-				<pre>
-					<code class="command">
+				<pre><code class="bash">
 npm install 
-					</code>
-				</pre>
+				</code></pre>
 			</div>
 			<div class="intro-box">
 				<h2>Gulpタスクを実行する</h2>
 				<p>
 					以下のコマンドを実行し、Gulpタスクを実行して下さい。
 				</p>
-				<pre>
-					<code class="command">
+				<pre><code class="bash">
 gulp scss-build
-					</code>
-				</pre>
-				<p>
+				</code></pre>
+				<p style="word-break:break-all;">
 					以下のファイルが生成されていることを確認して下さい。<br>
-					[Urushi-ROOT]/urushi/material/style/material.css 
+					[Urushi-ROOT]/urushi/material/style/material.css
 				</p>
 			</div>
 			<div class="intro-box">
@@ -109,11 +107,403 @@ gulp scss-build
 				</p>
 				<img src=" ./../gh-pages-resoucres/images/button-test.png"/>
 			</div>
+
+			<div class="intro-box">
+				<h1>独自コンポーネントを作成する</h1>
+				<p>
+					Urushiをベースに、独自コンポーネントの作成を行います。<br>
+					以下の様なCardコンポーネントを作成していきましょう。
+				</p>
+
+				<div class="test-area">
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title", "titleImg" : "./../gh-pages-resoucres/images/dahlia.jpg"}'>
+						<div>Card Content</div>
+					</div>
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title", "titleImg" : "./../gh-pages-resoucres/images/city.jpg"}'>
+						<a class="button" href="#" target="_self">action1</a>
+						<a class="button" href="#" target="_self">action2</a>
+					</div>
+				</div>
+			</div>
+			<div class="intro-box">
+				<h2>フォルダ構成</h2>
+				<div class="urushi-directories">
+					<div class="top">
+						<span class="material-icons md-dark">folder_open</span>Web site root
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder_open</span>config
+					</div>
+					<div class="third md-accent">requireConfig.js</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder_open</span>urushi
+					</div>
+					<div class="third">
+						<span class="material-icons md-dark">folder_open</span>material
+					</div>
+					<div class="fourth">
+						<span class="material-icons md-dark">folder_open</span>js
+					</div>
+					<div class="fifth md-accent">Card.js</div>
+					<div class="fifth md-accent">templateConfig.js</div>
+					<div class="fourth">
+						<span class="material-icons md-dark">folder_open</span>template
+					</div>
+					<div class="fifth md-accent">card.html</div>
+				</div>
+			</div>
+			<div class="intro-box">
+				<h2>コンポーネントを作成する</h2>
+				<h3>Step1. requireConfig.jsを編集する</h3>
+				<p>
+					CardコンポーネントのPATHを設定ファイルに追加します。<br>
+					requireConfig.jsに以下のソースコードを記述してください。
+				</p>
+				<div class="urushi-directories">
+					<div class="top">
+						<span class="material-icons md-dark">folder_open</span>Web site root
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder_open</span>config
+					</div>
+					<div class="third md-accent">requireConfig.js</div>
+				</div>
+				<pre><code class="javascript">
+// requireConfig.js
+window.requireConfig = {
+    baseUrl : window.requireRoot || './',
+    paths : {
+        text : 'lib/js/text',
+        //・・・
+        uploadManagerListItemTemplate : 'urushi/beta/template/uploadManagerListItem.html',
+
+        // Card
+        Card : 'urushi/material/js/Card',
+        cardTemplate : 'urushi/material/template/card.html'
+    },
+    shim : {
+    //・・・
+				</code></pre>
+
+				<h3>Step2. templateConfig.jsを編集する</h3>
+				<p>
+					Template engineの設定ファイルに、Cardコンポーネントの情報を追加します。<br>
+					templateConfig.jsに以下のソースコードを記述してください。
+				</p>
+				<div class="urushi-directories">
+					<div class="top">
+						<span class="material-icons md-dark">folder_open</span>Web site root
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder_open</span>config
+					</div>
+					<div class="third">requireConfig.js</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder_open</span>urushi
+					</div>
+					<div class="third">
+						<span class="material-icons md-dark">folder_open</span>material
+					</div>
+					<div class="fourth">
+						<span class="material-icons md-dark">folder_open</span>js
+					</div>
+					<div class="fifth">Card.js</div>
+					<div class="fifth  md-accent">templateConfig.js</div>
+					<div class="fourth">
+						<span class="material-icons md-dark">folder_open</span>template
+					</div>
+					<div class="fifth">card.html</div>
+				</div>
+				<pre><code class="javascript">
+// templateConfig.js
+define(
+    'templateConfig',
+    [],
+    /**
+     * @alias module:templateConfig
+     * @returns {object} templateConfig object.
+     */
+    function () {
+        'use strict';
+
+        return {
+            base : {
+                //・・・    
+            },
+            
+            //・・・
+
+            card : {
+                name : 'Card',
+                className : 'card',
+                requires : [],
+                method : {
+                    id : 'getField',
+                    cardClass : 'getOptionalClasses',
+                    title : 'getUrushiOption',
+                    titleImg : 'getUrushiOption',
+                    content : 'getChildNodesFunction'
+                },
+                options : {
+                    id : 'id'
+                }
+            }
+        };
+    }
+);
+				</code></pre>
+				<p>
+					templateConfig.jsの記載方法については下記を参考にしてください。
+				</p>
+				<a class="button button-raised button-start" href="./how-to-write-templateConfig.html" target="_self">how to write templateConfig</a>
+
+				<h3>Step3. テンプレートファイルを作成する</h3>
+				<p>
+					CardコンポーネントのテンプレートとなるHTMLファイルを作成します。<br>
+					card.htmlを新規に作成し、以下のソースコードを記述してください。
+				</p>
+				<div class="urushi-directories">
+					<div class="top">
+						<span class="material-icons md-dark">folder_open</span>Web site root
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder_open</span>config
+					</div>
+					<div class="third">requireConfig.js</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder_open</span>urushi
+					</div>
+					<div class="third">
+						<span class="material-icons md-dark">folder_open</span>material
+					</div>
+					<div class="fourth">
+						<span class="material-icons md-dark">folder_open</span>js
+					</div>
+					<div class="fifth">Card.js</div>
+					<div class="fifth">templateConfig.js</div>
+					<div class="fourth">
+						<span class="material-icons md-dark">folder_open</span>template
+					</div>
+					<div class="fifth md-accent">card.html</div>
+				</div>
+				<pre><code class="html">
+&lt;!-- card.html --&gt;
+&lt;div id="<%= id %>" class="card shadow-z-3 <%= cardClass %> <%= additionalClass %>"&gt;
+    &lt;div id="<%= id %>-img" class="card-img">&gt;
+        &lt;div&gt;
+            &lt;img src="<%= titleImg %>"&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id="<%= id %>-title" class="card-title"&gt;
+        &lt;span><%= title %>&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div id="<%= id %>-content" class="card-content"><%= content %>&lt;/div&gt;
+&lt;/div&gt;
+				</code></pre>
+
+				<h3>Step4. Cardコンポーネントクラスを作成する。</h3>
+				<p>
+					CardコンポーネントクラスをJavaScriptで定義します。<br>
+					Card.jsを新規に作成し、以下のソースコードを記述してください。
+				</p>
+				<div class="urushi-directories">
+					<div class="top">
+						<span class="material-icons md-dark">folder_open</span>Web site root
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder_open</span>config
+					</div>
+					<div class="third">requireConfig.js</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder_open</span>urushi
+					</div>
+					<div class="third">
+						<span class="material-icons md-dark">folder_open</span>material
+					</div>
+					<div class="fourth">
+						<span class="material-icons md-dark">folder_open</span>js
+					</div>
+					<div class="fifth md-accent">Card.js</div>
+					<div class="fifth">templateConfig.js</div>
+					<div class="fourth">
+						<span class="material-icons md-dark">folder_open</span>template
+					</div>
+					<div class="fifth">card.html</div>
+				</div>
+				<pre><code class="javascript" style="height: 50em;">
+// Card.js
+/**
+ * Provides card class as widget.
+ */
+define(
+    'Card',
+    [
+        'Urushi',
+        'Base',
+        'text!cardTemplate'
+    ],
+    /**
+     * @class
+     * @augments module:_Base
+     * @alias module:Card
+     * @returns {object} Card instance.
+     */
+    function (urushi, Base, template) {
+        'use strict';
+
+        var CONSTANTS = {
+            ID_PREFIX : 'urushi.Card',
+            EMBEDDED : {cardClass : '', additionalClass : '', title : '', content : '', titleImg : ''}
+        };
+
+        var idNo = 0;
+
+        return Base.extend(/** @lends module:Card.prototype */ {
+
+            template : undefined,
+            embedded : undefined,
+            _initProperties : function (/* object */ args) {
+                this.template = template;
+                this.embedded = CONSTANTS.EMBEDDED;
+            },
+            initOption : function (/* object */ args) {
+                this.setContent(args.content);
+            },
+            setContent : function (/* string|node|NodeList|function */ contents) {
+                if ('function' === typeof contents) {
+                    contents = contents();
+                }
+                if (!urushi.setDomContents(this.contentNode, contents)) {
+                    urushi.clearDomContents(this.contentNode);
+                }
+            },
+            _attachNode : function () {
+                this.imgNode = this.rootNode.getElementsByClassName('card-img')[0];
+                this.titleNode = this.rootNode.getElementsByClassName('card-title')[0];
+                this.contentNode = this.rootNode.getElementsByClassName('card-content')[0];
+            },
+            _getId : function () {
+                return CONSTANTS.ID_PREFIX + idNo++;
+            }
+        });
+    }
+);
+				</code></pre>
+
+				<p>
+					ここまでがコンポーネント作成で必要な作業です。<br>
+					次はスタイルを整えていきます。
+				</p>
+
+				<h3>Step5. スタイルを整える。</h3>
+				<p>
+					Cardコンポーネント専用のCSSファイルを作成します。<br>
+					card.cssを新規に作成し、以下のソースコードを記述してください。
+				</p>
+				<div class="urushi-directories">
+					<div class="top">
+						<span class="material-icons md-dark">folder_open</span>Web site root
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder_open</span>urushi
+					</div>
+					<div class="third">
+						<span class="material-icons md-dark">folder_open</span>material
+					</div>
+					<div class="fourth">
+						<span class="material-icons md-dark">folder_open</span>style
+					</div>
+					<div class="fifth">
+						<span class="material-icons md-dark">folder_open</span>module
+					</div>
+					<div class="sixth">
+						<span class="material-icons md-dark">folder_open</span>structure
+					</div>
+					<div class="seventh md-accent">card.css</div>
+				</div>
+				<pre><code class="html">
+.card
+.shadow-z-1{box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)}
+.shadow-z-2{box-shadow:0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23)}
+.shadow-z-2-hover{box-shadow:0 3px 6px rgba(0,0,0,.2),0 3px 6px rgba(0,0,0,.28)}
+.shadow-z-3{box-shadow:0 10px 20px rgba(0,0,0,.19),0 6px 6px rgba(0,0,0,.23)}
+.shadow-z-4{box-shadow:0 14px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22)}
+.shadow-z-5{box-shadow:0 19px 38px rgba(0,0,0,.3),0 15px 12px rgba(0,0,0,.22)}
+.card{border-radius:2px;border:0;background-color:#FFF;margin: 15px;}
+.card {max-width: 512px;}
+.card-img:before {padding-top: 56.25%;display: block;content: "";}
+.card-img {position: relative;}
+.card-img > div {position: absolute;top: 0px;left: 0px;bottom: 0px;right: 0px;}
+.card-img > div > img {max-width: 1024px;width: 100%;height: 100%;}
+.card .card-title {padding: 24px 16px 16px 16px;font-size: 24px;}
+.card .card-content {padding: 24px 16px 16px 16px;font-size: 16px;}
+				</code></pre>
+			</div>
+
+			<div class="intro-box">
+				<h2>作成したコンポーネントを利用する</h2>
+				<p>
+					作成したCardコンポーネントを利用してみましょう。<br>
+					<a class="link" href="./get-started.html" target="_blank">get started</a> の「作成するWebサイトにUrushiを組み込む」を参考にします。
+				</p>
+				<div class="urushi-directories">
+					<div class="top">
+						<span class="material-icons md-dark">folder_open</span>Web site root
+					</div>
+					<div class="second md-accent">index.html</div>
+					<div class="second md-accent">sample.png</div>
+				</div>
+
+				<h3>Card ComponentをHTMLに記述する</h3>
+				<p>
+					data-urushi-optionsの"titleImg"には、背景画像のパスを指定します。<br>
+					下記の例では、index.htmlと同階層に配置したsample.pngを指定しています。
+				</p>
+				<pre><code class="html">
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf8"&gt;
+    &lt;link href="./urushi/material/style/material.css" rel="stylesheet"&gt;
+    &lt;link href="./urushi/material/style/module/structure/card.css" rel="stylesheet"&gt;
+
+    &lt;script src="./config/requireConfig.js"&gt;&lt;/script&gt;
+    &lt;script src="./lib/js/require.js" data-main="./main"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="test-area"&gt;
+	    &lt;div data-urushi-type="card" data-urushi-options='{"title" : "card-title" ,  "titleImg" : "sample.png"}'&gt;
+		    &lt;div&gt;Card Content&lt;/div&gt;
+	    &lt;/div&gt;
+	    &lt;div data-urushi-type="card" data-urushi-options='{"title" : "card-title"}'&gt;
+		    &lt;div&gt;Card Content&lt;/div&gt;
+	    &lt;/div&gt;
+    &lt;/div>
+&lt;/body&gt;
+&lt;/html&gt;
+
+				</code></pre>
+
+				<h3>プレビュー</h3>
+				<p>
+					プレビューを確認してみましょう。正しく導入出来ていると以下のプレビューと同じようなプレビューを確認できます。
+				</p>
+				<div class="test-area">
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title", "titleImg" : "./../gh-pages-resoucres/images/dahlia.jpg"}'>
+						<div>Card Content</div>
+					</div>
+					<div data-urushi-type="card" data-urushi-options='{"title" : "card-title", "titleImg" : "./../gh-pages-resoucres/images/city.jpg"}'>
+						<a class="button" href="#" target="_self">action1</a>
+						<a class="button" href="#" target="_self">action2</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 	<footer class="footer reverse">
 		<div class="row">
-			© 2016 Future architect inc. Auther Yuzo Hirakawa. Code licensed under the MIT License.
+			© 2016 Future architect inc. Auther San Yamagami. Code licensed under the MIT License.
 		</div>
 	</footer>
 </body>
