@@ -26,4 +26,7 @@ body{
 	.context-menu-wrapper>.context-menu>.context-menu-dot:before {
     right: 0px;
 	}
+	.box{
+	width:95%;
+	}
 }
