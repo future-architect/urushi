@@ -37,69 +37,182 @@
 		<div id="headerContextNarrow" class="headerContextNarrow">
  		</div>
 	</header>
-	<section class="hidden">
-$インストール。
-Get Zip
-解凍して配置。
+	<section class="">
+		<div class="row">
+			<div class="intro-box">
+				<h1>How to install Urushi</h1>
+				<h2>Download Urushi</h2>
+				<p>
+					Please download the ZIP file by clicking on 「GET URUSHI」 below.
+					You can download directly from github by accessing the link below.<br>
+					https://github.com/future-architect/urushi/releases
+				</p>
+				<a class="button button-raised button-download" href="https://github.com/future-architect/urushi/releases/download/0.5/urushi-0.5.zip"><i class="material-icons md-dark">file_download</i>GET URUSHI</a>
+			</div>
+			<div class="intro-box">
+				<h2>Check out the Demo</h2>
+				<p>
+					Unzip the downloaded file and place the folders in HTTP server as shown below.
+					You can view the demo top page by accessing the [HTTP path of the folder above]test/ from the browser.
+					From the top page, you can access any of the Web Component provided.
+				</p>
+				<div class="urushi-directories">
+					<div class="top">
+						<span class="material-icons md-dark">folder_open</span>Web site root
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>config
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>urushi
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>test
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>util
+					</div>
+				</div>
+				<h3>Before using Urushi</h3>
+				<p>
+					test and util folders are only needed for demo. 
+					Feel free to delete test and util foldersIf you do not require the demo.
+					If you are already using requirejs, make sure to add Urushi module path in your configuration file.
+				</p>
+			</div>
+			<div class="intro-box">
+				<h2>Use Urushi in your website</h2>
+				<p>
+					Finally, embed Urushi in your website.
+					Three steps are needed to use Urushi in your website.<br>
+					First, add script tag in HTML to use Urushi. 
+					Next, add source code in JavaScript to startup Urushi template.
+					With this, Urushi is ready to be used.
+					To use Urushi, add Urushi Web Component as attributes of HTML tags.<br>
+					Before that, create the HTML file to use Urushi.
+					Referring to the folder directory below, create a new index.hmtl file.<br>
+					With this, we can finally proceed to the first step.
+				</p>
+				<div class="urushi-directories">
+					<div class="top">
+						<span class="material-icons md-dark">folder_open</span>Web site root
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>config
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>urushi
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>test
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>util
+					</div>
+					<div class="second md-accent">index.html</div>
+				</div>
+				<h3>Using Urushi</h3>
+				<p>
+					Add two script tags within the head tags. 
+					Urushi uses requirejs, 
+					therefore it is necessary to add the config JavaScript file (requireConfig.js) in the script tag.
+					Next, describe the script tag to read requirejs and to load the JavaScript file(main.js) after the initialization of requirejs.
+				</p>
+				<pre><code class="html">
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf8"&gt;
+    &lt;link href="./urushi/material/style/material.css" rel="stylesheet"&gt;
 
-#利用者向けページへ
-#開発者向けページへ
+    <span class="big">&lt;script src="./config/requireConfig.js"&gt;&lt;/script&gt;</span>
+    <span class="big">&lt;script src="./lib/js/require.js" data-main="./main"&gt;&lt;/script&gt;</span>
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 
-$利用者向けページ
-index.html
-app.js作成
+</code></pre>
+				<h3>Adding JavaScript to startup Urushi</h3>
+				<p>
+					Add the JavaScript to startup Urushi by creating main.js 
+					and placing it in the same folder as index.html.
+					Execute main.js after the initialization of requirejs. 
+					Please add the following source code in main.js.<br>
+					The template engine will analyze the Document Tree specified by the first argument and start the process of replacing tags with Urushi Web Components.
+				</p>
+				<div class="urushi-directories">
+					<div class="top">
+						<span class="material-icons md-dark">folder_open</span>Web site root
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>config
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>urushi
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>test
+					</div>
+					<div class="second">
+						<span class="material-icons md-dark">folder</span>util
+					</div>
+					<div class="second">index.html</div>
+					<div class="second md-accent">main.js</div>
+				</div>
+				<pre><code class="javascript">
+// main.js
+require.config(requireConfig);
+require(['templateEngine', 'templateConfig'], function (templateEngine, templateConfig) {
+    templateEngine.renderDocument(document.body, templateConfig);
+});
 
-Httpアクセスする
+</code></pre>
+				<h3>Adding Urushi Web Components in HTML</h3>
+				<p>
+					Urushi Web Components can be used by describing data-urushi-type attributes in HTML tags and  adding the Web Component names.
+					By doing only that, you can use Urushi Web Components.
+					In addition to that, you can specify the contructor argument of Web Components by adding data-urushi-options attributes.<br>
+					Please wait while we prepare the list of usage for Web Components.
+				</p>
+				<pre><code class="html">
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf8"&gt;
+    &lt;link href="./urushi/material/style/material.css" rel="stylesheet"&gt;
 
-$開発者向けページへ
-別のZipを利用。
+    &lt;script src="./config/requireConfig.js"&gt;&lt;/script&gt;
+    &lt;script src="./lib/js/require.js" data-main="./main"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div <span class="big">data-urushi-type="panel"</span> <span class="big">data-urushi-options='{"header" : "Header title"}</span>'&gt;
+        &lt;button <span class="big">data-urushi-type="button"</span>&gt;CLICK ME&lt;/button&gt;
+        Toggle &lt;input <span class="big">data-urushi-type="togglebutton"</span> checked&gt;
+        &lt;input <span class="big">data-urushi-type="checkbox"</span>&gt; Check me!
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 
-Classの作成
-HTML作成
-CSS作成
-
-TemplateConfigを作成
-
-#利用者向けページへ。
-#デモのやり方一緒。
-
-1. node.jsのインストール。
-1.1. http://nodejs.org/ にアクセス。
-	→http://nodejs.org/dist/latest-v0.12.x/ にアクセス。
-1.2. INSTALLをクリック。
-1.3. インストールシールドに従いインストール。
-
-2. gulp.jsのインストール
-2.1. コマンドプロントを起動。
-2.2. npm config set proxy http://10.42.5.10:8000 を実行。
-※必要に応じて、グローバルインストールのprefixを変更
-（例）prefix = "C:\\uiux\\urushi\\util\\node\\gulp"
-
-2.3. npm install -g gulp を実行。
-
-3. GulpによるSCSSビルド
-3.1. ディレクトリを[urushi ROOT]/util/node/gulpに移動。
-     > cd [urushi ROOT]/util/node/gulp
-3.2. npm install を実行
-
-3.3. gulpfile.jsがproject/scss配下にチェックアウトされている事を確認。
-→[urushi ROOT]/util/node/gulp/gulpfile.js
-
-
-3.4. タスクを下記の通り実行。
-     gulp scss-build
-
-3.5. [urushi ROOT]/urushi/material/style 配下にCSSファイルが出来上がっている事を確認。
-     [urushi ROOT]/urushi/material/style/material.css
-
-4．デモ画面確認
-4.1. HTTPサーバを起動
-     [urushi ROOT]をドキュメントルートに設定
-     
-4.2. テストページにアクセス
-     http://localhost/test/index.html
-
-
+</code></pre>
+				<h3>Preview</h3>
+				<p>
+					Let's create the following preview! You will be able to view the following preview if the installation process has been successful.
+				</p>
+				<div data-urushi-type="panel" data-urushi-options='{"header" : "Header title"}'>
+					<button data-urushi-type="button">CLICK ME</button>
+					Toggle <input data-urushi-type="togglebutton" checked>
+					<input data-urushi-type="checkbox">Check me!
+				</div>
+			</div>
+		</div>
 	</section>
+	<footer class="footer reverse">
+		<div class="row">
+			© 2016 Future architect inc. Auther Yuzo Hirakawa. Code licensed under the MIT License.
+		</div>
+	</footer>
 </body>
 </html>
