@@ -17,37 +17,24 @@
 <!-- jsの読み込み -->
 <script src="../../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
 <script src="../../../gh-pages-resoucres/lib/js/fire-highlightjs.js"></script>
-<script src="../../../config/requireConfig.js"></script>
-<!--<script src="/../../lib/js/require.js" data-main="./../../../gh-pages-resoucres/start"></script>-->
-<script src="../../../lib/js/require.js" data-main="./main"></script>
-
+<script type="text/javascript">
+		window.hljs.initHighlightingOnLoad();
+		window.requireRoot = './../../../gh-pages-resoucres/';
+	</script>
+<script src="../../../gh-pages-resoucres/config/requireConfig.js"></script>
+<script src="../../../lib/js/require.js" data-main="../../../gh-pages-resoucres/demo"></script><!--<script src="/../../lib/js/require.js" data-main="./../../../gh-pages-resoucres/start"></script>-->
 </head>
 <body>
 	<header id="header" class="header md-bg-primary floating">
 		<div class="logo-wrapper">
 			<img class="urushi-logo" src="../../../gh-pages-resoucres/urushi-logo.png">
 		</div>
-		<a class="button" href="../../" target="_self">TOP PAGE</a>
-		<a class="button" href="../../../" target="_self">ENGLISH</a>
-		<div class="spmenu">
-			<select id="test" data-urushi-type="contextmenu">
-				<option id='item1' name='item1'value="../../">TOP PAGE</option>
-				<option id='item2' name='item2' value="../../../">ENGLISH</option>
-				<option id='item3' name='item3' value="../alert">Alert</option>
-				<option id='item4' name='item4' value="../button">Button</option>
-				<option id='item5' name='item5' value="../checkbox">Checkbox</option>
-				<option id='item6' name='item6' value="../dialog">Dialog</option>
-				<option id='item7' name='item7' value="../dropdown">Dropdown</option>
-				<option id='item8' name='item8' value="../hambuger">Hamburger</option>
-				<option id='item9' name='item9' value="../input">Input</option>
-				<option id='item10' name='item10' value="../panel">Panel</option>
-				<option id='item11' name='item11' value="../radio">Radio</option>
-				<option id='item12' name='item12' value="../textarea">TextArea</option>
-				<option id='item13' name='item13' value="../toast">Toast</option>
-				<option id='item14' name='item14' value="../togglebutton">ToggleButton</option>
-				<option id='item14' name='item15' value="../tooltip">Tooltip</option>
-			</select>
+		<div id="headerContextWide" class="headerContextWide">
+			<a class="button" href="../" target="_self">DEMO TOP</a>
+			<a class="button" href="./get-started.html" target="_self">GET STARTED</a>
 		</div>
+		<div id="headerContextNarrow" class="headerContextNarrow">
+ 		</div>
 	</header>
 	<div data-urushi-type="panel"
 		data-urushi-options='{"header" : "Side Menu"}' class="panel  sideBar">
@@ -73,7 +60,7 @@
 	</div>
 	<div data-urushi-type="panel" class="contentsArea">
 		<div class="test-area">
-			<h2>Buttons</h2>
+			<h2>Button</h2>
 			<button id="button1" data-urushi-type="button">Button</button>
 			<button id="button2" data-urushi-type="button" class="button-default">Default
 				Button</button>

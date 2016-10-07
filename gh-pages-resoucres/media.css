@@ -5,18 +5,21 @@ button, .button {
 body{
 	font-family: 'Noto Sans Japanese', serif;
 }
-.spmenu{
-	display:none;
+
+.context-menu-wrapper>.context-menu>.context-menu-dot:before {
+    top: -14.5px;
+    left: 0;
 }
+
+.headerContextNarrow {
+	margin-top: 3px;
+	}
 
 @media screen and (max-width: 640px){
 	.contentsArea{
 		width:90%;
 	}
 	.sideBar{
-		display:none;
-	}
-	.button{
 		display:none;
 	}
 	.spmenu{
