@@ -1,0 +1,26 @@
+{
+  "name": "urushi",
+  "homepage": "https://github.com/future-architect/urushi",
+  "version": "0.5.0",
+  "authors": [
+    "Yuzo.Hirakawa"
+  ],
+  "description": "A web component framework which conformed to the policy of Google Material design.",
+  "main": "urushi/Urushi.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "blueimp-file-upload": "^9.10.0",
+    "jquery": "^3.1.0",
+    "jquery-ui": "^1.12.1",
+    "requirejs": "^2.1.15",
+    "requirejs-text": "^2.0.15",
+    "underscore": "^1.7.0"
+  }
+}
