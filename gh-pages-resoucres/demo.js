@@ -107,7 +107,7 @@
 
 	// URLからファイル名取得
 	var screenFileNm = window.location.href.split('/').pop().split('.')[0];
-	
+
 	// index.htmlの場合
 	if(!screenFileNm) {
 		screenFileNm = 'index';
@@ -181,79 +181,61 @@
 	} else {
 		document.attachEvent('on' + 'scroll', onscroll);
 	}
-	var DemoNm = window.location.href.split('/')[5];
-	console.log(DemoNm);	
+
+	// デモ動作設定
+	const DIALOG="dialog"
+	const TOAST="toast"
+	var $dir = location.href.split("/");  
+	var demoNm = $dir[$dir.length -2];  
 	require(['Urushi','Alert', 'templateEngine', 'templateConfig','ToastManager'], function(Urushi,Alert,templateEngine,
-			templateConfig,ToastManager) {
-		if(DemoNm=='dialog'){
-		console.log(DemoNm);
-		templateEngine.renderDocument(document.body, templateConfig).then(
-					function(result) {
-						var modules = result.widgets;
-						console.log(modules);
-						Urushi.addEvent(modules.button1.getRootNode(), 'click',
-								modules.button1, function() {
-									modules.dialog1.show();
-								});
-						Urushi.addEvent(modules.button2.getRootNode(), 'click',
-								modules.button2, function() {
-									modules.dialog2.show();
-								});
-						done();
-					}).otherwise(function(error) {
-				done();
-			});
-		}else if(DemoNm=='toast'){
+		templateConfig,ToastManager) {
+		if(demoNm === DIALOG){
 			templateEngine.renderDocument(document.body, templateConfig).then(
-			function(result) {
-				var modules = result.widgets, key, manager;
-				console.log(modules);
-				manager = new ToastManager();
-				console.log(manager);
-				document.body.appendChild(manager.getRootNode());
-				Urushi.addEvent(modules.button.getRootNode(), 'click', manager,
-						'show', 'toast demo');
-				done();
-			}).otherwise(function(error) {
-		done();
-	});
-		}else if(DemoNm=='toast'){
-			templateEngine.renderDocument(document.body, templateConfig);
-		}
-			else{
-		templateEngine.renderDocument(document.body, templateConfig).then(
 				function(result) {
-					var alerts = result.widgets, key;
-					for (key in alerts) {
-						alerts[key].show();
-					}
-					flag = true;
+					var modules = result.widgets;
+					console.log(modules);
+					Urushi.addEvent(modules.button1.getRootNode(), 'click',
+						modules.button1, function() {
+							modules.dialog1.show();
+						});
+					Urushi.addEvent(modules.button2.getRootNode(), 'click',
+						modules.button2, function() {
+							modules.dialog2.show();
+						});
 					done();
 				}).otherwise(function(error) {
-			flag = false;
-			done();
-		});
-		}
-// require([ 'templateEngine', 'templateConfig', 'Urushi' ], function(
-// 		templateEngine, templateConfig, Urushi) {
-// 	templateEngine.renderDocument(document.body, templateConfig).then(
-// 			function(result) {
-// 				var modules = result.widgets;
-// 				console.log(modules);
-// 				Urushi.addEvent(modules.button1.getRootNode(), 'click',
-// 						modules.button1, function() {
-// 							modules.dialog1.show();
-// 						});
-// 				Urushi.addEvent(modules.button2.getRootNode(), 'click',
-// 						modules.button2, function() {
-// 							modules.dialog2.show();
-// 						});
-// 				done();
-// 			}).otherwise(function(error) {
-// 		done();
-// 	});
-
-	// require(['templateEngine', 'templateConfig'], function (templateEngine, templateConfig) {
-	// 	templateEngine.renderDocument(document.body, templateConfig);
-	});
+					done();
+				});
+			}else if(demoNm === TOAST){
+				templateEngine.renderDocument(document.body, templateConfig).then(
+					function(result) {
+						var modules = result.widgets, key, manager;
+						console.log(modules);
+						manager = new ToastManager();
+						console.log(manager);
+						document.body.appendChild(manager.getRootNode());
+						Urushi.addEvent(modules.button.getRootNode(), 'click', manager,
+							'show', 'toast demo');
+						done();
+					}).otherwise(function(error) {
+						done();
+					});
+				}else if(demoNm ==='toast'){
+					templateEngine.renderDocument(document.body, templateConfig);
+				}
+				else{
+					templateEngine.renderDocument(document.body, templateConfig).then(
+						function(result) {
+							var alerts = result.widgets, key;
+							for (key in alerts) {
+								alerts[key].show();
+							}
+							flag = true;
+							done();
+						}).otherwise(function(error) {
+							flag = false;
+							done();
+						});
+					}
+				});
 })();
