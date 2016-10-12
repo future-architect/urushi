@@ -159,6 +159,9 @@ pre, code {
 .header .context-menu-wrapper {
 	float: right;
 }
+.context-menu-wrapper{
+	margin: auto;
+}
 .row {
 	margin: 0 auto;
 	padding: 72px 32px;
