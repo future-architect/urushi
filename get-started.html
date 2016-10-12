@@ -24,7 +24,7 @@
 	<script src="./gh-pages-resoucres/config/requireConfig.js"></script>
 	<script src="./gh-pages-resoucres/lib/js/require.js" data-main="./gh-pages-resoucres/start"></script>
 </head>
-<body>
+<body class="get-started">
 	<header id="header" class="header md-bg-primary">
 		<div class="logo-wrapper">
 			<img class="urushi-logo" src="./gh-pages-resoucres/urushi-logo.png">
@@ -76,7 +76,7 @@
 				<h3>Before using Urushi</h3>
 				<p>
 					test and util folders are only needed for demo. 
-					Feel free to delete test and util foldersIf you do not require the demo.
+					Feel free to delete test and util folders, if you do not require the demo.
 					If you are already using requirejs, make sure to add Urushi module path in your configuration file.
 				</p>
 			</div>
@@ -85,12 +85,12 @@
 				<p>
 					Finally, embed Urushi in your website.
 					Three steps are needed to use Urushi in your website.<br>
-					First, add script tag in HTML to use Urushi. 
+					First, add script tag in HTML to use Urushi.<br>
 					Next, add source code in JavaScript to startup Urushi template.
 					With this, Urushi is ready to be used.
 					To use Urushi, add Urushi Web Component as attributes of HTML tags.<br>
 					Before that, create the HTML file to use Urushi.
-					Referring to the folder directory below, create a new index.hmtl file.<br>
+					Referring to the folder directory below, create a new index.html file.<br>
 					With this, we can finally proceed to the first step.
 				</p>
 				<div class="urushi-directories">
@@ -113,7 +113,7 @@
 				</div>
 				<h3>Using Urushi</h3>
 				<p>
-					Add two script tags within the head tags. 
+					Add two script tags within the head tag. 
 					Urushi uses requirejs, 
 					therefore it is necessary to add the config JavaScript file (requireConfig.js) in the script tag.
 					Next, describe the script tag to read requirejs and to load the JavaScript file(main.js) after the initialization of requirejs.
@@ -173,7 +173,7 @@ require(['templateEngine', 'templateConfig'], function (templateEngine, template
 				<p>
 					Urushi Web Components can be used by describing data-urushi-type attributes in HTML tags and  adding the Web Component names.
 					By doing only that, you can use Urushi Web Components.
-					In addition to that, you can specify the contructor argument of Web Components by adding data-urushi-options attributes.<br>
+					In addition to that, you can specify the constructor argument of Web Components by adding data-urushi-options attributes.<br>
 					Please wait while we prepare the list of usage for Web Components.
 				</p>
 				<pre><code class="html">
