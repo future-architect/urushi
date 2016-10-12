@@ -185,8 +185,9 @@
 	// デモ動作設定
 	const DIALOG="dialog"
 	const TOAST="toast"
-	var $dir = location.href.split("/");  
-	var demoNm = $dir[$dir.length -2];  
+	var dir = location.href.split("/");  
+	var demoNm = dir[dir.length -2];
+	  
 	require(['Urushi','Alert', 'templateEngine', 'templateConfig','ToastManager'], function(Urushi,Alert,templateEngine,
 		templateConfig,ToastManager) {
 		if(demoNm === DIALOG){
