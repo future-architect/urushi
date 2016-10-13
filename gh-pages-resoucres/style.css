@@ -148,7 +148,7 @@ pre, code {
 	position: fixed;
 	z-index:1;
 	width: 100%;
-	padding: 4px 16px;
+	padding: 0px 16px;
 	box-shadow: 0 2px 6px rgba(0,0,0,0.0);
 	transition: all 500ms ease-in-out 100ms;
 }
@@ -163,9 +163,14 @@ pre, code {
 	margin: auto;
 }
 .row {
+	text-align: center;
 	margin: 0 auto;
 	padding: 72px 32px;
 	max-width: 1024px;
+}
+.footer {
+	margin-top: 24px;
+	height: 48px;
 }
 
 ul.table {
@@ -269,9 +274,9 @@ ul.table > li {
 	right: 0px;
 }
 
-.footer .row {
+/*.footer .row {
 	padding: 16px 32px 14px 32px;
-}
+}*/
 .footer .material-icons {
 	vertical-align: middle;
 	margin-top: -6px;
@@ -286,6 +291,19 @@ ul.table > li {
 	margin-bottom: 10px;
 	margin-top: 10px;
 	display: none!important;
+}
+
+.space-50 {
+	height: 50px;
+	width: 100%;
+}
+.space-100 {
+	height: 100px;
+	width: 100%;
+}
+.space-150 {
+	height: 150px;
+	width: 100%;
 }
 
 @media screen and (max-width: 1200px) {
@@ -306,8 +324,8 @@ ul.table > li {
 	.header {
 		padding-right: 0px!important;
 	}
-	.header .logo-wrapper {
-		margin-top: 10px!important;
+	.row {
+		padding: 32px;
 	}
 	section {
 		padding-top: 20px;
@@ -331,6 +349,11 @@ ul.table > li {
 	}
 	.row {
 		padding: 32px;
+		font-size: 8px;
+	}
+	.footer {
+		height: 40px;
+		margin-top: 24px;
 	}
 	ul.table, ul.table > li {
 		display: block;
@@ -342,6 +365,9 @@ ul.table > li {
 	.concept .table .urushi-logo-wrapper {
 		width: 320px;
 	}
+	.urushi-logo {
+		float: left;
+	}
 	.concept .button-area {
 		margin-top: 32px;
 		text-align: left;
@@ -351,6 +377,26 @@ ul.table > li {
 	.concept .table .urushi-logo-wrapper {
 		width: 240px;
 	}
+	.urushi-logo {
+		float: left;
+	}
+	.space-hamburger {
+		height: 30px;
+		width: 100%;
+	}
+}
+
+.header .logo-wrapper {
+	width: 200px;
+	float: left;
+	margin-top: 13px;
+}
+.header .logo-wrapper .urushi-logo {
+	width: 70%;
+}
+.urushi-logo {
+	display: block;
+	margin: auto;
 }
 
 .reverse {
@@ -397,15 +443,6 @@ body.for-developers .intro-box img {
 	max-width: 1024px;
 	width: 100%;
  }
-
-.header .logo-wrapper {
-	width: 200px;
-	float: left;
-	margin-top: 4px;
-}
-.header .logo-wrapper .urushi-logo {
-	width: 100%;
-}
 
 .urushi-directories {
 	display: block;
@@ -464,3 +501,4 @@ body.for-developers .intro-box img {
 .checkbox-label {
 	margin: 16px 0px;
 }
+

@@ -7,7 +7,7 @@
 	var screens = {
 		'index' : {
 			'id' : 'index',
-			'name' : 'DEMO TOP',
+			'name' : 'INDEX',
 			'path' : './',
 			'screenFileNm' : 'index'
 		},
@@ -94,12 +94,6 @@
 			'name' : 'TOOLTIP',
 			'path' : '../tooltip/',
 			'screenFileNm' : 'tooltip'
-		},
-		'for-developers' : {
-			'id' : 'forDevelopers',
-			'name' : 'FOR DEVELOPERS',
-			'path' : './for-developers.html',
-			'screenFileNm' : 'for-developers'
 		}
 	};
 	var isLocaleJa = false;
@@ -128,8 +122,8 @@
 	localeChangeItem = {};
 	localeChangeItem.id = screens[screenFileNm].id;
 	if(isLocaleJa) {
-		localeChangeItem.name = 'DEMO TOP';
-		localeChangeItem.label = 'DEMO TOP';
+		localeChangeItem.name = 'INDEX';
+		localeChangeItem.label = 'INDEX';
 		localeChangeItem.path = './../' + screens[screenFileNm].path;
 	} else {
 		localeChangeItem.name = 'JAPANESE';
