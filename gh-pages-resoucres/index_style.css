@@ -18,8 +18,8 @@ h1, h2 { //
 	margin: 16px;
 	display: inline-block;
 	background-color: #fff;
-	width: 22.8%;
-	height: 120px;
+	width: 344px;
+	height: 98px;
 	text-align: center;
 	line-height: 10px;
 	box-shadow: 1px 1px 1px #ddd;
@@ -72,6 +72,7 @@ h1, h2 { //
 }
 
 .card {
+	line-height:170%;
 	float: left;
 	padding: 10px 16px;
 	background: #c90000; //
@@ -151,7 +152,7 @@ h1, h2 { //
 
 .contents {
 	margin: 30px auto;
-	width: 92%;
+	width: 96%;
 }
 
 .clearfix:after {

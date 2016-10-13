@@ -29,7 +29,19 @@ body{
 	.context-menu-wrapper>.context-menu>.context-menu-dot:before {
     right: 0px;
 	}
+	.card{
+	margin:0;
+	border-bottom:1px solid #EBEBEB;
+	}
 	.box{
-	width:95%;
+	height:88px;
+	width:100%;
+	}
+	.contents{
+	width:100%;
+	margin:0;
+	}
+	.footer{
+	margin:0;
 	}
 }
