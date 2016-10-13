@@ -108,6 +108,10 @@ body {
 	line-height: 1;
 }
 
+h3.html-label {
+	margin-top: 32px;
+	margin-bottom: 0px;
+}
 h2, h3 {
 	margin-top: 48px;
 	margin-bottom: 16px;
@@ -126,10 +130,6 @@ p {
 }
 p:nth-last-of-type(1) {
 	margin-bottom: 0;
-}
-
-pre {
-	margin: 24px 0;
 }
 
 pre, code {
@@ -455,4 +455,12 @@ body.for-developers .intro-box img {
 }
 .get-started .intro-box  .panel {
 	margin: 24px 0;
+}
+
+.alert.wipe.in {
+	margin-top: 16px;
+}
+
+.checkbox-label {
+	margin: 16px 0px;
 }
