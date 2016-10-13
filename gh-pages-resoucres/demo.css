@@ -1,0 +1,63 @@
+.header {
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+
+	padding: 0;
+	padding-left: 16px;
+	height: 48px;
+	width: 100%;
+
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	background: #4CAF50;
+}
+.header .logo-wrapper .urushi-logo {
+	padding-left: 16px;
+	width: 76%;
+}
+.header .logo-wrapper {
+	margin: 0;
+}
+
+.contentsArea {
+	margin-top: 96px;
+	margin-right: auto;
+	margin-left: auto;
+	width: 72%;
+}
+
+footer {
+	margin-top: 48px;
+}
+
+.alert.wipe {
+	opacity: 1;
+	width: 600px;
+}
+
+button, .button {
+	font-size: 15pt;
+}
+
+.demo-page .header {
+	text-align: initial;
+}
+.demo-page .header > * {
+	vertical-align: middle;
+}
+
+.demo-page .header .hamburger {
+	display: inline-block;
+}
+
+.demo-page .header .logo-wrapper {
+	float: initial;
+	display: inline-block;
+}
+.demo-page > .contentsArea > .panel-body {
+	padding: 32px;
+}
+.demo-page > .contentsArea > .panel-body > div {
+	margin: 0;
+}

@@ -108,10 +108,6 @@ body {
 	line-height: 1;
 }
 
-h3.html-label {
-	margin-top: 32px;
-	margin-bottom: 0px;
-}
 h2, h3 {
 	margin-top: 48px;
 	margin-bottom: 16px;
@@ -132,6 +128,12 @@ p:nth-last-of-type(1) {
 	margin-bottom: 0;
 }
 
+pre {
+	margin: 24px 0;
+	-moz-tab-size: 4;
+	tab-size: 4;
+}
+
 pre, code {
 	border-radius: 4px;
 }
@@ -148,7 +150,7 @@ pre, code {
 	position: fixed;
 	z-index:1;
 	width: 100%;
-	padding: 0px 16px;
+	padding: 4px 16px;
 	box-shadow: 0 2px 6px rgba(0,0,0,0.0);
 	transition: all 500ms ease-in-out 100ms;
 }
@@ -159,18 +161,10 @@ pre, code {
 .header .context-menu-wrapper {
 	float: right;
 }
-.context-menu-wrapper{
-	margin: auto;
-}
 .row {
-	text-align: center;
 	margin: 0 auto;
 	padding: 72px 32px;
 	max-width: 1024px;
-}
-.footer {
-	margin-top: 24px;
-	height: 48px;
 }
 
 ul.table {
@@ -274,9 +268,9 @@ ul.table > li {
 	right: 0px;
 }
 
-/*.footer .row {
+.footer .row {
 	padding: 16px 32px 14px 32px;
-}*/
+}
 .footer .material-icons {
 	vertical-align: middle;
 	margin-top: -6px;
@@ -291,19 +285,6 @@ ul.table > li {
 	margin-bottom: 10px;
 	margin-top: 10px;
 	display: none!important;
-}
-
-.space-50 {
-	height: 50px;
-	width: 100%;
-}
-.space-100 {
-	height: 100px;
-	width: 100%;
-}
-.space-150 {
-	height: 150px;
-	width: 100%;
 }
 
 @media screen and (max-width: 1200px) {
@@ -324,8 +305,8 @@ ul.table > li {
 	.header {
 		padding-right: 0px!important;
 	}
-	.row {
-		padding: 32px;
+	.header .logo-wrapper {
+		margin-top: 10px!important;
 	}
 	section {
 		padding-top: 20px;
@@ -349,11 +330,6 @@ ul.table > li {
 	}
 	.row {
 		padding: 32px;
-		font-size: 8px;
-	}
-	.footer {
-		height: 40px;
-		margin-top: 24px;
 	}
 	ul.table, ul.table > li {
 		display: block;
@@ -365,9 +341,6 @@ ul.table > li {
 	.concept .table .urushi-logo-wrapper {
 		width: 320px;
 	}
-	.urushi-logo {
-		float: left;
-	}
 	.concept .button-area {
 		margin-top: 32px;
 		text-align: left;
@@ -377,26 +350,6 @@ ul.table > li {
 	.concept .table .urushi-logo-wrapper {
 		width: 240px;
 	}
-	.urushi-logo {
-		float: left;
-	}
-	.space-hamburger {
-		height: 30px;
-		width: 100%;
-	}
-}
-
-.header .logo-wrapper {
-	width: 200px;
-	float: left;
-	margin-top: 13px;
-}
-.header .logo-wrapper .urushi-logo {
-	width: 70%;
-}
-.urushi-logo {
-	display: block;
-	margin: auto;
 }
 
 .reverse {
@@ -412,7 +365,7 @@ code .big {
 	font-style: italic;
 }
 
-.jp .footer {
+.footer {
 	font-size: 10.5pt;
 	font-weight: 400;
 }
@@ -443,6 +396,15 @@ body.for-developers .intro-box img {
 	max-width: 1024px;
 	width: 100%;
  }
+
+.header .logo-wrapper {
+	width: 200px;
+	float: left;
+	margin-top: 4px;
+}
+.header .logo-wrapper .urushi-logo {
+	width: 100%;
+}
 
 .urushi-directories {
 	display: block;
@@ -493,12 +455,3 @@ body.for-developers .intro-box img {
 .get-started .intro-box  .panel {
 	margin: 24px 0;
 }
-
-.alert.wipe.in {
-	margin-top: 16px;
-}
-
-.checkbox-label {
-	margin: 16px 0px;
-}
-

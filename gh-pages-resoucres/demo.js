@@ -1,7 +1,7 @@
 
 (function () {
 	'use strict';
-	var header, onscroll, contextItems, contextItem, localeChangeItem, key, itemCallback, callbackFnc;
+	var header, contextItems, contextItem, localeChangeItem, key, itemCallback, callbackFnc;
 
 	// 画面情報
 	var screens = {
@@ -160,21 +160,6 @@
 	});
 
 	header = document.getElementById('header');
-
-	onscroll = function () {
-		var y = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-		if (y && !header.classList.contains('floating')) {
-			header.classList.add('floating');
-		} else if (!y && header.classList.contains('floating')) {
-			header.classList.remove('floating');
-		}
-	};
-
-	if (document.addEventListener) {
-		document.addEventListener('scroll', onscroll, false);
-	} else {
-		document.attachEvent('on' + 'scroll', onscroll);
-	}
 
 	// デモ動作設定
 	const DIALOG="dialog"
