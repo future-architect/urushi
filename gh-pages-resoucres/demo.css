@@ -57,6 +57,14 @@ footer {
 body {
 	padding-top: 60px;
 }
+.footer {
+	background: #000;
+	width: 100%;
+	margin-top: 150px;
+}
+.footer .row{
+    padding: 16px 32px 20px 32px;
+}
 
 .card {
 	color: rgba(0, 0, 0, 0.54);
