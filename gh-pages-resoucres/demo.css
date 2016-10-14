@@ -57,3 +57,11 @@ footer {
 .demo-alert .alert.wipe.in {
 	width: 100%;
 }
+/* radio 
+.demo-radio .circle,.check {
+    margin-top: 4px;
+}*/
+/* toggle */
+.demo-toggle .contentsArea .toggle-button{
+	margin:24px;
+}
