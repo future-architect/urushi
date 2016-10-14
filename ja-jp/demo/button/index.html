@@ -1,38 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Button test</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
-<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
-<!-- cssの読み込み -->
-<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
-<link href="../../../gh-pages-resoucres/highlight/styles/rainbow.css" rel="stylesheet">
-<link href="../../../gh-pages-resoucres/urushi_style.css" rel="stylesheet">
-<link href="../../../gh-pages-resoucres/index_style.css" rel="stylesheet" type="text/css">
-<link href="../../../gh-pages-resoucres/contents.css" rel="stylesheet" type="text/css">
-<link href="../../../gh-pages-resoucres/style.css" rel="stylesheet" type="text/css">
-<link href="../../../gh-pages-resoucres/material.css" rel="stylesheet">
-<link href="../../../gh-pages-resoucres/media.css" rel="stylesheet">
-<!-- jsの読み込み -->
-<script src="../../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
-<script src="../../../gh-pages-resoucres/lib/js/fire-highlightjs.js"></script>
-<script type="text/javascript">
+	<title>Button test</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
+
+	<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
+
+	<!-- cssの読み込み -->
+	<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
+	<link href="../../../gh-pages-resoucres/highlight/styles/rainbow.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/material.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/style.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/demo.css" rel="stylesheet" type="text/css">
+
+	<!-- jsの読み込み -->
+	<script src="../../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
+	<script src="../../../gh-pages-resoucres/lib/js/fire-highlightjs.js"></script>
+	<script type="text/javascript">
 		window.hljs.initHighlightingOnLoad();
 		window.requireRoot = './../../../gh-pages-resoucres/';
 	</script>
-<script src="../../../gh-pages-resoucres/config/requireConfig.js"></script>
-<script src="../../../lib/js/require.js" data-main="../../../gh-pages-resoucres/demo"></script>
+	<script src="../../../gh-pages-resoucres/config/requireConfig.js"></script>
+	<script src="../../../lib/js/require.js" data-main="../../../gh-pages-resoucres/demo"></script>
 </head>
-<body>
-	<header id="header" class="header md-bg-primary floating">
+<body class="button-alert jp">
+	<header id="header" class="header md-bg-primary">
+		<span id="hamburger" data-urushi-type="hamburger"></span>
 		<div class="logo-wrapper">
 			<img class="urushi-logo" src="../../../gh-pages-resoucres/urushi-logo.png">
 		</div>
-		<div id="headerContextNarrow" class="headerContextNarrow">
- 		</div>
 	</header>
-	<div data-urushi-type="panel"
+<!-- 	<div data-urushi-type="panel"
 		data-urushi-options='{"header" : "Side Menu"}' class="panel  sideBar">
 		<ul class="sideBarList idnexList">
 			<li><a href="../index.html">Index</a></li>
@@ -54,30 +53,21 @@
 			<li><a href="../tooltip">Tooltip</a></li>
 		</ul>
 	</div>
-	<div data-urushi-type="panel" class="contentsArea">
+ -->	<div data-urushi-type="panel" class="contentsArea">
 		<div class="test-area">
 			<h2>Button</h2>
 			<button id="button1" data-urushi-type="button">Button</button>
-			<button id="button2" data-urushi-type="button" class="button-default">Default
-				Button</button>
-			<button id="button3" data-urushi-type="button"
-				class="button-default-accent">Default Accent Button</button>
-			<button id="button4" data-urushi-type="button" disabled>Disabled
-				Button</button>
-			<button id="button5" data-urushi-type="button" class="button-success">Success
-				Button</button>
-			<button id="button6" data-urushi-type="button" class="button-info">Info
-				Button</button><br/>
-			<button id="button7" data-urushi-type="button" class="button-primary">Primary
-				Button</button>
-			<button id="button8" data-urushi-type="button" class="button-warning">Warning
-				Button</button>
-			<button id="button9" data-urushi-type="button" class="button-accent">Accent
-				Button</button>
-			<button id="button10" data-urushi-type="button"
-				class="button-primary" disabled>Disabled Primary Button</button>
-			<button id="button11" data-urushi-type="button" class="button-danger">Danger
-				Button</button>
+			<button id="button2" data-urushi-type="button" class="button-default">Default Button</button>
+			<button id="button3" data-urushi-type="button" class="button-default-accent">Default Accent Button</button>
+			<button id="button4" data-urushi-type="button" disabled>Disabled Button</button>
+			<button id="button5" data-urushi-type="button" class="button-success">Success Button</button>
+			<button id="button6" data-urushi-type="button" class="button-info">Info Button</button>
+			<br/>
+			<button id="button7" data-urushi-type="button" class="button-primary">Primary Button</button>
+			<button id="button8" data-urushi-type="button" class="button-warning">Warning Button</button>
+			<button id="button9" data-urushi-type="button" class="button-accent">Accent Button</button>
+			<button id="button10" data-urushi-type="button" class="button-primary" disabled>Disabled Primary Button</button>
+			<button id="button11" data-urushi-type="button" class="button-danger">Danger Button</button>
 			<h3>html</h3>
 			<pre>
 				<code class="html hljs xml">
