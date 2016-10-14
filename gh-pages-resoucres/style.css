@@ -30,6 +30,12 @@ ul:after {
 	clear: both;
 }
 
+hr {
+	border: 0;
+	height: 2px;
+	background-color: rgba(0, 0, 0, 0.12);
+}
+
 .md-bg-primary { background-color: #4CAF50; }
 .md-bg-primary-dark { background-color: #388E3C; }
 .md-bg-primary-light { background-color: #C8E6C9; }
@@ -108,10 +114,6 @@ body {
 	line-height: 1;
 }
 
-h3.html-label {
-	margin-top: 32px;
-	margin-bottom: 0px;
-}
 h2, h3 {
 	margin-top: 48px;
 	margin-bottom: 16px;
@@ -130,6 +132,12 @@ p {
 }
 p:nth-last-of-type(1) {
 	margin-bottom: 0;
+}
+
+pre {
+	margin: 24px 0;
+	-moz-tab-size: 4;
+	tab-size: 4;
 }
 
 pre, code {
@@ -158,9 +166,6 @@ pre, code {
 }
 .header .context-menu-wrapper {
 	float: right;
-}
-.context-menu-wrapper{
-	margin: auto;
 }
 .row {
 	margin: 0 auto;
@@ -366,7 +371,7 @@ code .big {
 	font-style: italic;
 }
 
-.jp .footer {
+.footer {
 	font-size: 10.5pt;
 	font-weight: 400;
 }
@@ -455,12 +460,4 @@ body.for-developers .intro-box img {
 }
 .get-started .intro-box  .panel {
 	margin: 24px 0;
-}
-
-.alert.wipe.in {
-	margin-top: 16px;
-}
-
-.checkbox-label {
-	margin: 16px 0px;
 }

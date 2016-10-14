@@ -2,57 +2,36 @@
 <html>
 <head>
 <title>Textarea test</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
-<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
-<!-- cssの読み込み -->
-<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
-<link href="../../../gh-pages-resoucres/highlight/styles/rainbow.css" rel="stylesheet">
-<link href="../../../gh-pages-resoucres/urushi_style.css" rel="stylesheet">
-<link href="../../../gh-pages-resoucres/index_style.css" rel="stylesheet" type="text/css">
-<link href="../../../gh-pages-resoucres/contents.css" rel="stylesheet" type="text/css">
-<link href="../../../gh-pages-resoucres/style.css" rel="stylesheet" type="text/css">
-<link href="../../../gh-pages-resoucres/material.css" rel="stylesheet">
-<link href="../../../gh-pages-resoucres/media.css" rel="stylesheet">
-<!-- jsの読み込み -->
-<script src="../../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
-<script src="../../../gh-pages-resoucres/lib/js/fire-highlightjs.js"></script>
-<script src="../../../config/requireConfig.js"></script>
-<script src="../../../lib/js/require.js" data-main="./main"></script>
-<style type="text/css">
-.form-control-wrapper {
-	margin: 24px;
-}
-</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
+
+	<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
+
+	<!-- cssの読み込み -->
+	<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
+	<link href="../../../gh-pages-resoucres/highlight/styles/rainbow.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/material.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/style.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/demo.css" rel="stylesheet" type="text/css">
+
+	<!-- jsの読み込み -->
+	<script src="../../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
+	<script src="../../../gh-pages-resoucres/lib/js/fire-highlightjs.js"></script>
+	<script type="text/javascript">
+		window.hljs.initHighlightingOnLoad();
+		window.requireRoot = './../../../gh-pages-resoucres/';
+	</script>
+	<script src="../../../gh-pages-resoucres/config/requireConfig.js"></script>
+	<script src="../../../lib/js/require.js" data-main="../../../gh-pages-resoucres/demo"></script>
 </head>
-<body>
-	<header id="header" class="header md-bg-primary floating">
+<body  class="demo-textarea jp">
+	<header id="header" class="header md-bg-primary">
+		<span id="hamburger" data-urushi-type="hamburger"></span>
 		<div class="logo-wrapper">
 			<img class="urushi-logo" src="../../../gh-pages-resoucres/urushi-logo.png">
 		</div>
-		<a class="button" href="../../" target="_self">TOP PAGE</a>
-		<a class="button" href="../../../" target="_self">ENGLISH</a>
-		<div class="spmenu">
-			<select id="test" data-urushi-type="contextmenu">
-				<option id='item1' name='item1'><a class="button" href="../../" target="_self">TOP PAGE</a></option>
-				<option id='item2' name='item2'><a class="button" href="../../../" target="_self">ENGLISH</a></option>
-				<option id='item3' name='item3'><a class="button" href="../alert" target="_self">Alert</a></option>
-				<option id='item4' name='item4'><a class="button" href="../button" target="_self">Button</a></option>
-				<option id='item5' name='item5'><a class="button" href="../checkbox" target="_self">CheckBox</a></option>
-				<option id='item6' name='item6'><a class="button" href="../dialog" target="_self">Dialog</a></option>
-				<option id='item7' name='item7'><a class="button" href="../dropdown" target="_self">Dropdown</a></option>
-				<option id='item8' name='item8'><a class="button" href="../hamburger" target="_self">Hamburger</a></option>
-				<option id='item9' name='item9'><a class="button" href="../input" target="_self">Input</a></option>
-				<option id='item10' name='item10'><a class="button" href="../panel" target="_self">Panel</a></option>
-				<option id='item11' name='item11'><a class="button" href="../radio" target="_self">Radio</a></option>
-				<option id='item12' name='item12'><a class="button" href="../textarea" target="_self">TextArea</a></option>
-				<option id='item13' name='item13'><a class="button" href="../toast" target="_self">Toast</a></option>
-				<option id='item14' name='item14'><a class="button" href="../togglebutton" target="_self">ToggleButton</a></option>
-				<option id='item14' name='item15'><a class="button" href="../tooltip" target="_self">Tooltip</a></option>
-			</select>
-		</div>
 	</header>
-	<div data-urushi-type="panel"
+<!--	<div data-urushi-type="panel"
 		data-urushi-options='{"header" : "Side Menu"}' class="panel  sideBar">
 		<ul class="sideBarList idnexList">
 			<li><a href="../index.html">Index</a></li>
@@ -74,9 +53,9 @@
 			<li><a href="../tooltip">Tooltip</a></li>
 		</ul>
 	</div>
+-->
 	<div data-urushi-type="panel"
 		class="contentsArea">
-	<div class="test-area">
 	<h2>Textarea</h2>
 		<textarea id="textarea0" data-urushi-type="textarea"></textarea>
 		<br>
@@ -91,24 +70,20 @@ test message."
 		<textarea id="textarea3" value="" data-urushi-type="textarea"
 			data-urushi-options='{"hint" : "hint message."}'
 			placeholder="placeholder message."></textarea>
-<h3>html</h3>
-<pre>
-<code class="html hljs xml">
+		<h3 class="html-label">html</h3>
+		<pre>
+			<code class="html">
 &lt;textarea id="textarea0" data-urushi-type="textarea"></textarea>
 &lt;textarea id="textarea1" data-urushi-type="textarea" disabled="true"></textarea>
 &lt;textarea id="textarea2" value="some value. test message." data-urushi-type="textarea" data-urushi-options='{"hint" : "hint message."}' placeholder="placeholder message."></textarea>
 &lt;textarea id="textarea3" value="" data-urushi-type="textarea" data-urushi-options='{"hint" : "hint message."}' placeholder="placeholder message."></textarea>
 
-</code>
-</pre>
-
+			</code>
+		</pre>
 	</div>
-	<div class="test-area" id="script-modules"></div>
-	</div>
-	<div class="clearfix"></div>
 		<footer class="footer reverse">
 		<div class="row">
-			© 2016 Future architect inc. Code licensed under the MIT License.
+			© 2016 Future architect inc. Auther Yuzo Hirakawa. Code licensed under the MIT License.
 		</div>
 	</footer>
 </body>

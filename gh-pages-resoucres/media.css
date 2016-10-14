@@ -10,9 +10,12 @@ body{
     top: -14.5px;
     left: 0;
 }
+.context-menu-wrapper>.context-menu {
+	margin-top: 3px;
+}
 
 .headerContextNarrow {
-	margin-top: 3px;
+	margin-top: 0px;
 	}
 
 @media screen and (max-width: 640px){
@@ -27,7 +30,7 @@ body{
 		float:right;
 	}
 	.context-menu-wrapper>.context-menu>.context-menu-dot:before {
-    right: 0px;
+    	right: 0px;
 	}
 	.card{
 	margin:0;

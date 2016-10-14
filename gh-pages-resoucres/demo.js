@@ -1,13 +1,13 @@
 
 (function () {
 	'use strict';
-	var header, onscroll, contextItems, contextItem, localeChangeItem, key, itemCallback, callbackFnc;
+	var header, contextItems, contextItem, localeChangeItem, key, itemCallback, callbackFnc;
 
 	// 画面情報
 	var screens = {
 		'index' : {
 			'id' : 'index',
-			'name' : 'DEMO TOP',
+			'name' : 'INDEX',
 			'path' : './',
 			'screenFileNm' : 'index'
 		},
@@ -94,12 +94,6 @@
 			'name' : 'TOOLTIP',
 			'path' : '../tooltip/',
 			'screenFileNm' : 'tooltip'
-		},
-		'for-developers' : {
-			'id' : 'forDevelopers',
-			'name' : 'FOR DEVELOPERS',
-			'path' : './for-developers.html',
-			'screenFileNm' : 'for-developers'
 		}
 	};
 	var isLocaleJa = false;
@@ -128,8 +122,8 @@
 	localeChangeItem = {};
 	localeChangeItem.id = screens[screenFileNm].id;
 	if(isLocaleJa) {
-		localeChangeItem.name = 'DEMO TOP';
-		localeChangeItem.label = 'DEMO TOP';
+		localeChangeItem.name = 'INDEX';
+		localeChangeItem.label = 'INDEX';
 		localeChangeItem.path = './../' + screens[screenFileNm].path;
 	} else {
 		localeChangeItem.name = 'JAPANESE';
@@ -166,21 +160,6 @@
 	});
 
 	header = document.getElementById('header');
-
-	onscroll = function () {
-		var y = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-		if (y && !header.classList.contains('floating')) {
-			header.classList.add('floating');
-		} else if (!y && header.classList.contains('floating')) {
-			header.classList.remove('floating');
-		}
-	};
-
-	if (document.addEventListener) {
-		document.addEventListener('scroll', onscroll, false);
-	} else {
-		document.attachEvent('on' + 'scroll', onscroll);
-	}
 
 	// デモ動作設定
 	const DIALOG="dialog"
