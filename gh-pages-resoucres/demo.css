@@ -62,7 +62,6 @@ button, .button {
 	margin: 0;
 }
 
-br {
-	display: block;
-	margin: 20px 0;
+.space {
+	margin: 16px 0px;
 }
