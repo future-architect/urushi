@@ -33,6 +33,7 @@ body{
     	right: 0px;
 	}
 	.card{
+	width:100%;
 	margin:0;
 	border-bottom:1px solid #EBEBEB;
 	}

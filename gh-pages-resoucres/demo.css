@@ -65,3 +65,83 @@ footer {
 .demo-toggle .contentsArea .toggle-button{
 	margin:24px;
 }
+/* index */
+body {
+	padding-top: 60px;
+	font-family: 'Noto Sans Japanese', serif;
+	font-weight: 400;
+}
+
+hr {
+	border-color: #fff;
+}
+
+.header {
+	height: 56px;
+	padding-left: 16px;
+}
+.header h1 {
+	line-height: 44px;
+}
+
+.footer {
+	background: #000;
+	width: 100%;
+	margin-top: 150px;
+}
+
+.card {
+	color: rgba(0, 0, 0, 0.54);
+	margin: 16px;
+	display: inline-block;
+	background-color: #fff;
+	width: 344px;
+	height: 98px;
+	text-align: left;
+	line-height:170%;
+	float: left;
+	padding: 10px 16px;
+	box-shadow: 1px 1px 1px #ddd;
+	transition: box-shadow 200ms ease-in-out;
+	transition: background 200ms ease-in-out;
+	font-size: 12px;
+	font-family:'Noto Sans Japanese', "Hiragino Kaku Gothic Pro W3", "Hiragino Kaku Gothic Pro", "Yu Gothic",
+		Meiryo, Osaka, "MSPゴシック", "MS PGothic", sans-serif;
+	border-radius: 2px;
+}
+.card:hover {
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, .1), 0 2px 10px rgba(1, 0, 0, .1);
+	cursor: pointer;
+}
+.card a {
+	font-size: 24px;
+	display: block;
+	padding: 10px 5px;
+	text-align: left;
+	color: #460B0B;
+	text-decoration: none;
+}
+.card hr {
+	width: 90%;
+	margin-right: 10%;
+	height: 1px;
+	border: none;
+	background-color: rgba(0, 0, 0, 0.38);
+}
+.card h2 {
+	font-size: 24px;
+	margin: 14px 0px; 
+	color: rgba(0, 0, 0, 0.87);
+	font-weight: bold;
+}
+
+.contents {
+	margin: 30px auto;
+	width: 96%;
+}
+
+.clearfix:after {
+	content: "";
+	clear: both;
+	display: block;
+}
