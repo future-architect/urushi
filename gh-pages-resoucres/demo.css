@@ -61,3 +61,8 @@ button, .button {
 .demo-page > .contentsArea > .panel-body > div {
 	margin: 0;
 }
+
+br {
+	display: block;
+	margin: 20px 0;
+}
