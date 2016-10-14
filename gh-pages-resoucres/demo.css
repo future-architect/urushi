@@ -52,3 +52,8 @@ hr {
 footer {
 	margin-top: 48px;
 }
+
+/* Alert */
+.demo-alert .alert.wipe.in {
+	width: 100%;
+}
