@@ -77,15 +77,15 @@
 &lt;div id="dialog1"
 		data-urushi-type="Dialog"
 		data-urushi-options='{"header" : "Header name"}'>
-    &lt;div>innner tag 1&lt;/div>
-    &lt;div>innner tag 2&lt;/div>
+	&lt;div>innner tag 1&lt;/div>
+	&lt;div>innner tag 2&lt;/div>
 &lt;/div>
 &lt;div id="dialog2"
 		data-urushi-type="Dialog"
 		data-urushi-options='{"header": "Header name", "footer": "footer message", "isDisplayCloseIcon": true}'>
-    &lt;div>innner tag 1&lt;/div>
-    &lt;div>innner tag 2&lt;/div>
-    &lt;button class="button-primary" data-urushi-type="button">button in dialog&lt;/button>
+	&lt;div>innner tag 1&lt;/div>
+	&lt;div>innner tag 2&lt;/div>
+	&lt;button class="button-primary" data-urushi-type="button">button in dialog&lt;/button>
 &lt;/div>
 
 </code></pre>
@@ -94,22 +94,25 @@
 //main.js
 require.config(requireConfig);
 require([ 'templateEngine', 'templateConfig', 'Urushi' ], function(
-        templateEngine, templateConfig, Urushi) {
-    templateEngine.renderDocument(document.body, templateConfig).then(
-            function(result) {
-                var modules = result.widgets;
-                Urushi.addEvent(modules.button1.getRootNode(), 'click',
-                        modules.button1, function() {
-                            modules.dialog1.show();
-                        });
-                Urushi.addEvent(modules.button2.getRootNode(), 'click',
-                        modules.button2, function() {
-                            modules.dialog2.show();
-                        });
-                done();
-            }).otherwise(function(error) {
-        done();
-    });
+		templateEngine, templateConfig, Urushi) {
+	
+	templateEngine.renderDocument(document.body, templateConfig).then(function(result) {
+		var modules = result.widgets;
+		Urushi.addEvent(
+			modules.button1.getRootNode(),
+			'click',
+			modules.button1, function() {
+				modules.dialog1.show();
+			}
+		);
+		Urushi.addEvent(
+			modules.button2.getRootNode(),
+			'click',
+			modules.button2, function() {
+				modules.dialog2.show();
+			}
+		);
+	});
 });
 
 </code></pre>
