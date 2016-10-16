@@ -65,6 +65,10 @@ footer {
 .demo-button .contentsArea .button {
 	margin: 8px 8px;
 }
+/* Checkbox */
+.demo-checkbox .contentsArea .checkbox {
+	margin: 8px 0;
+}
 
 /* radio 
 .demo-radio .circle,.check {

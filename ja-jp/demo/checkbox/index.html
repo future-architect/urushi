@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Checkbox test</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
-<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
-<!-- cssの読み込み -->
-<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
-<link href="../../../gh-pages-resoucres/highlight/styles/rainbow.css" rel="stylesheet">
-<link href="../../../gh-pages-resoucres/urushi_style.css" rel="stylesheet">
-<link href="../../../gh-pages-resoucres/index_style.css" rel="stylesheet" type="text/css">
-<link href="../../../gh-pages-resoucres/contents.css" rel="stylesheet" type="text/css">
-<link href="../../../gh-pages-resoucres/style.css" rel="stylesheet" type="text/css">
-<link href="../../../gh-pages-resoucres/material.css" rel="stylesheet">
-<link href="../../../gh-pages-resoucres/media.css" rel="stylesheet">
-<!-- jsの読み込み -->
-<script src="../../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
-<script src="../../../gh-pages-resoucres/lib/js/fire-highlightjs.js"></script>
-<script type="text/javascript">
+	<title>Checkbox test</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
+
+	<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
+
+	<!-- cssの読み込み -->
+	<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
+	<link href="../../../gh-pages-resoucres/highlight/styles/rainbow.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/material.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/style.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/demo.css" rel="stylesheet" type="text/css">
+
+	<!-- jsの読み込み -->
+	<script src="../../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
+	<script src="../../../gh-pages-resoucres/lib/js/fire-highlightjs.js"></script>
+	<script type="text/javascript">
 		window.hljs.initHighlightingOnLoad();
 		window.requireRoot = './../../../gh-pages-resoucres/';
 	</script>
-<script src="../../../gh-pages-resoucres/config/requireConfig.js"></script>
-<script src="../../../lib/js/require.js" data-main="../../../gh-pages-resoucres/demo"></script>
-<!--<script src="../../../lib/js/require.js" data-main="./main"></script>-->
+	<script src="../../../gh-pages-resoucres/config/requireConfig.js"></script>
+	<script src="../../../lib/js/require.js" data-main="../../../gh-pages-resoucres/demo"></script>
 </head>
-<body>
-	<header id="header" class="header md-bg-primary floating">
+<body class="demo-checkbox jp">
+	<header id="header" class="header md-bg-primary">
+		<span id="hamburger" data-urushi-type="hamburger"></span>
 		<div class="logo-wrapper">
 			<img class="urushi-logo" src="../../../gh-pages-resoucres/urushi-logo.png">
 		</div>
-		<div id="headerContextNarrow" class="headerContextNarrow">
- 		</div>
 	</header>
-	<div data-urushi-type="panel"
+<!-- 	<div data-urushi-type="panel"
 		data-urushi-options='{"header" : "Side Menu"}' class="panel  sideBar">
 		<ul class="sideBarList idnexList">
 			<li><a href="../index.html">Index</a></li>
@@ -55,28 +53,20 @@
 			<li><a href="../tooltip">Tooltip</a></li>
 		</ul>
 	</div>
-	<div data-urushi-type="panel"
-		class="contentsArea">
-		<div class="test-area">
-			<h2>Checkbox</h2>
-			<input id="checkbox1" class="space" data-urushi-type="checkbox">Checkbox
-			<input id="checkbox2" class="checkbox-default space"
-				data-urushi-type="checkbox">Default
-			<input id="checkbox3" class="checkbox-primary space"
-				data-urushi-type="checkbox" checked>Primary
-			<input id="checkbox4" class="checkbox-success space"
-				data-urushi-type="checkbox">Success
-			<input id="checkbox5" class="checkbox-info space"
-				data-urushi-type="checkbox" checked>Info
-			<input id="checkbox6" class="checkbox-warning space"
-				data-urushi-type="checkbox">Warning
-			<input id="checkbox7" class="checkbox-danger space"
-				data-urushi-type="checkbox" checked>Danger
-			<input id="checkbox8" class="checkbox-default space"
-				data-urushi-type="checkbox" checked disabled>Disabled
-			<h3>html</h3>
-			<pre>
-				<code class="html hljs xml">
+ -->
+	<div data-urushi-type="panel" class="contentsArea">
+		<h2>Checkbox</h2>
+		<h3>Checkboxes</h3>
+		<input id="checkbox1" data-urushi-type="checkbox">Checkbox
+		<input id="checkbox2" data-urushi-type="checkbox" class="checkbox-default">Default
+		<input id="checkbox3" data-urushi-type="checkbox" class="checkbox-primary" checked>Primary
+		<input id="checkbox4" data-urushi-type="checkbox" class="checkbox-success">Success
+		<input id="checkbox5" data-urushi-type="checkbox" class="checkbox-info" checked>Info
+		<input id="checkbox6" data-urushi-type="checkbox" class="checkbox-warning">Warning
+		<input id="checkbox7" data-urushi-type="checkbox" class="checkbox-danger" checked>Danger
+		<input id="checkbox8" data-urushi-type="checkbox" class="checkbox-default" checked disabled>Disabled
+		<h3>html</h3>
+		<pre><code class="html">
 &lt;input id="checkbox1" data-urushi-type="checkbox">Checkbox
 &lt;input id="checkbox2" class="checkbox-default" data-urushi-type="checkbox">Default
 &lt;input id="checkbox3" class="checkbox-primary" data-urushi-type="checkbox" checked>Primary
@@ -85,16 +75,11 @@
 &lt;input id="checkbox6" class="checkbox-warning" data-urushi-type="checkbox">Warning
 &lt;input id="checkbox7" class="checkbox-danger" data-urushi-type="checkbox" checked>Danger
 &lt;input id="checkbox8" class="checkbox-default" data-urushi-type="checkbox" checked disabled>Disabled
-				</code>
-			</pre>
-		</div>
-		<div class="test-area" id="script-modules"></div>
+
+</code></pre>
 	</div>
-	<div class="clearfix"></div>
 	<footer class="footer reverse">
-	<div class="row">
-			© 2016 Future architect inc. Code licensed under the MIT License.
-	</div>
+		<div class="row">© 2016 Future architect inc. Code licensed under the MIT License.</div>
 	</footer>
 </body>
 </html>
