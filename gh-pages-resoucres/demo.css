@@ -1,3 +1,6 @@
+body {
+	padding-top: 96px;
+}
 pre {
 	margin: 8px 0;
 }
@@ -37,7 +40,6 @@ hr {
 }
 
 .contentsArea {
-	margin-top: 96px;
 	margin-right: auto;
 	margin-left: auto;
 	width: 72%;
@@ -69,7 +71,12 @@ footer {
 .demo-checkbox .contentsArea .checkbox {
 	margin: 8px 0;
 }
-
+.demo-contextmenu .contentsArea .context-menu-wrapper {
+	margin: 0 auto;
+}
+.demo-contextmenu .contentsArea .context-menu .context-menu-dot {
+	background-color: rgba(0, 0, 0, 0.87);
+}
 /* radio 
 .demo-radio .circle,.check {
 	margin-top: 4px;
