@@ -61,6 +61,11 @@ footer {
 .demo-alert .alert.wipe.in {
 	width: 100%;
 }
+/* Button */
+.demo-button .contentsArea .button {
+	margin: 8px 8px;
+}
+
 /* radio 
 .demo-radio .circle,.check {
 	margin-top: 4px;
