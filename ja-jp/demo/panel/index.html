@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Panel test</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
-<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
-<!-- cssの読み込み -->
-<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
-<link href="../../../gh-pages-resoucres/highlight/styles/rainbow.css" rel="stylesheet">
-<link href="../../../gh-pages-resoucres/material.css" rel="stylesheet">
-<link href="../../../gh-pages-resoucres/style.css" rel="stylesheet">
-<link href="../../../gh-pages-resoucres/demo.css" rel="stylesheet" type="text/css">
-<!-- jsの読み込み -->
-<script src="../../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
-<script src="../../../gh-pages-resoucres/lib/js/fire-highlightjs.js"></script>
-<script type="text/javascript">
-	window.hljs.initHighlightingOnLoad();
-	window.requireRoot = './../../../gh-pages-resoucres/';
-</script>
-<script src="../../../gh-pages-resoucres/config/requireConfig.js"></script>
-<script src="../../../lib/js/require.js" data-main="../../../gh-pages-resoucres/demo"></script>
+	<title>Panel demo</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
+
+	<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
+
+	<!-- cssの読み込み -->
+	<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
+	<link href="../../../gh-pages-resoucres/highlight/styles/rainbow.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/material.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/style.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/demo.css" rel="stylesheet" type="text/css">
+
+	<!-- jsの読み込み -->
+	<script src="../../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
+	<script src="../../../gh-pages-resoucres/lib/js/fire-highlightjs.js"></script>
+	<script type="text/javascript">
+		window.hljs.initHighlightingOnLoad();
+		window.requireRoot = './../../../gh-pages-resoucres/';
+	</script>
+	<script src="../../../gh-pages-resoucres/config/requireConfig.js"></script>
+	<script src="../../../lib/js/require.js" data-main="../../../gh-pages-resoucres/demo"></script>
 </head>
-<style>
-	.alert.wipe.in {
-		width:100%;
-	}
-</style>
-<body class="demo-page jp">
+<body class="demo-panel jp">
 	<header id="header" class="header md-bg-primary">
 		<span id="hamburger" data-urushi-type="hamburger"></span>
 		<div class="logo-wrapper">
@@ -58,6 +56,7 @@
 -->
 	<div data-urushi-type="panel" class="contentsArea">
 		<h2>Panel</h2>
+		<h3>コンテンツエリアのみPanel</h3>
 		<div data-urushi-type="panel">
 			<span>Inner message.</span>
 		</div>
@@ -66,9 +65,11 @@
 &lt;div data-urushi-type="panel">
     &lt;span>Inner message.&lt;/span>
 &lt;/div>
-		</code></pre>
-		<div data-urushi-type="panel"
-			data-urushi-options='{"header" : "Header title", "footer" : "Footer title"}'>
+
+</code></pre>
+		<hr>
+		<h3>ヘッダ、フッタあり、コンポーネント入りPanel</h3>
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Header title", "footer" : "Footer title"}'>
 			<h2>sub title</h2>
 			<div>
 				<div>test message.</div>
@@ -84,54 +85,86 @@
         &lt;button data-urushi-type="button">Panel button&lt;/button>
     &lt;/div>
 &lt;/div>
-		</code></pre>
-		<div data-urushi-type="panel"
-			data-urushi-options='{"header" : "Header default"}'
-			class="panel-default"></div>
-		<h3>html</h3>
-		<pre><code class="html">
-&lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Header default"}' class="panel-default">&lt;/div>
-		</code></pre>
-		<div data-urushi-type="panel"
-			data-urushi-options='{"header" : "Header primary"}'
-			class="panel-primary"></div>
-		<h3>html</h3>
-		<pre><code class="html">
-&lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Header primary"}' class="panel-primary">&lt;/div>
-		</code></pre>
-		<div data-urushi-type="panel"
-			data-urushi-options='{"header" : "Header success"}'
-			class="panel-success"></div>
-		<h3>html</h3>
-		<pre><code class="html">
-&lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Header success"}' class="panel-success">&lt;/div>
-		</code></pre>
-		<div data-urushi-type="panel"
-			data-urushi-options='{"header" : "Header info"}' class="panel-info"></div>
-		<h3>html</h3>
-		<pre><code class="html">
-&lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Header info"}' class="panel-info">&lt;/div>
-		</code></pre>
-		<div data-urushi-type="panel"
-			data-urushi-options='{"header" : "Header warning"}'
-			class="panel-warning"></div>
-		<h3>html</h3>
-		<pre><code class="html">
-&lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Header warning"}' class="panel-warning">&lt;/div>
-		</code></pre>
-		<div data-urushi-type="panel"
-			data-urushi-options='{"header" : "Header danger"}'
-			class="panel-danger"></div>
-		<h3>html</h3>
-		<pre><code class="html">
-&lt;div data-urushi-type="panel" data-urushi-options='{"header" : "Header danger"}' class="panel-danger">&lt;/div>
-		</code></pre>
-	</div>
-	<div class="clearfix"></div>
-		<footer class="footer reverse">
-		<div class="row">
-			© 2016 Future architect inc. Code licensed under the MIT License.
+
+</code></pre>
+		<hr>
+		<h3>Primary配色Panel</h3>
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Header primary"}' class="panel-primary">
+			Primary header color.
 		</div>
+		<h3>html</h3>
+		<pre><code class="html">
+&lt;div
+	data-urushi-type="panel"
+	data-urushi-options='{"header" : "Header primary"}'
+	class="panel-primary">
+	Primary header color.
+&lt;/div>
+
+</code></pre>
+		<hr>
+		<h3>Success配色Panel</h3>
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Header success"}' class="panel-success">
+			Success header color.
+		</div>
+		<h3>html</h3>
+		<pre><code class="html">
+&lt;div
+	data-urushi-type="panel"
+	data-urushi-options='{"header" : "Header success"}'
+	class="panel-success">
+	Success header color.
+&lt;/div>
+
+</code></pre>
+		<hr>
+		<h3>Info配色Panel</h3>
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Header info"}' class="panel-info">
+			Info header color.
+		</div>
+		<h3>html</h3>
+		<pre><code class="html">
+&lt;div
+	data-urushi-type="panel"
+	data-urushi-options='{"header" : "Header info"}'
+	class="panel-info">
+	Info header color.
+&lt;/div>
+
+</code></pre>
+		<hr>
+		<h3>Info配色Panel</h3>
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Header warning"}' class="panel-warning">
+			Warning header color.
+		</div>
+		<h3>html</h3>
+		<pre><code class="html">
+&lt;div
+	data-urushi-type="panel"
+	data-urushi-options='{"header" : "Header warning"}'
+	class="panel-warning">
+	Warning header color.
+&lt;/div>
+
+</code></pre>
+		<hr>
+		<h3>Info配色Panel</h3>
+		<div data-urushi-type="panel" data-urushi-options='{"header" : "Header danger"}' class="panel-danger">
+			Danger header color.
+		</div>
+		<h3>html</h3>
+		<pre><code class="html">
+&lt;div
+	data-urushi-type="panel"
+	data-urushi-options='{"header" : "Header danger"}'
+	class="panel-danger">
+	Danger header color.
+&lt;/div>
+
+</code></pre>
+	</div>
+	<footer class="footer reverse">
+		<div class="row">© 2016 Future architect inc. Code licensed under the MIT License.</div>
 	</footer>
 </body>
 </html>

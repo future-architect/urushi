@@ -89,11 +89,16 @@ footer {
 .demo-hamburger .contentsArea .hamburger .hamburger-line {
 	background-color: rgba(0, 0, 0, 0.87);
 }
-
-/* radio 
-.demo-radio .circle,.check {
-	margin-top: 4px;
-}*/
+/* Input */
+.demo-input .contentsArea .form-control-wrapper {
+	margin: 32px 0;
+	width: 360px;
+}
+/* Radio */
+.demo-radio .contentsArea .radio {
+	font-size: 14px;
+	margin: 8px 0;
+}
 /* toggle */
 .demo-toggle .contentsArea .toggle-button{
 	margin:24px;
