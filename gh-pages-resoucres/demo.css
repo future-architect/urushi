@@ -43,6 +43,7 @@ hr {
 	margin-right: auto;
 	margin-left: auto;
 	width: 72%;
+	min-height: calc(100vh - 92px - 96px);
 }
 .contentsArea > .panel-body {
 	padding: 32px;
@@ -80,6 +81,13 @@ footer {
 /* Dropdown */
 .demo-dropdown .contentsArea .form-control-wrapper {
 	width: 240px;
+}
+/* Hamburger */
+.demo-hamburger .contentsArea .hamburger {
+	margin: 0 auto;
+}
+.demo-hamburger .contentsArea .hamburger .hamburger-line {
+	background-color: rgba(0, 0, 0, 0.87);
 }
 
 /* radio 
