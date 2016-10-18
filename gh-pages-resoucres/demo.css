@@ -77,6 +77,11 @@ footer {
 .demo-contextmenu .contentsArea .context-menu .context-menu-dot {
 	background-color: rgba(0, 0, 0, 0.87);
 }
+/* Dropdown */
+.demo-dropdown .contentsArea .form-control-wrapper {
+	width: 240px;
+}
+
 /* radio 
 .demo-radio .circle,.check {
 	margin-top: 4px;
