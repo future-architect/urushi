@@ -1,104 +1,55 @@
-.box {
-	color: #7f7f7f;
+body {
+	padding-top: 60px;
+}
+
+.card {
+	color: rgba(0, 0, 0, 0.54);
 	margin: 16px;
 	display: inline-block;
 	background-color: #fff;
-	width: 22.8%;
-	height: 120px;
-	text-align: center;
-	line-height: 10px;
+	width: 344px;
+	height: 98px;
+	text-align: left;
+	line-height:170%;
+	float: left;
+	padding: 10px 16px;
 	box-shadow: 1px 1px 1px #ddd;
 	transition: box-shadow 200ms ease-in-out;
 	transition: background 200ms ease-in-out;
+	font-size: 12px;
+	font-family:'Noto Sans Japanese', "Hiragino Kaku Gothic Pro W3", "Hiragino Kaku Gothic Pro", "Yu Gothic",
+		Meiryo, Osaka, "MSPゴシック", "MS PGothic", sans-serif;
+	border-radius: 2px;
 }
-
-.box:hover {
-	background: #C90000;
+.card:hover {
 	box-shadow: 0px 2px 10px rgba(0, 0, 0, .1), 0 2px 10px rgba(1, 0, 0, .1);
 	cursor: pointer;
 }
-
-.box a {
+.card a {
 	font-size: 24px;
 	display: block;
 	padding: 10px 5px;
 	text-align: left;
-	color: #7f7f7f;
+	color: #460B0B;
 	text-decoration: none;
 }
-
-.box a:hover {
-	color: #ffffff;
-}
-
-.card {
-	float: left;
-	padding: 10px 16px;
-	background: #c90000;
-	background: #fff;
-	color: #FBA0A0;
-	font-size: 12px;
-	text-align: left;
-	border-radius: 2px;
-}
-
-.card h2 {
-	font-size: 24px;
-	margin: 14px 0px;
-	background: #fff;
-}
-
-.card a {
-	background: #c90000;
-	color: #460B0B;
-}
-
-.box hr {
+.card hr {
 	width: 90%;
 	margin-right: 10%;
-	border-color: #D23636;
-}
-
-.card-v1 {
-	background: #DACD21;
-	background: #fff;
-	color: rgba(0, 0, 0, 0.54);;
-}
-
-.card-v1 h2 {
-	color: rgba(0, 0, 0, 0.87);
-	font-weight: bold;
-}
-
-.card-v1 hr {
 	height: 1px;
 	border: none;
 	background-color: rgba(0, 0, 0, 0.38);
 }
-
-.card-v2 {
-	background: #DACD21;
-	background: #fff;
-	color: #EAA92F;
-}
-
-.card-v2 hr {
-	border-color: #fff;
-}
-
-.card-v2 a {
-	color: #ccc;
-}
-
-.card-v3 {
-	background: #DACD21;
-	background: #fff;
-	color: #3f51b5;
+.card h2 {
+	font-size: 24px;
+	margin: 14px 0px; 
+	color: rgba(0, 0, 0, 0.87);
+	font-weight: bold;
 }
 
 .contents {
-	margin: 0 auto;
-	width: 92%;
+	margin: 30px auto;
+	width: 96%;
 }
 
 .clearfix:after {
@@ -106,4 +57,8 @@
 	clear: both;
 	display: block;
 }
-
+.footer{
+	position: fixed;
+    bottom: 0;
+    width: 100%;
+}
