@@ -1,7 +1,7 @@
 html,body{
 	height:100%;
 }
-
+/*card*/
 .card {
 	color: rgba(0, 0, 0, 0.54);
 	margin: 16px;
@@ -12,7 +12,6 @@ html,body{
 	text-align: left;
 	line-height:170%;
 	float: left;
-	padding: 10px 16px;
 	box-shadow: 1px 1px 1px #ddd;
 	transition: box-shadow 200ms ease-in-out;
 	transition: background 200ms ease-in-out;
@@ -22,23 +21,15 @@ html,body{
 	border-radius: 2px;
 }
 .card:hover {
-	box-shadow: 0px 2px 10px rgba(0, 0, 0, .1), 0 2px 10px rgba(1, 0, 0, .1);
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(1, 0, 0, 0.1);
 	cursor: pointer;
 }
 .card a {
-	font-size: 24px;
 	display: block;
-	padding: 10px 5px;
+	padding: 15px 16px;
 	text-align: left;
-	color: #460B0B;
+	color: rgba(0, 0, 0, 0.54);
 	text-decoration: none;
-}
-.card hr {
-	width: 90%;
-	margin-right: 10%;
-	height: 1px;
-	border: none;
-	background-color: rgba(0, 0, 0, 0.38);
 }
 .card h2 {
 	font-size: 24px;
@@ -53,17 +44,6 @@ html,body{
 	padding:3.2% 0%;
 }
 
-.clearfix:after {
-	content: "";
-	clear: both;
-	display: block;
-}
-
-.footer{
-    bottom: 0;
-    width: 100%;
-}
-
 .header .logo-wrapper{
 	margin-top:8px;
 }
@@ -71,9 +51,21 @@ html,body{
     padding-left: 8px;
 }
 
+.footer{
+    bottom: 0;
+    width: 100%;
+}
+
+/*sp-size css*/
 @media screen and (max-width: 640px){
 	body{
 		padding-top:48px;
+	}
+
+	.card{
+		margin:0;
+		width:100%;
+		border-bottom:1px solid rgba(0, 0, 0, 0.12);
 	}
 
 	.contents {
@@ -86,9 +78,4 @@ html,body{
 		margin:0px;
 	}
 
-	.card{
-		margin:0;
-		width:100%;
-		border-bottom:1px solid rgba(0, 0, 0, 0.12);
-	}
 }
