@@ -54,26 +54,23 @@
 		</ul>
 	</div>-->
 	<div data-urushi-type="panel" class="contentsArea">
-		<div class="test-area">
-			<h2>Toast</h2>
-			<button id="button" class="button-primary" data-urushi-type="button"
+		<h2>Toast</h2>
+		<button id="button" class="button-primary" data-urushi-type="button"
 				data-urushi-options='{"content":"message"}'>Toast up</button>
-			<h3>html</h3>
-			<pre>
-				<code class="html">
+		<h3>html</h3>
+		<pre><code class="html">
 &lt;div class="test-area">
     &lt;button id="button" class="button-primary" data-urushi-type="button">Toast up&lt;/button>
 &lt;/div>
-				</code>
-			</pre>
-			<h3>javascript</h3>
-			<pre>
-				<code class="javascript">
+
+</code></pre>
+		<h3>javascript</h3>
+		<pre><code class="javascript">
 //main.js
-window.requireConfig.baseUrl = '../../';
 require.config(requireConfig);
 require([ 'templateEngine', 'templateConfig', 'Urushi','ToastManager' ], function(
     templateEngine, templateConfig, Urushi,ToastManager) {
+    
         templateEngine.renderDocument(document.body, templateConfig).then(
             function(result) {
                 var modules = result.widgets, key, manager;
@@ -81,15 +78,10 @@ require([ 'templateEngine', 'templateConfig', 'Urushi','ToastManager' ], functio
                 document.body.appendChild(manager.getRootNode());
                 Urushi.addEvent(modules.button.getRootNode(), 'click', manager,
                         'show', 'toast demo');
-                done();
-            }).otherwise(function(error) {
-        done();
-    });
+            });
 });
 
-				</code>
-			</pre>
-		</div>
+</code></pre>
 	</div>
 	<footer class="footer reverse">
 		<div class="row">© 2016 Future architect inc. Code licensed under the MIT License.</div>

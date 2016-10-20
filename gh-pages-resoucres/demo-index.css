@@ -1,5 +1,5 @@
-body {
-	padding-top: 60px;
+html,body{
+	height:100%;
 }
 
 .card {
@@ -48,8 +48,9 @@ body {
 }
 
 .contents {
-	margin: 30px auto;
+	margin:auto;
 	width: 96%;
+	padding:3.2% 0%;
 }
 
 .clearfix:after {
@@ -57,8 +58,37 @@ body {
 	clear: both;
 	display: block;
 }
+
 .footer{
-	position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+.header .logo-wrapper{
+	margin-top:8px;
+}
+.header .logo-wrapper .urushi-logo {
+    padding-left: 8px;
+}
+
+@media screen and (max-width: 640px){
+	body{
+		padding-top:48px;
+	}
+
+	.contents {
+	     margin:0; 
+	     width: 100%; 
+	     padding:0%;
+	}
+
+	.footer{
+		margin:0px;
+	}
+
+	.card{
+		margin:0;
+		width:100%;
+		border-bottom:1px solid rgba(0, 0, 0, 0.12);
+	}
 }
