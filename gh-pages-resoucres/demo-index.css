@@ -7,7 +7,7 @@ html,body{
 	margin: 16px;
 	display: inline-block;
 	background-color: #fff;
-	width: 344px;
+	width: 22%;
 	height: 98px;
 	text-align: left;
 	line-height:170%;
@@ -26,7 +26,7 @@ html,body{
 }
 .card a {
 	display: block;
-	padding: 15px 16px;
+	padding: 10px 16px 20px;
 	text-align: left;
 	color: rgba(0, 0, 0, 0.54);
 	text-decoration: none;
@@ -48,16 +48,22 @@ html,body{
 	margin-top:8px;
 }
 .header .logo-wrapper .urushi-logo {
-    padding-left: 8px;
+    padding-left: 16px;
+    margin-left: 52px;
 }
 
 .footer{
     bottom: 0;
     width: 100%;
 }
-
+/*tablet-size css*/
+@media screen and (min-width:750px) and (max-width: 1280px){
+	.card {
+		width:44%;
+		}
+}
 /*sp-size css*/
-@media screen and (max-width: 640px){
+@media screen and (max-width: 750px){
 	body{
 		padding-top:48px;
 	}
