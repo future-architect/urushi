@@ -99,6 +99,13 @@ footer {
 	font-size: 14px;
 	margin: 8px 0;
 }
+/* Textarea */
+.demo-textarea .contentsArea .form-control-wrapper {
+	margin: 24px 0;
+}
+.demo-textarea .contentsArea .ex-placeholder {
+	margin-bottom: 48px;
+}
 /* toggle */
 .demo-toggle .contentsArea .toggle-button{
 	margin:24px;
