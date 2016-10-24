@@ -1,18 +1,19 @@
-window.requireConfig.baseUrl = '../../../';
-
 require.config(requireConfig);
-//require([ 'Dialog' ], function(Dialog) {
-//	var dialog = new Dialog({
-//		header : 'Dialog name',
-//		content : 'contens.<br /><div>...</div>',
-//		footer : 'footer content',
-//		parentNode : document.body,
-//		isDisplayCloseIcon : false
-//	});
-//	document.body.appendChild(dialog.getRootNode());
-//	dialog.show();
-//});
-require([ 'templateEngine', 'templateConfig' ], function(templateEngine,
-		templateConfig) {
-	templateEngine.renderDocument(document.body, templateConfig);
+require(['Urushi', 'templateEngine', 'templateConfig'], function(Urushi, templateEngine, templateConfig) {
+	'use strict';
+
+	templateEngine.renderDocument(document.body, templateConfig).then(function(result) {
+		result.widgets.hamburger.setCallback(function () {
+			document.getElementById('demo-slide-underlay').classList.add('show');
+			document.getElementById('demo-slide-menu').classList.add('show');
+		});
+
+		Urushi.addEvent(document.getElementById('demo-slide-underlay'), 'click', this, function () {
+			document.getElementById('demo-slide-underlay').classList.remove('show');
+			document.getElementById('demo-slide-menu').classList.remove('show');
+			result.widgets.hamburger.transform(false);
+		});
+
+		return result;
+	});
 });
