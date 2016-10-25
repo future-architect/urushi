@@ -79,13 +79,17 @@ hr {
 	left: 0px;
 }
 
-.slide-panel li {
-	padding: 16px 32px;
-}
-.slide-panel li a {
+.slide-panel a {
+	display: block;
+	padding: 16px 24px;
+	width: 100%;
+
 	font-size: 16px;
 	color: rgba(0, 0, 0, 0.87);
 	text-decoration: none;
+}
+.slide-panel a.selected {
+	color: #FF9800;
 }
 
 .contentsArea {
@@ -150,6 +154,7 @@ footer {
 /* Textarea */
 .demo-textarea .contentsArea .form-control-wrapper {
 	margin: 24px 0;
+	width: 320px;
 }
 .demo-textarea .contentsArea .ex-placeholder {
 	margin-bottom: 48px;
@@ -157,4 +162,14 @@ footer {
 /* toggle */
 .demo-toggle .contentsArea .toggle-button{
 	margin:24px;
+}
+/* Tooltip */
+.contentsArea > .panel-body > div.popover.right {
+	margin-left: 10px;
+}
+.contentsArea > .panel-body > div.popover.left {
+	margin-right: 10px;
+}
+.contentsArea > .panel-body > div.popover.bottom {
+	margin-top: 10px;
 }

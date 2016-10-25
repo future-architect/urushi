@@ -2,9 +2,6 @@ require.config(requireConfig);
 require(['Urushi', 'templateEngine', 'templateConfig', 'Dialog'], function(Urushi, templateEngine, templateConfig, Dialog) {
 	'use strict';
 
-	var dialog = new Dialog({content: 'DUMMY'});
-	document.body.appendChild(dialog.getRootNode());
-
 	templateEngine.renderDocument(document.body, templateConfig).then(function(result) {
 		result.widgets.hamburger.setCallback(function () {
 			document.getElementById('demo-slide-underlay').classList.add('show');
@@ -19,6 +16,9 @@ require(['Urushi', 'templateEngine', 'templateConfig', 'Dialog'], function(Urush
 
 		return result;
 	}).then(function (result) {
+		var dialog = new Dialog({content: 'DUMMY'});
+		document.body.appendChild(dialog.getRootNode());
+
 		result.widgets['hamburger-demo'].setCallback(function (is) {
 			dialog.setContent('Clicked hamburger : ' + (!!is ? 'ON' : 'OFF'));
 			dialog.show();
