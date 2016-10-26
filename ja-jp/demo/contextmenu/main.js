@@ -15,5 +15,7 @@ require(['Urushi', 'templateEngine', 'templateConfig'], function(Urushi, templat
 		});
 
 		return result;
+	}).then(function () {
+		document.getElementById('loading-pane').classList.add('close');
 	});
 });

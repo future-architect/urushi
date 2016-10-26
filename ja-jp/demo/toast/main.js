@@ -25,5 +25,7 @@ require(['Urushi', 'templateEngine', 'templateConfig', 'ToastManager'], function
 			manager,
 			'show',
 			'Toast demo');
+	}).then(function () {
+		document.getElementById('loading-pane').classList.add('close');
 	});
 });

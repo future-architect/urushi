@@ -31,5 +31,7 @@ require(['Urushi', 'templateEngine', 'templateConfig'], function(Urushi, templat
 				modules.dialog2.show();
 			}
 		);
+	}).then(function () {
+		document.getElementById('loading-pane').classList.add('close');
 	});
 });

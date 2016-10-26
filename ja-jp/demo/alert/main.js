@@ -22,5 +22,7 @@ require(['Urushi', 'templateEngine', 'templateConfig'], function(Urushi, templat
 				alerts[key].show();
 			}
 		}
+	}).then(function () {
+		document.getElementById('loading-pane').classList.add('close');
 	});
 });

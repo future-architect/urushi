@@ -23,5 +23,7 @@ require(['Urushi', 'templateEngine', 'templateConfig', 'Dialog'], function(Urush
 			dialog.setContent('Clicked hamburger : ' + (!!is ? 'ON' : 'OFF'));
 			dialog.show();
 		});
+	}).then(function () {
+		document.getElementById('loading-pane').classList.add('close');
 	});
 });
