@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<title>Toggle demo</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
+
+	<link rel="shortcut icon" href=" ../../../gh-pages-resoucres/favicon.ico" type="image/x-icon">
+
+	<!-- cssの読み込み -->
+	<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
+	<link href="../../../gh-pages-resoucres/highlight/styles/rainbow.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/material.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/style.css" rel="stylesheet">
+	<link href="../../../gh-pages-resoucres/demo.css" rel="stylesheet" type="text/css">
+
+	<!-- jsの読み込み -->
+	<script src="../../../gh-pages-resoucres/highlight/highlight.pack.js"></script>
+	<script src="../../../gh-pages-resoucres/lib/js/fire-highlightjs.js"></script>
+	<script type="text/javascript">
+		window.hljs.initHighlightingOnLoad();
+		window.requireRoot = './../../../gh-pages-resoucres/';
+	</script>
+	<script src="../../../gh-pages-resoucres/config/requireConfig.js"></script>
+	<script src="../../../lib/js/require.js" data-main="main"></script>
+</head>
+<body class="demo-toggle jp">
+	<header id="header" class="header md-bg-primary">
+		<span id="hamburger" data-urushi-type="hamburger"></span>
+		<div class="logo-wrapper">
+			<img class="urushi-logo" src="../../../gh-pages-resoucres/urushi-logo.png">
+		</div>
+	</header>
+	<div id="demo-slide-underlay" class="slide-underlay"></div>
+	<div id="demo-slide-menu" class="slide-panel">
+		<ul class="sideBarList">
+			<a href="../">Index</a>
+			<a href="../alert">Alert</a>
+			<a href="../button">Button</a>
+			<a href="../checkbox">CheckBox</a>
+			<a href="../contextmenu">ContextMenu</a>
+			<a href="../dialog">Dialog</a>
+			<a href="../dropdown">Dropdown</a>
+			<a href="../hamburger">Hamburger</a>
+			<a href="../input">Input</a>
+			<a href="../panel">Panel</a>
+			<a href="../radio">Radio</a>
+			<a href="../textarea">Textarea</a>
+			<a href="../toast">Toast</a>
+			<a href="../toggle" class="selected">ToggleButton</a>
+			<a href="../tooltip">Tooltip</a>
+		</ul>
+	</div>
+	<div data-urushi-type="panel"class="contentsArea">
+		<h2>Toggle</h2>
+			Default<input data-urushi-type="togglebutton" checked>
+			Primary<input data-urushi-type="togglebutton" checked>
+			Success<input data-urushi-type="togglebutton"> Info<input
+				data-urushi-type="togglebutton"> Warning<input
+				data-urushi-type="togglebutton"> Danger<input
+				data-urushi-type="togglebutton"> Disabled<input
+				data-urushi-type="togglebutton" checked disabled>
+		<h3>html</h3>
+		<pre><code class="html">
+Default&lt;input data-urushi-type="togglebutton" checked>
+Primary&lt;input data-urushi-type="togglebutton" checked>
+Success&lt;input data-urushi-type="togglebutton">
+Info&lt;input data-urushi-type="togglebutton">
+Warning&lt;input data-urushi-type="togglebutton">
+Danger&lt;input data-urushi-type="togglebutton">
+Disabled&lt;input data-urushi-type="togglebutton" checked disabled>
+
+</code></pre>
+	</div>
+	<footer class="footer reverse">
+		<div class="row">© 2016 Future architect inc. Code licensed under the MIT License.</div>
+	</footer>
+	<div id="loading-pane" class="loading-pane">
+		<div class="loading-pane-modal"></div>
+		<svg class="circular">
+			<circle class="path" cx="100" cy="100" r="60" fill="none" stroke-width="8" stroke-miterlimit="10"></circle>
+		</svg>
+	</div>
+</body>
+</html>

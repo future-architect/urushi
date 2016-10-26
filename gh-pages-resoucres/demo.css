@@ -1,0 +1,273 @@
+body {
+	padding-top: 96px;
+}
+pre {
+	margin: 8px 0;
+}
+hr {
+	margin: 40px 0;
+}
+.header {
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+
+	padding: 0;
+	padding-left: 16px;
+	height: 48px;
+	width: 100%;
+
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	background: #4CAF50;
+
+	text-align: initial;
+}
+.header > * {
+	vertical-align: middle;
+}
+.header .logo-wrapper {
+	margin: 0;
+	float: initial;
+	display: inline-block;
+}
+.header .hamburger {
+	display: inline-block;
+}
+.header .logo-wrapper .urushi-logo {
+	padding-left: 16px;
+	width: 80%;
+}
+
+.slide-underlay {
+	position: fixed;
+	z-index: -1;
+	top: -200%;
+	left: -200%;
+
+	border-radius: 50%;
+	height: 265%;
+	width: 265%;
+
+	background-color: rgba(33, 33, 33, .2);
+
+	transform: scale(0);
+
+	transition: all 300ms ease-out;
+}
+.slide-underlay.show {
+	z-index: 2;
+	top: -125%;
+	left: -125%;
+	transform: scale(1);
+}
+
+.slide-panel {
+	position: fixed;
+	z-index: 3;
+	left: -240px;
+	top: 0;
+	height: 100%;
+	width: 240px;
+	overflow-y: auto;
+	background-color: #FFFFFF;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
+
+	transition: left 200ms ease-out 100ms;
+}
+.slide-panel.show {
+	left: 0px;
+}
+
+.slide-panel a {
+	display: block;
+	padding: 16px 24px;
+	width: 100%;
+
+	font-size: 16px;
+	color: rgba(0, 0, 0, 0.87);
+	text-decoration: none;
+}
+.slide-panel a.selected {
+	color: #FF9800;
+}
+
+.contentsArea {
+	margin-right: auto;
+	margin-left: auto;
+	width: 72%;
+	min-height: calc(100vh - 92px - 96px);
+}
+.contentsArea > .panel-body {
+	padding: 32px;
+}
+.contentsArea > .panel-body > div {
+	margin: 0;
+}
+
+footer {
+	margin-top: 48px;
+}
+
+/* Loading pane. */
+.loading-pane {
+	position: absolute;
+	margin: 0;
+	border: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 10000;
+
+	overflow: hidden;
+}
+.loading-pane.close {
+	animation: loading-pane-close 500ms ease-in-out;
+	animation-fill-mode: forwards
+}
+.loading-pane> div {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.loading-pane .loading-pane-modal {
+	background-color: #212121;
+}
+
+.circular {
+	position: absolute;
+	margin: auto;
+	height: 200px;
+	width: 200px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	animation: loading-rotate 2s linear infinite;
+}
+
+.path {
+	stroke-dasharray: 1,376;
+	stroke-dashoffset: 0;
+	animation: loading-dash 1.5s ease-in-out infinite, loading-color 6s ease-in-out infinite;
+	stroke-linecap: round;
+}
+
+@keyframes loading-pane-close {
+	0% {
+		display: block;
+		visibility: visible;
+	}
+	99% {
+		display: block;
+		visibility: visible;
+		opacity: 0;
+	}
+	100% {
+		opacity: 0;
+		display: none;
+		visibility: hidden;
+	}
+}
+
+@keyframes loading-rotate {
+	100%{
+		transform: rotate(360deg);
+	}
+}
+@keyframes loading-dash {
+	0% {
+		stroke-dasharray: 1, 376;
+		stroke-dashoffset: 0;
+	}
+	50% {
+		stroke-dasharray: 160, 376;
+		stroke-dashoffset: -220;
+	}
+	100% {
+		stroke-dasharray: 160, 376;
+		stroke-dashoffset: -374;
+	}
+}
+@keyframes loading-color {
+	100%, 0% {
+		stroke: #E91E63;
+	}
+	40% {
+		stroke: #2196F3;
+	}
+	66% {
+		stroke: #4CAF50;
+	}
+	80%, 90% {
+		stroke: #FFEB3B;
+	}
+}
+
+/* top */
+.demo-top body {
+}
+/* Alert */
+.demo-alert .alert.wipe.in {
+	width: 100%;
+}
+/* Button */
+.demo-button .contentsArea .button {
+	margin: 8px 8px;
+}
+/* Checkbox */
+.demo-checkbox .contentsArea .checkbox {
+	margin: 8px 0;
+}
+.demo-contextmenu .contentsArea .context-menu-wrapper {
+	margin: 0 auto;
+}
+.demo-contextmenu .contentsArea .context-menu .context-menu-dot {
+	background-color: rgba(0, 0, 0, 0.87);
+}
+/* Dropdown */
+.demo-dropdown .contentsArea .form-control-wrapper {
+	width: 240px;
+}
+/* Hamburger */
+.demo-hamburger .contentsArea .hamburger {
+	margin: 0 auto;
+}
+.demo-hamburger .contentsArea .hamburger .hamburger-line {
+	background-color: rgba(0, 0, 0, 0.87);
+}
+/* Input */
+.demo-input .contentsArea .form-control-wrapper {
+	margin: 32px 0;
+	width: 360px;
+}
+/* Radio */
+.demo-radio .contentsArea .radio {
+	font-size: 14px;
+	margin: 8px 0;
+}
+/* Textarea */
+.demo-textarea .contentsArea .form-control-wrapper {
+	margin: 24px 0;
+	width: 320px;
+}
+.demo-textarea .contentsArea .ex-placeholder {
+	margin-bottom: 48px;
+}
+/* toggle */
+.demo-toggle .contentsArea .toggle-button{
+	margin:24px;
+}
+/* Tooltip */
+.contentsArea > .panel-body > div.popover.right {
+	margin-left: 10px;
+}
+.contentsArea > .panel-body > div.popover.left {
+	margin-right: 10px;
+}
+.contentsArea > .panel-body > div.popover.bottom {
+	margin-top: 10px;
+}

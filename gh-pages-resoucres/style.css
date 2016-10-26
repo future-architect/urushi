@@ -30,6 +30,12 @@ ul:after {
 	clear: both;
 }
 
+hr {
+	border: 0;
+	height: 2px;
+	background-color: rgba(0, 0, 0, 0.12);
+}
+
 .md-bg-primary { background-color: #4CAF50; }
 .md-bg-primary-dark { background-color: #388E3C; }
 .md-bg-primary-light { background-color: #C8E6C9; }
@@ -130,6 +136,8 @@ p:nth-last-of-type(1) {
 
 pre {
 	margin: 24px 0;
+	-moz-tab-size: 4;
+	tab-size: 4;
 }
 
 pre, code {

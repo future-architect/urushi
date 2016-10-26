@@ -1,0 +1,87 @@
+html,body{
+	height:100%;
+}
+/*card*/
+.card {
+	color: rgba(0, 0, 0, 0.54);
+	margin: 16px;
+	display: inline-block;
+	background-color: #fff;
+	width: 22%;
+	height: 98px;
+	text-align: left;
+	line-height:170%;
+	float: left;
+	box-shadow: 1px 1px 1px #ddd;
+	transition: box-shadow 200ms ease-in-out;
+	transition: background 200ms ease-in-out;
+	font-size: 12px;
+	font-family:'Noto Sans Japanese', "Hiragino Kaku Gothic Pro W3", "Hiragino Kaku Gothic Pro", "Yu Gothic",
+		Meiryo, Osaka, "MSPゴシック", "MS PGothic", sans-serif;
+	border-radius: 2px;
+}
+.card:hover {
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(1, 0, 0, 0.1);
+	cursor: pointer;
+}
+.card a {
+	display: block;
+	padding: 10px 16px 20px;
+	text-align: left;
+	color: rgba(0, 0, 0, 0.54);
+	text-decoration: none;
+}
+.card h2 {
+	font-size: 24px;
+	margin: 14px 0px; 
+	color: rgba(0, 0, 0, 0.87);
+	font-weight: bold;
+}
+
+.contents {
+	margin:auto;
+	width: 96%;
+	padding:3.2% 0%;
+}
+
+.header .logo-wrapper{
+	margin-top:8px;
+}
+.header .logo-wrapper .urushi-logo {
+    padding-left: 16px;
+    margin-left: 52px;
+}
+
+.footer{
+    bottom: 0;
+    width: 100%;
+}
+/*tablet-size css*/
+@media screen and (min-width:750px) and (max-width: 1280px){
+	.card {
+		width:44%;
+		}
+}
+/*sp-size css*/
+@media screen and (max-width: 750px){
+	body{
+		padding-top:48px;
+	}
+
+	.card{
+		margin:0;
+		width:100%;
+		border-bottom:1px solid rgba(0, 0, 0, 0.12);
+	}
+
+	.contents {
+	     margin:0; 
+	     width: 100%; 
+	     padding:0%;
+	}
+
+	.footer{
+		margin:0px;
+	}
+
+}

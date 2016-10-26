@@ -1,0 +1,38 @@
+button, .button {
+	font-size: 15pt;
+	font-weight:500;
+}
+body{
+	font-family: 'Noto Sans Japanese', serif;
+}
+
+.context-menu-wrapper>.context-menu>.context-menu-dot:before {
+    top: -14.5px;
+    left: 0;
+}
+.context-menu-wrapper>.context-menu {
+	margin-top: 3px;
+}
+
+.headerContextNarrow {
+	margin-top: 0px;
+	}
+
+@media screen and (max-width: 640px){
+	.contentsArea{
+		width:90%;
+	}
+	.sideBar{
+		display:none;
+	}
+	.spmenu{
+		display:block;
+		float:right;
+	}
+	.context-menu-wrapper>.context-menu>.context-menu-dot:before {
+    	right: 0px;
+	}
+	.box{
+	width:95%;
+	}
+}
