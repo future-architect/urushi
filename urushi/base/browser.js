@@ -17,7 +17,7 @@ define(
 	 * @alias module:browser
 	 * @returns {object} browser object.
 	 */
-	function () {
+	function() {
 		'use strict';
 
 		return {
@@ -28,23 +28,24 @@ define(
 			 * @type object
 			 * @constant
 			 */
-			KEYCODE : {
-				BACKSPACE : 8,
-				COMMA : 188,
-				DELETE : 46,
-				DOWN : 40,
-				END : 35,
-				ENTER : 13,
-				ESCAPE : 27,
-				HOME : 36,
-				LEFT : 37,
-				PAGE_DOWN : 34,
-				PAGE_UP : 33,
-				PERIOD : 190,
-				RIGHT : 39,
-				SPACE : 32,
-				TAB : 9,
-				UP : 38
+			KEYCODE: {
+				BACKSPACE: 8,
+				COMMA: 188,
+				DELETE: 46,
+				DOWN: 40,
+				END: 35,
+				ENTER: 13,
+				ESCAPE: 27,
+				HOME: 36,
+				LEFT: 37,
+				PAGE_DOWN: 34,
+				PAGE_UP: 33,
+				PERIOD: 190,
+				RIGHT: 39,
+				SPACE: 32,
+				TAB: 9,
+				UP: 38,
+				URUSHI_ERROR: -1
 			},
 			/**
 			 * <pre>
@@ -53,7 +54,7 @@ define(
 			 * @function
 			 * @returns {boolean} Whether touch terminal or not.
 			 */
-			isTouch : function () {
+			isTouch: function() {
 				return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 			},
 			/**
@@ -63,7 +64,7 @@ define(
 			 * @function
 			 * @returns {boolean} Whethr browser supports CSS3 transition or not.
 			 */
-			hasTransitionSupport : function () {
+			hasTransitionSupport: function() {
 				var style = (document.body || document.documentElement).style;
 
 				return (
@@ -82,7 +83,7 @@ define(
 			 * @param {KeyEvent} event KeyEvent
 			 * @returns {number} KeyCode
 			 */
-			getKeyCode : function (/* KeyEvent */ event) {
+			getKeyCode: function(/* KeyEvent */ event) {
 				if (document.all) {
 					return event.keyCode;
 				} else if (document.getElementById) {
@@ -90,6 +91,7 @@ define(
 				} else if (document.layers) {
 					return event.which;
 				}
+				return this.KEYCODE.URUSHI_ERROR; // Error value
 			}
 		};
 	}

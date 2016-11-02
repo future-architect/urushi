@@ -1,5 +1,3 @@
-/*eslint "camelcase" : 0*/
-/*eslint "vars-on-top" : 0*/
 /**
  * @fileOverView Integrated event listener for input tag.
  * @author Yuzo Hirakawa

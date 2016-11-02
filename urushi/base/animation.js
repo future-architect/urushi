@@ -19,7 +19,7 @@ define(
 	 * @alias module:animation
 	 * @returns {object} animation object.
 	 */
-	function (Deferred) {
+	function(Deferred) {
 		'use strict';
 		var EASINGS,
 			STYLEKEYS,
@@ -30,7 +30,7 @@ define(
 		 * </pre>
 		 * @see http://d.hatena.ne.jp/babu_babu_baboo/20120618/1340004207
 		 */
-		function cubicBezier (x2, y2, x3, y3) {
+		function cubicBezier(x2, y2, x3, y3) {
 			var step,
 				err = 0.0001;
 
@@ -39,7 +39,7 @@ define(
 			x3 *= 3;
 			y3 *= 3;
 			
-			return function (t) {
+			return function(t) {
 				var p,
 					a,
 					b,
@@ -76,7 +76,7 @@ define(
 		 * @param {string} Style name.
 		 * @returns {string} Style name that has vendor prefix.
 		 */
-		function getStyleName (/* string */ property) {
+		function getStyleName(/* string */ property) {
 			if (property in document.body.style) {
 				return property;
 			} else if ('-ms-' + property in document.body.style) {
@@ -97,12 +97,12 @@ define(
 		 * @constant
 		 */
 		EASINGS = {
-			linear : function (/* number */ p) {
+			linear: function(/* number */ p) {
 				return p;
 			},
-			easeIn : cubicBezier(0.420, 0.000, 1.000, 1.000),
-			easeOut : cubicBezier(0.000, 0.000, 0.580, 1.000),
-			easeInOut : cubicBezier(0.420, 0.000, 0.580, 1.000),
+			easeIn: cubicBezier(0.420, 0.000, 1.000, 1.000),
+			easeOut: cubicBezier(0.000, 0.000, 0.580, 1.000),
+			easeInOut: cubicBezier(0.420, 0.000, 0.580, 1.000),
 		};
 		/**
 		 * <pre>
@@ -112,7 +112,7 @@ define(
 		 * @constant
 		 */
 		STYLEKEYS = {
-			transform : getStyleName('transform')
+			transform: getStyleName('transform')
 		};
 
 		raf = window.requestAnimationFrame || setTimeout;
@@ -125,7 +125,7 @@ define(
 			 * @type object
 			 * @constant
 			 */
-			EASINGS : EASINGS,
+			EASINGS: EASINGS,
 			/**
 			 * <pre>
 			 * Vendor prefix styles.
@@ -133,7 +133,7 @@ define(
 			 * @type object
 			 * @constant
 			 */
-			STYLEKEYS : STYLEKEYS,
+			STYLEKEYS: STYLEKEYS,
 			/**
 			 * <pre>
 			 * Animates.
@@ -144,7 +144,7 @@ define(
 			 * @param {function|string} easing
 			 * @returns {object} Deferred object.
 			 */
-			animate : function (/* number */ duration, /* function */ step, /* function|string */ easing) {
+			animate: function(/* number */ duration, /* function */ step, /* function|string */ easing) {
 				var startedAt = Date.now(),
 					anim,
 					deferred = new Deferred();
@@ -157,10 +157,10 @@ define(
 
 				anim = function() {
 					var pos = (Date.now() - startedAt);
-					if (deferred.isCanceled()) {//cancel
+					if (deferred.isCanceled()) { //cancel
 						return;
 					}
-					if (pos >= duration) {//end
+					if (pos >= duration) { //end
 						step(1);
 						deferred.resolve();
 						return;
@@ -184,7 +184,7 @@ define(
 			 * @param {function|string} easing
 			 * @returns {object} Deferred object.
 			 */
-			animateInfinite : function (/* number */ duration, /* function */ step, /* function|string */ easing) {
+			animateInfinite: function(/* number */ duration, /* function */ step, /* function|string */ easing) {
 				var startedAt = Date.now(),
 					anim,
 					deferred = new Deferred();
@@ -197,10 +197,10 @@ define(
 
 				anim = function() {
 					var pos = (Date.now() - startedAt);
-					if (deferred.isCanceled()) {//cancel
+					if (deferred.isCanceled()) { //cancel
 						return;
 					}
-					if (pos >= duration) {//next
+					if (pos >= duration) { //next
 						pos = pos % duration;
 						startedAt = startedAt + duration;
 					}
@@ -223,9 +223,10 @@ define(
 			 * @param {number} p 0 to 1.
 			 * @returns {number} interval point.
 			 */
-			calcPoint : function(/* number */ from, /* number */ to, /* number */ p) {
+			calcPoint: function(/* number */ from, /* number */ to, /* number */ p) {
 				from = from - 0;
 				to = to - 0;
+
 				return from + ((to - from) * p);
 			},
 			/**
@@ -238,7 +239,7 @@ define(
 			 * @param {number} p 0 to 1
 			 * @returns {string} Color.
 			 */
-			calcPointColor : function(/* string */ from, /* string */ to, /* number */ p) {
+			calcPointColor: function(/* string */ from, /* string */ to, /* number */ p) {
 				
 				/**
 				 * returns neutral color.
@@ -264,7 +265,6 @@ define(
 					color1 = getColorBase10(color1);
 					color2 = getColorBase10(color2);
 
-
 					/**
 					 * Get average color of the arguments.
 					 * Returns hexadecimal color.
@@ -283,6 +283,7 @@ define(
 
 					return getColor.bind(this)(color1, color2);
 				}
+				
 				return getMedianColor.bind(this)(from, to);
 			}
 		};

@@ -12,12 +12,12 @@
  * </pre>
  *
  * @example
- *	require(['Deferred'], function (Deferred) {
+ *	require(['Deferred'], function(Deferred) {
  *
  *		function timeout () {
  *			var deferred = new Deferred();
  *
- *			setTimeout(function () {
+ *			setTimeout(function() {
  *				// ...
  *				deferred.resolve(true);
  *			}, 1000);
@@ -25,7 +25,7 @@
  *			return deferred;
  *		}
  *
- *		timeout().then(function (result) {
+ *		timeout().then(function(result) {
  *			console.log(result);
  *		});
  *	});
@@ -40,7 +40,7 @@ define(
 	 * @alias module:Deferred
 	 * @returns {Class} Deferred class.
 	 */
-	function (Promise) {
+	function(Promise) {
 		'use strict';
 
 		/**
@@ -53,11 +53,11 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-				CLASS_NAME : 'Deferred',
-				STATUS_PROGRESS : 0,
-				STATUS_RESOLVED : 1,
-				STATUS_REJECTED : 2,
-				MESSAGE_FULLFILED : 'Process was already finished.'
+				CLASS_NAME: 'Deferred',
+				STATUS_PROGRESS: 0,
+				STATUS_RESOLVED: 1,
+				STATUS_REJECTED: 2,
+				MESSAGE_FULLFILED: 'Process was already finished.'
 			},
 			/**
 			 * <pre>
@@ -70,11 +70,11 @@ define(
 			 * @param {any} result
 			 * @returns none.
 			 */
-			signalDeferred = function (/* object */ deferred, /* number */ status, /* any */ result) {
+			signalDeferred = function(/* object */ deferred, /* number */ status, /* any */ result) {
 				var validStatus = {
-					'0' : 'progress',
-					'1' : 'resolve',
-					'2' : 'reject'
+					'0': 'progress',
+					'1': 'resolve',
+					'2': 'reject'
 				};
 
 				if (!deferred || deferred.isCanceled() || !validStatus[status]) {
@@ -92,7 +92,7 @@ define(
 			 * @param {number} status
 			 * @returns function to call a callback function.
 			 */
-			createDeferredSignaler = function (/* object */ deferred, /* number */ status) {
+			createDeferredSignaler = function(/* object */ deferred, /* number */ status) {
 				return function(/* any */ result) {
 					signalDeferred(deferred, status, result);
 				};
@@ -108,7 +108,7 @@ define(
 			 * @param {any} result Asynchronous function's returns.
 			 * @returns none.
 			 */
-			signalListener = function (/* Array */ listeners, /* number */ status, /* any */ result) {
+			signalListener = function(/* Array */ listeners, /* number */ status, /* any */ result) {
 				var func = listeners && listeners[status],
 					deferred = listeners && listeners.deferred,
 					newResult;
@@ -155,7 +155,7 @@ define(
 			 * @param {object} deferred
 			 * @returns none.
 			 */
-			signalWaiting = function (/* Array */ waiting, /* number */ status, /* any */ result) {
+			signalWaiting = function(/* Array */ waiting, /* number */ status, /* any */ result) {
 				var index;
 
 				for (index = 0; index < waiting.length; index++) {
@@ -164,7 +164,7 @@ define(
 			},
 			Deferred;
 
-		Deferred = function (canceler) {
+		Deferred = function(canceler) {
 			var promise,
 				status = CONSTANTS.STATUS_PROGRESS,
 				result,
@@ -180,12 +180,12 @@ define(
 				 * @param {boolean} strict
 				 * @returns {object} promise object.
 				 */
-				_inner = function (/* function */ fnc, /* boolean */ strict) {
+				_inner = function(/* function */ fnc, /* boolean */ strict) {
 					if (strict) {
 						throw new Error(CONSTANTS.MESSAGE_FULLFILED);
 					}
 
-					fnc = fnc || function () {};
+					fnc = fnc || function() {};
 					if (!status) {
 						fnc();
 					}
@@ -211,7 +211,7 @@ define(
 			 * @function
 			 * @returns {boolean} Whether asynchronous process resolved or not.
 			 */
-			this.isResolved = function () {
+			this.isResolved = function() {
 				return CONSTANTS.STATUS_RESOLVED === status;
 			};
 			/**
@@ -222,7 +222,7 @@ define(
 			 * @function
 			 * @returns {boolean} Whether asynchronous process rejected or not.
 			 */
-			this.isRejected = function () {
+			this.isRejected = function() {
 				return CONSTANTS.STATUS_REJECTED === status;
 			};
 			/**
@@ -233,7 +233,7 @@ define(
 			 * @function
 			 * @returns {boolean} Whether asynchronous process canceled or not.
 			 */
-			this.isCanceled = function () {
+			this.isCanceled = function() {
 				return canceled;
 			};
 			/**
@@ -244,7 +244,7 @@ define(
 			 * @function
 			 * @returns {boolean} Whether asynchronous process finished or not.
 			 */
-			this.isFulfilled = function () {
+			this.isFulfilled = function() {
 				return !!status;
 			};
 			/**
@@ -256,8 +256,8 @@ define(
 			 * @poaram {boolean} strict
 			 * @returns {object} Promise object.
 			 */
-			this.progress = function (/* any */ update, /* boolean */ strict) {
-				return _inner(function () {
+			this.progress = function(/* any */ update, /* boolean */ strict) {
+				return _inner(function() {
 					signalWaiting(waiting, CONSTANTS.STATUS_PROGRESS, update, null);
 				}, strict);
 			};
@@ -270,8 +270,8 @@ define(
 			 * @poaram {boolean} strict
 			 * @returns {object} Promise object.
 			 */
-			this.resolve = function (/* any */ value, /* boolean */ strict) {
-				return _inner(function () {
+			this.resolve = function(/* any */ value, /* boolean */ strict) {
+				return _inner(function() {
 					status = CONSTANTS.STATUS_RESOLVED;
 					result = value;
 					signalWaiting(waiting, CONSTANTS.STATUS_RESOLVED, value, null);
@@ -288,8 +288,8 @@ define(
 			 * @poaram {boolean} strict
 			 * @returns {object} Promise object.
 			 */
-			this.reject = reject = function (/* any */ error, /* boolean */ strict) {
-				return _inner(function () {
+			this.reject = reject = function(/* any */ error, /* boolean */ strict) {
+				return _inner(function() {
 					status = CONSTANTS.STATUS_REJECTED;
 					result = error;
 					signalWaiting(waiting, CONSTANTS.STATUS_REJECTED, error, null);
@@ -307,11 +307,14 @@ define(
 			 * @param {function} progressback Callback function is called when asynchronous process is being.
 			 * @returns {object} Promise object.
 			 */
-			this.then = then = function (/* function */ callback, /* function */ errorback, /* function */ progressback) {
+			this.then = then = function(
+					/* function */ callback,
+					/* function */ errorback,
+					/* function */ progressback) {
 				var listener = [progressback, callback, errorback];
 				
 				listener.cancel = promise.cancel;
-				listener.deferred = new Deferred(function (reason) {
+				listener.deferred = new Deferred(function(reason) {
 					return listener.cancel(reason);
 				});
 				if (status && !waiting) {
@@ -319,6 +322,7 @@ define(
 				} else {
 					waiting.push(listener);
 				}
+
 				return listener.deferred.promise;
 			};
 			/**
@@ -329,7 +333,7 @@ define(
 			 * @paraam {function} callback Callback function is called when asynchronous process finished.
 			 * @returns {object} Promise object.
 			 */
-			this.always = function (/* function */ callback) {
+			this.always = function(/* function */ callback) {
 				return then(callback, callback);
 			};
 			/**
@@ -340,7 +344,7 @@ define(
 			 * @paraam {function} errorback Callback function is called whe nasynchronous process rejected.
 			 * @returns {object} Promise object.
 			 */
-			this.otherwise = function (/* function */ errorback) {
+			this.otherwise = function(/* function */ errorback) {
 				return then(null, errorback);
 			};
 			/**
@@ -353,7 +357,7 @@ define(
 			 * @param {boolean} strict
 			 * @returns {object} Promise object.
 			 */
-			this.cancel = function (/* any */ reason, /* boolean */ strict) {
+			this.cancel = function(/* any */ reason, /* boolean */ strict) {
 				var returns;
 
 				if (strict) {
@@ -376,7 +380,7 @@ define(
 
 					return reason;
 				}
-				if (status === CONSTANTS.STATUS_REJECTED && result === reason) {
+				if (CONSTANTS.STATUS_REJECTED === status && result === reason) {
 					return reason;
 				}
 
@@ -387,6 +391,7 @@ define(
 				
 				return null;
 			};
+			
 			// initialize Promise object.
 			promise.isResolved = this.isResolved;
 			promise.isRejected = this.isRejected;
