@@ -187,15 +187,33 @@ define(
 						callbacks[scope.id][element.id][eventName] = callbacks[scope.id][element.id][eventName] || {};
 						callbacks[scope.id][element.id][eventName][callback] = fnc;
 					} else {
-						console.log('Regsiterd function can\'t be deleted.', element && element.id || undefined, eventName, scope, callback, preArgs);
+						console.log(
+							'Regsiterd function can\'t be deleted.',
+							element && element.id || undefined,
+							eventName,
+							scope,
+							callback,
+							preArgs);
 					}
 				};
 			} else {
-				return function(/* node */ element, /* string */ eventName, /* object */ scope, /* string|function */ callback, /* object */ preArgs) {
+				return function(
+						/* node */ element,
+						/* string */ eventName,
+						/* object */ scope,
+						/* string|function */ callback,
+						/* object */ preArgs) {
+
 					var fnc;
 
 					if (!element || !eventName || !callback) {
-						console.log('Callback function registration error.', element && element.id || undefined, eventName, scope, callback, preArgs);
+						console.log(
+							'Callback function registration error.',
+							element && element.id || undefined,
+							eventName,
+							scope,
+							callback,
+							preArgs);
 						return;
 					}
 					if (scope &&
@@ -208,7 +226,13 @@ define(
 						callbacks[scope.id][element.id][eventName] &&
 						callbacks[scope.id][element.id][eventName][callback]) {
 
-						console.log('Duplicate registration error.', element && element.id || undefined, eventName, scope, callback, preArgs);
+						console.log(
+							'Duplicate registration error.',
+							element && element.id || undefined,
+							eventName,
+							scope,
+							callback,
+							preArgs);
 						return;
 					}
 					if ('string' === typeof callback) {
@@ -232,7 +256,13 @@ define(
 						callbacks[scope.id][element.id][eventName] = callbacks[scope.id][element.id][eventName] || {};
 						callbacks[scope.id][element.id][eventName][callback] = fnc;
 					} else {
-						console.log('Regsiterd function can\'t be deleted.', element && element.id || undefined, eventName, scope, callback, preArgs);
+						console.log(
+							'Regsiterd function can\'t be deleted.',
+							element && element.id || undefined,
+							eventName,
+							scope,
+							callback,
+							preArgs);
 					}
 				};
 			}
@@ -240,8 +270,17 @@ define(
 
 		event.removeEvent = (function() {
 			if (document.addEventListener) {
-				return function(/* node */ element, /* string */ eventName, /* object */ scope, /* string */ callbackName) {
-					if (!scope || !element || !callbacks[scope.id] || !callbacks[scope.id][element.id] || !callbacks[scope.id][element.id][eventName] || !callbacks[scope.id][element.id][eventName][callbackName]) {
+				return function(
+						/* node */ element,
+						/* string */ eventName,
+						/* object */ scope,
+						/* string */ callbackName) {
+					if (!scope ||
+							!element ||
+							!callbacks[scope.id] ||
+							!callbacks[scope.id][element.id] ||
+							!callbacks[scope.id][element.id][eventName] ||
+							!callbacks[scope.id][element.id][eventName][callbackName]) {
 						return;
 					}
 
@@ -250,8 +289,17 @@ define(
 					delete callbacks[scope.id][element.id][eventName][callbackName];
 				};
 			} else {
-				return function(/* node */ element, /* string */ eventName, /* object */ scope, /* string */ callbackName) {
-					if (!scope || !element || !callbacks[scope.id] || !callbacks[scope.id][element.id] || !callbacks[scope.id][element.id][eventName] || !callbacks[scope.id][element.id][eventName][callbackName]) {
+				return function(
+						/* node */ element,
+						/* string */ eventName,
+						/* object */ scope,
+						/* string */ callbackName) {
+					if (!scope ||
+							!element ||
+							!callbacks[scope.id] ||
+							!callbacks[scope.id][element.id] ||
+							!callbacks[scope.id][element.id][eventName] ||
+							!callbacks[scope.id][element.id][eventName][callbackName]) {
 						return;
 					}
 					

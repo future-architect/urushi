@@ -12,10 +12,10 @@
  * </pre>
  * @module Promise
  */
-define('Promise', [], function () {
+define('Promise', [], function() {
 	'use strict';
 
-	var Promise = function () {};
+	var Promise = function() {};
 
 	return Promise;
 });

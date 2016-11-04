@@ -17,7 +17,7 @@ define(
 	 * @alias module:node
 	 * @returns {object} node object.
 	 */
-	function () {
+	function() {
 		'use strict';
 
 		var node = {};
@@ -31,7 +31,7 @@ define(
 		 * @param {node} node Check target.
 		 * @returns {boolean} Whether argument is node or not.
 		 */
-		function isNode (/* node */ node) {
+		function isNode(/* node */ node) {
 			return (node && !isNaN(node.nodeType));
 		}
 		/**
@@ -43,7 +43,7 @@ define(
 		 * @param {node} node Check target.
 		 * @returns {boolean} Whether argument is element node or not.
 		 */
-		function isElementNode (/* node */ node) {
+		function isElementNode(/* node */ node) {
 			return (isNode(node) && document.ELEMENT_NODE === node.nodeType);
 		}
 		/**
@@ -55,7 +55,7 @@ define(
 		 * @param {node} node Check target.
 		 * @returns {boolean} Whether argument is text element node or not.
 		 */
-		function isTextNode (/* node */ node) {
+		function isTextNode(/* node */ node) {
 			return (isNode(node) && document.TEXT_NODE === node.nodeType);
 		}
 		/**
@@ -67,7 +67,7 @@ define(
 		 * @param {node} node Check target.
 		 * @returns {boolean} Whether argument is comment element node or not.
 		 */
-		function isCommentNode (/* node */ node) {
+		function isCommentNode(/* node */ node) {
 			return (isNode(node) && document.COMMENT_NODE === node.nodeType);
 		}
 		/**
@@ -79,7 +79,7 @@ define(
 		 * @param {node} node Check target.
 		 * @returns {boolean} Whether argument is fragment element node or not.
 		 */
-		function isFragmentNode (/* node */ node) {
+		function isFragmentNode(/* node */ node) {
 			return (isNode(node) && document.DOCUMENT_FRAGMENT_NODE === node.nodeType);
 		}
 		/**
@@ -91,7 +91,7 @@ define(
 		 * @param {node} node Target node.
 		 * @returns none
 		 */
-		function clearDomContents (/* node */ dom) {
+		function clearDomContents(/* node */ dom) {
 			while (dom.firstChild) {
 				dom.removeChild(dom.firstChild);
 			}
@@ -106,7 +106,7 @@ define(
 		 * @param {string|DomNode|Array|NodeList|DocumentFragment} newContents Content is replaced.
 		 * @returns {boolean} Whether function succeeded or not.
 		 */
-		function setDomContents (/* node */ dom, /* string|DomNode|Array|NodeList|DocumentFragment */ newContents) {
+		function setDomContents(/* node */ dom, /* string|DomNode|Array|NodeList|DocumentFragment */ newContents) {
 			var index,
 				length,
 				content,
@@ -115,7 +115,7 @@ define(
 			if (!isElementNode(dom)) {
 				throw new Error('Not element node.');
 			}
-			if (newContents === undefined || newContents === null) {
+			if (undefined === newContents || null === newContents) {
 				return false;
 			}
 
@@ -129,7 +129,7 @@ define(
 				}
 				newContents = Array.prototype.slice.call(newContents);
 			} else {
-				if (newContents === '') {
+				if ('' === newContents) {
 					return false;
 				}
 
@@ -144,7 +144,11 @@ define(
 
 			for (index = 0, length = newContents.length; index < length; index++) {
 				content = newContents[index];
-				if (isElementNode(content) || isTextNode(content) || isCommentNode(content) || isFragmentNode(content)) {
+				if (isElementNode(content) ||
+						isTextNode(content) ||
+						isCommentNode(content) ||
+						isFragmentNode(content)) {
+					
 					dom.appendChild(content);
 				} else if (content instanceof jQuery) {
 					for (jqIndex = 0, jqLength = content.length; jqIndex < jqLength; jqIndex++) {
