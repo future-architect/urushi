@@ -32,11 +32,11 @@
  *		descriptoin		: 受け入れる拡張子。複数の場合カンマ区切り。空白またはnullの場合すべてのファイルを受け入れる。
  * </pre>
  * @example
- *	require(['UploadManager'], function (UploadManager) {
+ *	require(['UploadManager'], function(UploadManager) {
  *		var uploadManager = new UploadManager({
- *			id : 'myFileInput',
- *			url : '/upload/url.json',
- *			allowedTypes : 'jpeg,jpg,png,gif',
+ *			id: 'myFileInput',
+ *			url: '/upload/url.json',
+ *			allowedTypes: 'jpeg,jpg,png,gif',
  *		});
  *		document.body.appendChild(uploadManager.getRootNode());
  *	});
@@ -46,11 +46,11 @@
  *			id="myUploadManager"
  *			class="optional-class"
  *			data-urushi-type="UploadManager"
- *			data-urushi-options='{"url" : "/upload/url.json", "allowedTypes" : "jpeg,jpg,png,gif"}'
+ *			data-urushi-options='{"url": "/upload/url.json", "allowedTypes": "jpeg,jpg,png,gif"}'
  *		/>
  *
  * @snippet-trigger urushi-uploadmanager
- * @snippet-content <input id="" data-urushi-type="uploadmanager" data-urushi-options='{"url" : "/...", "allowedTypes" : "csv,xls,xlsx"}'></input>
+ * @snippet-content <input id="" data-urushi-type="uploadmanager" data-urushi-options='{"url": "/...", "allowedTypes": "csv,xls,xlsx"}'></input>
  * @snippet-description urushi-uploadmanager
  *
  * @module UploadManager
@@ -74,7 +74,7 @@ define(
 	 * @alias module:UploadManager
 	 * @returns {Object} UploadManager object.
 	 */
-	function (urushi, _Base, FileInput, UploadManagerListItem, template) {
+	function(urushi, _Base, FileInput, UploadManagerListItem, template) {
 		'use strict';
 
 		/**
@@ -88,19 +88,19 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.UploadManager',
-			EMBEDDED : {uploadManagerClass : '', url : ''},
-			CALLBACKID_ADD_FILE : 'add',
-			CALLBACKID_NOT_ALLOWEDTYPE_ADD_FILE : 'not-allowed-type',
-			CALLBACKID_UPLOAD_START : 'upload-start',
-			CALLBACKID_UPLOAD_DONE : 'done',
-			CALLBACKID_UPLOAD_FAIL : 'fail',
-			CALLBACKID_CLOSE_UPLOADED : 'close-uploaded',
-			CALLBACKID_CHANGE : 'change',
-			ACTIONID_ADD_FILE : 'add',
-			ACTIONID_CANCEL : 'cancel',
-			ACTIONID_UPLOAD_DONE : 'done',
-			LABEL_FILE_ADD : 'ファイル追加',
+			ID_PREFIX: 'urushi.UploadManager',
+			EMBEDDED: {uploadManagerClass: '', url: ''},
+			CALLBACKID_ADD_FILE: 'add',
+			CALLBACKID_NOT_ALLOWEDTYPE_ADD_FILE: 'not-allowed-type',
+			CALLBACKID_UPLOAD_START: 'upload-start',
+			CALLBACKID_UPLOAD_DONE: 'done',
+			CALLBACKID_UPLOAD_FAIL: 'fail',
+			CALLBACKID_CLOSE_UPLOADED: 'close-uploaded',
+			CALLBACKID_CHANGE: 'change',
+			ACTIONID_ADD_FILE: 'add',
+			ACTIONID_CANCEL: 'cancel',
+			ACTIONID_UPLOAD_DONE: 'done',
+			LABEL_FILE_ADD: 'ファイル追加',
 		};
 
 		/**
@@ -124,14 +124,14 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : template,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type Object
 			 * @constant
 			 * @private
 			 */
-			embedded : CONSTANTS.EMBEDDED,
+			embedded: CONSTANTS.EMBEDDED,
 			/**
 			 * <pre>
 			 * FileInputのインスタンス
@@ -139,7 +139,7 @@ define(
 			 * @type FileInput
 			 * @private
 			 */
-			fileinput : null,
+			fileinput: null,
 			/**
 			 * <pre>
 			 * ListのDomNode
@@ -147,7 +147,7 @@ define(
 			 * @type DomNode
 			 * @private
 			 */
-			listNode : null,
+			listNode: null,
 			/**
 			 * <pre>
 			 * POSTするurl。コンストラクタのオプションから取得
@@ -155,7 +155,7 @@ define(
 			 * @type string
 			 * @private
 			 */
-			url : '',
+			url: '',
 			/**
 			 * <pre>
 			 * 受け入れる拡張子。コンストラクタのオプションから取得
@@ -164,7 +164,7 @@ define(
 			 * @default ''
 			 * @private
 			 */
-			allowedTypes : '',
+			allowedTypes: '',
 			/**
 			 * <pre>
 			 * uploadファイルリスト
@@ -172,7 +172,7 @@ define(
 			 * @type Array
 			 * @private
 			 */
-			items : undefined,
+			items: undefined,
 			/**
 			 * <pre>
 			 * コールバックリスナの保持用変数
@@ -180,7 +180,7 @@ define(
 			 * @type Object
 			 * @private
 			 */
-			callbackMap : null,
+			callbackMap: null,
 			/**
 			 * <pre>
 			 * 初期化処理。
@@ -189,7 +189,7 @@ define(
 			 * @param {Object} args 初期化時引数。 not nullable.
 			 * @returns none.
 			 */
-			init : function (/* Object */ args) {
+			init: function(/* Object */ args) {
 				args = args || {};
 				this._super(args);
 
@@ -203,7 +203,7 @@ define(
 			 * @param {Object} args 初期化時に必要な引数。
 			 * @returns none.
 			 */
-			_initProperties : function (/* Object */ args) {
+			_initProperties: function(/* Object */ args) {
 				this._super(args);
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
@@ -220,16 +220,16 @@ define(
 			 * @param {Object} args
 			 * @returns none
 			 */
-			_render : function (/* Object */ args) {
+			_render: function(/* Object */ args) {
 				var fileinputElement;
 				this._super(args);
 
 				fileinputElement = this.rootNode.getElementsByClassName('upload-manager-fileinput')[0];
 				this.fileinput = new FileInput({
-					url : this.url,
-					label : CONSTANTS.LABEL_FILE_ADD,
-					allowedTypes : this.allowedTypes,
-					dropZone : this.rootNode,
+					url: this.url,
+					label: CONSTANTS.LABEL_FILE_ADD,
+					allowedTypes: this.allowedTypes,
+					dropZone: this.rootNode,
 				});
 				fileinputElement.appendChild(this.fileinput.getRootNode());
 			},
@@ -241,7 +241,7 @@ define(
 			 * @private
 			 * @returns none
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this._super();
 
 				this.listNode = this.rootNode.getElementsByClassName('upload-manager-list')[0];
@@ -252,7 +252,7 @@ define(
 			 * @private
 			 * @returns {string} object's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -263,7 +263,7 @@ define(
 			 * @private
 			 * @returns none
 			 */
-			_bindHandler : function () {
+			_bindHandler: function() {
 				this.fileinput.setOnAdd(this._onAddFileAction.bind(this));
 				this.fileinput.setOnUploadDone(this._onUploadDone.bind(this));
 				this.fileinput.setOnUploadFail(this._onUploadFail.bind(this));
@@ -284,20 +284,20 @@ define(
 			 * @param {string} fileName ファイル名
 			 * @returns none
 			 */
-			_onAddFileAction : function (/* Object */ $data, /* string */ fileName) {
+			_onAddFileAction: function(/* Object */ $data, /* string */ fileName) {
 				var listItem = this._createUploadManagerListItem({
-					$data : $data,
-					fileName : fileName,
-					uploadStartCallback : (function($data) {
+					$data: $data,
+					fileName: fileName,
+					uploadStartCallback: (function($data) {
 						this._onFileUploadStart($data.context);
 					}).bind(this),
-					cancelCallback : (function() {
+					cancelCallback: (function() {
 						this._onChange(CONSTANTS.ACTIONID_CANCEL);
 					}).bind(this),
-					closeCallback : (function() {
+					closeCallback: (function() {
 						this._onCloseUploadedFile($data.context);
 					}).bind(this),
-					destroyCallback : this._removeItems.bind(this),
+					destroyCallback: this._removeItems.bind(this),
 				});
 
 				this.listNode.appendChild(listItem.getRootNode());
@@ -316,7 +316,7 @@ define(
 			 * @param {Object} param インスタンス生成用のパラメータ
 			 * @returns {UploadManagerListItem}
 			 */
-			_createUploadManagerListItem : function (/* Object */ param) {
+			_createUploadManagerListItem: function(/* Object */ param) {
 				return new UploadManagerListItem(param);
 			},
 			/**
@@ -328,7 +328,7 @@ define(
 			 * @param {string} fileName ファイル名
 			 * @returns none
 			 */
-			_onAddNotAllowedTypeFileAction : function (/* string */ fileName) {
+			_onAddNotAllowedTypeFileAction: function(/* string */ fileName) {
 				this._onAddNotAllowedTypeFile(fileName);
 			},
 			/**
@@ -340,7 +340,7 @@ define(
 			 * @param {string} fileName ファイル名
 			 * @returns none
 			 */
-			_onAddFile : function (/* string */ fileName) {
+			_onAddFile: function(/* string */ fileName) {
 				this._fireCallback(CONSTANTS.CALLBACKID_ADD_FILE, fileName);
 				this._onChange(CONSTANTS.ACTIONID_ADD_FILE);
 			},
@@ -353,7 +353,7 @@ define(
 			 * @param {string} fileName ファイル名
 			 * @returns none
 			 */
-			_onAddNotAllowedTypeFile : function (/* string */ fileName) {
+			_onAddNotAllowedTypeFile: function(/* string */ fileName) {
 				this._fireCallback(CONSTANTS.CALLBACKID_NOT_ALLOWEDTYPE_ADD_FILE, fileName);
 			},
 			/**
@@ -366,7 +366,7 @@ define(
 			 * @param {Object} $data jquery.uploadのdata
 			 * @returns none
 			 */
-			_onUploadDone : function (/* Object */ result, /* Object */ $data) {
+			_onUploadDone: function(/* Object */ result, /* Object */ $data) {
 				$data.context.done();
 				this._onFileUploadDone(result, $data.context);
 			},
@@ -379,7 +379,7 @@ define(
 			 * @param {UploadManagerListItem} listItem
 			 * @returns none
 			 */
-			_onFileUploadStart : function (/* UploadManagerListItem */ listItem) {
+			_onFileUploadStart: function(/* UploadManagerListItem */ listItem) {
 				this._fireCallback(CONSTANTS.CALLBACKID_UPLOAD_START, listItem.getRootNode());
 			},
 			/**
@@ -392,7 +392,7 @@ define(
 			 * @param {UploadManagerListItem} listItem
 			 * @returns none
 			 */
-			_onFileUploadDone : function (/* Object */ result, /* UploadManagerListItem */ listItem) {
+			_onFileUploadDone: function(/* Object */ result, /* UploadManagerListItem */ listItem) {
 				this._fireCallback(CONSTANTS.CALLBACKID_UPLOAD_DONE, result, listItem.getRootNode());
 				this._onChange(CONSTANTS.ACTIONID_UPLOAD_DONE);
 			},
@@ -406,7 +406,7 @@ define(
 			 * @param {Object} $data jquery.uploadのdata
 			 * @returns none
 			 */
-			_onUploadFail : function (/* string */ error, /* Object */ $data) {
+			_onUploadFail: function(/* string */ error, /* Object */ $data) {
 				$data.context.fail();
 				this._onFileUploadFail(error, $data.context);
 			},
@@ -419,7 +419,7 @@ define(
 			 * @param {UploadManagerListItem} listItem
 			 * @returns none
 			 */
-			_onCloseUploadedFile : function (/* UploadManagerListItem */ listItem) {
+			_onCloseUploadedFile: function(/* UploadManagerListItem */ listItem) {
 				this._fireCallback(CONSTANTS.CALLBACKID_CLOSE_UPLOADED, listItem.getRootNode());
 			},
 
@@ -433,7 +433,7 @@ define(
 			 * @param {UploadManagerListItem} listItem
 			 * @returns none
 			 */
-			_onFileUploadFail : function (/* string */ error, /* UploadManagerListItem */ listItem) {
+			_onFileUploadFail: function(/* string */ error, /* UploadManagerListItem */ listItem) {
 				this._fireCallback(CONSTANTS.CALLBACKID_UPLOAD_FAIL, error, listItem.getRootNode());
 			},
 			/**
@@ -445,7 +445,7 @@ define(
 			 * @param {string} actionId
 			 * @returns none
 			 */
-			_onChange : function (/* string */ actionId) {
+			_onChange: function(/* string */ actionId) {
 				this._fireCallback(CONSTANTS.CALLBACKID_CHANGE, actionId);
 			},
 			/**
@@ -456,7 +456,7 @@ define(
 			 * @private
 			 * @returns none
 			 */
-			_onDragEnter : function () {
+			_onDragEnter: function() {
 				this.rootNode.classList.add('upload-manager-dragenter');
 			},
 			/**
@@ -467,7 +467,7 @@ define(
 			 * @private
 			 * @returns none
 			 */
-			_onDragLeave : function () {
+			_onDragLeave: function() {
 				this.rootNode.classList.remove('upload-manager-dragenter');
 			},
 			/**
@@ -479,7 +479,7 @@ define(
 			 * @param {UploadManagerListItem} listItem
 			 * @returns none.
 			 */
-			_removeItems : function(/* Object */ listItem) {
+			_removeItems: function(/* Object */ listItem) {
 				var index,
 					length;
 				for (index = 0, length = this.items.length; index < length; index++) {
@@ -499,7 +499,7 @@ define(
 			 * @param {string} id
 			 * @returns none.
 			 */
-			_fireCallback : function(/* string */ id) {
+			_fireCallback: function(/* string */ id) {
 				var callback = this.callbackMap[id];
 				if (callback) {
 					callback.apply(this, Array.prototype.slice.call(arguments, 1));
@@ -513,7 +513,7 @@ define(
 			 * @param {function} callback アップロード開始コールバック関数 引数 1:ListItemのrootNode
 			 * @returns none.
 			 */
-			setOnFileUploadStart : function (/* function */ callback) {
+			setOnFileUploadStart: function(/* function */ callback) {
 				if (!callback || 'function' !== typeof callback) {
 					return;
 				}
@@ -526,7 +526,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			removeOnFileUploadStart : function () {
+			removeOnFileUploadStart: function() {
 				this.callbackMap[CONSTANTS.CALLBACKID_UPLOAD_START] = null;
 			},
 			/**
@@ -537,7 +537,7 @@ define(
 			 * @param {function} callback アップロード成功コールバック関数 引数 1:リクエストの返り値  2:ListItemのrootNode
 			 * @returns none.
 			 */
-			setOnFileUploadDone : function (/* function */ callback) {
+			setOnFileUploadDone: function(/* function */ callback) {
 				if (!callback || 'function' !== typeof callback) {
 					return;
 				}
@@ -550,7 +550,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			removeOnFileUploadDone : function () {
+			removeOnFileUploadDone: function() {
 				this.callbackMap[CONSTANTS.CALLBACKID_UPLOAD_DONE] = null;
 			},
 			/**
@@ -561,7 +561,7 @@ define(
 			 * @param {function} callback アップロード失敗コールバック関数 1:jquery.uploadエラー 2:ListItemのrootNode
 			 * @returns none.
 			 */
-			setOnFileUploadFail : function (/* function */ callback) {
+			setOnFileUploadFail: function(/* function */ callback) {
 				if (!callback || 'function' !== typeof callback) {
 					return;
 				}
@@ -574,7 +574,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			removeOnFileUploadFail : function () {
+			removeOnFileUploadFail: function() {
 				this.callbackMap[CONSTANTS.CALLBACKID_UPLOAD_FAIL] = null;
 			},
 			/**
@@ -585,7 +585,7 @@ define(
 			 * @param {function} callback 引数 1:ファイル名
 			 * @returns none
 			 */
-			setOnAddFile : function (/* function */ callback) {
+			setOnAddFile: function(/* function */ callback) {
 				if (!callback || 'function' !== typeof callback) {
 					return;
 				}
@@ -598,7 +598,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			removeOnAddFile : function () {
+			removeOnAddFile: function() {
 				this.callbackMap[CONSTANTS.CALLBACKID_ADD_FILE] = null;
 			},
 			/**
@@ -609,7 +609,7 @@ define(
 			 * @param {function} callback 引数 1:ファイル名
 			 * @returns none
 			 */
-			setOnNotAllowedtypeAdd : function (/* function */ callback) {
+			setOnNotAllowedtypeAdd: function(/* function */ callback) {
 				if (!callback || 'function' !== typeof callback) {
 					return;
 				}
@@ -622,7 +622,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			removeOnNotAllowedtypeAdd : function () {
+			removeOnNotAllowedtypeAdd: function() {
 				this.callbackMap[CONSTANTS.CALLBACKID_NOT_ALLOWEDTYPE_ADD_FILE] = null;
 			},
 			/**
@@ -634,7 +634,7 @@ define(
 			 * @param {function} callback 引数 1:アクションID
 			 * @returns none
 			 */
-			setOnChange : function (/* function */ callback) {
+			setOnChange: function(/* function */ callback) {
 				if (!callback || 'function' !== typeof callback) {
 					return;
 				}
@@ -647,7 +647,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			removeOnChange : function () {
+			removeOnChange: function() {
 				this.callbackMap[CONSTANTS.CALLBACKID_CHANGE] = null;
 			},
 			/**
@@ -658,7 +658,7 @@ define(
 			 * @returns {number} uploadが完了していない件数
 			 * @public
 			 */
-			countWaitFiles : function () {
+			countWaitFiles: function() {
 				var index,
 					length,
 					count = 0;
@@ -675,7 +675,7 @@ define(
 			 * @param {boolean} is 非活性にする場合はtrue, 活性にする場合はfalseを指定する。
 			 * @returns none
 			 */
-			setDisabled : function (/* boolean */ is) {
+			setDisabled: function(/* boolean */ is) {
 				var index,
 					length,
 					item;
@@ -711,7 +711,7 @@ define(
 			 * @returns none
 			 * @override
 			 */
-			destroy : function () {
+			destroy: function() {
 				var items = this.items.slice(0),
 					index,
 					length = items.length;

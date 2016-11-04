@@ -26,11 +26,11 @@
  *		descriptoin		: Paginationのappend対象となるGridを指定する。
  * </pre>
  * @example
- *	require(['_GridPagination'], function (_GridPagination) {
+ *	require(['_GridPagination'], function(_GridPagination) {
  *		var gridPagination = new _GridPagination({
- *			rowsPerPage : 100,
- *			dataListLength : 1000,
- *			grid : new Grid()
+ *			rowsPerPage: 100,
+ *			dataListLength: 1000,
+ *			grid: new Grid()
  *		});
  *		document.body.appendChild(gridPagination.getRootNode());
  *	});
@@ -51,7 +51,7 @@ define(
 	 * @alias module:_GridPagination
 	 * @returns {Object} _GridPagination object.
 	 */
-	function (_Base, Urushi, template) {
+	function(_Base, Urushi, template) {
 		'use strict';
 
 		/**
@@ -65,10 +65,10 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'Pagination',
-			ID_PREFIX_OF_LINKS : 'Link',
-			EMBEDDED : {gridClass : '', additionalClass : ''},
-			NUMBER_OF_LINKS : 5
+			ID_PREFIX: 'Pagination',
+			ID_PREFIX_OF_LINKS: 'Link',
+			EMBEDDED: {gridClass: '', additionalClass: ''},
+			NUMBER_OF_LINKS: 5
 		};
 
 		return _Base.extend({
@@ -80,7 +80,7 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * <pre>
 			 * 現在のページ番号を保持する
@@ -89,7 +89,7 @@ define(
 			 * @type number
 			 * @private
 			 */
-			currentPageNumber : undefined,
+			currentPageNumber: undefined,
 			/**
 			 * <pre>
 			 * ページの総数を保持する
@@ -98,7 +98,7 @@ define(
 			 * @type number
 			 * @private
 			 */
-			numberOfPages : undefined,
+			numberOfPages: undefined,
 			/**
 			 * <pre>
 			 * ページネーションのLINK数を保持する
@@ -107,7 +107,7 @@ define(
 			 * @type number
 			 * @private
 			 */
-			numberOfLinks : undefined,
+			numberOfLinks: undefined,
 			/**
 			 * <pre>
 			 * ページネーションのappend対象となるGridを保持する
@@ -116,7 +116,7 @@ define(
 			 * @type Object
 			 * @private
 			 */
-			grid : undefined,
+			grid: undefined,
 			/**
 			 * <pre>
 			 * 自動付与されるIDの接尾語。
@@ -125,7 +125,7 @@ define(
 			 * @type number
 			 * @private
 			 */
-			linksIdNo : undefined,
+			linksIdNo: undefined,
 
 			/**
 			 * <pre>
@@ -135,7 +135,7 @@ define(
 			 * @param {Object} options 初期化に必要な情報
 			 * @returns none.
 			 */
-			init : function (/* Object */ args) {
+			init: function(/* Object */ args) {
 				var _args = args || {};
 				this._super(_args);
 				this._setCallbackToArrows();
@@ -149,7 +149,7 @@ define(
 			 * @param {Object} args 初期化時に必要な引数。
 			 * @returns none.
 			 */
-			_initProperties : function (/* Object */ args) {
+			_initProperties: function(/* Object */ args) {
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
 				this.currentPageNumber = 1;
@@ -161,23 +161,24 @@ define(
 			 * _GridPaginationの生成処理。
 			 * 総ページ数の計算と、linksを作成を行う。
 			 * またNodeへのアクセスポイントも設定している。
-			 * linksNode : linksのDOMNode
+			 * linksNode: linksのDOMNode
 			 * </pre>
 			 * @function
 			 * @private
 			 * @param {Object} args 初期化時に必要な引数。
 			 * @returns none.
 			 */
-			_render : function (/* Object */ args) {
+			_render: function(/* Object */ args) {
 				var span,
 					fragment = document.createDocumentFragment(),
 					index,
 					length,
-					_compiled = _.template(this.template);
+					_compiled = _.template(this.template),
+					pageNum;
 
 				args = _.extend(_.clone(this.embedded), args);
 				this.id = this.grid.id + CONSTANTS.ID_PREFIX;
-				args = _.extend(args, {id : this.id});
+				args = _.extend(args, {id: this.id});
 				this.rootNode = $(_compiled(args))[0];
 
 
@@ -186,10 +187,12 @@ define(
 				}
 
 				this.numberOfPages = Math.ceil(args.dataListLength / args.rowsPerPage);
-				
-				length = this.numberOfLinks = (this.numberOfPages < CONSTANTS.NUMBER_OF_LINKS) ? this.numberOfPages : CONSTANTS.NUMBER_OF_LINKS;
+
+				this.numberOfLinks = this.numberOfPages < CONSTANTS.NUMBER_OF_LINKS
+					? this.numberOfPages : CONSTANTS.NUMBER_OF_LINKS;
+				length = this.numberOfLinks;
 				for (index = 0; index < length; index++) {
-					var pageNum = 1 + index;
+					pageNum = 1 + index;
 					span = document.createElement('span');
 					span.id = this.id + this._getLinkId();
 					span.classList.add('link');
@@ -205,7 +208,7 @@ define(
 			 * 作成されたDomNodeへのアクセスポイントを設定する。
 			 * アクセスポイントは下記の通り。
 			 *
-			 * beforeNode : 戻るアイコン
+			 * beforeNode: 戻るアイコン
 			 * nextNode ： 進むアイコン
 			 * currentNode ： 現在地を表示するノード
 			 * </pre>
@@ -213,7 +216,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this._super();
 				this.beforeNode = this.rootNode.getElementsByClassName('before')[0];
 				this.nextNode = this.rootNode.getElementsByClassName('next')[0];
@@ -227,7 +230,7 @@ define(
 			 * @private
 			 * @returns {string} object's id.
 			 */
-			_getLinkId : function () {
+			_getLinkId: function() {
 				return CONSTANTS.ID_PREFIX_OF_LINKS + this.linksIdNo++;
 			},
 			/**
@@ -238,7 +241,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_setCallbackToArrows : function () {
+			_setCallbackToArrows: function() {
 				Urushi.addEvent(this.beforeNode, 'click', this, '_onClickArrows', 'before');
 				Urushi.addEvent(this.nextNode, 'click', this, '_onClickArrows', 'next');
 			},
@@ -249,7 +252,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			initEmphasize : function () {
+			initEmphasize: function() {
 				// this.currentNode.style.left = this.linksNode.childNodes[0].offsetLeft + 'px';
 				this._emphasizeLink(this.currentPageNumber);
 			},
@@ -261,7 +264,7 @@ define(
 			 * @param {string} direction 矢印の向きを指定した文字列
 			 * @returns none.
 			 */
-			_onClickArrows : function (/* string */ direction) {
+			_onClickArrows: function(/* string */ direction) {
 				var pageNumber;
 				if ('before' === direction) {
 					pageNumber = this.currentPageNumber - 1;
@@ -286,7 +289,7 @@ define(
 			 * @param {number} linkIndex LINKSの位置を表すindex値
 			 * @returns none.
 			 */
-			_onClickLinks : function (/* number */ linkIndex) {
+			_onClickLinks: function(/* number */ linkIndex) {
 				var pageNumber;
 				pageNumber = this._calculateAlignFirst(this.currentPageNumber) + linkIndex;
 				this.setPage(pageNumber);
@@ -299,7 +302,7 @@ define(
 			 * @param {number} pageNumber ページ番号
 			 * @returns none.
 			 */
-			setPage : function (/* number */ pageNumber) {
+			setPage: function(/* number */ pageNumber) {
 				var previousPageNumber = this.currentPageNumber;
 
 				if ('number' !== typeof pageNumber) {
@@ -325,7 +328,7 @@ define(
 			 * @function
 			 * @returns {number} 現在のページ番号
 			 */
-			getCurrentPage : function () {
+			getCurrentPage: function() {
 				return this.currentPageNumber;
 			},
 			/**
@@ -338,7 +341,7 @@ define(
 			 * @param {number} currentPageNumber 移動先のページ番号
 			 * @returns none
 			 */
-			_paging : function (/* number */ previousPageNumber, /* number */ currentPageNumber) {
+			_paging: function(/* number */ previousPageNumber, /* number */ currentPageNumber) {
 				if (1 === currentPageNumber) {
 					this._enableArrow(false, this.beforeNode);
 				} else {
@@ -364,7 +367,7 @@ define(
 			 * @param {object} node 矢印のnode
 			 * @returns none
 			 */
-			_enableArrow : function (/* boolean */ is, /* Object */ node) {
+			_enableArrow: function(/* boolean */ is, /* Object */ node) {
 				if ('boolean' !== typeof is) {
 					return;
 				}
@@ -385,7 +388,7 @@ define(
 			 * @param {number} currentPageNumber 移動先のページ番号
 			 * @returns none
 			 */
-			_alterLinks : function (/* number */ previousPageNumber, /* number */ currentPageNumber) {
+			_alterLinks: function(/* number */ previousPageNumber, /* number */ currentPageNumber) {
 				var alignFirstOfPrevious = this._calculateAlignFirst(previousPageNumber),
 					alignFirstOfCurrent = this._calculateAlignFirst(currentPageNumber);
 
@@ -407,7 +410,7 @@ define(
 			 * @param {number} pageNumber ページ番号
 			 * @returns {number} LINKSの先頭値（一番左の値）
 			 */
-			_calculateAlignFirst : function (/* number */ pageNumber) {
+			_calculateAlignFirst: function(/* number */ pageNumber) {
 				var alignFirst;
 
 				if (this._isFormer(pageNumber)) {
@@ -430,7 +433,7 @@ define(
 			 * @param {string} direction LINKSの移動向き
 			 * @returns none
 			 */
-			_linksAnimation : function (/* number */ alignFirst, /* string */ direction) {
+			_linksAnimation: function(/* number */ alignFirst, /* string */ direction) {
 				var links = this.linksNode.childNodes,
 					index,
 					length = links.length,
@@ -452,7 +455,7 @@ define(
 					links[index].classList.add(move1Class);
 				}
 
-				move2 = function () {
+				move2 = function() {
 					for (index = 0; index < length; index++) {
 						links[index].classList.remove(move1Class);
 						links[index].classList.add(move2Class);
@@ -461,7 +464,7 @@ define(
 				};
 				setTimeout(move2, 200);
 
-				move3 = function () {
+				move3 = function() {
 					for (index = 0; index < length; index++) {
 						links[index].classList.remove('invisible');
 						links[index].classList.remove(move2Class);
@@ -478,7 +481,7 @@ define(
 			 * @param {number} pageNumber ページ番号
 			 * @returns none
 			 */
-			_emphasizeLink : function (/* number */ pageNumber) {
+			_emphasizeLink: function(/* number */ pageNumber) {
 				var areaIndex;
 
 				if (this._isFormer(pageNumber)) {
@@ -500,7 +503,7 @@ define(
 			 * @param {number} pageNumber ページ番号
 			 * @returns {boolean} 所属を表す真偽値
 			 */
-			_isFormer : function (/* number */ pageNumber) {
+			_isFormer: function(/* number */ pageNumber) {
 				return pageNumber <= Math.floor(this.numberOfLinks / 2);
 			},
 			/**
@@ -513,7 +516,7 @@ define(
 			 * @param {number} pageNumber ページ番号
 			 * @returns {boolean} 所属を表す真偽値
 			 */
-			_isLatter : function (/* number */ pageNumber) {
+			_isLatter: function(/* number */ pageNumber) {
 				return pageNumber >= this.numberOfPages - Math.floor(this.numberOfLinks / 2);
 			},
 			/**
@@ -523,7 +526,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			destroy : function () {
+			destroy: function() {
 				var nodes = this.linksNode.childNodes,
 					index,
 					length = nodes.length;

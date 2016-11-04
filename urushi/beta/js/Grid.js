@@ -51,19 +51,19 @@
  *		descriptoin		: 選択行の管理を行うかどうかを指定する。未指定の場合はfalseとなり、選択行の管理は行われない。
  * </pre>
  * @example
- *	require(['Grid'], function (Grid) {
+ *	require(['Grid'], function(Grid) {
  *		var grid = new Grid({
- *			id : 'myGrid',
- *			gridClass : 'grid-primary',
- *			additionalClass : '',
- *			header : [
- *				'name1' : 'value1',
- *				'name2' : 'value2',
- *				'name3' : 'value3'
+ *			id: 'myGrid',
+ *			gridClass: 'grid-primary',
+ *			additionalClass: '',
+ *			header: [
+ *				'name1': 'value1',
+ *				'name2': 'value2',
+ *				'name3': 'value3'
  *			],
- *			model : new GridModel(),
- *			rowsPerPage : 100,
- *			paginationArea : below
+ *			model: new GridModel(),
+ *			rowsPerPage: 100,
+ *			paginationArea: below
  *		});
  *		document.body.appendChild(grid.getRootNode());
  *	});
@@ -104,7 +104,7 @@ define(
 	 * @alias module:Grid
 	 * @returns {Object} Grid object.
 	 */
-	function (_, _CollectionWidgetBase, Urushi, Pagination, Option, ColumnItem, legacy, template) {
+	function(_, _CollectionWidgetBase, Urushi, Pagination, Option, ColumnItem, legacy, template) {
 		'use strict';
 
 		/**
@@ -118,10 +118,10 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.grid',
-			ROW_PREFIX : '.row-',
-			EMBEDDED : {gridClass : '', additionalClass : ''},
-			DEFAULT_ROWS_PER_PAGE : 50
+			ID_PREFIX: 'urushi.grid',
+			ROW_PREFIX: '.row-',
+			EMBEDDED: {gridClass: '', additionalClass: ''},
+			DEFAULT_ROWS_PER_PAGE: 50
 		};
 		/**
 		 * <pre>
@@ -142,7 +142,7 @@ define(
 			 * @type number
 			 * @private
 			 */
-			rowsPerPage : undefined,
+			rowsPerPage: undefined,
 			/**
 			 * <pre>
 			 * ページナビゲーションの表示位置を指定する。
@@ -150,14 +150,14 @@ define(
 			 * @type string
 			 * @private
 			 */
-			paginationArea : undefined,
+			paginationArea: undefined,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type Object
 			 * @constant
 			 * @private
 			 */
-			embedded : undefined,
+			embedded: undefined,
 			/**
 			 * <pre>
 			 * タグ構造はgrid.htmlを参照すること。
@@ -166,7 +166,7 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * <pre>
 			 * Gridにて使用するmodel情報を保持する
@@ -174,7 +174,7 @@ define(
 			 * @type Object
 			 * @private
 			 */
-			model : undefined,
+			model: undefined,
 			/**
 			 * <pre>
 			 * Gridにて使用するpagination情報を保持する
@@ -182,7 +182,7 @@ define(
 			 * @type Object
 			 * @private
 			 */
-			pagination : undefined,
+			pagination: undefined,
 			/**
 			 * <pre>
 			 * Gridにて使用するoptionのモジュールを管理する
@@ -190,7 +190,7 @@ define(
 			 * @type Object
 			 * @private
 			 */
-			optionModule : undefined,
+			optionModule: undefined,
 			/**
 			 * <pre>
 			 * Gridにて使用するoption情報を管理する
@@ -198,7 +198,7 @@ define(
 			 * @type Object
 			 * @private
 			 */
-			option : undefined,
+			option: undefined,
 			/**
 			 * <pre>
 			 * Gridにて表示済みのDOMNodeを管理する
@@ -206,7 +206,7 @@ define(
 			 * @type Object
 			 * @private
 			 */
-			cacheMap : undefined,
+			cacheMap: undefined,
 			/**
 			 * <pre>
 			 * Gridにて生成したmoduleのidと、modelのname、属するrowのidを管理する
@@ -214,7 +214,7 @@ define(
 			 * @type Object
 			 * @private
 			 */
-			moduleMap : undefined,
+			moduleMap: undefined,
 			/**
 			 * <pre>
 			 * Gridにて選択された行のデータを保持する
@@ -222,7 +222,7 @@ define(
 			 * @type Object
 			 * @private
 			 */
-			selected : undefined,
+			selected: undefined,
 			/**
 			 * <pre>
 			 * Gridにて選択された行のDOMNodeを保持する
@@ -230,7 +230,7 @@ define(
 			 * @type DOMNode
 			 * @private
 			 */
-			selectedNode : undefined,
+			selectedNode: undefined,
 			/**
 			 * <pre>
 			 * Gridにて選択された行のDOMNodeを保持する
@@ -238,7 +238,7 @@ define(
 			 * @type DOMNode
 			 * @private
 			 */
-			selectionMode : undefined,
+			selectionMode: undefined,
 			/**
 			 * <pre>
 			 * Gridにて生成されるrowと、modelの紐づけを管理する
@@ -246,7 +246,7 @@ define(
 			 * @type Object
 			 * @private
 			 */
-			rowMap : undefined,
+			rowMap: undefined,
 			/**
 			 * <pre>
 			 * Gridにてmodelを保持しているか管理するフラグ
@@ -254,7 +254,7 @@ define(
 			 * @type boolean
 			 * @private
 			 */
-			hasModel : undefined,
+			hasModel: undefined,
 			/**
 			 * <pre>
 			 * Gridの表示情報が最新のmodelに基づいているかどうかを管理するフラグ
@@ -262,7 +262,7 @@ define(
 			 * @type boolean
 			 * @private
 			 */
-			loaded : undefined,
+			loaded: undefined,
 			/**
 			 * <pre>
 			 * _adjustWidthのthisをスコープにしたもの
@@ -271,7 +271,7 @@ define(
 			 * @type function
 			 * @private
 			 */
-			_selfScopeAdjustWidth : undefined,
+			_selfScopeAdjustWidth: undefined,
 
 			/**
 			 * <pre>
@@ -284,7 +284,7 @@ define(
 			 * @param {Object} args 初期化に必要な引数
 			 * @returns none.
 			 */
-			init : function (/* Object */ args) {
+			init: function(/* Object */ args) {
 				var _args = args || {};
 				this._super(_args);
 				this._setSelectionMode(_args.selection);
@@ -304,7 +304,7 @@ define(
 			 * @param {Object} args 初期化時に必要な引数。
 			 * @returns none.
 			 */
-			_initProperties : function (/* Object */ args) {
+			_initProperties: function(/* Object */ args) {
 				this._super(args);
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
@@ -328,13 +328,13 @@ define(
 			 * 作成されたDomNodeへのアクセスポイントを設定する。
 			 * アクセスポイントは下記の通り。
 			 *
-			 * gridNode : gridを表示するノード。gridWrapperからpaginationを除いた部分
+			 * gridNode: gridを表示するノード。gridWrapperからpaginationを除いた部分
 			 * </pre>
 			 * @function
 			 * @private
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this._super();
 				this.gridNode = this.rootNode.getElementsByClassName('grid')[0];
 			},
@@ -344,7 +344,7 @@ define(
 			 * @private
 			 * @returns {string} object's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -353,7 +353,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_render : function (/* Object */ args) {
+			_render: function(/* Object */ args) {
 				this._super(args);
 				this.rootNode.classList.add(this.id.replace('.', '-'));
 				this._renderHeader(args.header);
@@ -368,7 +368,7 @@ define(
 			 * @param {array} header ヘッダ情報
 			 * @returns none.
 			 */
-			_renderHeader : function (/* array */ header) {
+			_renderHeader: function(/* array */ header) {
 				var index,
 					length = header.length,
 					ul,
@@ -376,7 +376,7 @@ define(
 					colArgs;
 
 				if (null === header || undefined === header || 0 === length) {
-					throw new Error('_renderHeader : Grid must need valid header');
+					throw new Error('_renderHeader: Grid must need valid header');
 				}
 
 				ul = document.createElement('ul');
@@ -399,7 +399,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_adjustWidth : function() {
+			_adjustWidth: function() {
 				var outer = document.createElement('div'),
 					style = outer.style,
 					inner,
@@ -429,7 +429,7 @@ define(
 			 * @param {boolean} is セレクションモードのON/OFF
 			 * @returns none.
 			 */
-			_setSelectionMode : function (/* boolean */ is) {
+			_setSelectionMode: function(/* boolean */ is) {
 				if (undefined === is || 'boolean' !== typeof is) {
 					return;
 				}
@@ -445,7 +445,7 @@ define(
 			 * @param {string} area ページネーション表示箇所
 			 * @returns none.
 			 */
-			_setPaginationArea : function (/* string */ area) {
+			_setPaginationArea: function(/* string */ area) {
 				area = ('none' === area || 'above' === area || 'below' === area) && area || 'none';
 				this.paginationArea = area;
 			},
@@ -458,7 +458,7 @@ define(
 			 * @param {number} rowsPerPage ページあたりの表示行数
 			 * @returns none.
 			 */
-			// setRowsPerPage : function (/* number */ rowsPerPage) {
+			// setRowsPerPage: function(/* number */ rowsPerPage) {
 			// 	this._setRowsPerPage(rowsPerPage);
 			// 	this._updatePagination();
 			// },
@@ -475,13 +475,13 @@ define(
 			 * @param {number} rowsPerPage ページあたりの表示行数
 			 * @returns none.
 			 */
-			_setRowsPerPage : function (/* number */ rowsPerPage) {
+			_setRowsPerPage: function(/* number */ rowsPerPage) {
 				if ('none' === this.paginationArea) {
 					this.rowsPerPage = 0;
 					return;
 				}
 				if ('none' !== this.paginationArea && 0 === rowsPerPage) {
-					throw new Error('_setRowsPerPage : Invalid Arguments');
+					throw new Error('_setRowsPerPage: Invalid Arguments');
 				}
 				this.rowsPerPage = rowsPerPage || CONSTANTS.DEFAULT_ROWS_PER_PAGE;
 			},
@@ -497,7 +497,7 @@ define(
 			 * @param {Object} model Gridにて使用するModel
 			 * @returns none.
 			 */
-			setModel : function (/* Object */ model) {
+			setModel: function(/* Object */ model) {
 				if (!model) {
 					return;
 				}
@@ -517,7 +517,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			clear : function () {
+			clear: function() {
 				this._clearPage();
 				this._clearPageCache();
 				this._clearRowCache();
@@ -535,7 +535,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_clearPage : function () {
+			_clearPage: function() {
 				this._clearRows();
 				this._renderBody();
 			},
@@ -548,7 +548,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_clearRows : function () {
+			_clearRows: function() {
 				if (!this.gridBodyNode) {
 					return;
 				}
@@ -569,7 +569,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_renderBody : function () {
+			_renderBody: function() {
 				var gridBody = document.createElement('div');
 				gridBody.classList.add('grid-body');
 				this.rootNode.getElementsByClassName('grid')[0].appendChild(gridBody);
@@ -583,7 +583,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_clearRowCache : function () {
+			_clearRowCache: function() {
 				var id,
 					row,
 					index,
@@ -614,7 +614,7 @@ define(
 			 * @param {array} nodes イベント削除対象のDOMNode群
 			 * @returns none.
 			 */
-			_removeEventOnRows : function (/* array */ nodes) {
+			_removeEventOnRows: function(/* array */ nodes) {
 				var index,
 					length;
 				for (index = 0, length = nodes.length; index < length; index++) {
@@ -630,7 +630,7 @@ define(
 			 * @param {DOMNode} node イベント削除対象のDOMNode
 			 * @returns none.
 			 */
-			_removeEventOnRow : function (/* array */ node) {
+			_removeEventOnRow: function(/* array */ node) {
 				Urushi.removeEvent(node, 'click', this, '_onSelect');
 			},
 			/**
@@ -641,7 +641,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_clearPageCache : function () {
+			_clearPageCache: function() {
 				this.cacheMap = {};
 			},
 			/**
@@ -652,7 +652,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_destroyPagination : function () {
+			_destroyPagination: function() {
 				if (!this.pagination) {
 					return;
 				}
@@ -667,7 +667,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_clearModel : function () {
+			_clearModel: function() {
 				this.model = undefined;
 				this.hasModel = false;
 			},
@@ -680,9 +680,9 @@ define(
 			 * @param {Object} model Gridにて使用するmodel
 			 * @returns none.
 			 */
-			_setModel : function (/* Object */ model) {
+			_setModel: function(/* Object */ model) {
 				if (!(model.hasOwnProperty('dataList'))) {
-					throw new Error('_setModel : Invalid model.');
+					throw new Error('_setModel: Invalid model.');
 				}
 				this.model = model;
 				this.hasModel = true;
@@ -695,7 +695,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_updatePagination : function () {
+			_updatePagination: function() {
 				this._destroyPagination();
 				this._createPagination();
 			},
@@ -707,10 +707,10 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_createPagination : function () {
+			_createPagination: function() {
 				var dataListLength;
 				if (!this.hasModel) {
-					throw new Error('_createPagination : Please set model.');
+					throw new Error('_createPagination: Please set model.');
 				}
 				if ('none' === this.paginationArea) {
 					return;
@@ -721,9 +721,9 @@ define(
 				}
 				this.pagination = new Pagination(
 					{
-						rowsPerPage : this.rowsPerPage,
-						dataListLength : dataListLength,
-						grid : this
+						rowsPerPage: this.rowsPerPage,
+						dataListLength: dataListLength,
+						grid: this
 					}
 				);
 			},
@@ -735,7 +735,7 @@ define(
 			 * @param {number} pageNumber 遷移したいページ番号
 			 * @returns none.
 			 */
-			setPage : function (/* number */ pageNumber) {
+			setPage: function(/* number */ pageNumber) {
 				if (!this.pagination) {
 					throw new Error('No pagination is detected.');
 				}
@@ -751,15 +751,15 @@ define(
 			 * @param {object} options gridに設定したいoption情報
 			 * @returns none.
 			 */
-			load : function (options) {
+			load: function(options) {
 				if (!this.hasModel) {
-					throw new Error('load : Please set model.');
+					throw new Error('load: Please set model.');
 				}
 				this._clearPageCache();
 				this._clearRowCache();
 				this.loaded = true;
 				options = options || {};
-				this._loadOption(options).then(function () {
+				this._loadOption(options).then(function() {
 					this._loadView();
 				}.bind(this));
 			},
@@ -772,7 +772,7 @@ define(
 			 * @param {object} options gridに設定したいoption情報
 			 * @returns deferred モジュールのrequire完了を管理する
 			 */
-			_loadOption : function (/* Object */ options) {
+			_loadOption: function(/* Object */ options) {
 				var deferred,
 					name,
 					moduleName,
@@ -786,7 +786,7 @@ define(
 
 				for (name in options) {
 					if (!this._isExistInColumn(name)) {
-						throw new Error('_loadOption : Invalid name is detected.');
+						throw new Error('_loadOption: Invalid name is detected.');
 					}
 					moduleName = options[name].module;
 					if (-1 !== moduleNames.indexOf(moduleName)) {
@@ -803,7 +803,7 @@ define(
 				}
 				deferred = this.option.requireModules(moduleNames);
 
-				deferred.then(function () {
+				deferred.then(function() {
 					this.option.addOptions(options);
 				}.bind(this));
 
@@ -819,7 +819,7 @@ define(
 			 * @param {string} name カラムのname
 			 * @returns 正常なnameを受け取っているか否か。
 			 */
-			_isExistInColumn : function (/* string */ name) {
+			_isExistInColumn: function(/* string */ name) {
 				return !!this.getColumn(name);
 			},
 			/**
@@ -829,7 +829,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			clearOption : function () {
+			clearOption: function() {
 				if (!this.option) {
 					return;
 				}
@@ -844,7 +844,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_loadView : function () {
+			_loadView: function() {
 				this._renderPagination();
 				this._loadBody();
 			},
@@ -856,13 +856,15 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_renderPagination : function () {
+			_renderPagination: function() {
 				if (!this.pagination) {
 					return;
 				}
 				this.gridNode.classList.add('enablePagination');
 				if ('above' === this.paginationArea) {
-					this.rootNode.insertBefore(this.pagination.getRootNode(), this.rootNode.getElementsByClassName('grid')[0]);
+					this.rootNode.insertBefore(
+						this.pagination.getRootNode(),
+						this.rootNode.getElementsByClassName('grid')[0]);
 				} else {
 					this.rootNode.appendChild(this.pagination.getRootNode());
 				}
@@ -877,9 +879,9 @@ define(
 			 * @param {number} previousPageNumber 遷移前のページ番号
 			 * @returns none.
 			 */
-			_loadBody : function (/* number */ previousPageNumber) {
+			_loadBody: function(/* number */ previousPageNumber) {
 				if (!this.loaded) {
-					throw new Error('_loadView : Please load the Grid');
+					throw new Error('_loadView: Please load the Grid');
 				}
 				this._cachePage(previousPageNumber);
 				this._clearPage();
@@ -895,7 +897,7 @@ define(
 			 * @param {number} previousPageNumber 遷移前のページ番号
 			 * @returns none.
 			 */
-			_cachePage : function (/* number */ previousPageNumber) {
+			_cachePage: function(/* number */ previousPageNumber) {
 				var nodes,
 					fragment,
 					node;
@@ -924,7 +926,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_renderPage : function () {
+			_renderPage: function() {
 				var currentPage,
 					rowsPerPage,
 					start;
@@ -932,7 +934,8 @@ define(
 				if (!this.model) {
 					return;
 				}
-				currentPage = 'none' === this.paginationArea ? 1 : this.pagination ? this.pagination.getCurrentPage() : 1;
+				currentPage = 'none' === this.paginationArea
+					? 1 : this.pagination ? this.pagination.getCurrentPage() : 1;
 
 				if (this.cacheMap[currentPage]) {
 					this.gridBodyNode.appendChild(this.cacheMap[currentPage]);
@@ -952,7 +955,7 @@ define(
 			 * @param {array} dataList Gridに追加するデータリスト
 			 * @returns none.
 			 */
-			_addRows : function (/* array */ dataList, /* number */ pageNum, /* number */ start) {
+			_addRows: function(/* array */ dataList, /* number */ pageNum, /* number */ start) {
 				var index,
 					_dataList = dataList || [],
 					length = _dataList.length,
@@ -976,7 +979,7 @@ define(
 			 * @param {Object} data Gridに追加する1個のデータ
 			 * @returns データ情報から生成されたul.
 			 */
-			_addRow : function (/* Object */ data, /* number */ rowNumber) {
+			_addRow: function(/* Object */ data, /* number */ rowNumber) {
 				var ul,
 					_data = data || {},
 					index,
@@ -1001,8 +1004,8 @@ define(
 					ul.appendChild(cellNode);
 				}
 				this.rowMap[ul.id] = {
-					rowNumber : rowNumber,
-					node : ul
+					rowNumber: rowNumber,
+					node: ul
 				};
 				return ul;
 			},
@@ -1015,7 +1018,7 @@ define(
 			 * @param {string} name cellが属するcolumnのname
 			 * @returns dataValue cellに表示する文字列
 			 */
-			_getDataValue : function (/* object */ data, /* string */ name) {
+			_getDataValue: function(/* object */ data, /* string */ name) {
 				var dataValue;
 				dataValue = data[name];
 				if (undefined === dataValue) {
@@ -1034,7 +1037,7 @@ define(
 			 * @param {Object} data Gridに追加する1行分のデータ
 			 * @returns li 生成されたcellのDOMNode
 			 */
-			_createCell : function (/* string */ name, /* string */ id, /* object */ data) {
+			_createCell: function(/* string */ name, /* string */ id, /* object */ data) {
 				var li,
 					module,
 					additionalClass,
@@ -1054,7 +1057,7 @@ define(
 					module = this.option.createModule(name, id, dataValue);
 					// ↓urushi部品にはaddOnChangeが実装されていない↓
 					// if (module.addOnChangeCallback) {
-					// 	module.addOnChangeCallback(function (value, index) {
+					// 	module.addOnChangeCallback(function(value, index) {
 					// 		this.updateItem(value, index);
 					// 	}.bind(this));
 					// }
@@ -1063,7 +1066,7 @@ define(
 					if (additionalClass) {
 						li.classList.add(additionalClass);
 					}
-					this.moduleMap[module.id] = {name : name, row : id, module : module};
+					this.moduleMap[module.id] = {name: name, row: id, module: module};
 				}
 				return li;
 			},
@@ -1076,7 +1079,7 @@ define(
 			 * @param {DOMNode} node 選択された行のDOMNode
 			 * @returns none.
 			 */
-			_onSelect : function (/* DOMNode */ node) {
+			_onSelect: function(/* DOMNode */ node) {
 				if (this.selectedNode === node) {
 					return;
 				}
@@ -1095,7 +1098,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			getSelected : function () {
+			getSelected: function() {
 				return this.selected;
 			},
 			/**
@@ -1106,7 +1109,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			updateItem : function (/* string or boolean */ value, /* object */ module) {
+			updateItem: function(/* string or boolean */ value, /* object */ module) {
 			},
 			/**
 			 * <pre>
@@ -1116,9 +1119,9 @@ define(
 			 * @param {array} dataList 複数行データ
 			 * @returns none.
 			 */
-			addRows : function (/* array */ dataList) {
+			addRows: function(/* array */ dataList) {
 				if (!this.hasModel) {
-					throw new Error('addRows : Please set model.');
+					throw new Error('addRows: Please set model.');
 				}
 				this.model.addItems(dataList);
 				this._updatePagination();
@@ -1132,9 +1135,9 @@ define(
 			 * @param {Object} data Gridに追加する1個のデータ
 			 * @returns none.
 			 */
-			addRow : function (/* Object */ data) {
+			addRow: function(/* Object */ data) {
 				if (!this.hasModel) {
-					throw new Error('addRow : Please set model.');
+					throw new Error('addRow: Please set model.');
 				}
 				this.model.addItem(data);
 				this._updatePagination();
@@ -1147,9 +1150,9 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			removeRows : function () {
+			removeRows: function() {
 				if (!this.hasModel) {
-					throw new Error('removeRows : Please set model.');
+					throw new Error('removeRows: Please set model.');
 				}
 				this.loaded = false;
 			},
@@ -1161,9 +1164,9 @@ define(
 			 * @param {string} id 削除する行のid
 			 * @returns none.
 			 */
-			removeRow : function (/* string */ id) {
+			removeRow: function(/* string */ id) {
 				if (!this.hasModel) {
-					throw new Error('removeRows : Please set model.');
+					throw new Error('removeRows: Please set model.');
 				}
 				// loadを前提としているため、各キャッシュデータの破棄は行わない。
 				this.gridBodyNode.removeChild(this.rowMap[id].node);
@@ -1177,9 +1180,9 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			removeSelected : function () {
+			removeSelected: function() {
 				if (!this.hasModel) {
-					throw new Error('removeRows : Please set model.');
+					throw new Error('removeRows: Please set model.');
 				}
 				this.removeRow(this.selectedNode.id);
 				this.loaded = false;
@@ -1193,7 +1196,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			render : function () {
+			render: function() {
 				if (!this.loaded) {
 					return;
 				}
@@ -1211,7 +1214,7 @@ define(
 			 * @param {DOMNode} node Gridをappendする対象のDOMNode
 			 * @returns none.
 			 */
-			show : function (node) {
+			show: function(node) {
 				node.appendChild(this.getRootNode());
 				this.render();
 			},
@@ -1223,7 +1226,7 @@ define(
 			 * @params {string} name GridColumnItemのname
 			 * @returns {_GridColumnItem}.
 			 */
-			getColumn : function (/* string */ name) {
+			getColumn: function(/* string */ name) {
 				return this.getSubItem(name);
 			},
 			/**
@@ -1233,7 +1236,7 @@ define(
 			 * @function
 			 * @returns {Array<_GridColumnItem>}.
 			 */
-			getColumns : function () {
+			getColumns: function() {
 				return this.getSubItems();
 			},
 			/**
@@ -1246,7 +1249,7 @@ define(
 			 * @param {string} name 非表示にしたいカラムname。可変長引数対応のため、カンマ区切りでいくつでも記載可。記載しない場合すべてに適用
 			 * @returns {boolean}
 			 */
-			setHiddenColumn : function (/* boolean */ is,/* string */ name) {
+			setHiddenColumn: function(/* boolean */ is, /* string */ name) {
 				var names = Array.prototype.slice.call(arguments, 1),
 					index,
 					col,
@@ -1277,7 +1280,7 @@ define(
 			 * @param {string} name 非表示を検査したいname
 			 * @returns {boolean} コンポーネントの非表示状態
 			 */
-			isHiddenColumn : function (/* string */ name) {
+			isHiddenColumn: function(/* string */ name) {
 				var col = this.getColumn(name);
 				if (!col) {
 					return undefined;
@@ -1291,7 +1294,7 @@ define(
 			 * @function
 			 * @returns {object} model
 			 */
-			getModel : function () {
+			getModel: function() {
 				return this.model;
 			},
 			/**
@@ -1301,7 +1304,7 @@ define(
 			 * @function
 			 * @returns {boolean} flag
 			 */
-			isUsePaginanion : function () {
+			isUsePaginanion: function() {
 				return 'none' !== this.paginatnionArea && true || false;
 			},
 			/**
@@ -1311,7 +1314,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			destroy : function () {
+			destroy: function() {
 				window.removeEventListener('resize', this._selfScopeAdjustWidth, false);
 				this.clear();
 				this._super();

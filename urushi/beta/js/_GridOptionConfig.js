@@ -16,72 +16,72 @@ define(
 	 * @alias module:_GridOptionConfig
 	 * @returns {object} GridOptionConfig object.
 	 */
-	function () {
+	function() {
 		'use strict';
 
 		return {
-			allowedModules : {
-				'icon' : 'icon',
-				'button' : 'Button',
-				'checkbox' : 'Checkbox',
-				'contextmenu' : 'ContextMenu',
-				'dropdown' : 'DropDown',
-				'hamburger' : 'Hamburger',
-				'input' : 'Input',
-				'togglebutton' : 'ToggleButton'
+			allowedModules: {
+				'icon': 'icon',
+				'button': 'Button',
+				'checkbox': 'Checkbox',
+				'contextmenu': 'ContextMenu',
+				'dropdown': 'DropDown',
+				'hamburger': 'Hamburger',
+				'input': 'Input',
+				'togglebutton': 'ToggleButton'
 			},
-			properties : {
-				'Button' : {
-					'moduleClass' : 'buttonClass',
-					'additionalClass' : 'additionalClass',
-					'label' : 'label',
+			properties: {
+				'Button': {
+					'moduleClass': 'buttonClass',
+					'additionalClass': 'additionalClass',
+					'label': 'label',
 				},
-				'Checkbox' : {
-					'moduleClass' : 'checkboxClass',
-					'additionalClass' : 'additionalClass',
+				'Checkbox': {
+					'moduleClass': 'checkboxClass',
+					'additionalClass': 'additionalClass',
 				},
-				'ContextMenu' : {
-					'moduleClass' : 'contextMenuClass',
-					'additionalClass' : 'additionalClass',
-					'items' : 'items',
-					'callback' : 'defaultCallback',
-					'bubbling' : 'bubbling',
-					'type' : 'type',
+				'ContextMenu': {
+					'moduleClass': 'contextMenuClass',
+					'additionalClass': 'additionalClass',
+					'items': 'items',
+					'callback': 'defaultCallback',
+					'bubbling': 'bubbling',
+					'type': 'type',
 				},
-				'DropDown' : {
-					'moduleClass' : 'dropdownClass',
-					'additionalClass' : 'additionalClass',
-					'items' : 'items',
+				'DropDown': {
+					'moduleClass': 'dropdownClass',
+					'additionalClass': 'additionalClass',
+					'items': 'items',
 				},
-				'Hamburger' : {
-					'additionalClass' : 'additionalClass',
-					'callback' : 'callback'
+				'Hamburger': {
+					'additionalClass': 'additionalClass',
+					'callback': 'callback'
 				},
-				'Input' : {
-					'moduleClass' : 'inputClass',
-					'additionalClass' : 'additionalClass',
+				'Input': {
+					'moduleClass': 'inputClass',
+					'additionalClass': 'additionalClass',
 				},
-				'ToggleButton' : {
-					'moduleClass' : 'toggleButtonClass',
-					'additionalClass' : 'additionalClass',
+				'ToggleButton': {
+					'moduleClass': 'toggleButtonClass',
+					'additionalClass': 'additionalClass',
 				}
 			},
-			presetProperties : {
-				'Button' : {
-					'moduleClass' : 'button-default',
+			presetProperties: {
+				'Button': {
+					'moduleClass': 'button-default',
 				},
-				'ContextMenu' : {
-					'moduleClass' : 'contextMenu-default',
-				},
-			},
-			forceProperties : {
-				'ContextMenu' : {
-					'bubbling' : true,
-					'type' : 'grid',
+				'ContextMenu': {
+					'moduleClass': 'contextMenu-default',
 				},
 			},
-			finalizeArgs : {
-				contextmenu : function (args, id) {
+			forceProperties: {
+				'ContextMenu': {
+					'bubbling': true,
+					'type': 'grid',
+				},
+			},
+			finalizeArgs: {
+				contextmenu: function(args, id) {
 					var index,
 						length;
 					for (index = 0, length = args.items.length; index < length; index++) {
@@ -89,23 +89,23 @@ define(
 					}
 				},
 			},
-			setValueMap : {
-				input : function (module, label) {
+			setValueMap: {
+				input: function(module, label) {
 					module.setValue(label);
 				},
-				checkbox : function (module, label) {
+				checkbox: function(module, label) {
 					module.setChecked(label);
 				},
-				togglebutton : function (module, label) {
+				togglebutton: function(module, label) {
 					module.setValue(label);
 				},
-				dropdown : function (module, label) {
+				dropdown: function(module, label) {
 					module.setSelected(label);
 				}
 			},
-			additionalColumnStyle : {
-				'dropdown' : 'ignoreOverflow',
-				'contextmenu' : 'ignoreOverflow'
+			additionalColumnStyle: {
+				'dropdown': 'ignoreOverflow',
+				'contextmenu': 'ignoreOverflow'
 			}
 		};
 	}
