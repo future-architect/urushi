@@ -24,8 +24,8 @@
  *		descriptoin		: Callback function for hamburger click event.
  * </pre>
  * @example
- *	require(['Hamburger'], function (Hamburger) {
- *		var hamburger = new Hamburger({callback : function () {}});
+ *	require(['Hamburger'], function(Hamburger) {
+ *		var hamburger = new Hamburger({callback: function() {}});
  *		document.body.appendChild(hamburger.getRootNode());
  *	});
  *
@@ -59,7 +59,7 @@ define(
 	 * @alias module:Hamburger
 	 * @returns {object} Hamburger instance.
 	 */
-	function ($, urushi, _Base, legacy, template) {
+	function($, urushi, _Base, legacy, template) {
 		'use strict';
 
 		/**
@@ -70,8 +70,8 @@ define(
 		 * @constant
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.hamburger',
-			EMBEDDED : {hamburgerClass : '', additionalClass : ''}
+			ID_PREFIX: 'urushi.hamburger',
+			EMBEDDED: {hamburgerClass: '', additionalClass: ''}
 		};
 
 		/**
@@ -92,13 +92,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded : undefined,
+			embedded: undefined,
 			/**
 			 * <pre>
 			 * Callback function for hamburger click event.
@@ -106,7 +106,7 @@ define(
 			 * @type function
 			 * @private
 			 */
-			callback : undefined,
+			callback: undefined,
 			/**
 			 * <pre>
 			 * Initialzed instance properties.
@@ -115,7 +115,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
 				this.setCallback(args.callback);
@@ -128,7 +128,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			initOption : function (/* object */ args) {
+			initOption: function(/* object */ args) {
 				urushi.addEvent(this.hamburgerNode, 'click', this, '_onClickHamburger');
 			},
 			/**
@@ -138,7 +138,7 @@ define(
 			 * @param {boolean} is Open or close.
 			 * @returns none.
 			 */
-			transform : function (/* boolean */ is) {
+			transform: function(/* boolean */ is) {
 				if (this.isDisabled() || 'boolean' !== typeof is) {
 					return;
 				}
@@ -155,7 +155,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			toggle : function () {
+			toggle: function() {
 				this.transform(!this.hamburgerLineNode.classList.contains('hamburger-transformed'));
 			},
 			/**
@@ -165,7 +165,7 @@ define(
 			 * @param {function} callback Calback function.
 			 * @returns none.
 			 */
-			setCallback : function (/* function */ callback) {
+			setCallback: function(/* function */ callback) {
 				if (!callback || 'function' !== typeof callback) {
 					return;
 				}
@@ -181,7 +181,7 @@ define(
 			 * @param {object} Event object.
 			 * @returns none.
 			 */
-			_onClickHamburger : function (/* object */ event) {
+			_onClickHamburger: function(/* object */ event) {
 				if (event) {
 					event.stopPropagation();
 				}
@@ -190,7 +190,7 @@ define(
 				}
 				this.toggle();
 
-				setTimeout(function () {
+				setTimeout(function() {
 					this.callback(this.hamburgerLineNode.classList.contains('hamburger-transformed'));
 				}.bind(this), 50);
 			},
@@ -204,7 +204,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this.hamburgerNode = this.rootNode;
 				this.hamburgerLineNode = this.rootNode.getElementsByClassName('hamburger-line')[0];
 			},
@@ -213,7 +213,7 @@ define(
 			 * @protected
 			 * @returns {string} Instance id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -223,7 +223,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			destroy : function () {
+			destroy: function() {
 				urushi.removeEvent(this.hamburgerNode, 'click', this, '_onClickHamburger');
 
 				this._super();

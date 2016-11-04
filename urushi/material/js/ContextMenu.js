@@ -43,27 +43,27 @@
  *		descriptoin		: 特殊スタイルのコンテキストメニューを生成する。
  * </pre>
  * @example
- *	require(['ContextMenu'], function (ContextMenu) {
+ *	require(['ContextMenu'], function(ContextMenu) {
  *		var contextMenu = new ContextMenu({
- *			id : 'myContextMenu',
- *			additionalClass : '',
- *			items :[
+ *			id: 'myContextMenu',
+ *			additionalClass: '',
+ *			items:[
  *				{
- *					id : 'item1',
- *					name : 'item1',
- *					label : 'label1',
- *					callback : function () {},
- *					icon : 'mdi-action-alarm'
+ *					id: 'item1',
+ *					name: 'item1',
+ *					label: 'label1',
+ *					callback: function() {},
+ *					icon: 'mdi-action-alarm'
  *				},
  *				{
- *					id : 'item2',
- *					name : 'item2',
- *					label : 'label2',
- *					callback : function () {},
- *					icon : 'mdi-action-backup'
+ *					id: 'item2',
+ *					name: 'item2',
+ *					label: 'label2',
+ *					callback: function() {},
+ *					icon: 'mdi-action-backup'
  *				}
  *			],
- *			defaultCallback : function () {}
+ *			defaultCallback: function() {}
  *		});
  *		document.body.appendChild(contextMenu.getRootNode());
  *	});
@@ -102,7 +102,7 @@ define(
 	 * @alias module:ContextMenu
 	 * @returns {object} ContextMenu object.
 	 */
-	function ($, urushi, materialConfig, _CollectionWidgetBase, ContextMenuItem, legacy, animation, template) {
+	function($, urushi, materialConfig, _CollectionWidgetBase, ContextMenuItem, legacy, animation, template) {
 		'use strict';
 
 		/**
@@ -115,14 +115,14 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.context-menu',
-			ITEM_ID_PREFIX : '.item',
-			EMBEDDED : {contextMenuClass : '', additionalClass : ''},
-			DURATION : 150,
-			ITEMS_TRANSITION_DURATION : 150,
-			ITEMS_LI_MARGIN : 20,
-			MINIMUM_WIDTH : 100,
-			CONTEXTMENU_WIDTH : 48,
+			ID_PREFIX: 'urushi.context-menu',
+			ITEM_ID_PREFIX: '.item',
+			EMBEDDED: {contextMenuClass: '', additionalClass: ''},
+			DURATION: 150,
+			ITEMS_TRANSITION_DURATION: 150,
+			ITEMS_LI_MARGIN: 20,
+			MINIMUM_WIDTH: 100,
+			CONTEXTMENU_WIDTH: 48,
 		};
 
 		/**
@@ -145,14 +145,14 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @constant
 			 * @private
 			 */
-			embedded : undefined,
+			embedded: undefined,
 			/**
 			 * <pre>
 			 * Width of menu items.
@@ -161,7 +161,7 @@ define(
 			 * @type string
 			 * @private
 			 */
-			contentWidth : undefined,
+			contentWidth: undefined,
 			/**
 			 * <pre>
 			 * Callback function for items are clicked.
@@ -171,7 +171,7 @@ define(
 			 * @type function
 			 * @private
 			 */
-			defaultCallback : undefined,
+			defaultCallback: undefined,
 			/**
 			 * <pre>
 			 * Callback function for context menu icon click event.
@@ -179,7 +179,7 @@ define(
 			 * @type array
 			 * @private
 			 */
-			onClickContextCallbacks : undefined,
+			onClickContextCallbacks: undefined,
 			/**
 			 * <pre>
 			 * Arguments for item click callback function.
@@ -187,7 +187,7 @@ define(
 			 * @type array
 			 * @private
 			 */
-			onClickItemCustomArgs : undefined,
+			onClickItemCustomArgs: undefined,
 			/**
 			 * <pre>
 			 * Whether bubbling contextMenu click event.
@@ -195,7 +195,7 @@ define(
 			 * @type boolean
 			 * @private
 			 */
-			bubbling : undefined,
+			bubbling: undefined,
 			/**
 			 * TODO: 削除予定
 			 * <pre>
@@ -204,7 +204,7 @@ define(
 			 * @type string
 			 * @private
 			 */
-			type : undefined,
+			type: undefined,
 			/**
 			 * <pre>
 			 * Identifier for item.
@@ -212,7 +212,7 @@ define(
 			 * @type string
 			 * @private
 			 */
-			itemIdNo : undefined,
+			itemIdNo: undefined,
 			/**
 			 * <pre>
 			 * It manages the end of display animation of context menu.
@@ -220,7 +220,7 @@ define(
 			 * @type object
 			 * @private
 			 */
-			animationDeferred : undefined,
+			animationDeferred: undefined,
 			/**
 			 * <pre>
 			 * It manages the end of transform animation of close icon.
@@ -228,7 +228,7 @@ define(
 			 * @type Deferred
 			 * @private
 			 */
-			closeIconAnimationDeferred : undefined,
+			closeIconAnimationDeferred: undefined,
 			/**
 			 * <pre>
 			 * Initialize instance property.
@@ -238,7 +238,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this._super(args);
 
 				this.template = template;
@@ -260,7 +260,7 @@ define(
 			 * @param {boolean} is Bubbling or not.
 			 * @returns none.
 			 */
-			_setBubbling : function (/* boolean */ is) {
+			_setBubbling: function(/* boolean */ is) {
 				if ('boolean' !== typeof is) {
 					return;
 				}
@@ -275,7 +275,7 @@ define(
 			 * @param {string} type Special style mode name.
 			 * @returns none.
 			 */
-			_setType : function (/* string */ type) {
+			_setType: function(/* string */ type) {
 				if ('grid' === type) {
 					this.rootNode.classList.add('type-grid');
 					this.type = 'grid';
@@ -294,7 +294,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			initOption : function (/* object */ args) {
+			initOption: function(/* object */ args) {
 				this._setType(args.type || false);
 
 				this.itemsNode.tabIndex = -1;
@@ -322,7 +322,7 @@ define(
 			 * @params {Array} items Items are added.
 			 * @returns none.
 			 */
-			addItems : function (/* Array */ items) {
+			addItems: function(/* Array */ items) {
 				var index,
 					length;
 
@@ -350,7 +350,7 @@ define(
 			 * @params {string} name Item's name.
 			 * @returns {object} item.
 			 */
-			getItem : function (/* string */ name) {
+			getItem: function(/* string */ name) {
 				return this.getSubItem(name);
 			},
 			/**
@@ -360,7 +360,7 @@ define(
 			 * @function
 			 * @returns {array} item list.
 			 */
-			getItems : function () {
+			getItems: function() {
 				return this.getSubItems();
 			},
 			/**
@@ -372,7 +372,7 @@ define(
 			 * @param {string|array} itemName Item name(s).
 			 * @returns none.
 			 */
-			setupShowItems : function (/* string|Array */ itemName) {
+			setupShowItems: function(/* string|Array */ itemName) {
 				var itemNames = itemName instanceof Array ? itemName : Array.prototype.slice.call(arguments),
 					isShowTarget = function(itemName) {
 						return itemNames.indexOf(itemName) > -1;
@@ -396,7 +396,7 @@ define(
 			 * @param {boolean} is Item's state that is hideen or not.
 			 * @returns {boolean} It finished function normally or not.
 			 */
-			setHiddenItem : function (/* boolean */ is) {
+			setHiddenItem: function(/* boolean */ is) {
 				var itemNames = Array.prototype.slice.call(arguments, 1),
 					index,
 					item,
@@ -427,7 +427,7 @@ define(
 			 * @param {string} itemName Item's name.
 			 * @returns {boolean} Item's state.
 			 */
-			isHiddenItem : function (/* string */ itemName) {
+			isHiddenItem: function(/* string */ itemName) {
 				var item = this.getItem(itemName);
 				if (!item) {
 					return undefined;
@@ -442,7 +442,7 @@ define(
 			 * @param {string} itemId Item's identifier.
 			 * @returns none.
 			 */
-			removeItems : function () {
+			removeItems: function() {
 				var itemNames = Array.prototype.slice.call(arguments),
 					index,
 					length,
@@ -469,7 +469,7 @@ define(
 			 * @param {string} itemId Item's identifier.
 			 * @returns none.
 			 */
-			_removeItem : function (/* string */ itemName) {
+			_removeItem: function(/* string */ itemName) {
 				urushi.removeEvent(this.itemsMap[itemName].node, 'click', this, 'onClickItem');
 				this.listNode.removeChild(this.itemsMap[itemName].node);
 				delete this.itemsMap[itemName];
@@ -483,20 +483,22 @@ define(
 			 * @params {object} item A item that is added to context menu.
 			 * @returns none.
 			 */
-			_addItem : function (/* object */ item) {
+			_addItem: function(/* object */ item) {
 				var itemArgs,
 					menuItem;
 
-				if (!item || !item.hasOwnProperty('name') || !item.name || !item.hasOwnProperty('label') || !item.label) {
+				if (!item ||
+						!item.hasOwnProperty('name') || !item.name ||
+						!item.hasOwnProperty('label') || !item.label) {
 					throw new Error('Item must have name and label.');
 				}
 				itemArgs = {
-					owner : this,
-					id : item.name,
-					liId : item.liId,
-					label : item.label,
-					icon : item.icon,
-					callback : item.callback,
+					owner: this,
+					id: item.name,
+					liId: item.liId,
+					label: item.label,
+					icon: item.icon,
+					callback: item.callback,
 				};
 				menuItem = new ContextMenuItem(itemArgs);
 				this.listNode.appendChild(menuItem.node);
@@ -511,7 +513,7 @@ define(
 			 * @private
 			 * @returns none
 			 */
-			_setContentWidth : function () {
+			_setContentWidth: function() {
 				var index,
 					length,
 					item,
@@ -525,7 +527,7 @@ define(
 					}
 				}
 				this.contentWidth = maxWidth + CONSTANTS.ITEMS_LI_MARGIN * 2;
-				this.contentWidth = (this.contentWidth > CONSTANTS.MINIMUM_WIDTH) ? this.contentWidth : CONSTANTS.MINIMUM_WIDTH;
+				this.contentWidth = Math.max(this.contentWidth, CONSTANTS.MINIMUM_WIDTH);
 			},
 			/**
 			 * <pre>
@@ -535,7 +537,7 @@ define(
 			 * @param {function} callback Callback function.
 			 * @returns none.
 			 */
-			setCallback : function (/* function */ callback) {
+			setCallback: function(/* function */ callback) {
 				var index,
 					length,
 					item,
@@ -564,7 +566,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			clearOnClickItemCustomArgs : function () {
+			clearOnClickItemCustomArgs: function() {
 				this.onClickItemCustomArgs = [];
 			},
 			/**
@@ -575,7 +577,7 @@ define(
 			 * @param {any} arguments item押下時のコールバック関数に渡す引数。可変長引数のためいくつでも記載可。
 			 * @returns none.
 			 */
-			addOnClickItemCustomArgs : function () {
+			addOnClickItemCustomArgs: function() {
 				var index,
 					length;
 				for (index = 0, length = arguments.length; index < length; index++) {
@@ -592,7 +594,7 @@ define(
 			 * @param {_CollectionItemBase} item 削除される子_CollectionItemBase
 			 * @returns none
 			 */
-			_onRemoveSubItem : function(/* _CollectionItemBase */ item) {
+			_onRemoveSubItem: function(/* _CollectionItemBase */ item) {
 				this._setContentWidth();
 			},
 			/**
@@ -603,7 +605,7 @@ define(
 			 * @param {object} item Item object.
 			 * @returns none.
 			 */
-			onClickItem : function (/* object */ item) {
+			onClickItem: function(/* object */ item) {
 				var fnc,
 					args = [],
 					index,
@@ -618,7 +620,7 @@ define(
 				for (index = 0, length = this.onClickItemCustomArgs.length; index < length; index++) {
 					args.push(this.onClickItemCustomArgs[index]);
 				}
-				fnc = function () {
+				fnc = function() {
 					item.callback.apply(this, args);
 				};
 				setTimeout(fnc, CONSTANTS.ITEMS_TRANSITION_DURATION);
@@ -631,7 +633,7 @@ define(
 			 * @param {function} callback Callback function.
 			 * @returns none.
 			 */
-			addOnClickContextCallback : function (/* function */ callback) {
+			addOnClickContextCallback: function(/* function */ callback) {
 				if ('function' !== typeof callback) {
 					throw new Error('addOnClickContextCallback : Specify function.');
 				}
@@ -646,7 +648,7 @@ define(
 			 * @params {object} event Event object.
 			 * @returns none.
 			 */
-			onClickContext : function (/* object */ event) {
+			onClickContext: function(/* object */ event) {
 				var items = this.listNode.childNodes,
 					index,
 					length,
@@ -655,8 +657,8 @@ define(
 					height,
 					show,
 					displayTargets = [],
-					delay = function (node) {
-						return function () {
+					delay = function(node) {
+						return function() {
 							node.classList.add('show');
 
 							if (!urushi.hasTransitionSupport()) {
@@ -740,7 +742,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_close : function () {
+			_close: function() {
 				var items = this.listNode.childNodes,
 					index,
 					length = items.length;
@@ -777,7 +779,7 @@ define(
 			 * @params {object} event Event object.
 			 * @returns none.
 			 */
-			onBlurContext : function (/* object */ event) {
+			onBlurContext: function(/* object */ event) {
 				event.stopPropagation();
 				this._close();
 			},
@@ -789,7 +791,7 @@ define(
 			 * @params {object} event Event object.
 			 * @returns none.
 			 */
-			onClickClose : function (/* object */ event) {
+			onClickClose: function(/* object */ event) {
 				event.stopPropagation();
 				this._close();
 			},
@@ -807,7 +809,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this.contextMenuIconNode = this.rootNode.getElementsByClassName('context-menu')[0];
 				this.itemsNode = this.rootNode.getElementsByClassName('items')[0];
 				this.listNode = this.rootNode.getElementsByClassName('items-list')[0];
@@ -820,7 +822,7 @@ define(
 			 * @private
 			 * @returns {string} object's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -831,7 +833,7 @@ define(
 			 * @private
 			 * @returns none
 			 */
-			_onCloseIconMouseEnter : function () {
+			_onCloseIconMouseEnter: function() {
 				//for IE
 				if (this.closeIconAnimationDeferred) {
 					this.closeIconAnimationDeferred.cancel();
@@ -851,7 +853,7 @@ define(
 			 * @private
 			 * @returns none
 			 */
-			_onCloseIconMouseLeave : function () {
+			_onCloseIconMouseLeave: function() {
 				if (this.closeIconAnimationDeferred) {
 					this.closeIconAnimationDeferred.cancel();
 					this.closeIconAnimationDeferred = undefined;
@@ -871,7 +873,7 @@ define(
 			 * @private
 			 * @returns {string} object's id.
 			 */
-			_getItemId : function () {
+			_getItemId: function() {
 				return this.id + CONSTANTS.ITEM_ID_PREFIX + this.itemIdNo++;
 			},
 			/**
@@ -882,7 +884,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			destroy : function () {
+			destroy: function() {
 				urushi.removeEvent(this.contextMenuIconNode, 'click', this, 'onClickContext');
 				urushi.removeEvent(this.closeIconNode, 'click', this, 'onClickClose');
 				urushi.removeEvent(this.itemsNode, 'blur', this, 'onBlurContext');

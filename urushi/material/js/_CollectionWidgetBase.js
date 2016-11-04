@@ -26,7 +26,7 @@ define(
 	 * @alias module:_CollectionWidgetBase
 	 * @returns {object} _CollectionWidgetBase object.
 	 */
-	function (_, _Base, _collectionMixin) {
+	function(_, _Base, _collectionMixin) {
 		'use strict';
 
 		/**
@@ -39,8 +39,8 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi._collectionWidgetBase',
-			EMBEDDED : {}
+			ID_PREFIX: 'urushi._collectionWidgetBase',
+			EMBEDDED: {}
 		};
 
 		/**
@@ -62,7 +62,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this._initPropertiesCollectionMixin(args);
 			},
 			/**
@@ -72,7 +72,7 @@ define(
 			 * @protected
 			 * @returns {string} Instance identifier.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -82,7 +82,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			destroy : function () {
+			destroy: function() {
 				this._destroyCollectionMixin();
 
 				this._super();
