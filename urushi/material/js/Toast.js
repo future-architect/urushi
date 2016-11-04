@@ -25,12 +25,12 @@
  *		descriptoin		: Body contents.
  * </pre>
  * @example
- *	require(['Toast'], function (Toast) {
+ *	require(['Toast'], function(Toast) {
  *		var toast = new Toast({
- *			id : 'myToast',
- *			toastClass : '',
- *			additionalClass : '',
- *			content : 'message'
+ *			id: 'myToast',
+ *			toastClass: '',
+ *			additionalClass: '',
+ *			content: 'message'
  *		});
  *		document.body.appendChild(toast.getRootNode());
  *		toast.show();
@@ -59,7 +59,7 @@ define(
 	 * @alias module:Toast
 	 * @returns {object} Toast object.
 	*/
-	function ($, urushi, materialConfig, _Base, Deferred, template) {
+	function($, urushi, materialConfig, _Base, Deferred, template) {
 		'use strict';
 
 		/**
@@ -70,9 +70,9 @@ define(
 		 * @constant
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.toast',
-			EMBEDDED : {additionalClass : '', content : ''},
-			CLASS_NAME_TOAST_OPENED : 'toast-opened'
+			ID_PREFIX: 'urushi.toast',
+			EMBEDDED: {additionalClass: '', content: ''},
+			CLASS_NAME_TOAST_OPENED: 'toast-opened'
 		};
 
 		/**
@@ -92,13 +92,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded : undefined,
+			embedded: undefined,
 			/**
 			 * <pre>
 			 * Indicates whether the toast is displayed.
@@ -106,7 +106,7 @@ define(
 			 * @type boolean
 			 * @private
 			 */
-			isShown : undefined,
+			isShown: undefined,
 			/**
 			 * <pre>
 			 * Initializes instance properties.
@@ -114,7 +114,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
 				this.isShown = false;
@@ -126,7 +126,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			initOption : function (/* object */ args) {
+			initOption: function(/* object */ args) {
 				this.setContent(args.content);
 			},
 			/**
@@ -136,7 +136,7 @@ define(
 			 * @param {string|node} content Contents.
 			 * @returns none.
 			 */
-			setContent : function (/* string|node */content) {
+			setContent: function(/* string|node */content) {
 				if (!urushi.setDomContents(this.contentNode, content)) {
 					throw new Error('Bad argument : content is required.');
 				}
@@ -147,7 +147,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			show : function () {
+			show: function() {
 				var style, deferred;
 
 				if (this.isShown) {
@@ -161,18 +161,18 @@ define(
 					this.rootNode.classList.add(CONSTANTS.CLASS_NAME_TOAST_OPENED);
 				} else {
 					style = {
-						'position' : 'relative',
-						'-ms-transform' : 'translateY(100%)',
-						'height' : 'auto',
-						'padding' : '14px 15px',
-						'margin-bottom' : '20px',
-						'opacity' : 0
+						'position': 'relative',
+						'-ms-transform': 'translateY(100%)',
+						'height': 'auto',
+						'padding': '14px 15px',
+						'margin-bottom': '20px',
+						'opacity': 0
 					};
 					$(this.rootNode).css(style);
 					$(this.rootNode).animate(
-						{bottom : materialConfig.TOAST_STYLE_BOTTOM, opacity : materialConfig.DEFAULT_VALUE_OPACITY_MAX},
+						{bottom: materialConfig.TOAST_STYLE_BOTTOM, opacity: materialConfig.DEFAULT_VALUE_OPACITY_MAX},
 						materialConfig.DEFAULT_VALUE_DURATION,
-						function () {
+						function() {
 							deferred.resolve();
 						}
 					);
@@ -186,7 +186,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			hide : function () {
+			hide: function() {
 				var deferred;
 
 				if (!this.isShown) {
@@ -200,7 +200,7 @@ define(
 					this.rootNode.classList.remove(CONSTANTS.CLASS_NAME_TOAST_OPENED);
 				} else {
 					$(this.rootNode).animate(
-						{bottom : 0, opacity : materialConfig.DEFAULT_VALUE_OPACITY_MIN},
+						{bottom: 0, opacity: materialConfig.DEFAULT_VALUE_OPACITY_MIN},
 						materialConfig.DEFAULT_VALUE_DURATION,
 						(function() {
 							this.rootNode.classList.add('hidden');
@@ -219,7 +219,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_onEndShow : function (/* object */ deferred) {
+			_onEndShow: function(/* object */ deferred) {
 				deferred.resolve();
 				urushi.removeEvent(this.rootNode, 'transitionend', this, '_onEndShow');
 			},
@@ -232,7 +232,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_onEndHide : function (/* object */ deferred) {
+			_onEndHide: function(/* object */ deferred) {
 				this.rootNode.classList.add('hidden');
 				deferred.resolve();
 
@@ -247,7 +247,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this.contentNode = this.rootNode.childNodes[0];
 			},
 			/**
@@ -255,7 +255,7 @@ define(
 			 * @protected
 			 * @returns {string} object's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			}
 		});

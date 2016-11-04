@@ -30,12 +30,12 @@
  *		descriptoin		: Chechbox label.
  * </pre>
  * @example
- *	require(['Checkbox'], function (Checkbox) {
+ *	require(['Checkbox'], function(Checkbox) {
  *		var checkbox = new Checkbox({
- *			id : 'myCheckbox',
- *			checkboxClass : 'checkbox-primary',
- *			additionalClass : '',
- *			label : 'Required'
+ *			id: 'myCheckbox',
+ *			checkboxClass: 'checkbox-primary',
+ *			additionalClass: '',
+ *			label: 'Required'
  *		});
  *		document.body.appendChild(checkbox.getRootNode());
  *	});
@@ -71,7 +71,7 @@ define(
 	 * @alias module:Checkbox
 	 * @returns {object} Checkbox instance.
 	 */
-	function (urushi, materialConfig, _Base, template, transitionUnit, rippleTransitionUnit) {
+	function(urushi, materialConfig, _Base, template, transitionUnit, rippleTransitionUnit) {
 		'use strict';
 
 		/**
@@ -82,22 +82,22 @@ define(
 		 * @constant
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.checkbox',
-			EMBEDDED : {checkboxClass : '', additionalClass : '', label : ''},
-			INTERVAL : 20,
-			RIPPLE_SCALE_MIN : 0,
-			RIPPLE_SCALE_MAX : 1,
-			CHECK_DEFAULT_TOP : 14,
-			CHECK_DEFAULT_LEFT : -3,
-			CHECK_DEFAULT_WIDTH : 0,
-			CHECK_DEFAULT_HIGHT : 0,
-			CHECK_ANIMATE_WIDTH_TOP : 13,
-			CHECK_ANIMATE_WIDTH_LEFT : -5,
-			CHECK_ANIMATE_WIDTH_WIDTH : 7,
-			CHECK_ANIMATE_WIDTH_HIGHT : 2,
-			CHECK_ANIMATE_HIGHT_TOP : 4,
-			CHECK_ANIMATE_HIGHT_LEFT : -1,
-			CHECK_ANIMATE_HIGHT_HIGHT : 13
+			ID_PREFIX: 'urushi.checkbox',
+			EMBEDDED: {checkboxClass: '', additionalClass: '', label: ''},
+			INTERVAL: 20,
+			RIPPLE_SCALE_MIN: 0,
+			RIPPLE_SCALE_MAX: 1,
+			CHECK_DEFAULT_TOP: 14,
+			CHECK_DEFAULT_LEFT: -3,
+			CHECK_DEFAULT_WIDTH: 0,
+			CHECK_DEFAULT_HIGHT: 0,
+			CHECK_ANIMATE_WIDTH_TOP: 13,
+			CHECK_ANIMATE_WIDTH_LEFT: -5,
+			CHECK_ANIMATE_WIDTH_WIDTH: 7,
+			CHECK_ANIMATE_WIDTH_HIGHT: 2,
+			CHECK_ANIMATE_HIGHT_TOP: 4,
+			CHECK_ANIMATE_HIGHT_LEFT: -1,
+			CHECK_ANIMATE_HIGHT_HIGHT: 13
 		};
 
 		/**
@@ -117,13 +117,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : template,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded : CONSTANTS.EMBEDDED,
+			embedded: CONSTANTS.EMBEDDED,
 			/**
 			 * <pre>
 			 * Animation time.
@@ -132,7 +132,7 @@ define(
 			 * @type number
 			 * @private
 			 */
-			duration : undefined,
+			duration: undefined,
 			/**
 			 * <pre>
 			 * Initialize instance properties.
@@ -141,7 +141,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
 				this.duration = materialConfig.DEFAULT_VALUE_DURATION;
@@ -155,7 +155,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_render : function (args) {
+			_render: function(args) {
 				this._super(args);
 
 				if (urushi.hasTransitionSupport()) {
@@ -175,7 +175,7 @@ define(
 			 * @param {object} Constructor arguments.
 			 * @returns none.
 			 */
-			initOption : function (/* object */ args) {
+			initOption: function(/* object */ args) {
 				this.setChecked(args.checked);
 
 				if (urushi.hasTransitionSupport()) {
@@ -189,7 +189,7 @@ define(
 			 * </pre>
 			 * @returns {boolean} Checkbox state.
 			 */
-			getValue : function () {
+			getValue: function() {
 				return this.inputNode.checked;
 			},
 			/**
@@ -198,7 +198,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			clear : function () {
+			clear: function() {
 				this.setChecked(false);
 			},
 			/**
@@ -210,7 +210,7 @@ define(
 			 * @param {boolean} is On or off checkbox.
 			 * @returns none.
 			 */
-			setChecked : function (/* boolean */ is) {
+			setChecked: function(/* boolean */ is) {
 				var checkDuration,
 					checkNode;
 
@@ -229,40 +229,40 @@ define(
 					checkNode = this.checkNode;
 
 					$(this.checkNode).css({
-						top : CONSTANTS.CHECK_DEFAULT_TOP,
-						left : CONSTANTS.CHECK_DEFAULT_LEFT,
-						width : CONSTANTS.CHECK_DEFAULT_WIDTH,
-						height : CONSTANTS.CHECK_DEFAULT_HIGHT,
-						opacity : materialConfig.DEFAULT_VALUE_OPACITY_MAX,
+						top: CONSTANTS.CHECK_DEFAULT_TOP,
+						left: CONSTANTS.CHECK_DEFAULT_LEFT,
+						width: CONSTANTS.CHECK_DEFAULT_WIDTH,
+						height: CONSTANTS.CHECK_DEFAULT_HIGHT,
+						opacity: materialConfig.DEFAULT_VALUE_OPACITY_MAX,
 					});
 
 					$(this.checkBackgroundNode).animate({
-						opacity : materialConfig.DEFAULT_VALUE_OPACITY_MAX
+						opacity: materialConfig.DEFAULT_VALUE_OPACITY_MAX
 					}, checkDuration);
 
 					$(this.checkBackgroundNode).css({
-						opacity : materialConfig.DEFAULT_VALUE_OPACITY_MAX
+						opacity: materialConfig.DEFAULT_VALUE_OPACITY_MAX
 					});
 
 					$(checkNode).animate({
-						top : CONSTANTS.CHECK_ANIMATE_WIDTH_TOP,
-						left : CONSTANTS.CHECK_ANIMATE_WIDTH_LEFT,
-						width : CONSTANTS.CHECK_ANIMATE_WIDTH_WIDTH,
-						hight : CONSTANTS.CHECK_ANIMATE_WIDTH_HIGHT
-					}, checkDuration, function () {
+						top: CONSTANTS.CHECK_ANIMATE_WIDTH_TOP,
+						left: CONSTANTS.CHECK_ANIMATE_WIDTH_LEFT,
+						width: CONSTANTS.CHECK_ANIMATE_WIDTH_WIDTH,
+						hight: CONSTANTS.CHECK_ANIMATE_WIDTH_HIGHT
+					}, checkDuration, function() {
 						$(checkNode).animate({
-							top : CONSTANTS.CHECK_ANIMATE_HIGHT_TOP,
-							left : CONSTANTS.CHECK_ANIMATE_HIGHT_LEFT,
-							height : CONSTANTS.CHECK_ANIMATE_HIGHT_HIGHT
+							top: CONSTANTS.CHECK_ANIMATE_HIGHT_TOP,
+							left: CONSTANTS.CHECK_ANIMATE_HIGHT_LEFT,
+							height: CONSTANTS.CHECK_ANIMATE_HIGHT_HIGHT
 						}, checkDuration);
 					});
 				} else {
 					$(this.checkBackgroundNode).animate({
-						opacity : materialConfig.DEFAULT_VALUE_OPACITY_MIN
+						opacity: materialConfig.DEFAULT_VALUE_OPACITY_MIN
 					}, this.duration);
 
 					$(this.checkNode).animate({
-						opacity : materialConfig.DEFAULT_VALUE_OPACITY_MIN
+						opacity: materialConfig.DEFAULT_VALUE_OPACITY_MIN
 					}, this.duration);
 				}
 			},
@@ -274,26 +274,28 @@ define(
 			 * @param {object} event Event object.
 			 * @returns none.
 			 */
-			_onClick : function (/* object */ event) {
+			_onClick: function(/* object */ event) {
 				var rippleCounter = 0,
 					rippleScale = CONSTANTS.RIPPLE_SCALE_MIN,
-					rippleOpacity = materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MIN,
-					ripple = function (/* object */ rippleNode, /* number */ duration) {
+					opacityMin = materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MIN,
+					opacityMax = materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MAX,
+					rippleOpacity = opacityMin,
+					ripple = function(/* object */ rippleNode, /* number */ duration) {
 						if (rippleCounter * CONSTANTS.INTERVAL < duration) {
 							setTimeout(function() {
 								rippleScale += CONSTANTS.RIPPLE_SCALE_MAX * CONSTANTS.INTERVAL / duration;
-								rippleOpacity += materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MAX * CONSTANTS.INTERVAL / duration;
+								rippleOpacity += opacityMax * CONSTANTS.INTERVAL / duration;
 								$(rippleNode).css({
-									'msTransform' : 'scale(' + rippleScale + ')',
-									'opacity' : rippleOpacity
+									'msTransform': 'scale(' + rippleScale + ')',
+									'opacity': rippleOpacity
 								});
 								rippleCounter++;
 								ripple(rippleNode, duration);
 							}, CONSTANTS.INTERVAL);
 						} else {
 							$(rippleNode).animate({
-								'msTransform' : 'scale(' + CONSTANTS.RIPPLE_SCALE_MIN + ')',
-								'opacity' : materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MIN
+								'msTransform': 'scale(' + CONSTANTS.RIPPLE_SCALE_MIN + ')',
+								'opacity': opacityMin
 							}, duration - 100);
 						}
 					};
@@ -318,7 +320,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this.inputNode = this.rootNode.getElementsByTagName('input')[0];
 
 				if (urushi.hasTransitionSupport()) {
@@ -334,7 +336,7 @@ define(
 			 * @protected
 			 * @returns {string} object's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -343,7 +345,7 @@ define(
 			 * </pre>
 			 * @returns {string} Value of input node attribute.
 			 */
-			getPropertyValue : function () {
+			getPropertyValue: function() {
 				return this.inputNode.value;
 			},
 			/**
@@ -353,7 +355,7 @@ define(
 			 * @param {string} value
 			 * @returns none
 			 */
-			setPropertyValue : function (/* string */ value) {
+			setPropertyValue: function(/* string */ value) {
 				this.inputNode.value = value;
 			},
 			/**
@@ -363,7 +365,7 @@ define(
 			 * @param {boolean} is True is disabled, false is enabled.
 			 * @returns {boolean} It finished normally, returns true.
 			 */
-			setDisabled : function (/* boolean */ is) {
+			setDisabled: function(/* boolean */ is) {
 				if (!this._super(is)) {
 					return false;
 				}
@@ -384,7 +386,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			destroy : function () {
+			destroy: function() {
 				if (!urushi.hasTransitionSupport()) {
 					urushi.removeEvent(this.inputNode, 'click', this, '_onClick');
 				}

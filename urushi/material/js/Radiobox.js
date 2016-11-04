@@ -44,15 +44,15 @@
  *		descriptoin		: Checked, or not.
  * </pre>
  * @example
- *	require(['Radiobox'], function (Radiobox) {
+ *	require(['Radiobox'], function(Radiobox) {
  *		var radiobox = new Radiobox({
- *			id : 'myRadio',
- *			radioboxClass : 'radio-default',
- *			additionalClass : 'disabled',
- *			name : 'category',
- *			value : 'type1',
- *			label : 'CAT : TYPE1',
- *			checked : true
+ *			id: 'myRadio',
+ *			radioboxClass: 'radio-default',
+ *			additionalClass: 'disabled',
+ *			name: 'category',
+ *			value: 'type1',
+ *			label: 'CAT : TYPE1',
+ *			checked: true
  *		});
  *		document.body.appendChild(radiobox.getRootNode());
  *	});
@@ -86,7 +86,7 @@ define(
 	 * @alias module:Radiobox
 	 * @returns {object} Radiobox instance.
 	*/
-	function ($, urushi, _Base, template) {
+	function($, urushi, _Base, template) {
 		'use strict';
 
 		/**
@@ -97,19 +97,19 @@ define(
 		 * @constant
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.Radiobox',
-			EMBEDDED : {radioboxClass : '', additionalClass : '', value : '', label : '', checked : false},
-			INTERVAL : 20,
-			RIPPLE_SCALE_MAX : 1,
-			RIPPLE_OPACITY_MAX : 0.2,
-			RIPPLE_SCALE_MIN : 0,
-			RIPPLE_OPACITY_MIN : 0,
-			CHECK_SCALE_MAX : 0.45,
-			CHECK_OPACITY_MAX : 1,
-			CHECK_SCALE_MIN : 0,
-			CHECK_OPACITY_MIN : 0,
-			DEFAULTS : {
-				DURATION : 300
+			ID_PREFIX: 'urushi.Radiobox',
+			EMBEDDED: {radioboxClass: '', additionalClass: '', value: '', label: '', checked: false},
+			INTERVAL: 20,
+			RIPPLE_SCALE_MAX: 1,
+			RIPPLE_OPACITY_MAX: 0.2,
+			RIPPLE_SCALE_MIN: 0,
+			RIPPLE_OPACITY_MIN: 0,
+			CHECK_SCALE_MAX: 0.45,
+			CHECK_OPACITY_MAX: 1,
+			CHECK_SCALE_MIN: 0,
+			CHECK_OPACITY_MIN: 0,
+			DEFAULTS: {
+				DURATION: 300
 			}
 		};
 
@@ -126,9 +126,9 @@ define(
 		 * For the browser does not support CSS3.0.
 		 * Controls same name radiobox.
 		 *	radioMap = {
-		 *		name : {
-		 *			checked : radioId,
-		 *			map : {id : instance}
+		 *		name: {
+		 *			checked: radioId,
+		 *			map: {id: instance}
 		 *		}
 		 *	}
 		 * </pre>
@@ -146,13 +146,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded : undefined,
+			embedded: undefined,
 			/**
 			 * <pre>
 			 * Initializes instance properties.
@@ -161,7 +161,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				if (!args.name) {
 					throw new Error('Name is required.');
 				}
@@ -177,7 +177,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			initOption : function (/* object */ args) {
+			initOption: function(/* object */ args) {
 				if (urushi.hasTransitionSupport()) {
 					return;
 				}
@@ -194,7 +194,7 @@ define(
 			 * </pre>
 			 * @returns {boolean} Whether the radiobox is checked or not.
 			 */
-			getValue : function () {
+			getValue: function() {
 				return this.inputNode.checked;
 			},
 			/**
@@ -204,7 +204,7 @@ define(
 			 * @param {boolean} is Whether it finished normally or not.
 			 * @returns none.
 			 */
-			setChecked : function (/* boolean */ is) {
+			setChecked: function(/* boolean */ is) {
 				if ('boolean' !== typeof is) {
 					return;
 				}
@@ -227,7 +227,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			_checkOn : function () {
+			_checkOn: function() {
 				var counter = 0,
 					rippleScale = CONSTANTS.RIPPLE_SCALE_MIN,
 					rippleOpacity = CONSTANTS.RIPPLE_OPACITY_MIN,
@@ -236,21 +236,21 @@ define(
 					resolution = CONSTANTS.INTERVAL / CONSTANTS.DEFAULTS.DURATION,
 					$rippleNode = $(this.rippleNode),
 					$checkNode = $(this.checkNode),
-					_checkOnInner = function () {
+					_checkOnInner = function() {
 						if (counter * CONSTANTS.INTERVAL < CONSTANTS.DEFAULTS.DURATION) {
-							setTimeout(function () {
+							setTimeout(function() {
 								rippleScale += CONSTANTS.RIPPLE_SCALE_MAX * resolution;
 								rippleOpacity += CONSTANTS.RIPPLE_OPACITY_MAX * resolution;
 								onCheckScale += CONSTANTS.CHECK_SCALE_MAX * resolution;
 								onCheckOpacity += CONSTANTS.CHECK_OPACITY_MAX * resolution;
 
 								$rippleNode.css({
-									'msTransform' : 'scale(' + rippleScale + ')',
-									'opacity' : rippleOpacity
+									'msTransform': 'scale(' + rippleScale + ')',
+									'opacity': rippleOpacity
 								});
 								$checkNode.css({
-									'msTransform' : 'scale(' + onCheckScale + ')',
-									'opacity' : onCheckOpacity
+									'msTransform': 'scale(' + onCheckScale + ')',
+									'opacity': onCheckOpacity
 								});
 
 								counter++;
@@ -259,8 +259,8 @@ define(
 						} else {
 							setTimeout(function() {
 								$rippleNode.animate({
-									'msTransform' : 'scale(' + CONSTANTS.CHECK_SCALE_MIN + ')',
-									'opacity' : CONSTANTS.CHECK_OPACITY_MIN
+									'msTransform': 'scale(' + CONSTANTS.CHECK_SCALE_MIN + ')',
+									'opacity': CONSTANTS.CHECK_OPACITY_MIN
 								}, CONSTANTS.DEFAULTS.DURATION - 100);
 							}, CONSTANTS.INTERVAL);
 						}
@@ -276,21 +276,21 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			_checkOff : function () {
+			_checkOff: function() {
 				var counter = 0,
 					offCheckScale = CONSTANTS.CHECK_SCALE_MAX,
 					offCheckOpacity = CONSTANTS.CHECK_OPACITY_MAX,
 					resolution = CONSTANTS.INTERVAL / CONSTANTS.DEFAULTS.DURATION,
 					$checkNode = $(this.checkNode),
-					_checkOffInner = function () {
+					_checkOffInner = function() {
 						if (counter * CONSTANTS.INTERVAL < CONSTANTS.DEFAULTS.DURATION) {
-							setTimeout(function () {
+							setTimeout(function() {
 								offCheckScale -= CONSTANTS.CHECK_SCALE_MAX * resolution;
 								offCheckOpacity -= CONSTANTS.CHECK_OPACITY_MAX * resolution;
 
 								$checkNode.css({
-									'msTransform' : 'scale(' + offCheckScale + ')',
-									'opacity' : offCheckOpacity
+									'msTransform': 'scale(' + offCheckScale + ')',
+									'opacity': offCheckOpacity
 								});
 
 								counter++;
@@ -309,7 +309,7 @@ define(
 			 * @param {object} event Event object.
 			 * @returns none.
 			 */
-			_onClick : function (/* object */ event) {
+			_onClick: function(/* object */ event) {
 				var name = this.inputNode.name,
 					id;
 
@@ -340,7 +340,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this.inputNode = this.rootNode.getElementsByTagName('input')[0];
 				this.rippleNode = this.rootNode.getElementsByClassName('ripple')[0];
 				this.checkNode = this.rootNode.getElementsByClassName('check')[0];
@@ -350,7 +350,7 @@ define(
 			 * @protected
 			 * @returns {string} Instance id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -359,7 +359,7 @@ define(
 			 * </pre>
 			 * @returns {string} Radiobox value attribute.
 			 */
-			getPropertyValue : function () {
+			getPropertyValue: function() {
 				return this.inputNode.value;
 			},
 			/**
@@ -369,7 +369,7 @@ define(
 			 * @param {string} value Value of the input value attribute.
 			 * @returns none
 			 */
-			setPropertyValue : function (/* string */ value) {
+			setPropertyValue: function(/* string */ value) {
 				this.inputNode.value = value;
 			},
 			/**
@@ -379,7 +379,7 @@ define(
 			 * @param {boolean} is True is disabled, false is enabled.
 			 * @returns {boolean} It finished normally, returns true.
 			 */
-			setDisabled : function (/* boolean */ is) {
+			setDisabled: function(/* boolean */ is) {
 				if (!this._super(is)) {
 					return false;
 				}

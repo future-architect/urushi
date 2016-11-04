@@ -40,24 +40,24 @@
  *		descriptoin		: Specify to display close button on header.
  * </pre>
  * @example
- *	require(['Alert'], function (Alert) {
+ *	require(['Alert'], function(Alert) {
  *		var alert = new Alert({
- *			id : 'myAlert',
- *			alertClass : 'alert-primary',
- *			additionalClass : '',
- *			header : 'Caution!',
- *			content : 'alert message.',
- * 			isDisplayCloseIcon : false
+ *			id: 'myAlert',
+ *			alertClass: 'alert-primary',
+ *			additionalClass: '',
+ *			header: 'Caution!',
+ *			content: 'alert message.',
+ * 			isDisplayCloseIcon: false
  *		});
  *		document.body.appendChild(alert.getRootNode());
  *		alert.show();
  *	});
  *
  * @example
- * <div id='myAlert' class="alert-primary" data-urushi-type="alert" data-urushi-options='{"header" : "Caution!", "isDisplayCloseIcon" : false}'>content</div>
+ * <div id='myAlert' class="alert-primary" data-urushi-type="alert" data-urushi-options='{"header": "Caution!", "isDisplayCloseIcon": false}'>content</div>
  *
  * @snippet-trigger urushi-alert
- * @snippet-content <div id="" data-urushi-type="alert" data-urushi-options='{"header" : "title"}'>Alert message.</div>
+ * @snippet-content <div id="" data-urushi-type="alert" data-urushi-options='{"header": "title"}'>Alert message.</div>
  * @snippet-description urushi-alert
  *
  * @module Alert
@@ -82,7 +82,7 @@ define(
 	 * @alias module:Alert
 	 * @returns {object} Alert class.
 	 */
-	function ($, urushi, materialConfig, _Base, template) {
+	function($, urushi, materialConfig, _Base, template) {
 		'use strict';
 
 		/**
@@ -93,8 +93,8 @@ define(
 		 * @constant
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.alert',
-			EMBEDDED : {alertClass : '', additionalClass : '', header : '', content : ''}
+			ID_PREFIX: 'urushi.alert',
+			EMBEDDED: {alertClass: '', additionalClass: '', header: '', content: ''}
 		};
 
 		/**
@@ -115,13 +115,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded : undefined,
+			embedded: undefined,
 			/**
 			 * <pre>
 			 * Animation time to close alert.
@@ -129,7 +129,7 @@ define(
 			 * @type number
 			 * @private
 			 */
-			duration : undefined,
+			duration: undefined,
 			/**
 			 * <pre>
 			 * display status of alert.
@@ -137,7 +137,7 @@ define(
 			 * @type boolean
 			 * @private
 			 */
-			isShown : undefined,
+			isShown: undefined,
 
 			/**
 			 * <pre>
@@ -147,7 +147,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
 				this.duration = materialConfig.DEFAULT_VALUE_DURATION;
@@ -162,7 +162,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			initOption : function (/* object */ args) {
+			initOption: function(/* object */ args) {
 				this.displayCloseIcon(args.isDisplayCloseIcon);
 				urushi.addEvent(this.buttonNode, 'click', this, 'close');
 			},
@@ -174,7 +174,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			show : function () {
+			show: function() {
 				if (this.isShown) {
 					return;
 				}
@@ -183,7 +183,10 @@ define(
 				if (urushi.hasTransitionSupport()) {
 					this.rootNode.classList.add('in');
 				} else {
-					$(this.rootNode).animate({width : materialConfig.ALERT_WIDTH, opacity : materialConfig.ALERT_OPACITY_MAX}, this.duration);
+					$(this.rootNode).animate({
+						width: materialConfig.ALERT_WIDTH,
+						opacity: materialConfig.ALERT_OPACITY_MAX
+					}, this.duration);
 				}
 			},
 			/**
@@ -194,7 +197,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			close : function () {
+			close: function() {
 				var node = this.rootNode;
 
 				if (!this.isShown) {
@@ -205,10 +208,13 @@ define(
 				if (urushi.hasTransitionSupport()) {
 					node.classList.remove('in');
 				} else {
-					$(this.rootNode).animate({width : materialConfig.ALERT_WIDTH_NONE, opacity : materialConfig.ALERT_OPACITY_MIN}, this.duration);
+					$(this.rootNode).animate({
+						width: materialConfig.ALERT_WIDTH_NONE,
+						opacity: materialConfig.ALERT_OPACITY_MIN
+					}, this.duration);
 				}
 
-				setTimeout(function () {
+				setTimeout(function() {
 					$(node).remove();
 				}, this.duration);
 			},
@@ -219,7 +225,7 @@ define(
 			 * @param {string|node|array} content Contents, is set in the header.
 			 * @returns none.
 			 */
-			setHeader : function (/* string|node|array */ content) {
+			setHeader: function(/* string|node|array */ content) {
 				if (!urushi.setDomContents(this.headerNode, content)) {
 					urushi.clearDomContents(this.headerNode);
 				}
@@ -231,7 +237,7 @@ define(
 			 * @param {string|node|array} content Contents, is set in the content area.
 			 * @returns none.
 			 */
-			setContent : function (/* string|node|array */ content) {
+			setContent: function(/* string|node|array */ content) {
 				if (!urushi.setDomContents(this.contentNode, content)) {
 					throw new Error('content is empty');
 				}
@@ -243,7 +249,7 @@ define(
 			 * @param {boolean} is Whether to display close icon or not.
 			 * @returns none.
 			 */
-			displayCloseIcon : function (/* boolean */ is) {
+			displayCloseIcon: function(/* boolean */ is) {
 				if ('boolean' !== typeof is) {
 					return;
 				}
@@ -264,7 +270,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this.buttonNode = this.rootNode.getElementsByTagName('button')[0];
 				this.headerNode = this.rootNode.getElementsByTagName('h4')[0];
 				this.contentNode = this.rootNode.getElementsByTagName('p')[0];
@@ -274,7 +280,7 @@ define(
 			 * @protected
 			 * @returns {string} Instance id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -285,7 +291,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			destroy : function () {
+			destroy: function() {
 				urushi.removeEvent(this.buttonNode, 'click', this, 'close');
 
 				this._super();

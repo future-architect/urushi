@@ -46,7 +46,7 @@ define(
 	 * @alias module:_ContextMenuItem
 	 * @returns {Object} _ContextMenuItem object.
 	 */
-	function (urushi, _CollectionItemBase) {
+	function(urushi, _CollectionItemBase) {
 		'use strict';
 
 		/**
@@ -59,10 +59,10 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi._contextMenuItem',
-			LI_ID_PREFIX : 'urushi._contextMenuItem.li',
-			ITEM_FONT_SIZE : 18,
-			ICON_MARGIN_RIGHT : 16,
+			ID_PREFIX: 'urushi._contextMenuItem',
+			LI_ID_PREFIX: 'urushi._contextMenuItem.li',
+			ITEM_FONT_SIZE: 18,
+			ICON_MARGIN_RIGHT: 16,
 		};
 
 		/**
@@ -92,7 +92,7 @@ define(
 			 * @type node
 			 * @private
 			 */
-			node : undefined,
+			node: undefined,
 			/**
 			 * <pre>
 			 * Width of label.
@@ -100,7 +100,7 @@ define(
 			 * @type number
 			 * @private
 			 */
-			width : 0,
+			width: 0,
 			/**
 			 * <pre>
 			 * Calback function for list item is clicked.
@@ -108,7 +108,7 @@ define(
 			 * @type function
 			 * @private
 			 */
-			callback : undefined,
+			callback: undefined,
 			/**
 			 * <pre>
 			 * Constructor.
@@ -119,7 +119,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			init : function (/* object */ args) {
+			init: function(/* object */ args) {
 				args = args || {};
 				this._super(args);
 
@@ -135,7 +135,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this._super(args);
 				this.callback = args.callback;
 			},
@@ -151,7 +151,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none
 			 */
-			_render : function (/* object */ args) {
+			_render: function(/* object */ args) {
 				var li,
 					span,
 					label,
@@ -186,7 +186,7 @@ define(
 			 * @param {function} callback Callback function.
 			 * @returns none.
 			 */
-			setCallback : function (/* function */ callback) {
+			setCallback: function(/* function */ callback) {
 				if ('function' !== typeof callback) {
 					throw new Error('setCallback : Specifiy function');
 				}
@@ -200,7 +200,7 @@ define(
 			 * @param {object} event Event object.
 			 * @returns none.
 			 */
-			onClickItem : function (/* object */ event) {
+			onClickItem: function(/* object */ event) {
 				event.stopPropagation();
 				this.owner.onClickItem(this);
 			},
@@ -211,7 +211,7 @@ define(
 			 * @protected
 			 * @returns {string} object's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -222,7 +222,7 @@ define(
 			 * @private
 			 * @returns {string} object's id.
 			 */
-			_getListItemId : function () {
+			_getListItemId: function() {
 				return CONSTANTS.LI_ID_PREFIX + liIdNo++;
 			},
 			/**
@@ -235,7 +235,7 @@ define(
 			 * @params {string} label Menu item label
 			 * @returns {number} width Width of men item.
 			 */
-			_getLabelWidth : function (/* string */ label) {
+			_getLabelWidth: function(/* string */ label) {
 				var $body = $(document.body),
 					$dummyWrapper = $('<div>'),
 					$dummy = $('<span>'),
@@ -244,16 +244,16 @@ define(
 				$dummy.text('&nbsp;');
 
 				$dummyWrapper.css({
-					position : 'absolute',
-					top : 0,
-					left : 0,
-					width : 9999,
-					'z-index' : -1
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					width: 9999,
+					'z-index': -1
 				});
 				$dummy.text(label);
 				$dummy.css({
-					'background-color' : 'transparent',
-					'font-size' : CONSTANTS.ITEM_FONT_SIZE + 'px',
+					'background-color': 'transparent',
+					'font-size': CONSTANTS.ITEM_FONT_SIZE + 'px',
 				});
 				$body.append($dummyWrapper.append($dummy));
 
@@ -272,7 +272,7 @@ define(
 			 * @param {boolean} is True is hidden, false is shown.
 			 * @returns {boolean} It finished normally, returns true.
 			 */
-			setHidden : function (/* boolean */ is) {
+			setHidden: function(/* boolean */ is) {
 				if ('boolean' !== typeof is) {
 					return false;
 				}
@@ -290,7 +290,7 @@ define(
 			 * @function
 			 * @returns {boolean} Whether the menu item is hidden or not.
 			 */
-			isHidden : function () {
+			isHidden: function() {
 				return this.node.classList.contains('hidden');
 			},
 			/**
@@ -300,7 +300,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			destroy : function () {
+			destroy: function() {
 				urushi.removeEvent(this.node, 'click', this, 'onClickItem');
 				$(this.node).remove();
 

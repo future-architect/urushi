@@ -35,20 +35,20 @@
  *		descriptoin		: Hint message for input. It is displayed at the bottom of input.
  * </pre>
  * @example
- *	require(['Input'], function (Input) {
+ *	require(['Input'], function(Input) {
  *		var input = new Input({
- *			id : 'myInput',
- *			inputClass : '',
- *			additionalClass : 'disabled',
- *			placeholder : 'Input mail address.',
- *			hint : 'hint message.',
+ *			id: 'myInput',
+ *			inputClass: '',
+ *			additionalClass: 'disabled',
+ *			placeholder: 'Input mail address.',
+ *			hint: 'hint message.',
  *		});
  *		document.body.appendChild(input.getRootNode());
  *		input.setValue('input value text');
  *	});
  *
  * @example
- *	<input id="myInput" class="disabled" type="text" value="input value text" placeholder="Input mail address." data-urushi-type="input" data-urushi-options='{"hint" : "hint message."}'>
+ *	<input id="myInput" class="disabled" type="text" value="input value text" placeholder="Input mail address." data-urushi-type="input" data-urushi-options='{"hint": "hint message."}'>
  *
  * @snippet-trigger urushi-input
  * @snippet-content <input id="" placeholder="example value." data-urushi-type="input">
@@ -81,7 +81,7 @@ define(
 	 * @alias module:Input
 	 * @returns {object} Input object.
 	 */
-	function (urushi, materialConfig, addInputEventListener, removeInputEventListener, _Base, template, transitionUnit) {
+	function(urushi, materialConfig, addInputEventListener, removeInputEventListener, _Base, template, transitionUnit) {
 		'use strict';
 
 		/**
@@ -92,10 +92,10 @@ define(
 		 * @constant
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.input',
-			EMBEDDED : {inputClass : '', additionalClass : ''},
-			DATA_URUSHI_FOCUS : 'data-urushi-focus',
-			INPUTNODE_FLOATING_LABEL : '.floating-label'
+			ID_PREFIX: 'urushi.input',
+			EMBEDDED: {inputClass: '', additionalClass: ''},
+			DATA_URUSHI_FOCUS: 'data-urushi-focus',
+			INPUTNODE_FLOATING_LABEL: '.floating-label'
 		};
 
 		/**
@@ -115,13 +115,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded : undefined,
+			embedded: undefined,
 			/**
 			 * <pre>
 			 * Callback functions for input events.
@@ -129,7 +129,7 @@ define(
 			 * @type object
 			 * @private
 			 */
-			callbacks : undefined,
+			callbacks: undefined,
 			/**
 			 * <pre>
 			 * TimeoutId for this.noBlurInput
@@ -138,7 +138,7 @@ define(
 			 * @default NaN
 			 * @private
 			 */
-			timeoutId : undefined,
+			timeoutId: undefined,
 			/**
 			 * <pre>
 			 * Flag for the undescore control.
@@ -148,7 +148,7 @@ define(
 			 * @default false
 			 * @private
 			 */
-			underlineFixShown : false,
+			underlineFixShown: false,
 			/**
 			 * <pre>
 			 * Style class for floating label element node.
@@ -158,7 +158,7 @@ define(
 			 * @default null
 			 * @private
 			 */
-			initFloatinglabelCss : null,
+			initFloatinglabelCss: null,
 			/**
 			 * <pre>
 			 * Initializes instance properties.
@@ -167,7 +167,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
 				this.callbacks = {};
@@ -185,7 +185,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_render : function (/* object */ args) {
+			_render: function(/* object */ args) {
 				this._super(args);
 
 				this._createPraceholder(args.placeholder);
@@ -197,7 +197,7 @@ define(
 				$(this.rootNode).find('.material-input').replaceWith(transitionUnit);
 				if (!urushi.hasTransitionSupport()) {
 					$(this.rootNode).find('.input-transition-unit-underline').css({
-						'margin-left' : '50%'
+						'margin-left': '50%'
 					});
 				}
 			},
@@ -209,7 +209,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			initOption : function (/* object */ args) {
+			initOption: function(/* object */ args) {
 				this.callbacks = addInputEventListener(this.inputNode, this._onInput.bind(this));
 				urushi.addEvent(this.inputNode, 'focus', this, '_onFocus');
 				urushi.addEvent(this.inputNode, 'blur', this, '_onBlur');
@@ -221,7 +221,7 @@ define(
 			 * @protected
 			 * @returns The input element node.
 			 */
-			_getInputNode : function () {
+			_getInputNode: function() {
 				return this.rootNode.getElementsByTagName('input')[0];
 			},
 			/**
@@ -232,7 +232,7 @@ define(
 			 * @param {string} placeholder Placeholder message.
 			 * @returns none.
 			 */
-			_createPraceholder : function (/* string */ placeholder) {
+			_createPraceholder: function(/* string */ placeholder) {
 				if (!placeholder) {
 					return;
 				}
@@ -245,7 +245,7 @@ define(
 				if (!urushi.hasTransitionSupport()) {
 					urushi.addEvent(this.floatinglabelNode, 'click', this, '_onClickFloatingLabel');
 
-					this.initFloatinglabelCss = {'top' : 5, 'font-size' : '14px'};
+					this.initFloatinglabelCss = {'top': 5, 'font-size': '14px'};
 				}
 			},
 			/**
@@ -256,7 +256,7 @@ define(
 			 * @param {string} hint Hint message.
 			 * @returns none.
 			 */
-			_createHint : function (/* string */ hint) {
+			_createHint: function(/* string */ hint) {
 				var div;
 				if (!hint) {
 					return;
@@ -273,7 +273,7 @@ define(
 			 * @param {string} value Value.
 			 * @returns none.
 			 */
-			setValue : function (/* string */ value) {
+			setValue: function(/* string */ value) {
 				if ('string' !== typeof value) {
 					return;
 				}
@@ -287,7 +287,7 @@ define(
 			 * </pre>
 			 * @returns {string} Value.
 			 */
-			getValue : function () {
+			getValue: function() {
 				return this.inputNode.value;
 			},
 			/**
@@ -296,7 +296,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			clear : function () {
+			clear: function() {
 				this.setValue('');
 			},
 			/**
@@ -308,7 +308,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this.inputNode = this.rootNode.getElementsByTagName('input')[0];
 
 				if (urushi.hasTransitionSupport()) {
@@ -323,7 +323,7 @@ define(
 			 * @protected
 			 * @returns {string} Instance id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -335,7 +335,7 @@ define(
 			 * @param {object} event Event object.
 			 * @returns none
 			 */
-			_onInput : function (/* object */ event) {
+			_onInput: function(/* object */ event) {
 				if (!urushi.hasTransitionSupport() && this.inputNode !== document.activeElement) {
 					if (this.inputNode.classList.contains('empty') && this.inputNode.value) {
 						this._moveOutPlaceholder();
@@ -359,7 +359,7 @@ define(
 			 * @param {object} event Event object.
 			 * @returns none
 			 */
-			_onClickFloatingLabel : function (/* object */ event) {
+			_onClickFloatingLabel: function(/* object */ event) {
 				if (urushi.hasTransitionSupport()) {
 					return;
 				}
@@ -384,7 +384,7 @@ define(
 			 * @param {object} event Event object.
 			 * @returns none
 			 */
-			_onFocus : function (/* object */ event) {
+			_onFocus: function(/* object */ event) {
 				event.stopPropagation();
 
 				if (urushi.hasTransitionSupport()) {
@@ -406,7 +406,7 @@ define(
 			 * @param {object} event Event object.
 			 * @returns none
 			 */
-			_onBlur : function (/* object */ event) {
+			_onBlur: function(/* object */ event) {
 				event.stopPropagation();
 
 				if (urushi.hasTransitionSupport()) {
@@ -429,11 +429,11 @@ define(
 			 * @protected
 			 * @returns none
 			 */
-			_showUnderline : function () {
+			_showUnderline: function() {
 				$(this.underlineNode).stop();
 				$(this.underlineNode).animate({
-					'margin-left' : 0,
-					'width' : '100%',
+					'margin-left': 0,
+					'width': '100%',
 				}, materialConfig.DEFAULT_VALUE_DURATION);
 			},
 			/**
@@ -444,11 +444,11 @@ define(
 			 * @protected
 			 * @returns none
 			 */
-			_hideUnderline : function () {
+			_hideUnderline: function() {
 				$(this.underlineNode).stop();
 				$(this.underlineNode).animate({
-					'margin-left' : '50%',
-					'width' : 0,
+					'margin-left': '50%',
+					'width': 0,
 				}, materialConfig.DEFAULT_VALUE_DURATION);
 			},
 			/**
@@ -459,7 +459,7 @@ define(
 			 * @protected
 			 * @returns none
 			 */
-			_showPlaceholder : function () {
+			_showPlaceholder: function() {
 				var $placeholderDiv = $(this.rootNode).find(CONSTANTS.INPUTNODE_FLOATING_LABEL);
 				this.inputNode.setAttribute(CONSTANTS.DATA_URUSHI_FOCUS, true);
 				if ($placeholderDiv.length && $(this.inputNode).hasClass('empty')) {
@@ -483,10 +483,10 @@ define(
 			 * @protected
 			 * @returns none
 			 */
-			_hidePlaceholder : function () {
+			_hidePlaceholder: function() {
 				var $placeholderDiv = $(this.rootNode).find(CONSTANTS.INPUTNODE_FLOATING_LABEL);
 				if ($placeholderDiv.length) {
-					this.timeoutId = setTimeout((function () {
+					this.timeoutId = setTimeout((function() {
 						this.inputNode.removeAttribute(CONSTANTS.DATA_URUSHI_FOCUS);
 						this.timeoutId = NaN;
 						if (!$(this.inputNode).hasClass('empty')) {
@@ -507,7 +507,7 @@ define(
 			 * @protected
 			 * @returns none
 			 */
-			_moveInPlaceholder : function () {
+			_moveInPlaceholder: function() {
 				var $placeholderDiv = $(this.rootNode).find(CONSTANTS.INPUTNODE_FLOATING_LABEL);
 				$placeholderDiv.stop();
 				$placeholderDiv.animate(this.initFloatinglabelCss, materialConfig.DEFAULT_VALUE_DURATION);
@@ -520,12 +520,12 @@ define(
 			 * @protected
 			 * @returns none
 			 */
-			_moveOutPlaceholder : function () {
+			_moveOutPlaceholder: function() {
 				var $placeholderDiv = $(this.rootNode).find(CONSTANTS.INPUTNODE_FLOATING_LABEL);
 				$placeholderDiv.stop();
 				$placeholderDiv.animate({
-					top : -16,
-					'font-size' : '10px'
+					top: -16,
+					'font-size': '10px'
 				}, materialConfig.DEFAULT_VALUE_DURATION);
 			},
 			/**
@@ -536,9 +536,9 @@ define(
 			 * @protected
 			 * @returns none
 			 */
-			_showHint : function () {
+			_showHint: function() {
 				$(this.rootNode).find('.hint').animate({
-					opacity : 1
+					opacity: 1
 				}, materialConfig.DEFAULT_VALUE_DURATION);
 			},
 			/**
@@ -549,9 +549,9 @@ define(
 			 * @protected
 			 * @returns none
 			 */
-			_hideHint : function () {
+			_hideHint: function() {
 				$(this.rootNode).find('.hint').animate({
-					opacity : 0
+					opacity: 0
 				}, materialConfig.DEFAULT_VALUE_DURATION);
 			},
 			/**
@@ -561,7 +561,7 @@ define(
 			 * @param {boolean} is True is disabled, false is enabled.
 			 * @returns {boolean} It finished normally, returns true.
 			 */
-			setDisabled : function (/* boolean */ is) {
+			setDisabled: function(/* boolean */ is) {
 				if (!this._super(is)) {
 					return false;
 				}
@@ -582,7 +582,7 @@ define(
 			 * </pre>
 			 * @returns none
 			 */
-			destroy : function () {
+			destroy: function() {
 				urushi.removeEvent(this.inputNode, 'focus', this, '_onFocus');
 				urushi.removeEvent(this.inputNode, 'blur', this, '_onBlur');
 

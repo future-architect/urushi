@@ -26,7 +26,7 @@ define(
 	 * @alias module:_Base
 	 * @returns {object} _Base instance.
 	 */
-	function (_, $, extend) {
+	function(_, $, extend) {
 		'use strict';
 
 		/**
@@ -37,8 +37,8 @@ define(
 		 * @constant
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi._base',
-			EMBEDDED : {}
+			ID_PREFIX: 'urushi._base',
+			EMBEDDED: {}
 		};
 
 		/**
@@ -57,7 +57,7 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : '',
+			template: '',
 			/**
 			 * <pre>
 			 * It's identifier.
@@ -67,7 +67,7 @@ define(
 			 * @type string
 			 * @private
 			 */
-			id : '',
+			id: '',
 			/**
 			 * <pre>
 			 * Root element node that is created by template string
@@ -75,7 +75,7 @@ define(
 			 * @type node
 			 * @private
 			 */
-			rootNode : null,
+			rootNode: null,
 			/**
 			 * <pre>
 			 * Default variables there are binded to template string.
@@ -84,7 +84,7 @@ define(
 			 * @type object
 			 * @private
 			 */
-			embedded : undefined,
+			embedded: undefined,
 
 			/**
 			 * <pre>
@@ -108,7 +108,7 @@ define(
 			 * @param {object} args Constructor argumetns.
 			 * @returns none.
 			 */
-			init : function (/* object */ args) {
+			init: function(/* object */ args) {
 				var _args = args || {};
 
 				this._initProperties(_args);
@@ -126,7 +126,7 @@ define(
 			 * @param {object} args Constructor argumetns.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this.template = '';
 				this.embedded = CONSTANTS.EMBEDDED;
 			},
@@ -140,7 +140,7 @@ define(
 			 * @param {object} args Constructor argumetns.
 			 * @returns none.
 			 */
-			initOption : function (/* object */ args) {},
+			initOption: function(/* object */ args) {},
 			/**
 			 * <pre>
 			 * Returns identifier.
@@ -153,7 +153,7 @@ define(
 			 * @protected
 			 * @returns {string} Instance's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -167,13 +167,13 @@ define(
 			 * @param {object} args Constructor argumetns.
 			 * @returns none
 			 */
-			_render : function (/* object */ args) {
+			_render: function(/* object */ args) {
 				var _compiled = _.template(this.template),
 					_args = args || {};
 
 				_args = _.extend(_.clone(this.embedded), args);
 				this.id = _args && _args.id || this._getId();
-				_args = _.extend(_args, {id : this.id});
+				_args = _.extend(_args, {id: this.id});
 				this.rootNode = $.parseHTML(_compiled(_args))[0];
 			},
 			/**
@@ -184,7 +184,7 @@ define(
 			 * @protected
 			 * @returns none
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 			},
 			/**
 			 * <pre>
@@ -192,7 +192,7 @@ define(
 			 * </pre>
 			 * @returns {node} Root node.
 			 */
-			getRootNode : function () {
+			getRootNode: function() {
 				return this.rootNode;
 			},
 			/**
@@ -202,7 +202,7 @@ define(
 			 * @param {boolean} is True is disabled, false is enabled.
 			 * @returns {boolean} It finished normally, returns true.
 			 */
-			setDisabled : function (/* boolean */ is) {
+			setDisabled: function(/* boolean */ is) {
 				if ('boolean' !== typeof is) {
 					return false;
 				}
@@ -223,7 +223,7 @@ define(
 			 * </pre>
 			 * @returns {boolean} Able state. Instance is disabled, returns true.
 			 */
-			isDisabled : function () {
+			isDisabled: function() {
 				return this.rootNode.classList.contains('disabled');
 			},
 			/**
@@ -234,7 +234,7 @@ define(
 			 * @param {boolean} is True is hidden, false is shown.
 			 * @returns {boolean} It finished normally, returns true.
 			 */
-			setHidden : function (/* boolean */ is) {
+			setHidden: function(/* boolean */ is) {
 				if ('boolean' !== typeof is) {
 					return false;
 				}
@@ -253,7 +253,7 @@ define(
 			 * </pre>
 			 * @returns {boolean} Avtive state. Instance is disabled, returns true.
 			 */
-			isHidden : function () {
+			isHidden: function() {
 				return this.rootNode.classList.contains('hidden');
 			},
 			/**
@@ -263,7 +263,7 @@ define(
 			 * </pre>
 			 * @returns none
 			 */
-			destroy : function () {
+			destroy: function() {
 				$(this.rootNode).remove();
 				this.destroyOption();
 			},
@@ -275,7 +275,7 @@ define(
 			 * @protected
 			 * @returns none
 			 */
-			destroyOption : function () {}
+			destroyOption: function() {}
 		});
 	}
 );

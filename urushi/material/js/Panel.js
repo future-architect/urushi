@@ -40,20 +40,20 @@
  *		descriptoin		: Footer content.
  * </pre>
  * @example
- *	require(['Panel'], function (Panel) {
+ *	require(['Panel'], function(Panel) {
  *		var panel = new Panel({
- *			id : 'myPanel',
- *			inputClass : 'panel-info',
- *			additionalClass : '',
- *			header : 'Header title',
- *			content : 'main contents',
- *			footer : 'additional messsage.'
+ *			id: 'myPanel',
+ *			inputClass: 'panel-info',
+ *			additionalClass: '',
+ *			header: 'Header title',
+ *			content: 'main contents',
+ *			footer: 'additional messsage.'
  *		});
  *		document.body.appendChild(panel.getRootNode());
  *	});
  *
  * @example
- *	<div id="myPanel" class="panel-info" data-urushi-type="panel" data-urushi-options='{"header" : "Header title", "footer" : "additional messsage."}'>
+ *	<div id="myPanel" class="panel-info" data-urushi-type="panel" data-urushi-options='{"header": "Header title", "footer": "additional messsage."}'>
  *		<p>contens. test message.</p>
  *		<div>
  *			<span class="hoge">message 1</span>
@@ -62,7 +62,7 @@
  *	</div>
  *
  * @snippet-trigger urushi-panel
- * @snippet-content <div id="" data-urushi-type="panel" data-urushi-options='{"header" : "Header title"}'></div>
+ * @snippet-content <div id="" data-urushi-type="panel" data-urushi-options='{"header": "Header title"}'></div>
  * @snippet-description urushi-panel
  *
  * @module Panel
@@ -84,7 +84,7 @@ define(
 	 * @alias module:Panel
 	 * @returns {object} Panel instance.
 	 */
-	function (urushi, _Base, template) {
+	function(urushi, _Base, template) {
 		'use strict';
 
 		/**
@@ -95,8 +95,8 @@ define(
 		 * @constant
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.Panel',
-			EMBEDDED : {panelClass : '', additionalClass : '', header : '', content : '', footer : ''}
+			ID_PREFIX: 'urushi.Panel',
+			EMBEDDED: {panelClass: '', additionalClass: '', header: '', content: '', footer: ''}
 		};
 
 		/**
@@ -117,13 +117,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded : undefined,
+			embedded: undefined,
 			/**
 			 * <pre>
 			 * Initializes instance properties.
@@ -132,7 +132,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
 			},
@@ -144,7 +144,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			initOption : function (/* object */ args) {
+			initOption: function(/* object */ args) {
 				this.setContent(args.content);
 				this.setHeader(args.header);
 				this.setFooter(args.footer);
@@ -156,7 +156,7 @@ define(
 			 * @param {string} header Content strings.
 			 * @returns none.
 			 */
-			setHeader : function (/* string */ header) {
+			setHeader: function(/* string */ header) {
 				if (urushi.setDomContents(this.headerNode, header)) {
 					if (this.headerNode.textContent) {
 						this.headerNode.classList.remove('hidden');
@@ -174,7 +174,7 @@ define(
 			 * @param {string|node|NodeList|function} content Body contents.
 			 * @returns none.
 			 */
-			setContent : function (/* string|node|NodeList|function */ contents) {
+			setContent: function(/* string|node|NodeList|function */ contents) {
 				if ('function' === typeof contents) {
 					contents = contents();
 				}
@@ -189,7 +189,7 @@ define(
 			 * @param {string} footer Content strings.
 			 * @returns none.
 			 */
-			setFooter : function (/* string */ footer) {
+			setFooter: function(/* string */ footer) {
 				if (urushi.setDomContents(this.footerNode, footer)) {
 					if (this.footerNode.textContent) {
 						this.footerNode.classList.remove('hidden');
@@ -211,7 +211,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this.headerNode = this.rootNode.getElementsByClassName('panel-header')[0];
 				this.contentNode = this.rootNode.getElementsByClassName('panel-body')[0];
 				this.footerNode = this.rootNode.getElementsByClassName('panel-footer')[0];
@@ -221,7 +221,7 @@ define(
 			 * @protected
 			 * @returns {string} Instance id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			}
 		});

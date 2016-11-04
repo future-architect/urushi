@@ -25,11 +25,11 @@
  *		descriptoin		: Dropdown list items.
  * </pre>
  * @example
- *	require(['Dropdown'], function (Dropdown) {
+ *	require(['Dropdown'], function(Dropdown) {
  *		var dropdown = new Dropdown({
- *			id : 'myCheckbox',
- *			dropdownClass : 'dropdown-primary',
- *			additionalClass : ''
+ *			id: 'myCheckbox',
+ *			dropdownClass: 'dropdown-primary',
+ *			additionalClass: ''
  *		});
  *		document.body.appendChild(dropdown.getRootNode());
  *	});
@@ -76,7 +76,7 @@ define(
 	 * @alias module:DropDown
 	 * @returns {object} Dropdown instance.
 	 */
-	function ($, urushi, legacy, materialConfig, animation, _Base, template) {
+	function($, urushi, legacy, materialConfig, animation, _Base, template) {
 		'use strict';
 
 		/**
@@ -87,17 +87,17 @@ define(
 		 * @constant
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.DropDown',
-			ID_PREFIX_ITEM : 'urushi.DropDown.item',
-			EMBEDDED : {additionalClass : ''},
-			TIMEOUT_TRIGGER : 10,
-			LIST_PLACE_TOP_RIGHT : 'top-right',
-			LIST_PLACE_BOTTOM_RIGHT : 'bottom-right',
-			ATTRIBUTE_INPUT_ITEM_SELECTED_VALUE : 'data-value',
-			ATTRIBUTE_UL_ITEM_SELECTED_ID : 'data-selected-id',
-			ATTRIBUTE_LI_ITEM_VALUE : 'data-value',
-			CLASS_ITEM_SELECTED : 'selected',
-			MENULIST_MIN_WIDTH : 200,
+			ID_PREFIX: 'urushi.DropDown',
+			ID_PREFIX_ITEM: 'urushi.DropDown.item',
+			EMBEDDED: {additionalClass: ''},
+			TIMEOUT_TRIGGER: 10,
+			LIST_PLACE_TOP_RIGHT: 'top-right',
+			LIST_PLACE_BOTTOM_RIGHT: 'bottom-right',
+			ATTRIBUTE_INPUT_ITEM_SELECTED_VALUE: 'data-value',
+			ATTRIBUTE_UL_ITEM_SELECTED_ID: 'data-selected-id',
+			ATTRIBUTE_LI_ITEM_VALUE: 'data-value',
+			CLASS_ITEM_SELECTED: 'selected',
+			MENULIST_MIN_WIDTH: 200,
 		};
 
 		/**
@@ -125,13 +125,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded : undefined,
+			embedded: undefined,
 			/**
 			 * <pre>
 			 * Dropdown menu is whether opend, or not.
@@ -139,27 +139,27 @@ define(
 			 * @type boolean
 			 * @private
 			 */
-			opened : false,
+			opened: false,
 			/**
 			 * <pre>
 			 * All of the dropdown items.
 			 * The format is as follows.
-			 * id : {label : '', value : '', node : node}
+			 * id : {label: '', value: '', node: node}
 			 * </pre>
 			 * @type object
 			 * @private
 			 */
-			items : undefined,
+			items: undefined,
 			/**
 			 * <pre>
 			 * All of the dropdown items.
 			 * The format is as follows.
-			 * value : {label : '', value : '', node : node}
+			 * value : {label: '', value: '', node: node}
 			 * </pre>
 			 * @type object
 			 * @private
 			 */
-			itemsByValue : undefined,
+			itemsByValue: undefined,
 			/**
 			 * <pre>
 			 * Deferred object for animation.
@@ -167,7 +167,7 @@ define(
 			 * @type object
 			 * @private
 			 */
-			animDeferred : undefined,
+			animDeferred: undefined,
 			/**
 			 * <pre>
 			 * Initializes instance properties.
@@ -176,7 +176,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
 				this.items = {};
@@ -193,7 +193,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			initOption : function (/* object */ args) {
+			initOption: function(/* object */ args) {
 				if (args.items) {
 					this.addItems(args.items);
 				}
@@ -214,7 +214,7 @@ define(
 			 * @params item {object} An item.
 			 * @returns none.
 			 */
-			_addItem : function (/* object */ item) {
+			_addItem: function(/* object */ item) {
 				var li,
 					label,
 					value,
@@ -231,11 +231,11 @@ define(
 				li.className = item.class || '';
 				value = item.value;
 				li.setAttribute(CONSTANTS.ATTRIBUTE_LI_ITEM_VALUE, item.value);
-				urushi.addEvent(li, 'click', this, '_onSelectItem', {target : li});
+				urushi.addEvent(li, 'click', this, '_onSelectItem', {target: li});
 
 				this.listNode.appendChild(li);
 
-				_item = {label : label, value : value, node : li};
+				_item = {label: label, value: value, node: li};
 				this.items[id] = _item;
 				this.itemsByValue[value] = _item;
 				
@@ -249,15 +249,15 @@ define(
 			 * </pre>
 			 * @example
 			 *	var item = {
-			 *		value : 'selected value', // require
-			 *		label : 'item label', // recommend
-			 *		class : 'optional-class', / option
+			 *		value: 'selected value', // require
+			 *		label: 'item label', // recommend
+			 *		class: 'optional-class', / option
 			 *	};
 			 *	dropdown.addItems([item]);
 			 * @params items {array} Items.
 			 * @returns none.
 			 */
-			addItems : function (/* array */ items) {
+			addItems: function(/* array */ items) {
 				var index, length;
 
 				if (!(items instanceof Array)) {
@@ -274,7 +274,7 @@ define(
 			 * @params value {string} Item value.
 			 * @returns none.
 			 */
-			removeItem : function (/* string */ value) {
+			removeItem: function(/* string */ value) {
 				var _item = this.itemsByValue[value],
 					id,
 					li,
@@ -304,7 +304,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			removeAllItems : function () {
+			removeAllItems: function() {
 				var value;
 				for (value in this.itemsByValue) {
 					this.removeItem(value);
@@ -318,7 +318,7 @@ define(
 			 * @param {node} target Selected element node.
 			 * @returns none.
 			 */
-			_onSelect : function (/* node */ target) {
+			_onSelect: function(/* node */ target) {
 				var id = target.id,
 					item = this.items[id];
 
@@ -336,7 +336,7 @@ define(
 			 * @params {object} event Event object.
 			 * @returns none.
 			 */
-			_onSelectItem : function (/* object */ args, /* object */ event) {
+			_onSelectItem: function(/* object */ args, /* object */ event) {
 				var target = args.target;
 
 				this.onSelect(target);
@@ -349,7 +349,7 @@ define(
 			 * @params {node} target Element node to be selected.
 			 * @returns none.
 			 */
-			onSelect : function (/* node */ target) {
+			onSelect: function(/* node */ target) {
 				this.clearSelected();
 				this._onSelect(target);
 			},
@@ -360,7 +360,7 @@ define(
 			 * @params {any} value Item's value
 			 * @returns none.
 			 */
-			setSelected : function (/* any */ value) {
+			setSelected: function(/* any */ value) {
 				var item = this.itemsByValue[value];
 
 				if (!item) {
@@ -374,7 +374,7 @@ define(
 			 * </pre>
 			 * @returns {object} Selected item.
 			 */
-			getSelectedItem : function () {
+			getSelectedItem: function() {
 				return this.items[this.listNode.getAttribute(CONSTANTS.ATTRIBUTE_UL_ITEM_SELECTED_ID) || ''];
 			},
 			/**
@@ -383,7 +383,7 @@ define(
 			 * </pre>
 			 * @returns {node} Selected item element node.
 			 */
-			getSelectedNode : function () {
+			getSelectedNode: function() {
 				var item = this.getSelectedItem();
 				return item ? item.node : undefined;
 			},
@@ -393,7 +393,7 @@ define(
 			 * </pre>
 			 * @returns {any} Item value.
 			 */
-			getSelectedValue : function () {
+			getSelectedValue: function() {
 				var item = this.getSelectedItem();
 				return item ? item.value : undefined;
 			},
@@ -403,8 +403,9 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			clearSelected : function () {
-				var selected = Array.prototype.slice.call(this.listNode.getElementsByClassName(CONSTANTS.CLASS_ITEM_SELECTED)),
+			clearSelected: function() {
+				var selectedNodes = this.listNode.getElementsByClassName(CONSTANTS.CLASS_ITEM_SELECTED),
+					selected = Array.prototype.slice.call(selectedNodes),
 					index,
 					length;
 
@@ -420,7 +421,7 @@ define(
 			 * @params {object} event Event object.
 			 * @returns none.
 			 */
-			_onMousedownList : function (/* object */ event) {
+			_onMousedownList: function(/* object */ event) {
 				event.preventDefault();
 
 				this.cancelBlur = true;
@@ -437,7 +438,7 @@ define(
 			 * @params {object} event Event object.
 			 * @returns none.
 			 */
-			_onClickInput : function (/* object */ event) {
+			_onClickInput: function(/* object */ event) {
 				var items = this.listNode.childNodes,
 					length = items.length,
 					dropDownHeight,
@@ -490,7 +491,7 @@ define(
 			 * @params {object} event Event object.
 			 * @returns none.
 			 */
-			_onBlurInput : function (event) {
+			_onBlurInput: function(event) {
 				if (this.cancelBlur) {
 					delete this.cancelBlur;
 					return;
@@ -506,7 +507,7 @@ define(
 			 * @params {object} event Event object.
 			 * @returns none.
 			 */
-			_onKeydownInput : function (event) {
+			_onKeydownInput: function(event) {
 				var keyCode = urushi.getKeyCode(event),
 					pageOffset;
 				if (this.opened) {
@@ -566,7 +567,7 @@ define(
 			 * @params {number} overInitial Item to be displayed at the top when Display item is over the menu list.
 			 * @returns none.
 			 */
-			_moveDisplayItems : function (/* number */ distance, /* number */ initial, /* number */ overInitial) {
+			_moveDisplayItems: function(/* number */ distance, /* number */ initial, /* number */ overInitial) {
 				var prevNode,
 					prevIndex = NaN,
 					nextIndex;
@@ -590,7 +591,7 @@ define(
 			 * @params {number} index index of item.
 			 * @returns none.
 			 */
-			_moveSelection : function (/* number */ nextIndex) {
+			_moveSelection: function(/* number */ nextIndex) {
 				var prevNode,
 					prevIndex = NaN,
 					nextNode;
@@ -615,7 +616,7 @@ define(
 			 * @params {node} target Item element node.
 			 * @returns none.
 			 */
-			_makeVisibleItem : function (/* node */ target) {
+			_makeVisibleItem: function(/* node */ target) {
 				if (!this.listNode.classList.contains('scroll')) {
 					return;
 				}
@@ -633,7 +634,7 @@ define(
 			 * @params {node} target Item element node.
 			 * @returns none.
 			 */
-			_makeVisibleItemForInit : function (/* node */ target) {
+			_makeVisibleItemForInit: function(/* node */ target) {
 				if (!target || !this.listNode.classList.contains('scroll')) {
 					return;
 				}
@@ -652,7 +653,7 @@ define(
 			 * @params {node} target Item element node.
 			 * @returns none.
 			 */
-			_setScrollVisibleTop : function (/* node */ target) {
+			_setScrollVisibleTop: function(/* node */ target) {
 				this.listNode.scrollTop = target.offsetTop;
 			},
 			/**
@@ -663,7 +664,7 @@ define(
 			 * @params {node} target Item element node.
 			 * @returns none.
 			 */
-			_setScrollVisibleBottom : function (/* node */ target) {
+			_setScrollVisibleBottom: function(/* node */ target) {
 				this.listNode.scrollTop = target.offsetTop + target.offsetHeight - this.listNode.offsetHeight;
 			},
 			/**
@@ -677,7 +678,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this.mainNode = this.rootNode.getElementsByClassName('dropdown')[0];
 				this.inputNode = this.rootNode.getElementsByTagName('input')[0];
 				this.listNode = this.rootNode.getElementsByTagName('ul')[0];
@@ -687,7 +688,7 @@ define(
 			 * @protected
 			 * @returns {string} Instance id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -697,7 +698,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_getItemId : function () {
+			_getItemId: function() {
 				return CONSTANTS.ID_PREFIX_ITEM + itemIdNo++;
 			},
 			/**
@@ -707,7 +708,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_openDropDownMenu : function (/* number */ height) {
+			_openDropDownMenu: function(/* number */ height) {
 				var liWidth,
 					liHeight,
 					select,
@@ -723,8 +724,8 @@ define(
 				liHeight = $(this.listNode.childNodes[0]).outerHeight();
 
 				$(this.listNode).find('li').css({
-					width : liWidth,
-					height : liHeight,
+					width: liWidth,
+					height: liHeight,
 				});
 				this.listNode.style.minWidth = 0;
 
@@ -766,7 +767,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_closeDropDownMenu : function () {
+			_closeDropDownMenu: function() {
 				var startWidth,
 					startHeight,
 					startOpacity;
@@ -800,7 +801,7 @@ define(
 			 * @param {boolean} is True is disabled, false is enabled.
 			 * @returns {boolean} It finished normally, returns true.
 			 */
-			setDisabled : function (/* boolean */ is) {
+			setDisabled: function(/* boolean */ is) {
 				if (!this._super(is)) {
 					return false;
 				}
@@ -821,7 +822,7 @@ define(
 			 * </pre>
 			 * @returns none
 			 */
-			destroy : function () {
+			destroy: function() {
 				var items = this.listNode.childNodes,
 					index,
 					length = items.length,
