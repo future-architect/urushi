@@ -52,21 +52,21 @@
  *		descriptoin		: Tooltipが非表示になるイベントを指定する。
  * </pre>
  * @example
- *	require(['Tooltip'], function (Tooltip) {
+ *	require(['Tooltip'], function(Tooltip) {
  *		var tooltip = new Tooltip({
- *			id : 'myTooltip',
- *			tooltipClass : '',
- *			additionalClass : '',
- *			position : 'top',
- *			content : 'please press the buttton.',
- *			parentNode : someButtonNode,
- *			on : 'mouseover',
- *			off : 'mouseout'
+ *			id: 'myTooltip',
+ *			tooltipClass: '',
+ *			additionalClass: '',
+ *			position: 'top',
+ *			content: 'please press the buttton.',
+ *			parentNode: someButtonNode,
+ *			on: 'mouseover',
+ *			off: 'mouseout'
  *		});
  *	});
  *
  * @example
- *	<button id="tooltipOnButton" class="buttonClass" data-urushi-type="button" data-urushi-addition-type="tooltip" data-urushi-addition-options='{"content" : "tooltip message."}'>button name</button>
+ *	<button id="tooltipOnButton" class="buttonClass" data-urushi-type="button" data-urushi-addition-type="tooltip" data-urushi-addition-options='{"content": "tooltip message."}'>button name</button>
  *
  * @module Tooltip
  * @extends module:_Base
@@ -87,7 +87,7 @@ define(
 	 * @alias module:Tooltip
 	 * @returns {Object} Tooltip object.
 	 */
-	function (urushi, materialConfig, _Base, template) {
+	function(urushi, materialConfig, _Base, template) {
 		'use strict';
 
 		/**
@@ -101,12 +101,12 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.Tooltip',
-			EMBEDDED : {tooltipClass : '', additionalClass : '', position : ''},
-			POSITION_VALID : {'left' : true, 'right' : true, 'top' : true, 'bottom' : true},
-			MARGIN : 2,
-			EVENT_ON : 'mouseover',
-			EVENT_OFF : 'mouseout'
+			ID_PREFIX: 'urushi.Tooltip',
+			EMBEDDED: {tooltipClass: '', additionalClass: '', position: ''},
+			POSITION_VALID: {'left': true, 'right': true, 'top': true, 'bottom': true},
+			MARGIN: 2,
+			EVENT_ON: 'mouseover',
+			EVENT_OFF: 'mouseout'
 		};
 
 		/**
@@ -130,14 +130,14 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type Object
 			 * @constant
 			 * @private
 			 */
-			embedded : undefined,
+			embedded: undefined,
 			/**
 			 * <pre>
 			 * Tooltipが表示中かどうかのフラグ。
@@ -146,7 +146,7 @@ define(
 			 * @default false
 			 * @private
 			 */
-			isShown : undefined,
+			isShown: undefined,
 			/**
 			 * <pre>
 			 * 親となるノードに対するtooltipを表示する位置。
@@ -157,7 +157,7 @@ define(
 			 * @default 'right'
 			 * @private
 			 */
-			position : undefined,
+			position: undefined,
 			/**
 			 * <pre>
 			 * tooltipを表示するイベント。
@@ -166,7 +166,7 @@ define(
 			 * @default 'mouseover'
 			 * @private
 			 */
-			on : undefined,
+			on: undefined,
 			/**
 			 * <pre>
 			 * tooltipを非表示にするイベント。
@@ -175,7 +175,7 @@ define(
 			 * @default 'mouseout'
 			 * @private
 			 */
-			off : undefined,
+			off: undefined,
 			/**
 			 * <pre>
 			 * tooltipを表示/非表示を切り替える時間。
@@ -184,7 +184,7 @@ define(
 			 * @default 300
 			 * @private
 			 */
-			duration : undefined,
+			duration: undefined,
 			/**
 			 * <pre>
 			 * Toastの初期化処理。
@@ -194,7 +194,7 @@ define(
 			 * @param {Object} args 初期化時引数。 not nullable.
 			 * @returns none.
 			 */
-			init : function (/* Object */ args) {
+			init: function(/* Object */ args) {
 				args = args || {};
 				this._super(args);
 
@@ -212,7 +212,7 @@ define(
 			 * @param {Object} args 初期化時に必要な引数。
 			 * @returns none.
 			 */
-			_initProperties : function (/* Object */ args) {
+			_initProperties: function(/* Object */ args) {
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
 				this.isShown = false;
@@ -231,7 +231,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this.contentNode = this.rootNode.getElementsByClassName('popover-content')[0];
 			},
 			/**
@@ -247,8 +247,8 @@ define(
 			 * @param {string} position 対象のノードにツールチップを表示する際、どこに表示するかを指定する。
 			 * @returns none.
 			 */
-			setPosition : function (/* string */ position) {
-				var _position = ((typeof position === 'string') ? position : '').toLowerCase();
+			setPosition: function(/* string */ position) {
+				var _position = (('string' === typeof position) ? position : '').toLowerCase();
 
 				if (!CONSTANTS.POSITION_VALID[_position]) {
 					if (!this.rootNode.classList.contains(this.position)) {
@@ -270,7 +270,7 @@ define(
 			 * @param {Domnode} paarent 親ノード
 			 * @returns none.
 			 */
-			setParent : function (/* Domnode */ parent) {
+			setParent: function(/* Domnode */ parent) {
 				if (!parent || parent.nodeType !== document.ELEMENT_NODE) {
 					throw new Error('DomNode(ELEMENT_NODE)を指定してください。');
 				}
@@ -284,7 +284,7 @@ define(
 			 * @param {string} off イベント名
 			 * @returns none.
 			 */
-			setOn : function (/* string */ on) {
+			setOn: function(/* string */ on) {
 				this._clearOn();
 
 				this.on = 'string' === typeof on ? on : CONSTANTS.EVENT_ON;
@@ -301,7 +301,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			_clearOn : function () {
+			_clearOn: function() {
 				urushi.removeEvent(this.parentNode, this.on, this, 'show');
 			},
 			/**
@@ -312,7 +312,7 @@ define(
 			 * @param {string} off イベント名
 			 * @returns none.
 			 */
-			setOff : function (/* string */ off) {
+			setOff: function(/* string */ off) {
 				this._clearOff();
 
 				this.off = 'string' === typeof off ? off : CONSTANTS.EVENT_OFF;
@@ -329,7 +329,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			_clearOff : function () {
+			_clearOff: function() {
 				urushi.removeEvent(this.parentNode, this.off, this, 'hide');
 			},
 			/**
@@ -340,7 +340,7 @@ define(
 			 * @param {string} content Tooltipに表示するコンテンツ
 			 * @returns none.
 			 */
-			setContent : function (/* string */ content) {
+			setContent: function(/* string */ content) {
 				if (!urushi.setDomContents(this.contentNode, content)) {
 					throw new Error('ツールチップに表示するコンテンツを指定してください。');
 				}
@@ -352,7 +352,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			show : function () {
+			show: function() {
 				if (this.isShown) {
 					return;
 				}
@@ -363,14 +363,14 @@ define(
 					document.body.appendChild(this.rootNode);
 				}
 				this.rootNode.style.display = 'block';
-				setTimeout((function () {
+				setTimeout((function() {
 					var viewPosition = this._calculatePosition();
 					this.rootNode.style.top = viewPosition.top;
 					this.rootNode.style.left = viewPosition.left;
 					if (urushi.hasTransitionSupport()) {
 						this.rootNode.classList.add('in');
 					} else {
-						$(this.rootNode).animate({opacity : materialConfig.DEFAULT_VALUE_OPACITY_MAX}, this.duration);
+						$(this.rootNode).animate({opacity: materialConfig.DEFAULT_VALUE_OPACITY_MAX}, this.duration);
 					}
 				}).bind(this), 50);
 			},
@@ -381,7 +381,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			hide : function () {
+			hide: function() {
 				if (!this.isShown) {
 					return;
 				}
@@ -390,10 +390,10 @@ define(
 				if (urushi.hasTransitionSupport()) {
 					this.rootNode.classList.remove('in');
 				} else {
-					$(this.rootNode).animate({opacity : materialConfig.DEFAULT_VALUE_OPACITY_MIN}, this.duration);
+					$(this.rootNode).animate({opacity: materialConfig.DEFAULT_VALUE_OPACITY_MIN}, this.duration);
 				}
 
-				setTimeout((function () {
+				setTimeout((function() {
 					this.rootNode.style.display = 'none';
 					try {
 						document.body.removeChild(this.rootNode);
@@ -408,10 +408,10 @@ define(
 			 * </pre>
 			 * @function
 			 * @private
-			 * @returns {Object} {top : 'position : absoluteで表示するtop[px]', left : 'position : absoluteで表示するleft[px]'}
+			 * @returns {Object} {top: 'position : absoluteで表示するtop[px]', left: 'position : absoluteで表示するleft[px]'}
 			 */
-			_calculatePosition : function () {
-				var viewPosition = {top : '', left : ''},
+			_calculatePosition: function() {
+				var viewPosition = {top: '', left: ''},
 					parentRects,
 					parentOffset,
 					parentTop,
@@ -430,33 +430,37 @@ define(
 				parentLeft = parentOffset.left;
 
 				viewPositionCalculatorParent = {
-					left : {top : parentTop + parentRects.height / 2, left : parentLeft},
-					right : {top : parentTop + parentRects.height / 2, left : parentLeft + parentRects.width},
-					top : {top : parentTop, left : parentLeft + parentRects.width / 2},
-					bottom : {top : parentTop + parentRects.height, left : parentLeft + parentRects.width / 2}
+					left: {top: parentTop + parentRects.height / 2, left: parentLeft},
+					right: {top: parentTop + parentRects.height / 2, left: parentLeft + parentRects.width},
+					top: {top: parentTop, left: parentLeft + parentRects.width / 2},
+					bottom: {top: parentTop + parentRects.height, left: parentLeft + parentRects.width / 2}
 				};
 
 				rootNodeSize = {
-					height : this.rootNode.offsetHeight,
-					width : this.rootNode.offsetWidth
+					height: this.rootNode.offsetHeight,
+					width: this.rootNode.offsetWidth
 				};
 				arrow = {
-					left : {where : 'width', size : 11},
-					right : {where : 'width', size : 11},
-					top : {where : 'height', size : 11},
-					bottom : {where : 'height', size : 11}
+					left: {where: 'width', size: 11},
+					right: {where: 'width', size: 11},
+					top: {where: 'height', size: 11},
+					bottom: {where: 'height', size: 11}
 				};
 				rootNodeSize[arrow[this.position].where] += arrow[this.position].size;
 				viewPositionCalculator = {
-					left : {top : -(rootNodeSize.height / 2), left : -(rootNodeSize.width + CONSTANTS.MARGIN)},
-					right : {top : -(rootNodeSize.height / 2), left : CONSTANTS.MARGIN},
-					top : {top : -(rootNodeSize.height + CONSTANTS.MARGIN), left : -(rootNodeSize.width / 2)},
-					bottom : {top : CONSTANTS.MARGIN, left : -(rootNodeSize.width / 2)}
+					left: {top: -(rootNodeSize.height / 2), left: -(rootNodeSize.width + CONSTANTS.MARGIN)},
+					right: {top: -(rootNodeSize.height / 2), left: CONSTANTS.MARGIN},
+					top: {top: -(rootNodeSize.height + CONSTANTS.MARGIN), left: -(rootNodeSize.width / 2)},
+					bottom: {top: CONSTANTS.MARGIN, left: -(rootNodeSize.width / 2)}
 				};
 
 				viewPosition = {
-					top : viewPositionCalculatorParent[this.position].top + viewPositionCalculator[this.position].top + 'px',
-					left : viewPositionCalculatorParent[this.position].left + viewPositionCalculator[this.position].left + 'px'
+					top: viewPositionCalculatorParent[this.position].top +
+							viewPositionCalculator[this.position].top +
+							'px',
+					left: viewPositionCalculatorParent[this.position].left +
+							viewPositionCalculator[this.position].left +
+							'px'
 				};
 
 				return viewPosition;
@@ -470,8 +474,13 @@ define(
 			 * @protected
 			 * @returns {Object}
 			 */
-			_calculateParentRect : function () {
-				return this.parentNode.getClientRects().length ? this.parentNode.getClientRects()[0] : {top : 0, left : 0, height : 0, width : 0};
+			_calculateParentRect: function() {
+				return this.parentNode.getClientRects().length ? this.parentNode.getClientRects()[0] : {
+					top: 0,
+					left: 0,
+					height: 0,
+					width: 0
+				};
 			},
 			/**
 			 * <pre>
@@ -479,12 +488,12 @@ define(
 			 * </pre>
 			 * @function
 			 * @protected
-			 * @returns {Object} {top : offsetTop位置, left : offsetLeft}
+			 * @returns {Object} {top: offsetTop位置, left: offsetLeft}
 			 */
-			_calculateParentOffsetPos : function () {
+			_calculateParentOffsetPos: function() {
 				return {
-					top : this.parentNode.offsetTop,
-					left : this.parentNode.offsetLeft
+					top: this.parentNode.offsetTop,
+					left: this.parentNode.offsetLeft
 				};
 			},
 			/**
@@ -493,7 +502,7 @@ define(
 			 * @private
 			 * @returns {string} object's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -504,7 +513,7 @@ define(
 			 * @function
 			 * @returns {number} duration[ms].
 			 */
-			getDuration : function () {
+			getDuration: function() {
 				return this.duration;
 			},
 			/**
@@ -515,7 +524,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			destroy : function () {
+			destroy: function() {
 				this._clearOn();
 				this._clearOff();
 

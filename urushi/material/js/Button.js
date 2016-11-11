@@ -30,12 +30,12 @@
  *		descriptoin		: Label of button.
  * </pre>
  * @example
- *	require(['Button'], function (Button) {
+ *	require(['Button'], function(Button) {
  *		var button = new Button({
- *			id : 'myButton',
- *			buttonClass : 'button-raised button-primary',
- *			additionalClass : 'disabled',
- *			label : 'Commit'
+ *			id: 'myButton',
+ *			buttonClass: 'button-raised button-primary',
+ *			additionalClass: 'disabled',
+ *			label: 'Commit'
  *		});
  *		document.body.appendChild(button.getRootNode());
  *	});
@@ -65,7 +65,7 @@ define(
 	 * @alias module:Button
 	 * @returns {object} Button object.
 	 */
-	function (Ripple, template) {
+	function(Ripple, template) {
 		'use strict';
 
 		/**
@@ -78,8 +78,8 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.button',
-			EMBEDDED : {buttonClass : '', additionalClass : '', label : 'Button Name'}
+			ID_PREFIX: 'urushi.button',
+			EMBEDDED: {buttonClass: '', additionalClass: '', label: 'Button Name'}
 		};
 
 		/**
@@ -102,13 +102,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : template,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded : CONSTANTS.EMBEDDED,
+			embedded: CONSTANTS.EMBEDDED,
 			/**
 			 * <pre>
 			 * Initialize instance properties.
@@ -117,7 +117,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this._super(args);
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
@@ -127,7 +127,7 @@ define(
 			 * @protected
 			 * @returns {string} object's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -138,7 +138,7 @@ define(
 			 * @param {boolean} is True is disabled, false is enabled.
 			 * @returns {boolean} It finished normally, returns true.
 			 */
-			setDisabled : function (/* boolean */ is) {
+			setDisabled: function(/* boolean */ is) {
 				if (!this._super(is)) {
 					return false;
 				}
@@ -155,7 +155,7 @@ define(
 			 * </pre>
 			 * @returns {mpde} Button node.
 			 */
-			getButtonNode : function () {
+			getButtonNode: function() {
 				return this.rootNode;
 			},
 		});

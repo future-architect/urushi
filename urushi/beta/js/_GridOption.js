@@ -15,9 +15,9 @@
  * </pre>
  *
  * @example
- *	require(['_GridOption'], function (_GridOption) {
+ *	require(['_GridOption'], function(_GridOption) {
  *		var option = new GridOption({
- *			dataList : []
+ *			dataList: []
  *		});
  *	});
  *
@@ -33,7 +33,7 @@ define(
 	 * @alias module:_GridOption
 	 * @returns {object} _GridOption object.
 	 */
-	function (extend, Config, Deferred) {
+	function(extend, Config, Deferred) {
 		'use strict';
 
 		return Class.extend({
@@ -43,21 +43,21 @@ define(
 			 * </pre>
 			 * @type object
 			 */
-			option : undefined,
+			option: undefined,
 			/**
 			 * <pre>
 			 * Modules that is used in Grid.
 			 * </pre>
 			 * @type object
 			 */
-			moduleMap : undefined,
+			moduleMap: undefined,
 			/**
 			 * <pre>
 			 * GridOptionにて使用するthis.config情報を保持するオブジェクト
 			 * </pre>
 			 * @type object
 			 */
-			config : undefined,
+			config: undefined,
 
 			/**
 			 * <pre>
@@ -68,7 +68,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			init : function (/* object */ args) {
+			init: function(/* object */ args) {
 				var _args = args || {};
 				// this._super(_args);
 				this._initProperties(_args);
@@ -83,7 +83,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this.option = {};
 				this.moduleMap = {};
 				this.config = Config;
@@ -96,7 +96,7 @@ define(
 			 * @param {object} args Constructor arguments for the Class.
 			 * @returns deferred Deferred instance.
 			 */
-			requireModules : function (/* array */ moduleNames) {
+			requireModules: function(/* array */ moduleNames) {
 				var deferred = new Deferred(),
 					unrequiredModules = this._detectUnrequired(moduleNames),
 					index,
@@ -113,7 +113,7 @@ define(
 				for (index = 0, length = unrequiredModules.length; index < length; index++) {
 					requireModules.push(this.config.allowedModules[unrequiredModules[index]]);
 				}
-				require(requireModules, function () {
+				require(requireModules, function() {
 					for (index = 0, length = unrequiredModules.length; index < length; index++) {
 						this.moduleMap[unrequiredModules[index]] = arguments[index];
 					}
@@ -130,7 +130,7 @@ define(
 			 * @param {array} moduleNames List of Class name.
 			 * @returns Class name list that must be loaded.
 			 */
-			_detectUnrequired : function (/* array */ moduleNames) {
+			_detectUnrequired: function(/* array */ moduleNames) {
 				var moduleName,
 					requiredModules = Object.keys(this.moduleMap),
 					index,
@@ -154,10 +154,10 @@ define(
 			 * @param {object} options Options.
 			 * @returns none
 			 */
-			addOptions : function (/* object */ options) {
+			addOptions: function(/* object */ options) {
 				var name;
 				if (!(options instanceof Object)) {
-					throw new Error('addOptions : Invalid Argument.');
+					throw new Error('addOptions: Invalid Argument.');
 				}
 				for (name in options) {
 					try {
@@ -167,7 +167,7 @@ define(
 					}
 				}
 			},
-			// addOption : function (/* string */ name, /* object */ option) {
+			// addOption: function(/* string */ name, /* object */ option) {
 			// 	this._addOption(name, option);
 			// },
 			/**
@@ -181,14 +181,14 @@ define(
 			 * @param {object} option Option.
 			 * @returns none
 			 */
-			_addOption : function (/* string */ name, /* object */ option) {
+			_addOption: function(/* string */ name, /* object */ option) {
 				var module;
 
 				if (!(option instanceof Object)) {
-					throw new Error('_addOption : Invalid Argument.');
+					throw new Error('_addOption: Invalid Argument.');
 				}
 				if (-1 === Object.keys(this.config.allowedModules).indexOf(option.module)) {
-					throw new Error('_addOption : Invalid module for Grid. name:' + name);
+					throw new Error('_addOption: Invalid module for Grid. name:' + name);
 				}
 				if ('icon' === option.module) {
 					this.option[name] = option;
@@ -215,7 +215,7 @@ define(
 			 * @param {string} label Label.
 			 * @returns Instance.
 			 */
-			createModule : function (/* string */ name, /* string */ id, /* string */ label) {
+			createModule: function(/* string */ name, /* string */ id, /* string */ label) {
 				var _id = id + '.' + name + '.' + this.option[name].module;
 				return this._createModule(this.option[name], _id, label);
 			},
@@ -231,7 +231,7 @@ define(
 			 * @param {string} label Label.
 			 * @returns module
 			 */
-			_createModule : function (/* object */ option, /* string */ id, /* string */ label) {
+			_createModule: function(/* object */ option, /* string */ id, /* string */ label) {
 				var key,
 					moduleName,
 					properties,
@@ -273,7 +273,7 @@ define(
 			 * @param {string} name Column name.
 			 * @returns Whether the option is set or not.
 			 */
-			contains : function (/* string */ name) {
+			contains: function(/* string */ name) {
 				return !!this.option[name];
 			},
 			/**
@@ -284,7 +284,7 @@ define(
 			 * @param {string} name Column name.
 			 * @returns Additional class name that is set to column.
 			 */
-			getAdditionalColumnStyle : function (/* string */ name) {
+			getAdditionalColumnStyle: function(/* string */ name) {
 				return this.config.additionalColumnStyle[this.option[name].module];
 			},
 			/**
@@ -295,7 +295,7 @@ define(
 			 * @param {string} name Colmun name.
 			 * @returns Class name.
 			 */
-			getModuleName : function (/* string */ name) {
+			getModuleName: function(/* string */ name) {
 				return this.option[name].module;
 			},
 			/**
@@ -307,7 +307,7 @@ define(
 			 * @param {string} id Id of row.
 			 * @returns element node that contains icon element node.
 			 */
-			createIcon : function (/* string */ name, /* string */ id) {
+			createIcon: function(/* string */ name, /* string */ id) {
 				var icon = document.createElement('span');
 				icon.id = id + '.' + name + '.icon';
 				icon.classList.add('grid-icon');

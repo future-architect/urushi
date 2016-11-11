@@ -33,7 +33,7 @@ define(
 	 * @alias module:_CollectionItemBase
 	 * @returns {Class} _CollectionItemBase class.
 	 */
-	function (_, $, extend, _collectionMixin) {
+	function(_, $, extend, _collectionMixin) {
 		'use strict';
 
 		/**
@@ -46,9 +46,9 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi._collectionItemBase',
-			EMBEDDED : {},
-			ABSTRUCT_METHOD : function () {
+			ID_PREFIX: 'urushi._collectionItemBase',
+			EMBEDDED: {},
+			ABSTRUCT_METHOD: function() {
 				throw new Error('Abstruct Error');
 			},
 		};
@@ -67,11 +67,11 @@ define(
 			/**
 			 * @see {@link module:_Base}#idPrefix
 			 */
-			idPrefix : CONSTANTS.ID_PREFIX,
+			idPrefix: CONSTANTS.ID_PREFIX,
 			/**
 			 * @see {@link module:_Base}#id
 			 */
-			id : '',
+			id: '',
 			/**
 			 * <pre>
 			 * Constructor.
@@ -98,7 +98,7 @@ define(
 			 * @param {object} args Constructor argumetns.
 			 * @returns none.
 			 */
-			init : function (/* object */ args) {
+			init: function(/* object */ args) {
 				var _args = args || {};
 
 				// Check whether parent is present.
@@ -130,7 +130,7 @@ define(
 			 * @param {object} args Constructor argumetns.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this._initPropertiesCollectionMixin(args);
 				this.id = args && args.id || this._getId();
 			},
@@ -144,7 +144,7 @@ define(
 			 * @param {object} args Constructor argumetns.
 			 * @returns none.
 			 */
-			initOption : function (/* object */ args) {},
+			initOption: function(/* object */ args) {},
 			/**
 			 * <pre>
 			 * Returns identifier.
@@ -158,7 +158,7 @@ define(
 			 * @private
 			 * @returns {string} Instance's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -172,7 +172,7 @@ define(
 			 * @param {object} args Constructor argumetns.
 			 * @returns none
 			 */
-			_render : function (/* object */ args) {
+			_render: function(/* object */ args) {
 			},
 			/**
 			 * <pre>
@@ -183,7 +183,7 @@ define(
 			 * @private
 			 * @returns none
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 			},
 			/**
 			 * <pre>
@@ -194,7 +194,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			setHidden : CONSTANTS.ABSTRUCT_METHOD,
+			setHidden: CONSTANTS.ABSTRUCT_METHOD,
 			/**
 			 * <pre>
 			 * Returns instance's active state.
@@ -203,7 +203,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			isHidden : CONSTANTS.ABSTRUCT_METHOD,
+			isHidden: CONSTANTS.ABSTRUCT_METHOD,
 			/**
 			 * <pre>
 			 * Discarding of instance.
@@ -212,7 +212,7 @@ define(
 			 * @function
 			 * @returns none
 			 */
-			destroy : function () {
+			destroy: function() {
 				this._destroyCollectionMixin();
 				this.destroyOption();
 			},
@@ -224,7 +224,7 @@ define(
 			 * @function
 			 * @returns none
 			 */
-			destroyOption : function () {}
+			destroyOption: function() {}
 		}));
 	}
 );

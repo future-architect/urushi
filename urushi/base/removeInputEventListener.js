@@ -17,12 +17,12 @@ define(
 	 * @alias module:removeInputEventListener
 	 * @returns {object} removeInputEventListener object.
 	 */
-	function () {
+	function() {
 		'use strict';
 
-		return (function () {
+		return (function() {
 			if (document.addEventListener) {
-				return function (/* object */ input, /* object */ callbacks) {
+				return function(/* object */ input, /* object */ callbacks) {
 					var eventName;
 
 					callbacks = callbacks || {};
@@ -35,7 +35,7 @@ define(
 					}
 				};
 			} else {
-				return function (/* object */ input, /* object */ callbacks) {
+				return function(/* object */ input, /* object */ callbacks) {
 					var eventName;
 
 					callbacks = callbacks || {};

@@ -17,7 +17,7 @@ define(
 	 * @alias module:xhr
 	 * @returns {object} xhr object.
 	 */
-	function (_, Deferred) {
+	function(_, Deferred) {
 		'use strict';
 		/**
 		 * <pre>
@@ -29,16 +29,16 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-				HTTP_METHOD_GET : 'GET',
-				HTTP_METHOD_POST : 'POST',
-				HTTP_METHOD_PUT : 'PUT',
-				HTTP_METHOD_DELETE : 'DELETE',
-				READY_STATE_UNINITIALIZED : 0,
-				READY_STATE_CONNECTED : 1,
-				READY_STATE_REQUESTED : 2,
-				READY_STATE_PROCESSING : 3,
-				READY_STATE_FINISHED : 4,
-				OPTION_DEFAULT_TIMEOUT : 300000
+				HTTP_METHOD_GET: 'GET',
+				HTTP_METHOD_POST: 'POST',
+				HTTP_METHOD_PUT: 'PUT',
+				HTTP_METHOD_DELETE: 'DELETE',
+				READY_STATE_UNINITIALIZED: 0,
+				READY_STATE_CONNECTED: 1,
+				READY_STATE_REQUESTED: 2,
+				READY_STATE_PROCESSING: 3,
+				READY_STATE_FINISHED: 4,
+				OPTION_DEFAULT_TIMEOUT: 300000
 			},
 			/**
 			 * <pre>
@@ -50,18 +50,18 @@ define(
 			 * @private
 			 */
 			defaultOptions = {
-				data : null,
-				query : null,
-				async : true,
-				responseType : 'text',
-				timeout : CONSTANTS.DEFAULT_TIMEOUT,
-				ioArgs : null,
-				withCredentials : false,
-				user : undefined,
-				password : undefined,
-				headers : {
-					'content-type' : 'application/x-www-form-urlencoded',
-					'X-Requested-With' : 'XMLHttpRequest'
+				data: null,
+				query: null,
+				async: true,
+				responseType: 'text',
+				timeout: CONSTANTS.DEFAULT_TIMEOUT,
+				ioArgs: null,
+				withCredentials: false,
+				user: undefined,
+				password: undefined,
+				headers: {
+					'content-type': 'application/x-www-form-urlencoded',
+					'X-Requested-With': 'XMLHttpRequest'
 				}
 			},
 			/**
@@ -73,7 +73,7 @@ define(
 			 * @private
 			 * @returns {boolean} true.
 			 */
-			isTrue = function () {
+			isTrue = function() {
 				return true;
 			},
 			/**
@@ -85,7 +85,7 @@ define(
 			 * @private
 			 * @returns {boolean} false.
 			 */
-			isFalse = function () {
+			isFalse = function() {
 				return false;
 			},
 			/**
@@ -97,7 +97,7 @@ define(
 			 * @private
 			 * @returns {boolean} Whether window object has XMLHttpRequest or not.
 			 */
-			hasXMLHttpRequest = (function () {
+			hasXMLHttpRequest = (function() {
 				return window.XMLHttpRequest ? isTrue : isFalse;
 			})(),
 			/**
@@ -109,7 +109,7 @@ define(
 			 * @private
 			 * @returns {boolean} Whether XMLHttpRequest has responceType or not.
 			 */
-			hasResponseType = (function () {
+			hasResponseType = (function() {
 				var httpRequest;
 
 				if (!hasXMLHttpRequest()) {
@@ -127,13 +127,13 @@ define(
 			 * @private
 			 * @returns {object} Xml http request object.
 			 */
-			getHttpRequest = (function () {
+			getHttpRequest = (function() {
 				if (window.XMLHttpRequest) {
-					return function () {
+					return function() {
 						return new XMLHttpRequest();
 					};
 				} else if (window.ActiveXObject) {
-					return function () {
+					return function() {
 						var httpRequest;
 						try {
 							httpRequest = new window.ActiveXObject('Msxml2.XMLHTTP');
@@ -143,7 +143,7 @@ define(
 						return httpRequest;
 					};
 				} else {
-					return function () {
+					return function() {
 						return null;
 					};
 				}
@@ -158,9 +158,9 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			response = function (/* object */ httpRequest, /* object */ deferred) {
+			response = function(/* object */ httpRequest, /* object */ deferred) {
 				var validStatus = [200, 201];
-				return function () {
+				return function() {
 					if (CONSTANTS.READY_STATE_FINISHED === httpRequest.readyState) {
 						if (-1 !== validStatus.indexOf(httpRequest.status)) {
 							deferred.resolve(httpRequest.responseText);
@@ -183,7 +183,7 @@ define(
 			 * @param {object} options Xhr optoins.
 			 * @returns {object} Deferred.
 			 */
-			_xhr = function (/* string */ method, /* string */ uri, /* object */ options) {
+			_xhr = function(/* string */ method, /* string */ uri, /* object */ options) {
 				var deferred = new Deferred(),
 					httpRequest,
 					xhrOptions,
@@ -195,7 +195,10 @@ define(
 
 					httpRequest.open(method, uri, xhrOptions.async, xhrOptions.user, xhrOptions.password);
 					httpRequest.withCredentials = xhrOptions.withCredentials;
-					httpRequest.onreadystatechange = xhrOptions.response ? xhrOptions.response(httpRequest, deferred) : response(httpRequest, deferred);
+					httpRequest.onreadystatechange = xhrOptions.response
+						? xhrOptions.response(httpRequest, deferred)
+						: response(httpRequest, deferred);
+					
 					if (hasResponseType()) {
 						httpRequest.responseType = xhrOptions.responseType;
 					}
@@ -217,8 +220,8 @@ define(
 			 * Get method.
 			 * </pre>
 			 * @example
-			 *	require(['xhr'], function (xhr) {
-			 *		xhr.get('http://localhost/urshi/Something?id=1').then(function (result) {
+			 *	require(['xhr'], function(xhr) {
+			 *		xhr.get('http://localhost/urshi/Something?id=1').then(function(result) {
 			 *			console.log(result);
 			 *		});
 			 *	});
@@ -227,7 +230,7 @@ define(
 			 * @param {object} options Xhr optoins.
 			 * @returns {object} Deferred object.
 			 */
-			get : function (/* string */ uri, /* object */ options) {
+			get: function(/* string */ uri, /* object */ options) {
 				return _xhr(CONSTANTS.HTTP_METHOD_GET, uri, options);
 			},
 			/**
@@ -235,8 +238,8 @@ define(
 			 * Post method.
 			 * </pre>
 			 * @example
-			 *	require(['xhr'], function (xhr) {
-			 *		xhr.post('http://localhost/urshi/Something', {data : {name : 'urushi'}}).then(function (result) {
+			 *	require(['xhr'], function(xhr) {
+			 *		xhr.post('http://localhost/urshi/Something', {data: {name: 'urushi'}}).then(function(result) {
 			 *			console.log(result);
 			 *		});
 			 *	});
@@ -245,7 +248,7 @@ define(
 			 * @param {object} options Xhr optoins.
 			 * @returns {object} Deferred object.
 			 */
-			post : function (/* string */ uri, /* object */ options) {
+			post: function(/* string */ uri, /* object */ options) {
 				return _xhr(CONSTANTS.HTTP_METHOD_POST, uri, options);
 			},
 			/**
@@ -253,8 +256,8 @@ define(
 			 * Put method.
 			 * </pre>
 			 * @example
-			 *	require(['xhr'], function (xhr) {
-			 *		xhr.put('http://localhost/urshi/Something', {data : {id : 1, name : 'urushi changed.'}}).then(function (result) {
+			 *	require(['xhr'], function(xhr) {
+			 *		xhr.put('http://localhost/urshi/Something', {data: {id: 1, name: 'urushi changed.'}}).then(function(result) {
 			 *			console.log(result);
 			 *		});
 			 *	});
@@ -263,7 +266,7 @@ define(
 			 * @param {object} options Xhr optoins.
 			 * @returns {object} Deferred object.
 			 */
-			put : function (/* string */ uri, /* object */ options) {
+			put: function(/* string */ uri, /* object */ options) {
 				return _xhr(CONSTANTS.HTTP_METHOD_PUT, uri, options);
 			},
 			/**
@@ -271,8 +274,8 @@ define(
 			 * Delete method.
 			 * </pre>
 			 * @example
-			 *	require(['xhr'], function (xhr) {
-			 *		xhr.delete('http://localhost/urshi/Something', {data : {id : 1}).then(function (result) {
+			 *	require(['xhr'], function(xhr) {
+			 *		xhr.delete('http://localhost/urshi/Something', {data: {id: 1}).then(function(result) {
 			 *			console.log(result);
 			 *		});
 			 *	});
@@ -281,7 +284,7 @@ define(
 			 * @param {object} options Xhr optoins.
 			 * @returns {object} Deferred object.
 			 */
-			delete : function (/* string */ uri, /* object */ options) {
+			delete: function(/* string */ uri, /* object */ options) {
 				return _xhr(CONSTANTS.HTTP_METHOD_DELETE, uri, options);
 			}
 		};

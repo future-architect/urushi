@@ -15,12 +15,12 @@
 define(
 	'legacy',
 	[],
-	function () {
+	function() {
 		'use strict';
 
 		// for IE8- Array.indexOf
 		if (!Array.prototype.indexOf) {
-			Array.prototype.indexOf = function (/* string */ target, /* number */ index) {
+			Array.prototype.indexOf = function(/* string */ target, /* number */ index) {
 				var i,
 					length;
 
@@ -39,7 +39,7 @@ define(
 		// for IE9- lement.classList
 		if (typeof document !== 'undefined' && !('classList' in document.createElement('a'))) {
 
-			(function (view) {
+			(function(view) {
 				if (!('HTMLElement' in view) && !('Element' in view)) {
 					return;
 				}
@@ -48,10 +48,10 @@ define(
 					protoProp = 'prototype',
 					elemCtrProto = (view.HTMLElement || view.Element)[protoProp],
 					objCtr = Object,
-					strTrim = String[protoProp].trim || function () {
+					strTrim = String[protoProp].trim || function() {
 						return this.replace(/^\s+|\s+$/g, '');
 					},
-					arrIndexOf = Array[protoProp].indexOf || function (item) {
+					arrIndexOf = Array[protoProp].indexOf || function(item) {
 						var i = 0,
 							len = this.length;
 
@@ -63,13 +63,13 @@ define(
 						return -1;
 					},
 					// Vendors: please allow content code to instantiate DOMExceptions
-					DOMEx = function (type, message) {
+					DOMEx = function(type, message) {
 						this.name = type;
 						this.code = DOMException[type];
 						this.message = message;
 					},
-					checkTokenAndGetIndex = function (classList, token) {
-						if (token === '') {
+					checkTokenAndGetIndex = function(classList, token) {
+						if ('' === token) {
 							throw new DOMEx('SYNTAX_ERR', 'An invalid or illegal string was specified');
 						}
 						if (/\s/.test(token)) {
@@ -77,7 +77,7 @@ define(
 						}
 						return arrIndexOf.call(classList, token);
 					},
-					ClassList = function (elem) {
+					ClassList = function(elem) {
 						var trimmedClasses = strTrim.call(elem.className),
 							classes = trimmedClasses ? trimmedClasses.split(/\s+/) : [],
 							i = 0,
@@ -86,26 +86,26 @@ define(
 						for (; i < len; i++) {
 							this.push(classes[i]);
 						}
-						this._updateClassName = function () {
+						this._updateClassName = function() {
 							elem.className = this.toString();
 						};
 					},
 					classListProto = ClassList[protoProp] = [],
-					classListGetter = function () {
+					classListGetter = function() {
 						return new ClassList(this);
 					};
 
 				// Most DOMException implementations don't allow calling DOMException's toString()
 				// on non-DOMExceptions. Error's toString() is sufficient here.
 				DOMEx[protoProp] = Error[protoProp];
-				classListProto.item = function (i) {
+				classListProto.item = function(i) {
 					return this[i] || null;
 				};
-				classListProto.contains = function (token) {
+				classListProto.contains = function(token) {
 					token += '';
 					return checkTokenAndGetIndex(this, token) !== -1;
 				};
-				classListProto.add = function () {
+				classListProto.add = function() {
 					var tokens = arguments,
 						i = 0,
 						l = tokens.length,
@@ -114,7 +114,7 @@ define(
 
 					do {
 						token = tokens[i] + '';
-						if (checkTokenAndGetIndex(this, token) === -1) {
+						if (-1 === checkTokenAndGetIndex(this, token)) {
 							this.push(token);
 							updated = true;
 						}
@@ -125,16 +125,17 @@ define(
 						this._updateClassName();
 					}
 				};
-				classListProto.remove = function () {
+				classListProto.remove = function() {
 					var tokens = arguments,
 						i = 0,
 						l = tokens.length,
 						token,
-						updated = false;
+						updated = false,
+						index;
 
 					do {
 						token = tokens[i] + '';
-						var index = checkTokenAndGetIndex(this, token);
+						index = checkTokenAndGetIndex(this, token);
 						if (index !== -1) {
 							this.splice(index, 1);
 							updated = true;
@@ -146,11 +147,12 @@ define(
 						this._updateClassName();
 					}
 				};
-				classListProto.toggle = function (token, forse) {
-					token += '';
+				classListProto.toggle = function(token, forse) {
+					var result, method;
 
-					var result = this.contains(token),
-						method = result ? forse !== true && 'remove' : forse !== false && 'add';
+					token += '';
+					result = this.contains(token);
+					method = result ? forse !== true && 'remove' : forse !== false && 'add';
 
 					if (method) {
 						this[method](token);
@@ -158,7 +160,7 @@ define(
 
 					return result;
 				};
-				classListProto.toString = function () {
+				classListProto.toString = function() {
 					return this.join(' ');
 				};
 
@@ -171,7 +173,7 @@ define(
 					try {
 						objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
 					} catch (ex) { // IE 8 doesn't support enumerable:true
-						if (ex.number === -0x7FF5EC54) {
+						if (-0x7FF5EC54 === ex.number) {
 							classListPropDesc.enumerable = false;
 							objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
 						}

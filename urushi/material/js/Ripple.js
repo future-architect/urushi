@@ -10,7 +10,7 @@
  *
  * </pre>
  * @example
- *	require(['Ripple'], function (Ripple) {
+ *	require(['Ripple'], function(Ripple) {
  *		var Some = Ripple.extend({...});
  *	});
  *
@@ -36,7 +36,7 @@ define(
 	 * @alias module:Ripple
 	 * @returns {Class} Ripple object.
 	*/
-	function ($, urushi, materialConfig, _Base) {
+	function($, urushi, materialConfig, _Base) {
 		'use strict';
 
 		/**
@@ -47,15 +47,15 @@ define(
 		 * @constant
 		 */
 		var CONSTANTS = {
-			CLASS_NAME_RIPPLE_ON : 'ripple-on',
-			CLASS_NAME_RIPPLE_OUT : 'ripple-out',
-			ATTRIBUTE_RIPPLE_ANIMATE : 'data-ripple-animate',
-			ATTRIBUTE_RIPPLE_ANIMATE_ON : 'on',
-			ATTRIBUTE_RIPPLE_ANIMATE_OFF : 'off',
-			ATTRIBUTE_RIPPLE_MOUSE_DOWN : 'data-ripple-mousedown',
-			ATTRIBUTE_RIPPLE_MOUSE_DOWN_ON : 'on',
-			ATTRIBUTE_RIPPLE_MOUSE_DOWN_OFF : 'off',
-			ATTRIBUTE_RIPPLE_COLOR : 'data-ripple-color'
+			CLASS_NAME_RIPPLE_ON: 'ripple-on',
+			CLASS_NAME_RIPPLE_OUT: 'ripple-out',
+			ATTRIBUTE_RIPPLE_ANIMATE: 'data-ripple-animate',
+			ATTRIBUTE_RIPPLE_ANIMATE_ON: 'on',
+			ATTRIBUTE_RIPPLE_ANIMATE_OFF: 'off',
+			ATTRIBUTE_RIPPLE_MOUSE_DOWN: 'data-ripple-mousedown',
+			ATTRIBUTE_RIPPLE_MOUSE_DOWN_ON: 'on',
+			ATTRIBUTE_RIPPLE_MOUSE_DOWN_OFF: 'off',
+			ATTRIBUTE_RIPPLE_COLOR: 'data-ripple-color'
 		};
 
 		return _Base.extend(/** @lends module:Ripple.prototype */ {
@@ -66,7 +66,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			initOption : function (/* object */ args) {
+			initOption: function(/* object */ args) {
 				urushi.addEvent(this._getRippleRootNode(), 'mousedown', this, '_onRippleStart');
 				urushi.addEvent(this._getRippleRootNode(), 'touchstart', this, '_onRippleStart');
 			},
@@ -77,7 +77,7 @@ define(
 			 * @protected
 			 * @returns {node} Element node that has ripple animation.
 			 */
-			_getRippleRootNode : function () {
+			_getRippleRootNode: function() {
 				return this.rootNode;
 			},
 			/**
@@ -87,7 +87,7 @@ define(
 			 * @protected
 			 * @returns {node} Wrapper element node.
 			 */
-			_createRippleWrapperElement : function () {
+			_createRippleWrapperElement: function() {
 				var children = this._getRippleRootNode().getElementsByClassName('ripple-wrapper'),
 					div;
 
@@ -110,8 +110,8 @@ define(
 			 * @param {event} event Event object.
 			 * @returns {number} X axiz for ripple animation start point.
 			 */
-			_getX : function (/* node */ wrapper, /* event */ event) {
-				//var offset = {top : wrapper.offsetTop, left : wrapper.offsetLeft};
+			_getX: function(/* node */ wrapper, /* event */ event) {
+				//var offset = {top: wrapper.offsetTop, left: wrapper.offsetLeft};
 				var offset = $(wrapper).offset();
 
 				if (!urushi.isTouch()) {
@@ -133,8 +133,8 @@ define(
 			 * @param {event} event Event object.
 			 * @returns {number} Y axiz for ripple animation start point.
 			 */
-			_getY : function (/* node */ wrapper, /* object */ event) {
-				//var offset = {top : wrapper.offsetTop, left : wrapper.offsetLeft};
+			_getY: function(/* node */ wrapper, /* object */ event) {
+				//var offset = {top: wrapper.offsetTop, left: wrapper.offsetLeft};
 				var offset = $(wrapper).offset();
 
 				if (!urushi.isTouch()) {
@@ -155,8 +155,10 @@ define(
 			 * @protected
 			 * @returns {string} Ripple color.
 			 */
-			_getRippleColor : function () {
-				return this._getRippleRootNode().getAttribute(CONSTANTS.ATTRIBUTE_RIPPLE_COLOR) || window.getComputedStyle(this._getRippleRootNode()).color;
+			_getRippleColor: function() {
+				return this._getRippleRootNode().getAttribute(
+						CONSTANTS.ATTRIBUTE_RIPPLE_COLOR
+					) || window.getComputedStyle(this._getRippleRootNode()).color;
 			},
 			/**
 			 * <pre>
@@ -166,8 +168,10 @@ define(
 			 * @param {node} ripple Element node that has ripple animation.
 			 * @returns Max size of ripple animation.
 			 */
-			_getNewSize : function (/* node */ ripple) {
-				return (Math.max($(this._getRippleRootNode()).outerWidth(), $(this._getRippleRootNode()).outerHeight()) / $(ripple).outerWidth()) * 2.5;
+			_getNewSize: function(/* node */ ripple) {
+				var width = $(this._getRippleRootNode()).outerWidth(),
+					height = $(this._getRippleRootNode()).outerHeight();
+				return (Math.max(width, height) / $(ripple).outerWidth()) * 2.5;
 			},
 			/**
 			 * <pre>
@@ -179,7 +183,7 @@ define(
 			 * @param {string} rippleColor Ripple color.
 			 * @returns Element node(div) that has ripple animation.
 			 */
-			_createRippleElement : function (/* number */ relX, /* number */ relY, /* string */ rippleColor) {
+			_createRippleElement: function(/* number */ relX, /* number */ relY, /* string */ rippleColor) {
 				var ripple = document.createElement('div');
 
 				ripple.className = 'ripple';
@@ -198,7 +202,7 @@ define(
 			 * @param {object} event Event object.
 			 * @returns Element node(div) that has ripple animation.
 			 */
-			_onRippleStart : function (/* object */ event) {
+			_onRippleStart: function(/* object */ event) {
 				var wrapper,
 					relX, relY,
 					rippleColor,
@@ -226,7 +230,10 @@ define(
 
 				setTimeout(this._rippleAnimationEnd.bind(this, ripple, wrapper), materialConfig.DEFAULT_VALUE_DURATION);
 
-				$(this._getRippleRootNode()).on('mouseup mouseleave touchend', this._onRippleMouseup.bind(this, {ripple : ripple, wrapper : wrapper}));
+				$(this._getRippleRootNode()).on('mouseup mouseleave touchend', this._onRippleMouseup.bind(this, {
+					ripple: ripple,
+					wrapper: wrapper
+				}));
 
 				return true;
 			},
@@ -240,10 +247,12 @@ define(
 			 * @param {node} wrapper Element node that is wrapper for element that has ripple animation.
 			 * @returns none.
 			 */
-			_rippleAnimationEnd : function (/* node */ ripple, /* node */ wrapper) {
+			_rippleAnimationEnd: function(/* node */ ripple, /* node */ wrapper) {
 				ripple.setAttribute(CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE, CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE_OFF);
 
-				if (CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN_OFF === ripple.getAttribute(CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN)) {
+				if (CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN_OFF === ripple.getAttribute(
+						CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN
+					)) {
 					this._rippleOut(ripple, wrapper);
 				}
 			},
@@ -254,11 +263,11 @@ define(
 			 * Ripple animation is finished, then it calls cleanup function(_rippleOut).
 			 * </pre>
 			 * @protected
-			 * @param {object} args Element nodes there are formated below {ripple :ripple, wrapper : wrapper}.
+			 * @param {object} args Element nodes there are formated below {ripple:ripple, wrapper: wrapper}.
 			 * @param {object} event Event object.
 			 * @returns none.
 			 */
-			_onRippleMouseup : function (/* object */ args, /* object */ event) {
+			_onRippleMouseup: function(/* object */ args, /* object */ event) {
 				var ripple, wrapper;
 
 				if (!args || !args.ripple || !args.wrapper) {
@@ -270,7 +279,9 @@ define(
 
 				ripple.setAttribute(CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN, CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN_OFF);
 
-				if (CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE_OFF === ripple.getAttribute(CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE)) {
+				if (CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE_OFF === ripple.getAttribute(
+						CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE
+					)) {
 					this._rippleOut(ripple, wrapper);
 				}
 			},
@@ -283,29 +294,35 @@ define(
 			 * @param {node} ripple Element node that has ripple animation.
 			 * @returns none.
 			 */
-			_rippleOn : function (/* node */ ripple) {
+			_rippleOn: function(/* node */ ripple) {
 				var size = this._getNewSize(ripple),
 					$rootNode = $(this._getRippleRootNode()),
 					$ripple = $(ripple);
 
 				if (urushi.hasTransitionSupport()) {
 					$ripple.css({
-						'-ms-transform' : 'scale(' + size + ')',
-						'-moz-transform' : 'scale(' + size + ')',
-						'-webkit-transform' : 'scale(' + size + ')',
-						'transform' : 'scale(' + size + ')'
+						'-ms-transform': 'scale(' + size + ')',
+						'-moz-transform': 'scale(' + size + ')',
+						'-webkit-transform': 'scale(' + size + ')',
+						'transform': 'scale(' + size + ')'
 					}).addClass(CONSTANTS.CLASS_NAME_RIPPLE_ON);
-					ripple.setAttribute(CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE, CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE_ON);
-					ripple.setAttribute(CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN, CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN_ON);
+					ripple.setAttribute(
+							CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE,
+							CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE_ON
+						);
+					ripple.setAttribute(
+							CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN,
+							CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN_ON
+						);
 				} else {
 					// for not suport css3.
 					$ripple.animate({
-						'width' : Math.max($rootNode.outerWidth(), $rootNode.outerHeight()) * 2,
-						'height' : Math.max($rootNode.outerWidth(), $rootNode.outerHeight()) * 2,
-						'margin-left' : Math.max($rootNode.outerWidth(), $rootNode.outerHeight()) * (-1),
-						'margin-top' : Math.max($rootNode.outerWidth(), $rootNode.outerHeight()) * (-1),
-						'opacity' : materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MAX
-					}, materialConfig.DEFAULT_VALUE_DURATION, function () {
+						'width': Math.max($rootNode.outerWidth(), $rootNode.outerHeight()) * 2,
+						'height': Math.max($rootNode.outerWidth(), $rootNode.outerHeight()) * 2,
+						'margin-left': Math.max($rootNode.outerWidth(), $rootNode.outerHeight()) * (-1),
+						'margin-top': Math.max($rootNode.outerWidth(), $rootNode.outerHeight()) * (-1),
+						'opacity': materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MAX
+					}, materialConfig.DEFAULT_VALUE_DURATION, function() {
 						$ripple.trigger('transitionend');
 					});
 				}
@@ -320,14 +337,14 @@ define(
 			 * @param {node} wrapper Element node that is wrapper for element that has ripple animation.
 			 * @returns none.
 			 */
-			_rippleOut : function (/* node */ ripple, /* node */ wrapper) {
+			_rippleOut: function(/* node */ ripple, /* node */ wrapper) {
 
 				$(ripple).off();
 
 				if (urushi.hasTransitionSupport()) {
 					$(ripple).addClass(CONSTANTS.CLASS_NAME_RIPPLE_OUT);
 				} else {
-					$(ripple).animate({opacity : materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MIN}, 100, function () {
+					$(ripple).animate({opacity: materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MIN}, 100, function() {
 						$(ripple).trigger('transitionend');
 					});
 				}
@@ -341,7 +358,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			destroy : function () {
+			destroy: function() {
 				urushi.removeEvent(this._getRippleRootNode(), 'mousedown', this, '_onRippleStart');
 				urushi.removeEvent(this._getRippleRootNode(), 'touchstart', this, '_onRippleStart');
 

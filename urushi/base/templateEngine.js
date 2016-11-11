@@ -17,7 +17,7 @@ define(
 	 * @alias module:templateEngine
 	 * @returns {object} templateEngine object.
 	 */
-	function (node, Deferred) {
+	function(node, Deferred) {
 		'use strict';
 
 		/**
@@ -30,10 +30,10 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-				TEMPLATE_NAME_TYPE : 'data-urushi-type',
-				TEMPLATE_NAME_OPTIONS : 'data-urushi-options',
-				TEMPLATE_NAME_ADDITION_TYPE : 'data-urushi-addition-type',
-				TEMPLATE_NAME_ADDITION_OPTIONS : 'data-urushi-addition-options'
+				TEMPLATE_NAME_TYPE: 'data-urushi-type',
+				TEMPLATE_NAME_OPTIONS: 'data-urushi-options',
+				TEMPLATE_NAME_ADDITION_TYPE: 'data-urushi-addition-type',
+				TEMPLATE_NAME_ADDITION_OPTIONS: 'data-urushi-addition-options'
 			},
 			generics = {};
 
@@ -49,7 +49,7 @@ define(
 		 * @param {string} accessor not used.
 		 * @returns {string} style classes from html other than it defined by the module.
 		 */
-		generics.getOptionalClasses = function (/* node */ doc, /* string */ key, /* string */ accessor) {
+		generics.getOptionalClasses = function(/* node */ doc, /* string */ key, /* string */ accessor) {
 			var tempClass = doc.className,
 				classList,
 				className,
@@ -79,7 +79,7 @@ define(
 		 * @param {string} accessor Place name.
 		 * @returns {string} text.
 		 */
-		generics.getAdjacentLabel = function (/* node */ doc, /* string */ key, /* string */ accessor) {
+		generics.getAdjacentLabel = function(/* node */ doc, /* string */ key, /* string */ accessor) {
 			var textNode = doc[accessor] || {};
 			return (textNode.wholeText || '').trim();
 		};
@@ -95,7 +95,7 @@ define(
 		 * @param {string} accessor Attribute key name.
 		 * @returns {string} attribute.
 		 */
-		generics.getAttribute = function (/* node */ doc, /* string */ key, /* string */ accessor) {
+		generics.getAttribute = function(/* node */ doc, /* string */ key, /* string */ accessor) {
 			return doc.getAttribute(accessor);
 		};
 		/**
@@ -110,7 +110,7 @@ define(
 		 * @param {string} accessor Field key name.
 		 * @returns {string} value in field
 		 */
-		generics.getField = function (/* node */ doc, /* string */ key, /* string */ accessor) {
+		generics.getField = function(/* node */ doc, /* string */ key, /* string */ accessor) {
 			return doc[accessor];
 		};
 		/**
@@ -126,13 +126,19 @@ define(
 		 * @param {string} accessor Not used.
 		 * @returns {string} data-urushi-options value.
 		 */
-		generics.getUrushiOption = function (/* node */ doc, /* string */ key, /* string */ accessor) {
+		generics.getUrushiOption = function(/* node */ doc, /* string */ key, /* string */ accessor) {
 			var options = doc.getAttribute(CONSTANTS.TEMPLATE_NAME_OPTIONS);
 			try {
 				options = JSON.parse(options) || {};
 			} catch (e) {
-				throw new Error('It\'s wrong syntax in ' + CONSTANTS.TEMPLATE_NAME_OPTIONS + ' : ID = ' + doc.id + ', key = ' + key);
+				throw new Error('It\'s wrong syntax in ' +
+					CONSTANTS.TEMPLATE_NAME_OPTIONS +
+					': ID = ' +
+					doc.id +
+					', key = ' +
+					key);
 			}
+
 			return options[key];
 		};
 		/**
@@ -149,12 +155,18 @@ define(
 		 * @param {string} accessor Not used.
 		 * @returns {string} data-urushi-addition-options value.
 		 */
-		generics.getUrushiAdditionOption = function (/* node */ doc, /* string */ key, /* string */ accessor) {
+		generics.getUrushiAdditionOption = function(/* node */ doc, /* string */ key, /* string */ accessor) {
 			var options = doc.getAttribute(CONSTANTS.TEMPLATE_NAME_ADDITION_OPTIONS);
 			try {
 				options = JSON.parse(options) || {};
 			} catch (e) {
-				throw new Error('It\'s wrong syntax in ' + CONSTANTS.TEMPLATE_NAME_ADDITION_OPTIONS + ' : ID = ' + doc.id + ', key = ' + key);
+				throw new Error(
+					'It\'s wrong syntax in ' +
+					CONSTANTS.TEMPLATE_NAME_ADDITION_OPTIONS +
+					': ID = ' +
+					doc.id +
+					', key = ' +
+					key);
 			}
 			return options[key] || '';
 		};
@@ -170,7 +182,7 @@ define(
 		 * @param {string} accessor Not used.
 		 * @returns {string} Text.
 		 */
-		generics.getPreviousText = function (/* node */ doc, /* string */ key, /* string */ accessor) {
+		generics.getPreviousText = function(/* node */ doc, /* string */ key, /* string */ accessor) {
 			var textNode = doc.previousSibling || {};
 			return (textNode.wholeText || '').trim();
 		};
@@ -186,7 +198,7 @@ define(
 		 * @param {string} accessor Not used.
 		 * @returns {string} Text.
 		 */
-		generics.getNextText = function (/* node */ doc, /* string */ key, /* string */ accessor) {
+		generics.getNextText = function(/* node */ doc, /* string */ key, /* string */ accessor) {
 			var textNode = doc.nextSibling || {};
 			return (textNode.wholeText || '').trim();
 		};
@@ -202,7 +214,7 @@ define(
 		 * @param {string} accessor Not used.
 		 * @returns {Array} Element list.
 		 */
-		generics.getChildNodes = function (/* node */ doc, /* string */ key, /* string */ accessor) {
+		generics.getChildNodes = function(/* node */ doc, /* string */ key, /* string */ accessor) {
 			var nodes = [],
 				childNodes = doc.childNodes,
 				childNode,
@@ -233,7 +245,7 @@ define(
 		 * @param {string} accessor
 		 * @returns {function} function that provide to get child nodes.
 		 */
-		generics.getChildNodesFunction = function (/* node */ doc, /* string */ key, /* string */ accessor) {
+		generics.getChildNodesFunction = function(/* node */ doc, /* string */ key, /* string */ accessor) {
 			return function() {
 				return generics.getChildNodes(doc, key, accessor);
 			};
@@ -248,7 +260,7 @@ define(
 		 * @param {node} doc Document element that converted by the template engine.
 		 * @returns none.
 		 */
-		generics.removePreviousNode = function (/* node */ doc) {
+		generics.removePreviousNode = function(/* node */ doc) {
 			if (!doc || !doc.previousSibling || !doc.previousSibling.wholeText.trime()) {
 				return;
 			}
@@ -270,7 +282,7 @@ define(
 		 * @param {string} accessor 変換対象
 		 * @returns none.
 		 */
-		generics.removeNextNode = function (/* node */ doc) {
+		generics.removeNextNode = function(/* node */ doc) {
 			if (!doc || !doc.nextSibling || !doc.nextSibling) {
 				return;
 			}
@@ -295,37 +307,37 @@ define(
 			 * @param {object} presetOptions preset constructor arguments.
 			 * @returns {object} Translated [docTree] and, created modules.
 			 */
-			renderDocument : function (/* node */ docTree, /* object */ configMap, /* object */ presetOptions) {
+			renderDocument: function(/* node */ docTree, /* object */ configMap, /* object */ presetOptions) {
 				var deferred = new Deferred(),
 					widgets = {},
-					ret = {compiled : docTree, widgets : widgets},
+					ret = {compiled: docTree, widgets: widgets},
 					renderingCount = NaN;
 
 				presetOptions = presetOptions || {};
 
-				function setAddition (/* object */ module, /* object */ config, /* string */ additionOptions) {
+				function setAddition(/* object */ module, /* object */ config, /* string */ additionOptions) {
 					try {
 						additionOptions = JSON.parse(additionOptions) || {};
 					} catch (e) {
 						throw new Error('It\'s wrong syntax in ' + CONSTANTS.TEMPLATE_NAME_ADDITION_OPTIONS);
 					}
 					additionOptions.parentNode = module.rootNode;
-					require([config.name], function (Module) {
+					require([config.name], function(Module) {
 						new Module(additionOptions);
 					});
 				}
-				function startRender () {
+				function startRender() {
 					renderingCount = renderingCount || 0;
 					renderingCount++;
 				}
-				function finishRender () {
+				function finishRender() {
 					renderingCount--;
 
 					if (0 === renderingCount) {
 						deferred.resolve(ret);
 					}
 				}
-				function render (/* node */ doc, /* object */ config) {
+				function render(/* node */ doc, /* object */ config) {
 					var options,
 						methods,
 						method,
@@ -352,7 +364,7 @@ define(
 							args[key] = method(doc, key, option);
 						}
 						if (config.requires.indexOf(key) && undefined === key) {
-							throw new Error('Require option is not defined. : ' + key);
+							throw new Error('Require option is not defined.: ' + key);
 						}
 					}
 
@@ -362,7 +374,7 @@ define(
 						}
 					}
 
-					require([config.name], function (/* Class */ Module) {
+					require([config.name], function(/* Class */ Module) {
 						var module = new Module(args),
 							target,
 							method,
@@ -381,7 +393,8 @@ define(
 							name = attributes[attrIndex].name;
 							value = attributes[attrIndex].value;
 
-							if (-1 === configMap.base.attributes.ignore.indexOf(name) && -1 === config.attributes.ignore.indexOf(name)) {
+							if (-1 === configMap.base.attributes.ignore.indexOf(name) &&
+									-1 === config.attributes.ignore.indexOf(name)) {
 								module[config.attributes.target].setAttribute(name, value);
 							}
 							if (config.setValue && 'value' === name) {
@@ -410,7 +423,7 @@ define(
 						finishRender();
 					});
 				}
-				function circulate (/* node */ doc) {
+				function circulate(/* node */ doc) {
 					var type = (doc.getAttribute(CONSTANTS.TEMPLATE_NAME_TYPE) || '').toLowerCase(),
 						children = doc.children || [],
 						index,
@@ -431,7 +444,7 @@ define(
 				circulate(docTree);
 
 				if (isNaN(renderingCount)) {
-					setTimeout(function () {
+					setTimeout(function() {
 						deferred.resolve(ret);
 					}, 10);
 				}

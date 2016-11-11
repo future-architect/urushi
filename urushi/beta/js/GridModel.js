@@ -15,9 +15,9 @@
  * </pre>
  *
  * @example
- *	require(['GridModel'], function (GridModel) {
+ *	require(['GridModel'], function(GridModel) {
  *		var model = new GridModel({
- *			dataList : []
+ *			dataList: []
  *		});
  *	});
  *
@@ -32,7 +32,7 @@ define(
 	 * @alias module:GridModel
 	 * @returns {Object} GridModel object.
 	 */
-	function (extend) {
+	function(extend) {
 		'use strict';
 
 		return Class.extend({
@@ -42,7 +42,7 @@ define(
 			 * </pre>
 			 * @type array
 			 */
-			dataList : undefined,
+			dataList: undefined,
 
 			/**
 			 * <pre>
@@ -52,7 +52,7 @@ define(
 			 * @param {Object} args 初期化時に必要な引数
 			 * @returns none.
 			 */
-			init : function (/* Object */ args) {
+			init: function(/* Object */ args) {
 				var _args = args || {};
 				this._initProperties(_args);
 				if (!Array.isArray(_args.dataList)) {
@@ -69,7 +69,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			_initProperties : function (/* Object */ args) {
+			_initProperties: function(/* Object */ args) {
 				this.dataList = [];
 			},
 			/**
@@ -79,7 +79,7 @@ define(
 			 * @function
 			 * @returns {number} dataListの要素数
 			 */
-			getItemsLength : function () {
+			getItemsLength: function() {
 				return this.dataList.length;
 			},
 			/**
@@ -89,7 +89,7 @@ define(
 			 * @function
 			 * @returns {array} dataList全件
 			 */
-			getFullData : function () {
+			getFullData: function() {
 				return this.dataList;
 			},
 			/**
@@ -100,7 +100,7 @@ define(
 			 * @param {number} index dataListにおけるindex値
 			 * @returns {object} data
 			 */
-			getItem : function (/* number */ index) {
+			getItem: function(/* number */ index) {
 				return this.dataList[index];
 			},
 			/**
@@ -114,7 +114,7 @@ define(
 			 * @param {number} end dataListの終点
 			 * @returns {array} 切り出されたdataList
 			 */
-			getItems : function (/* number */ start, /* number */ end) {
+			getItems: function(/* number */ start, /* number */ end) {
 				var _end;
 				start = 0 === start ? start : start || undefined;
 				_end = (start || 0 === start) && end && start + end || undefined;
@@ -128,7 +128,7 @@ define(
 			 * @param {array} dataList 追加する要素配列
 			 * @returns none.
 			 */
-			addItems : function (/* array */ dataList) {
+			addItems: function(/* array */ dataList) {
 				var index,
 					_dataList = dataList || [],
 					length = _dataList.length;
@@ -145,7 +145,7 @@ define(
 			 * @param {Object} data dataListに追加する要素
 			 * @returns none.
 			 */
-			addItem : function (/* Object */ data) {
+			addItem: function(/* Object */ data) {
 				if (null === data || undefined === data || 0 === Object.keys(data).length) {
 					return;
 				}
@@ -161,7 +161,7 @@ define(
 			 * @param {string|number|boolean} value セットする値
 			 * @returns none.
 			 */
-			setValue : function (/* string */ name, /* number */ index, /* string or number or boolean */ value) {
+			setValue: function(/* string */ name, /* number */ index, /* string or number or boolean */ value) {
 				this.dataList[index][name] = value;
 			},
 			/**
@@ -171,7 +171,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			clear : function () {
+			clear: function() {
 				this.dataList = [];
 			},
 			/**
@@ -182,7 +182,7 @@ define(
 			 * @param {number} index 削除する対象要素のindex値。可変長引数で受け取る。
 			 * @returns none.
 			 */
-			removeItems : function () {
+			removeItems: function() {
 				// var indexes,
 				// 	index,
 				// 	length;
@@ -200,7 +200,7 @@ define(
 			 * @param {number} index 削除する対象要素のindex値
 			 * @returns none.
 			 */
-			removeItem : function (/* number */ index) {
+			removeItem: function(/* number */ index) {
 				this.dataList.splice(index, 1);
 			},
 			//trim
@@ -213,12 +213,16 @@ define(
 			 * @param {number} index2 入れ替え対象の値
 			 * @returns none.
 			 */
-			exchange : function (/* number */ index1, /* number */ index2) {
+			exchange: function(/* number */ index1, /* number */ index2) {
 				var temp;
 				if ('number' !== typeof index1 || 'number' !== typeof index2) {
 					return;
 				}
-				if (index1 < 0 || index2 < 0 || index1 > this.dataList.length - 1 || index2 > this.dataList.length - 1) {
+				if (index1 < 0 ||
+						index2 < 0 ||
+						index1 > this.dataList.length - 1 ||
+						index2 > this.dataList.length - 1) {
+
 					return;
 				}
 				temp = this.dataList[index1];

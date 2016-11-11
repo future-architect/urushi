@@ -35,13 +35,13 @@
  *		descriptoin		: Hint message for textarea. It is displayed at the bottom of textarea.
  * </pre>
  * @example
- *	require(['Textarea'], function (Textarea) {
+ *	require(['Textarea'], function(Textarea) {
  *		var textarea = new Textarea({
- *			id : 'myTextarea',
- *			textareaClass : '',
- *			additionalClass : '',
- *			placeholder : 'Input free.',
- *			hint : 'hint message.'
+ *			id: 'myTextarea',
+ *			textareaClass: '',
+ *			additionalClass: '',
+ *			placeholder: 'Input free.',
+ *			hint: 'hint message.'
  *		});
  *		document.body.appendChild(textarea.getRootNode());
  *
@@ -49,10 +49,10 @@
  *	});
  *
  * @example
- *	<textarea id="myTextarea" class="" value="input value text.\ntest 2nd line." placeholder="Input free." data-urushi-type="textarea" data-urushi-options='{"hint" : "hint message."}'></textarea>
+ *	<textarea id="myTextarea" class="" value="input value text.\ntest 2nd line." placeholder="Input free." data-urushi-type="textarea" data-urushi-options='{"hint": "hint message."}'></textarea>
  *
  * @snippet-trigger urushi-textarea
- * @snippet-content <textarea id="" value="" data-urushi-type="textarea" data-urushi-options='{"hint" : "hint message."}'></textarea>
+ * @snippet-content <textarea id="" value="" data-urushi-type="textarea" data-urushi-options='{"hint": "hint message."}'></textarea>
  * @snippet-description urushi-textarea
  *
  * @module Textarea
@@ -74,7 +74,7 @@ define(
 	 * @alias module:Textarea
 	 * @returns {object} Textarea object.
 	 */
-	function (urushi, Input, template) {
+	function(urushi, Input, template) {
 		'use strict';
 
 		/**
@@ -85,8 +85,8 @@ define(
 		 * @constant
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.Textarea',
-			EMBEDDED : {textareaClass : '', additionalClass : ''}
+			ID_PREFIX: 'urushi.Textarea',
+			EMBEDDED: {textareaClass: '', additionalClass: ''}
 		};
 
 		/**
@@ -106,13 +106,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded : undefined,
+			embedded: undefined,
 			/**
 			 * <pre>
 			 * Initializes instance properties.
@@ -121,7 +121,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this._super(args);
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
@@ -135,7 +135,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this._super();
 				this.inputNode = this.rootNode.getElementsByTagName('textarea')[0];
 			},
@@ -146,7 +146,7 @@ define(
 			 * @protected
 			 * @returns The textarea element node.
 			 */
-			_getInputNode : function () {
+			_getInputNode: function() {
 				return this.rootNode.getElementsByTagName('textarea')[0];
 			},
 			/**
@@ -154,7 +154,7 @@ define(
 			 * @protected
 			 * @returns {string} Instance id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			}
 		});

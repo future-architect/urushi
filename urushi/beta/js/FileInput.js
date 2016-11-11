@@ -48,13 +48,13 @@
  *
  * </pre>
  * @example
- *	require(['FileInput'], function (FileInput) {
+ *	require(['FileInput'], function(FileInput) {
  *		var fileInput = new FileInput({
- *			id : 'myFileInput',
- *			buttonClass : 'button-raised button-primary',
- *			additionalClass : 'disabled',
- *			label : 'File',
- *			allowedTypes : 'jpeg,jpg,png,gif',
+ *			id: 'myFileInput',
+ *			buttonClass: 'button-raised button-primary',
+ *			additionalClass: 'disabled',
+ *			label: 'File',
+ *			allowedTypes: 'jpeg,jpg,png,gif',
  *		});
  *		document.body.appendChild(fileInput.getRootNode());
  *	});
@@ -64,11 +64,11 @@
  *		id="myFileInput"
  *		class="button-raised button-primary disabled"
  *		data-urushi-type="fileinput"
- *		data-urushi-options='{"allowedTypes" : "jpeg,jpg,png,gif", "label" : "label"}'
+ *		data-urushi-options='{"allowedTypes": "jpeg,jpg,png,gif", "label": "label"}'
  *	></input>
  *
  * @snippet-trigger urushi-fileinput
- * @snippet-content <input id="" data-urushi-type="fileinput", data-urushi-options='{"allowedTypes" : "", "label" : "ボタンラベル"}'></input>
+ * @snippet-content <input id="" data-urushi-type="fileinput", data-urushi-options='{"allowedTypes": "", "label": "ボタンラベル"}'></input>
  * @snippet-description urushi-fileinput
  *
  * @module FileInput
@@ -96,7 +96,7 @@ define(
 	 * @alias module:Button
 	 * @returns {Object} Button object.
 	 */
-	function (urushi, Input, $, $ui, $Fileupload, $IframeTransport, template) {
+	function(urushi, Input, $, $ui, $Fileupload, $IframeTransport, template) {
 		'use strict';
 
 		/**
@@ -110,14 +110,14 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.FileInput',
-			EMBEDDED : {buttonClass : '', additionalClass : '', label : 'FileInput Name', url : ''},
-			CALLBACKID_FILE_ADD : 'add',
-			CALLBACKID_FILE_NOT_ALLOWEDTYPE_ADD : 'not_allowedtype_add',
-			CALLBACKID_FILE_DRAGENTER : 'dragenter',
-			CALLBACKID_FILE_DRAGLEAVE : 'dragleave',
-			CALLBACKID_UPLOAD_DONE : 'done',
-			CALLBACKID_UPLOAD_FAIL : 'fail',
+			ID_PREFIX: 'urushi.FileInput',
+			EMBEDDED: {buttonClass: '', additionalClass: '', label: 'FileInput Name', url: ''},
+			CALLBACKID_FILE_ADD: 'add',
+			CALLBACKID_FILE_NOT_ALLOWEDTYPE_ADD: 'not_allowedtype_add',
+			CALLBACKID_FILE_DRAGENTER: 'dragenter',
+			CALLBACKID_FILE_DRAGLEAVE: 'dragleave',
+			CALLBACKID_UPLOAD_DONE: 'done',
+			CALLBACKID_UPLOAD_FAIL: 'fail',
 		};
 
 		/**
@@ -141,14 +141,14 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : template,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type Object
 			 * @constant
 			 * @private
 			 */
-			embedded : CONSTANTS.EMBEDDED,
+			embedded: CONSTANTS.EMBEDDED,
 			/**
 			 * <pre>
 			 * 受け入れる拡張子。コンストラクタのオプションから取得
@@ -157,7 +157,7 @@ define(
 			 * @default ''
 			 * @private
 			 */
-			allowedTypes : '',
+			allowedTypes: '',
 			/**
 			 * <pre>
 			 * コールバックリスナの保持用変数
@@ -165,7 +165,7 @@ define(
 			 * @type Object
 			 * @private
 			 */
-			callbackMap : null,
+			callbackMap: null,
 			/**
 			 * <pre>
 			 * instanceのpropertyを初期化する。
@@ -174,7 +174,7 @@ define(
 			 * @param {Object} args 初期化時に必要な引数。
 			 * @returns none.
 			 */
-			_initProperties : function (/* Object */ args) {
+			_initProperties: function(/* Object */ args) {
 				this._super(args);
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
@@ -188,22 +188,22 @@ define(
 			 * @param {Object} args
 			 * @returns none
 			 */
-			_render : function (/* Object */ args) {
+			_render: function(/* Object */ args) {
 				var fileInputNode;
 				args = args || {};
 				this._super(args);
 
 				fileInputNode = this.getFileInputNode();
 				$(fileInputNode).fileupload({
-					dropZone : args.dropZone || this.rootNode,
-					dataType : 'json',
+					dropZone: args.dropZone || this.rootNode,
+					dataType: 'json',
 					//url
-					add : this._add.bind(this),
-					done : this._done.bind(this),
-					fail : this._fail.bind(this),
-					dragenter : this._dragenter.bind(this),
-					dragover : this._dragover.bind(this),
-					dragleave : this._dragleave.bind(this),
+					add: this._add.bind(this),
+					done: this._done.bind(this),
+					fail: this._fail.bind(this),
+					dragenter: this._dragenter.bind(this),
+					dragover: this._dragover.bind(this),
+					dragleave: this._dragleave.bind(this),
 				});
 			},
 			/**
@@ -214,7 +214,7 @@ define(
 			 * @param {Object} $data Jquery.uploadからくるデータ
 			 * @returns none
 			 */
-			_add : function (/* Object */ e, /* Object */ $data) {
+			_add: function(/* Object */ e, /* Object */ $data) {
 				var fileName = $data.files[0].name,
 					fileType = fileName.split('.').pop();
 
@@ -236,7 +236,7 @@ define(
 			 * @param {Object} $data Jquery.uploadからくるデータ
 			 * @returns none
 			 */
-			_done : function (/* Object */ e, /* Object */ $data) {
+			_done: function(/* Object */ e, /* Object */ $data) {
 				this._fireCallback(CONSTANTS.CALLBACKID_UPLOAD_DONE, $data.response().result, $data);
 			},
 			/**
@@ -247,8 +247,8 @@ define(
 			 * @param {Object} $data Jquery.uploadからくるデータ
 			 * @returns none
 			 */
-			_fail : function (/* Object */ e, /* Object */ $data) {
-				if ($data.errorThrown === 'abort') {
+			_fail: function(/* Object */ e, /* Object */ $data) {
+				if ('abort' === $data.errorThrown) {
 					return;
 				}
 				this._fireCallback(CONSTANTS.CALLBACKID_UPLOAD_FAIL, $data.errorThrown, $data);
@@ -261,7 +261,7 @@ define(
 			 * @param {Object} e Jquery.uploadからくるイベント
 			 * @returns none
 			 */
-			_dragenter : function(/* Object */ e) {
+			_dragenter: function(/* Object */ e) {
 				if (this.timeoutId) {
 					clearTimeout(this.timeoutId);
 					this.timeoutId = null;
@@ -279,7 +279,7 @@ define(
 			 * @param {Object} e Jquery.uploadからくるイベント
 			 * @returns none
 			 */
-			_dragover : function(/* Object */ e) {
+			_dragover: function(/* Object */ e) {
 				if (this.timeoutId) {
 					clearTimeout(this.timeoutId);
 					this.timeoutId = null;
@@ -293,7 +293,7 @@ define(
 			 * @param {Object} e Jquery.uploadからくるイベント
 			 * @returns none
 			 */
-			_dragleave : function(/* Object */ e) {
+			_dragleave: function(/* Object */ e) {
 				if (this.timeoutId) {
 					clearTimeout(this.timeoutId);
 					this.timeoutId = null;
@@ -314,7 +314,7 @@ define(
 			 * @param {function} callback 引数 1:jquery.uploadのデータ 2:ファイル名
 			 * @returns none
 			 */
-			setOnAdd : function (/* function */ callback) {
+			setOnAdd: function(/* function */ callback) {
 				if (!callback || 'function' !== typeof callback) {
 					return;
 				}
@@ -327,7 +327,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			removeOnAdd : function () {
+			removeOnAdd: function() {
 				this.callbackMap[CONSTANTS.CALLBACKID_FILE_ADD] = null;
 			},
 			/**
@@ -338,7 +338,7 @@ define(
 			 * @param {function} callback 引数 1:ファイル名
 			 * @returns none
 			 */
-			setOnNotAllowedtypeAdd : function (/* function */ callback) {
+			setOnNotAllowedtypeAdd: function(/* function */ callback) {
 				if (!callback || 'function' !== typeof callback) {
 					return;
 				}
@@ -351,7 +351,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			removeOnNotAllowedtypeAdd : function () {
+			removeOnNotAllowedtypeAdd: function() {
 				this.callbackMap[CONSTANTS.CALLBACKID_FILE_NOT_ALLOWEDTYPE_ADD] = null;
 			},
 			/**
@@ -362,7 +362,7 @@ define(
 			 * @param {function} callback 引数 1:レスポンス返り値 2:jquery.uploadのデータ
 			 * @returns none
 			 */
-			setOnUploadDone : function (/* function */ callback) {
+			setOnUploadDone: function(/* function */ callback) {
 				if (!callback || 'function' !== typeof callback) {
 					return;
 				}
@@ -375,7 +375,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			removeOnUploadDone : function () {
+			removeOnUploadDone: function() {
 				this.callbackMap[CONSTANTS.CALLBACKID_UPLOAD_DONE] = null;
 			},
 			/**
@@ -386,7 +386,7 @@ define(
 			 * @param {function} callback 引数 1:errorThrown 2:jquery.uploadのデータ
 			 * @returns none
 			 */
-			setOnUploadFail : function (/* function */ callback) {
+			setOnUploadFail: function(/* function */ callback) {
 				if (!callback || 'function' !== typeof callback) {
 					return;
 				}
@@ -399,7 +399,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			removeOnUploadFail : function () {
+			removeOnUploadFail: function() {
 				this.callbackMap[CONSTANTS.CALLBACKID_UPLOAD_FAIL] = null;
 			},
 			/**
@@ -410,7 +410,7 @@ define(
 			 * @param {function} callback 引数なし
 			 * @returns none
 			 */
-			setOnDragEnter : function (/* function */ callback) {
+			setOnDragEnter: function(/* function */ callback) {
 				if (!callback || 'function' !== typeof callback) {
 					return;
 				}
@@ -424,7 +424,7 @@ define(
 			 * @param {function} callback 引数なし
 			 * @returns none
 			 */
-			setOnDragLeave : function (/* function */ callback) {
+			setOnDragLeave: function(/* function */ callback) {
 				if (!callback || 'function' !== typeof callback) {
 					return;
 				}
@@ -440,7 +440,7 @@ define(
 			 * @public
 			 * @returns DomNode
 			 */
-			getFileInputNode : function () {
+			getFileInputNode: function() {
 				return this.rootNode.getElementsByClassName('fileinput')[0];
 			},
 			/**
@@ -449,7 +449,7 @@ define(
 			 * @private
 			 * @returns {string} object's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -461,7 +461,7 @@ define(
 			 * @param {string} id
 			 * @returns none.
 			 */
-			_fireCallback : function(/* string */ id) {
+			_fireCallback: function(/* string */ id) {
 				var callback = this.callbackMap[id];
 				if (callback) {
 					callback.apply(this, Array.prototype.slice.call(arguments, 1));
@@ -473,7 +473,7 @@ define(
 			 * @param {boolean} is 非活性にする場合はtrue, 活性にする場合はfalseを指定する。
 			 * @returns none
 			 */
-			setDisabled : function (/* boolean */ is) {
+			setDisabled: function(/* boolean */ is) {
 				var fileInputNode;
 				if (!this._super(is)) {
 					return false;

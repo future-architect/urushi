@@ -29,12 +29,12 @@
  *		descriptoin		: Label of the toggle button.
  * </pre>
  * @example
- *	require(['ToggleButton'], function (ToggleButton) {
+ *	require(['ToggleButton'], function(ToggleButton) {
  *		var toggleButton = new ToggleButton({
- *			id : 'myToggleButton',
- *			toggleButtonClass : 'toggle-primary',
- *			additionalClass : '',
- *			label : 'Required'
+ *			id: 'myToggleButton',
+ *			toggleButtonClass: 'toggle-primary',
+ *			additionalClass: '',
+ *			label: 'Required'
  *		});
  *		document.body.appendChild(toggleButton.getRootNode());
  *	});
@@ -73,7 +73,7 @@ define(
 	 * @alias module:ToggleButton
 	 * @returns {object} ToggleButton object.
 	 */
-	function ($, jqueryUi, Urushi, materialConfig, _Base, template, transitionUnit) {
+	function($, jqueryUi, Urushi, materialConfig, _Base, template, transitionUnit) {
 		'use strict';
 		/**
 		 * <pre>
@@ -83,15 +83,15 @@ define(
 		 * @constant
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi.ToggleButton',
-			EMBEDDED : {toggleButtonClass : '', additionalClass : '', label : ''},
-			INTERVAL : 10,
-			RIPPLE_SCALE_MIN : 0,
-			RIPPLE_SCALE_MAX : 1,
-			CHECKMARK_POSITION_LEFT : 15,
-			CHECKMARK_POSITION_RIGHT : -5,
-			RIPPLE_POSITION_LEFT : 2,
-			RIPPLE_POSITION_RIGHT : -18
+			ID_PREFIX: 'urushi.ToggleButton',
+			EMBEDDED: {toggleButtonClass: '', additionalClass: '', label: ''},
+			INTERVAL: 10,
+			RIPPLE_SCALE_MIN: 0,
+			RIPPLE_SCALE_MAX: 1,
+			CHECKMARK_POSITION_LEFT: 15,
+			CHECKMARK_POSITION_RIGHT: -5,
+			RIPPLE_POSITION_LEFT: 2,
+			RIPPLE_POSITION_RIGHT: -18
 		};
 
 		/**
@@ -111,13 +111,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded : undefined,
+			embedded: undefined,
 			/**
 			 * <pre>
 			 * Initializes instance properties.
@@ -125,7 +125,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
 			},
@@ -139,7 +139,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_render : function (/* object */ args) {
+			_render: function(/* object */ args) {
 				this._super(args);
 
 				if (Urushi.hasTransitionSupport()) {
@@ -156,7 +156,7 @@ define(
 			 * @param {object} args Constructor arugments.
 			 * @returns none.
 			 */
-			initOption : function (/* object */ args) {
+			initOption: function(/* object */ args) {
 				if (!Urushi.hasTransitionSupport()) {
 					Urushi.addEvent(this.inputNode, 'click', this, '_onClick');
 				}
@@ -171,7 +171,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_onClick : function () {
+			_onClick: function() {
 				var rippleCounter = 0,
 					rippleScale = CONSTANTS.RIPPLE_SCALE_MIN,
 					rippleOpacity = materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MIN,
@@ -183,23 +183,25 @@ define(
 					notCheckedButtonColor,
 					tmpNotCheckedBackgroundTag,
 					tmpNotCheckedButtonTag,
-					ripple = function (/* object */ node, /* number */ duration) {
+					ripple = function(/* object */ node, /* number */ duration) {
 						if (rippleCounter * CONSTANTS.INTERVAL < duration) {
 							setTimeout(function() {
 								rippleScale += CONSTANTS.RIPPLE_SCALE_MAX * CONSTANTS.INTERVAL / duration;
-								rippleOpacity += materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MAX * CONSTANTS.INTERVAL / duration;
+								rippleOpacity += materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MAX *
+										CONSTANTS.INTERVAL /
+										duration;
 								$(node).css({
-									'msTransform' : 'scale(' + rippleScale + ')',
-									'opacity' : rippleOpacity
+									'msTransform': 'scale(' + rippleScale + ')',
+									'opacity': rippleOpacity
 								});
 								rippleCounter++;
 								ripple(node, duration);
 							}, CONSTANTS.INTERVAL);
 						} else {
 							$(node).animate({
-								'msTransform' : 'scale(' + CONSTANTS.RIPPLE_SCALE_MIN + ')',
-								'opacity' : materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MIN
-							}, duration, function () {
+								'msTransform': 'scale(' + CONSTANTS.RIPPLE_SCALE_MIN + ')',
+								'opacity': materialConfig.DEFAULT_VALUE_RIPPLE_OPACITY_MIN
+							}, duration, function() {
 								$(node).parents('.togglebutton').find('input').prop('disabled', false);
 							});
 						}
@@ -223,22 +225,29 @@ define(
 						tmpCheckedButtonTag.classList.add('toggle-button-unit-tmp');
 						this.inputNode.appendChild(tmpCheckedButtonTag);
 
-						checkedBackgroundColor = $(this.inputNode).find('.toggle-transition-unit-tmp').css('background-color');
-						checkedButtonColor = $(this.inputNode).find('.toggle-button-unit-tmp').css('background-color');
+						checkedBackgroundColor = $(this.inputNode).
+								find('.toggle-transition-unit-tmp').
+								css('background-color');
+						checkedButtonColor = $(this.inputNode).
+								find('.toggle-button-unit-tmp').
+								css('background-color');
 						$(tmpCheckedBackgroundTag).remove();
 						$(tmpCheckedButtonTag).remove();
 					}
 
 					$(this.buttonNode).animate({
-						left : CONSTANTS.CHECKMARK_POSITION_LEFT,
-						'backgroundColor' : checkedButtonColor
+						left: CONSTANTS.CHECKMARK_POSITION_LEFT,
+						'backgroundColor': checkedButtonColor
 					}, materialConfig.DEFAULT_VALUE_DURATION);
 					$(this.toggleNode).animate({
-						'backgroundColor' : checkedBackgroundColor
+						'backgroundColor': checkedBackgroundColor
 					}, materialConfig.DEFAULT_VALUE_DURATION);
 					$(this.rippleNode).animate({
-						left : CONSTANTS.RIPPLE_POSITION_LEFT,
-					}, materialConfig.DEFAULT_VALUE_DURATION, ripple(this.rippleNode, materialConfig.DEFAULT_VALUE_DURATION));
+						left: CONSTANTS.RIPPLE_POSITION_LEFT,
+					}, materialConfig.DEFAULT_VALUE_DURATION, ripple(
+								this.rippleNode,
+								materialConfig.DEFAULT_VALUE_DURATION
+							));
 				} else {
 					tmpNotCheckedBackgroundTag = document.createElement('div');
 					tmpNotCheckedButtonTag = document.createElement('div');
@@ -246,21 +255,28 @@ define(
 					tmpNotCheckedButtonTag.className = 'toggle-button-unit';
 					this.inputNode.appendChild(tmpNotCheckedBackgroundTag);
 					this.inputNode.appendChild(tmpNotCheckedButtonTag);
-					notCheckedBackgroundColor = $(this.inputNode).find('.toggle-transition-unit').css('background-color');
-					notCheckedButtonColor = $(this.inputNode).find('.toggle-button-unit').css('background-color');
+					notCheckedBackgroundColor = $(this.inputNode).
+							find('.toggle-transition-unit').
+							css('background-color');
+					notCheckedButtonColor = $(this.inputNode).
+							find('.toggle-button-unit').
+							css('background-color');
 					$(tmpNotCheckedBackgroundTag).remove();
 					$(tmpNotCheckedButtonTag).remove();
 
 					$(this.buttonNode).animate({
-						left : CONSTANTS.CHECKMARK_POSITION_RIGHT,
-						'backgroundColor' : notCheckedButtonColor
+						left: CONSTANTS.CHECKMARK_POSITION_RIGHT,
+						'backgroundColor': notCheckedButtonColor
 					}, materialConfig.DEFAULT_VALUE_DURATION);
 					$(this.toggleNode).animate({
-						'backgroundColor' : notCheckedBackgroundColor
+						'backgroundColor': notCheckedBackgroundColor
 					}, materialConfig.DEFAULT_VALUE_DURATION);
 					$(this.rippleNode).animate({
-						left : CONSTANTS.RIPPLE_POSITION_RIGHT
-					}, materialConfig.DEFAULT_VALUE_DURATION, ripple(this.rippleNode, materialConfig.DEFAULT_VALUE_DURATION));
+						left: CONSTANTS.RIPPLE_POSITION_RIGHT
+					}, materialConfig.DEFAULT_VALUE_DURATION, ripple(
+							this.rippleNode,
+							materialConfig.DEFAULT_VALUE_DURATION
+						));
 				}
 			},
 			/**
@@ -278,7 +294,7 @@ define(
 			 * @protected
 			 * @returns none.
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this.inputNode = this.rootNode.getElementsByTagName('input')[0];
 
 				if (Urushi.hasTransitionSupport()) {
@@ -293,7 +309,7 @@ define(
 			 * @function
 			 * @returns {string} object's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -303,7 +319,7 @@ define(
 			 * @param {boolean} is True is disabled, false is enabled.
 			 * @returns {boolean} It finished normally, returns true.
 			 */
-			setDisabled : function (/* boolean */ is) {
+			setDisabled: function(/* boolean */ is) {
 				if (!this._super(is)) {
 					return false;
 				}
@@ -323,7 +339,7 @@ define(
 			 * </pre>
 			 * @returns {boolean} The toggle button checked attribute.
 			 */
-			getValue : function () {
+			getValue: function() {
 				return this.inputNode.checked;
 			},
 			/**
@@ -333,7 +349,7 @@ define(
 			 * @param {boolean} Status.
 			 * @returns none.
 			 */
-			setValue : function (/* boolean */ is) {
+			setValue: function(/* boolean */ is) {
 				if ('boolean' !== typeof is) {
 					return;
 				}
@@ -347,7 +363,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			clear : function () {
+			clear: function() {
 				this.setValue(false);
 			},
 			/**
@@ -357,7 +373,7 @@ define(
 			 * </pre>
 			 * @returns none.
 			 */
-			destroy : function () {
+			destroy: function() {
 				if (!Urushi.hasTransitionSupport()) {
 					Urushi.removeEvent(this.inputNode, 'click', this, '_onClick');
 				}

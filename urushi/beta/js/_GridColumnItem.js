@@ -38,7 +38,7 @@ define(
 	 * @alias module:_GridColumnItem
 	 * @returns {object} _GridColumnItem object.
 	 */
-	function (urushi, _CollectionItemBase) {
+	function(urushi, _CollectionItemBase) {
 		'use strict';
 
 		/**
@@ -51,7 +51,7 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi._gridColumnItem',
+			ID_PREFIX: 'urushi._gridColumnItem',
 		};
 
 		/**
@@ -72,7 +72,7 @@ define(
 			 * @type node
 			 * @private
 			 */
-			headerNode : undefined,
+			headerNode: undefined,
 			/**
 			 * <pre>
 			 * List of cell element node.
@@ -80,7 +80,7 @@ define(
 			 * @type array
 			 * @private
 			 */
-			cellNodes : [],
+			cellNodes: [],
 			/**
 			 * <pre>
 			 * Initialize cellNodes.
@@ -92,7 +92,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this._super(args);
 				this.cellNodes = [];
 			},
@@ -107,13 +107,13 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none
 			 */
-			_render : function (/* object */ args) {
+			_render: function(/* object */ args) {
 				var li,
 					name,
 					value;
 
 				if (!args.name || !args.value) {
-					throw new Error('_renderHeader : header must contains valid name and value');
+					throw new Error('_renderHeader: header must contains valid name and value');
 				}
 				name = args.name;
 				value = args.value;
@@ -131,7 +131,7 @@ define(
 			 * @protected
 			 * @returns {string} instance id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -143,7 +143,7 @@ define(
 			 * @param {node} cellNode The cell element node that is added.
 			 * @returns none
 			 */
-			_addCellNode : function (/* node */ cellNode) {
+			_addCellNode: function(/* node */ cellNode) {
 				this.cellNodes.push(cellNode);
 
 				if (this.isHidden()) {
@@ -158,7 +158,7 @@ define(
 			 * @private
 			 * @returns none
 			 */
-			_clearCells : function() {
+			_clearCells: function() {
 				this.cellNodes = [];
 			},
 			/**
@@ -170,7 +170,7 @@ define(
 			 * @param {boolean} is True is hidden, false is shown.
 			 * @returns {boolean} It finished normally, returns true.
 			 */
-			setHidden : function (/* boolean */ is) {
+			setHidden: function(/* boolean */ is) {
 				var index,
 					length;
 				if ('boolean' !== typeof is) {
@@ -196,7 +196,7 @@ define(
 			 * @function
 			 * @returns {boolean} Avtive state. Instance is disabled, returns true.
 			 */
-			isHidden : function () {
+			isHidden: function() {
 				return this.headerNode.classList.contains('hidden');
 			},
 			/**
@@ -207,7 +207,7 @@ define(
 			 * @function
 			 * @returns none.
 			 */
-			destroy : function () {
+			destroy: function() {
 				var index,
 					length;
 				$(this.headerNode).remove();

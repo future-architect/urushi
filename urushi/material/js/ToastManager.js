@@ -25,11 +25,11 @@
  *		descriptoin		: Display time of toast[ms].
  * </pre>
  * @example
- *	require(['ToastManager'], function (ToastManager) {
+ *	require(['ToastManager'], function(ToastManager) {
  *		var toastManager = new ToastManager({
- *			id : 'toastManager',
- *			addtionalClass : '',
- *			displayTime : 5000
+ *			id: 'toastManager',
+ *			addtionalClass: '',
+ *			displayTime: 5000
  *		});
  *		document.body.appendChild(toastManager.getRootNode());
  *		toastManager.add('toast mesaage.');
@@ -58,7 +58,7 @@ define(
 	 * @alias module:ToastManager
 	 * @returns {object} ToastManager instance.
 	*/
-	function (urushi, _Base, materialConfig, Toast, template) {
+	function(urushi, _Base, materialConfig, Toast, template) {
 		'use strict';
 
 		/**
@@ -69,7 +69,7 @@ define(
 		 * @constant
 		 */
 		var CONSTANTS = {
-			ID : 'urushi.toast-manager',
+			ID: 'urushi.toast-manager',
 		};
 
 		/**
@@ -84,7 +84,7 @@ define(
 		 * <pre>
 		 * Toast instances map.
 		 * The map format is as follows.
-		 * {toastId : toastobject}
+		 * {toastId: toastobject}
 		 * </pre>
 		 * @type object
 		 */
@@ -99,7 +99,7 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : undefined,
+			template: undefined,
 			/**
 			 * <pre>
 			 * Default variables there are binded to template string.
@@ -108,7 +108,7 @@ define(
 			 * @type object
 			 * @private
 			 */
-			embedded : {},
+			embedded: {},
 			/**
 			 * <pre>
 			 * Display time of toast.
@@ -117,7 +117,7 @@ define(
 			 * @default 3000
 			 * @private
 			 */
-			displayTime : undefined,
+			displayTime: undefined,
 			/**
 			 * <pre>
 			 * Initializes.
@@ -125,7 +125,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			init : function (/* object */ args) {
+			init: function(/* object */ args) {
 				args = args || {};
 				if (isCreated) {
 					throw new Error('The instance is already created.');
@@ -142,7 +142,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initProperties : function (/* object */ args) {
+			_initProperties: function(/* object */ args) {
 				this.template = template;
 				this.id = CONSTANTS.ID;
 				this.setDisplayTime(args.displayTime || materialConfig.TOAST_DISPLAY_TIME);
@@ -154,7 +154,7 @@ define(
 			 * @param {string} id Toast instance id.
 			 * @returns {node} The toast element node.
 			 */
-			getToastNode : function (/* string */ id) {
+			getToastNode: function(/* string */ id) {
 				var toast;
 				if (!id) {
 					return null;
@@ -173,28 +173,31 @@ define(
 			 * @param {number} displayTime Display time of toast.
 			 * @returns {string} The toast id.
 			 */
-			show : function (/* string|node */ content, /* number */ displayTime) {
+			show: function(/* string|node */ content, /* number */ displayTime) {
 				var args, toast;
 
 				content = content || '';
-				if ('string' !== typeof content && document.DOCUMENT_FRAGMENT_NODE !== content.nodeType && document.ELEMENT_NODE !== content.nodeType || !content) {
+				if ('string' !== typeof content &&
+						document.DOCUMENT_FRAGMENT_NODE !== content.nodeType &&
+						document.ELEMENT_NODE !== content.nodeType ||
+						!content) {
 					return undefined;
 				}
 
-				args = {content : content};
+				args = {content: content};
 				toast = new Toast(args);
 				contents[toast.id] = toast;
 
 				this.rootNode.appendChild(toast.rootNode);
 
 				displayTime = isNaN(displayTime) || displayTime < 0 ? this.displayTime : displayTime;
-				setTimeout((function (displayTime, toast) {
-					toast.show().then(function (displayTime, toast) {
+				setTimeout((function(displayTime, toast) {
+					toast.show().then(function(displayTime, toast) {
 						if (0 === displayTime) {
 							return;
 						}
 
-						setTimeout((function (toast) {
+						setTimeout((function(toast) {
 							this.hide(toast.id);
 						}).bind(this, toast), displayTime);
 					}.bind(this, displayTime, toast));
@@ -210,7 +213,7 @@ define(
 			 * @param {string} id Toast instance id.
 			 * @returns none.
 			 */
-			hide : function (/* string */ id) {
+			hide: function(/* string */ id) {
 				var toast;
 				if (!id) {
 					return;
@@ -220,7 +223,7 @@ define(
 					return;
 				}
 				
-				toast.hide().then((function () {
+				toast.hide().then((function() {
 					this._deleteToast(toast.id);
 				}).bind(this));
 			},
@@ -232,7 +235,7 @@ define(
 			 * @param {string} id Toast instance id.
 			 * @returns none.
 			 */
-			_deleteToast : function (/* string */ id) {
+			_deleteToast: function(/* string */ id) {
 				contents[id].destroy();
 				contents[id] = null;
 				delete contents[id];
@@ -244,7 +247,7 @@ define(
 			 * @param {number} displayTime Display time[ms].
 			 * @returns none.
 			 */
-			setDisplayTime : function (/* number */ displayTime) {
+			setDisplayTime: function(/* number */ displayTime) {
 				if ('number' !== typeof displayTime) {
 					return;
 				}
@@ -257,7 +260,7 @@ define(
 			 * @protected
 			 * @returns {string} object's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return this.id;
 			},
 			/**
@@ -267,7 +270,7 @@ define(
 			 * </pre>
 			 * @returns none
 			 */
-			destroy : function () {
+			destroy: function() {
 				var key;
 				for (key in contents) {
 					this._deleteToast(key);

@@ -53,7 +53,7 @@ define(
 	 * @alias module:_UploadManagerListItem
 	 * @returns {Object} _UploadManagerListItem object.
 	 */
-	function ($, urushi, Input, Button, template) {
+	function($, urushi, Input, Button, template) {
 		'use strict';
 
 		/**
@@ -67,13 +67,13 @@ define(
 		 * @private
 		 */
 		var CONSTANTS = {
-			ID_PREFIX : 'urushi._UploadManagerListItem',
-			EMBEDDED : {fileName : ''},
-			LABEL_UPLOAD : 'アップロード',
-			LABEL_CANCEL : 'キャンセル',
-			LABEL_CLOSE : '閉じる',
-			MESSAGE_UPLOADING_STATUS : 'アップロード中',
-			MESSAGE_UPLOADDONE_STATUS : 'アップロード完了',
+			ID_PREFIX: 'urushi._UploadManagerListItem',
+			EMBEDDED: {fileName: ''},
+			LABEL_UPLOAD: 'アップロード',
+			LABEL_CANCEL: 'キャンセル',
+			LABEL_CLOSE: '閉じる',
+			MESSAGE_UPLOADING_STATUS: 'アップロード中',
+			MESSAGE_UPLOADDONE_STATUS: 'アップロード完了',
 		};
 
 		/**
@@ -98,80 +98,80 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template : template,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type Object
 			 * @constant
 			 * @private
 			 */
-			embedded : CONSTANTS.EMBEDDED,
+			embedded: CONSTANTS.EMBEDDED,
 			/**
 			 * アップロード完了ステータスtrueなら完了
 			 * @type boolean
 			 * @public
 			 */
-			isDone : null,
+			isDone: null,
 			/**
 			 * jquery.uploadから渡されたdata
 			 * @type Object
 			 * @private
 			 */
-			$data : null,
+			$data: null,
 			/**
 			 * アップロード処理開始時のコールバック
 			 * @type Function
 			 * @private
 			 */
-			uploadStartCallback : null,
+			uploadStartCallback: null,
 			/**
 			 * キャンセル時のコールバック
 			 * @type Function
 			 * @private
 			 */
-			cancelCallback : null,
+			cancelCallback: null,
 			/**
 			 * クローズ時のコールバック
 			 * @type Function
 			 * @private
 			 */
-			closeCallback : null,
+			closeCallback: null,
 			/**
 			 * 破棄処理のコールバック
 			 * @type Function
 			 * @private
 			 */
-			destroyCallback : null,
+			destroyCallback: null,
 			/**
 			 * メッセージ表示用のDomNode
 			 * @type DomNode
 			 * @private
 			 */
-			messageNode : null,
+			messageNode: null,
 			/**
 			 * input領域のDomNode
 			 * @type DomNode
 			 * @private
 			 */
-			inputNode : null,
+			inputNode: null,
 			/**
 			 * アップロードボタン
 			 * @type Button
 			 * @private
 			 */
-			buttonUpload : null,
+			buttonUpload: null,
 			/**
 			 * キャンセルボタン
 			 * @type Button
 			 * @private
 			 */
-			buttonCancel : null,
+			buttonCancel: null,
 			/**
 			 * 閉じるボタン
 			 * @type Button
 			 * @private
 			 */
-			buttonClose : null,
+			buttonClose: null,
 			/**
 			 * <pre>
 			 * 初期化処理。
@@ -180,7 +180,7 @@ define(
 			 * @param {Object} args 初期化時引数。 not nullable.
 			 * @returns none.
 			 */
-			init : function (/* Object */ args) {
+			init: function(/* Object */ args) {
 				this._super(args);
 
 				this._bindHandler();
@@ -193,7 +193,7 @@ define(
 			 * @param {Object} args 初期化時に必要な引数。
 			 * @returns none.
 			 */
-			_initProperties : function (/* Object */ args) {
+			_initProperties: function(/* Object */ args) {
 				this._super(args);
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
@@ -210,7 +210,7 @@ define(
 			 * @param {Object} args
 			 * @returns none
 			 */
-			_render : function (/* Object */ args) {
+			_render: function(/* Object */ args) {
 				var buttonsRoot,
 					doneButtonsRoot;
 				this._super(args);
@@ -234,10 +234,10 @@ define(
 			 * @protected
 			 * @returns none
 			 */
-			_createUploadButton : function () {
+			_createUploadButton: function() {
 				return new Button({
-					label : CONSTANTS.LABEL_UPLOAD,
-					buttonClass : 'button-raised button-info',
+					label: CONSTANTS.LABEL_UPLOAD,
+					buttonClass: 'button-raised button-info',
 				});
 			},
 			/**
@@ -248,10 +248,10 @@ define(
 			 * @protected
 			 * @returns none
 			 */
-			_createCancelButton : function () {
+			_createCancelButton: function() {
 				return new Button({
-					label : CONSTANTS.LABEL_CANCEL,
-					buttonClass : 'button-raised button-default',
+					label: CONSTANTS.LABEL_CANCEL,
+					buttonClass: 'button-raised button-default',
 				});
 			},
 			/**
@@ -262,10 +262,10 @@ define(
 			 * @protected
 			 * @returns none
 			 */
-			_createCloseButton : function () {
+			_createCloseButton: function() {
 				return new Button({
-					label : CONSTANTS.LABEL_CLOSE,
-					buttonClass : 'button-raised button-accent',
+					label: CONSTANTS.LABEL_CLOSE,
+					buttonClass: 'button-raised button-accent',
 				});
 			},
 			/**
@@ -276,7 +276,7 @@ define(
 			 * @private
 			 * @returns none
 			 */
-			_attachNode : function () {
+			_attachNode: function() {
 				this._super();
 
 				this.inputNode = this.rootNode.getElementsByClassName('upload-manager-li-filename-input')[0];
@@ -288,7 +288,7 @@ define(
 			 * @private
 			 * @returns {string} object's id.
 			 */
-			_getId : function () {
+			_getId: function() {
 				return CONSTANTS.ID_PREFIX + idNo++;
 			},
 			/**
@@ -297,7 +297,7 @@ define(
 			 * @private
 			 * @returns none
 			 */
-			_bindHandler : function () {
+			_bindHandler: function() {
 				urushi.addEvent(this.buttonUpload.getRootNode(), 'click', this, 'upload');
 				urushi.addEvent(this.buttonCancel.getRootNode(), 'click', this, 'cancel');
 				urushi.addEvent(this.buttonClose.getRootNode(), 'click', this, 'close');
@@ -310,7 +310,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			upload : function() {
+			upload: function() {
 				this.buttonUpload.setDisabled(true);
 				this.buttonCancel.setDisabled(true);
 				this.messageNode.textContent = CONSTANTS.MESSAGE_UPLOADING_STATUS;
@@ -325,7 +325,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			cancel : function() {
+			cancel: function() {
 				this.cancelCallback();
 				this.destroy();
 			},
@@ -337,7 +337,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			close : function() {
+			close: function() {
 				this.closeCallback();
 				this.destroy();
 			},
@@ -349,7 +349,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			done : function() {
+			done: function() {
 				this.messageNode.textContent = CONSTANTS.MESSAGE_UPLOADDONE_STATUS;
 				this.rootNode.classList.add('done');
 				this.isDone = true;
@@ -362,7 +362,7 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			fail : function() {
+			fail: function() {
 				this.buttonUpload.setDisabled(false);
 				this.buttonCancel.setDisabled(false);
 				this.messageNode.textContent = '';
@@ -377,7 +377,7 @@ define(
 			 * @returns none
 			 * @override
 			 */
-			destroy : function () {
+			destroy: function() {
 				urushi.removeEvent(this.buttonUpload.getRootNode(), 'click', this, 'upload');
 				this.buttonUpload.destroy();
 				this.buttonUpload = null;

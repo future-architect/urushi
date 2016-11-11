@@ -24,7 +24,7 @@ define(
 	 * @alias module:_collectionMixin
 	 * @returns {object} _collectionMixin.
 	 */
-	function (_, $, extend) {
+	function(_, $, extend) {
 		'use strict';
 
 		return {
@@ -36,7 +36,7 @@ define(
 			 * @type _collectionMixin
 			 * @private
 			 */
-			owner : undefined,
+			owner: undefined,
 			/**
 			 * <pre>
 			 * list of instance inherits _CollectionItemBase, is the child.
@@ -44,7 +44,7 @@ define(
 			 * @type array
 			 * @private
 			 */
-			subItemList : [],
+			subItemList: [],
 			/**
 			 * <pre>
 			 * Initialization.
@@ -53,7 +53,7 @@ define(
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
-			_initPropertiesCollectionMixin : function (/* object */ args) {
+			_initPropertiesCollectionMixin: function(/* object */ args) {
 				this.subItemList = [];
 				this.owner = args ? args.owner : undefined;
 			},
@@ -65,7 +65,7 @@ define(
 			 * @param {string} id Instance identifier.
 			 * @returns {object} Child instance, is the child.
 			 */
-			getSubItem : function (/* string */ id) {
+			getSubItem: function(/* string */ id) {
 				var index = this._getSubItemIndex(id);
 				if (index > -1) {
 					return this.subItemList[index];
@@ -80,7 +80,7 @@ define(
 			 * @param {string} id Instance identifier.
 			 * @returns {number} Child instance index.
 			 */
-			_getSubItemIndex : function (/* string */ id) {
+			_getSubItemIndex: function(/* string */ id) {
 				var index,
 					item;
 
@@ -99,7 +99,7 @@ define(
 			 * @function
 			 * @returns {array} Child instances.
 			 */
-			getSubItems : function () {
+			getSubItems: function() {
 				var result = [],
 					index,
 					length = this.subItemList.length;
@@ -115,7 +115,7 @@ define(
 			 * @function
 			 * @returns {array} Child instance ids.
 			 */
-			getSubItemIds : function () {
+			getSubItemIds: function() {
 				var result = [],
 					index,
 					length = this.subItemList.length;
@@ -133,7 +133,7 @@ define(
 			 * @param {string} id Instance identifier.
 			 * @returns none.
 			 */
-			_removeSubItem : function (/* string */ id) {
+			_removeSubItem: function(/* string */ id) {
 				var index = this._getSubItemIndex(id),
 					item;
 
@@ -152,7 +152,7 @@ define(
 			 * @param {object} item Child instance that is removed.
 			 * @returns none
 			 */
-			_onRemoveSubItem : function (/* object */ item) {
+			_onRemoveSubItem: function(/* object */ item) {
 			},
 			/**
 			 * <pre>
@@ -163,7 +163,7 @@ define(
 			 * @param {object} subCollectionItem Child instance that is added.
 			 * @returns none.
 			 */
-			_addSubItem : function (/* object */ subCollectionItem) {
+			_addSubItem: function(/* object */ subCollectionItem) {
 				if (this._getSubItemIndex(subCollectionItem.id) > -1) {
 					throw new Error('Duplication error : id = ' + subCollectionItem.id);
 				}
@@ -179,7 +179,7 @@ define(
 			 * @param {object} subCollectionItem Child instance that is added.
 			 * @returns none
 			 */
-			_onAddSubItem : function (/* object */ item) {
+			_onAddSubItem: function(/* object */ item) {
 			},
 			/**
 			 * <pre>
@@ -188,7 +188,7 @@ define(
 			 * @function
 			 * @returns none
 			 */
-			_destroyCollectionMixin : function () {
+			_destroyCollectionMixin: function() {
 				var index,
 					length,
 					items = this.getSubItems();
