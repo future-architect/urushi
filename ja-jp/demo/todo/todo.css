@@ -1,0 +1,30 @@
+.todo {
+	border-radius:2px;
+	border:0;
+	background-color:#FFF;
+	margin: 15px;
+	max-width: 512px;
+	box-shadow:0 10px 20px rgba(0,0,0,.19),0 6px 6px rgba(0,0,0,.23);
+	padding: 15px 25px 15px 25px;
+	font-size: 30px;
+	-webkit-animation-name: show-todo;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-timing-function: ease;
+	animation-name: show-todo;
+	animation-duration: 0.5s;
+	animation-timing-function: ease;
+};
+
+@-webkit-keyframes show-todo {
+	0% {opacity:0;transform:scale(0,0);}
+	100% {opacity:1;transform:scale(1,1);}
+}
+
+@keyframes show-todo {
+	0% {opacity:0;transform:scale(0,0);}
+	100% {opacity:1;transform:scale(1,1);}
+}
+
+.check-box{
+  transform: scale(1.6);
+}

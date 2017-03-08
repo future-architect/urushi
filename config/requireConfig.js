@@ -84,7 +84,17 @@ window.requireConfig = {
 
 		// Card
 		Card : 'urushi/material/js/Card',
-		cardTemplate : 'urushi/material/template/card.html'
+		cardTemplate : 'urushi/material/template/card.html',
+
+		// Label
+		Label : 'urushi/material/js/Label',
+		labelTemplate : 'urushi/material/template/label.html',
+		// Todo
+		Todo : 'urushi/material/js/Todo' ,
+		todoTemplate : 'urushi/material/template/todo.html',
+		// TodoInput
+		TodoInput : 'urushi/material/js/TodoInput' ,
+		todoInputTemplate : 'urushi/material/template/todo-input.html'
 	},
 	shim : {
 		'jqueryUi' : ['jquery']

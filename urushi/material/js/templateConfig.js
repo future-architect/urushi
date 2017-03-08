@@ -441,6 +441,44 @@ define(
 				options : {
 					id : 'id'
 				}
+			},
+			label : {
+				name : 'Label',
+				className : 'label',
+				requires : [],
+				method : {
+					id : 'getField',
+					labelClass : 'getOptionalClasses',
+					title : 'getUrushiOption'
+				},
+				options :{
+					id : 'id'
+				}
+			},
+			todo : {
+				name :'Todo',
+				className : 'todo',
+				requires :[],
+				method :{
+					id : 'getField',
+					todoClass : 'getOptionalClasses',
+					title : 'getUrushiOption'
+				},
+				options :{
+					id : 'id'
+				}
+			},
+			todoinput : {
+				name : 'TodoInput',
+				className : 'todoinput',
+				requires :[],
+				method : {
+					id : 'getField',
+					todoInputClass : 'getOptionalClasses'
+				},
+				options :{
+					id : 'id'
+				}
 			}
 		};
 	}

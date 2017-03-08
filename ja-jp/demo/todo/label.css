@@ -1,0 +1,10 @@
+.label{
+	border-radius:2px;
+	border:0;
+	background-color:#FFF;
+	margin: 15px;
+	max-width: 512px;
+	box-shadow:0 10px 20px rgba(0,0,0,.19),0 6px 6px rgba(0,0,0,.23);
+	padding: 24px 16px 16px 16px;
+	font-size: 24px;
+};
