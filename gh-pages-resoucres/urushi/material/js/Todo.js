@@ -33,6 +33,7 @@ define(
 				this.inputNode.style.display = "none";
 				var checkBox = new Checkbox();
 				this.checkBoxNode = checkBox.getRootNode();
+				console.log(this.checkBoxNode);
 				this.checkBoxNode.style.display = "inline";
 				this.checkBoxNode.style.cssFloat = "left";
 				this.checkNode = this.checkBoxNode.getElementsByTagName('input')[0];

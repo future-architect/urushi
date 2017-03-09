@@ -25,12 +25,13 @@ h1 {
 
 .checkbox label .check {
 	left :-10px !important;
-	top : 0px !important;
+	top : 0px;
 }
 
 .close {
 	font-size :50px !important;
 	color : rgba(0,0,0,.26);
+	float:right;
 }
 
 .todo-edit {
@@ -55,4 +56,9 @@ h1 {
 .form-control {
 	height: 55px !important;
 	font-size: 30px !important;
+}
+
+.text-area{
+	width:350px !important;
+	word-break:break-all;
 }
