@@ -38,7 +38,7 @@ h1 {
 	font-size :30px !important;
 }
 .ripple {
-	top : -5px !important;
+	top : -3px !important;
 	left : -12px !important;
 }
 
@@ -59,6 +59,6 @@ h1 {
 }
 
 .text-area{
-	width:350px !important;
+	width:370px !important;
 	word-break:break-all;
 }

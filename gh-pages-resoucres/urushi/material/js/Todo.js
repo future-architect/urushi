@@ -34,7 +34,7 @@ define(
 				var checkBox = new Checkbox();
 				this.checkBoxNode = checkBox.getRootNode();
 				console.log(this.checkBoxNode);
-				this.checkBoxNode.style.display = "inline";
+				this.checkBoxNode.style.display = "inline-block";
 				this.checkBoxNode.style.cssFloat = "left";
 				this.checkNode = this.checkBoxNode.getElementsByTagName('input')[0];
 				this.closeIconNode = this.rootNode.getElementsByClassName('close')[0];
@@ -67,9 +67,9 @@ define(
 				this.inputNode.getElementsByClassName('form-control')[0].value = todoText;
 			},
 			update : function(){
-				this.textAreaNode.style.display = "inline";
-				this.closeIconNode.style.display = "inline";
-				this.checkBoxNode.style.display = "inline";
+				this.textAreaNode.style.display = "inline-block";
+				this.closeIconNode.style.display = "inline-block";
+				this.checkBoxNode.style.display = "inline-block";
 				this.inputNode.style.display = "none";
 				var value = this.inputNode.getElementsByClassName('form-control')[0].value;
 				if(value.length > 0) {
