@@ -13,6 +13,7 @@
 	animation-name: show-todo;
 	animation-duration: 0.5s;
 	animation-timing-function: ease;
+	line-height: 40px;
 };
 
 @-webkit-keyframes show-todo {
@@ -25,6 +26,3 @@
 	100% {opacity:1;transform:scale(1,1);}
 }
 
-.check-box{
-  transform: scale(1.6);
-}

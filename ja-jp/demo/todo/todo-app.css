@@ -23,19 +23,36 @@ h1 {
 	margin :20px 0;
 }
 
-.todo-input-area > .form-control-wrapper > .form-control {
-	font-size : 36px;
-	height : 50px !important;
-	text-align: center;
-	color: #333333;
+.checkbox label .check {
+	left :-10px !important;
+	top : 0px !important;
 }
 
-.todo-input-area > .form-control-wrapper >  .form-control:-webkit-input-placeholder {
-	color: #b6b6b6;
+.close {
+	font-size :50px !important;
+	color : rgba(0,0,0,.26);
 }
-.todo-input-area > .form-control-wrapper >  .form-control:-moz-placeholder {
-	color: #b6b6b6;
+
+.todo-edit {
+	font-size :30px !important;
 }
-.todo-input-area > .form-control-wrapper >  .form-control:-ms-input-placeholder{
-	color: #b6b6b6;
+.ripple {
+	top : -5px !important;
+	left : -12px !important;
+}
+
+.form-control-wrapper .form-control.focus~.floating-label,
+.form-control-wrapper .form-control:focus~.floating-label,
+.form-control-wrapper .form-control:not(.empty)~.floating-label {
+	top: -36px;
+	font-size: 20px !important;
+}
+
+.floating-label{
+	font-size: 30px !important;
+}
+
+.form-control {
+	height: 55px !important;
+	font-size: 30px !important;
 }
