@@ -1,5 +1,5 @@
 module.exports = {
-	_writeLine : function (str) {
+	_writeLine : function(str) {
 		//lineの長さを定義
 		'use strict';
 		var LINE_LENGTH = 60,
@@ -18,7 +18,7 @@ module.exports = {
 		}
 		console.log(line);
 	},
-	_insertBlankLine : function () {
+	_insertBlankLine : function() {
 		'use strict';
 		console.log('');
 	}

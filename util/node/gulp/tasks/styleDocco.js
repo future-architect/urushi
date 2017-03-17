@@ -1,21 +1,22 @@
-var gulp = require('gulp'),
-	config = require('../config.js'),
-	common = require('../common.js'),
-	results = [];
+var gulp = require('gulp');
+var config = require('../config.js');
+var common = require('../common.js');
+var results = [];
 
-
-gulp.task('docco-include-css', function (){
+gulp.task('docco-include-css', function() {
 	'use strict';
-	var fs = require("fs"),
-		dest = config.styleDocco.style;
-		
+	
+	var fs = require('fs');
+	var dest = config.styleDocco.style;
 	var list = fs.readdirSync(dest);
+	var i, length;
 
-	for (var i=0, length = list.length; i<length; i++){
-		if(/.*\.css$/.test(list[i])){
-			results.push(dest + "\/" + list[i]);
+	for (i = 0, length = list.length; i < length; i++) {
+		if (/.*\.css$/.test(list[i])) {
+			results.push(dest + '\/' + list[i]);
 		}
 	}
+	
 	common._insertBlankLine();
 	common._writeLine('+');
 	common._insertBlankLine();
@@ -29,20 +30,19 @@ gulp.task('docco-include-css', function (){
 	common._insertBlankLine();
 });
 
-
-gulp.task('docco', ['docco-include-css'], function (){
+gulp.task('docco', ['docco-include-css'], function() {
 	'use strict';
-	var styledocco = require('gulp-styledocco'),
-		target = config.styleDocco.src + '/**/*.scss',
-		dest = config.styleDocco.dest,
-		style = results;
+	var styledocco = require('gulp-styledocco');
+	var target = config.styleDocco.src + '/**/*.scss';
+	var dest = config.styleDocco.dest;
+	var style = results;
+
 	// styeleDocco
-	gulp.src(target)
-		.pipe(styledocco({
-			out: dest,
-			preprocessor: 'sass',
-			include: style,
-			verbose: false
+	gulp.src(target).pipe(styledocco({
+		out: dest,
+		preprocessor: 'sass',
+		include: style,
+		verbose: false
 	}));
 });
 

@@ -3,7 +3,7 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	config = require('../config.js');
 
-gulp.task('js-build', function () {
+gulp.task('js-build', function() {
 	'use strict';
 	var i, length;
 	for (i = 0, length = config.js.src.rjs.length; i < length; i++) {
