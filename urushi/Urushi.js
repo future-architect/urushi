@@ -23,7 +23,7 @@ define(
 	 * @alias module:Urushi
 	 * @returns {object} Urushi object.
 	 */
-	function (legacy, browser, event, Deferred, xhr, node) {
+	function(legacy, browser, event, Deferred, xhr, node) {
 		'use strict';
 
 		var Urushi = {},
