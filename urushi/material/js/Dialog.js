@@ -80,7 +80,6 @@
  *
  * @module Dialog
  * @extends module:Panel
- * @requires jquery-2.1.1.js
  * @requires module:Urushi
  * @requires module:materialConfig
  * @requires module:Panel
@@ -89,7 +88,6 @@
 define(
 	'Dialog',
 	[
-		'jquery',
 		'Urushi',
 		'materialConfig',
 		'Panel',
@@ -101,7 +99,7 @@ define(
 	 * @alias module:Dialog
 	 * @returns {object} Dialog instance.
 	 */
-	function($, urushi, materialConfig, Panel, template) {
+	function(urushi, materialConfig, Panel, template) {
 		'use strict';
 
 		/**
@@ -165,7 +163,6 @@ define(
 			 * @returns none.
 			 */
 			show: function() {
-				var transformOffset;
 				if (this.isShown) {
 					return;
 				}
@@ -179,27 +176,8 @@ define(
 
 				this.rootNode.style.display = 'block';
 				setTimeout((function() {
-					if (urushi.hasTransitionSupport()) {
-						this.rootNode.classList.add('in');
-						this.underlayNode.classList.add('in');
-					} else {
-						transformOffset = $(this.dialogNode).height() / 2;
-						$(this.rootNode).css({opacity: materialConfig.DEFAULT_VALUE_OPACITY_MIN});
-						$(this.dialogNode).css({'margin-top': materialConfig.DIALOG_POINT_WAITING - transformOffset});
-						$(this.underlayNode).css({opacity: materialConfig.DEFAULT_VALUE_OPACITY_MIN});
-
-						this.rootNode.classList.add('in');
-						
-						$(this.rootNode).animate({
-							opacity: materialConfig.DEFAULT_VALUE_OPACITY_MAX
-						}, materialConfig.DIALOG_ANIMATION_DURATION);
-						$(this.dialogNode).animate({
-							'margin-top': materialConfig.DIALOG_POINT_VIEW
-						}, materialConfig.DIALOG_ANIMATION_DURATION);
-						$(this.underlayNode).animate({
-							opacity: materialConfig.DEFAULT_VALUE_OPACITY_MAX
-						}, materialConfig.DIALOG_ANIMATION_DURATION);
-					}
+					this.rootNode.classList.add('in');
+					this.underlayNode.classList.add('in');
 					this._enforceFocus();
 				}).bind(this), materialConfig.DIALOG_ANIMATION_DELAY);
 			},
@@ -210,7 +188,6 @@ define(
 			 * @returns none.
 			 */
 			hide: function() {
-				var transformOffset;
 				if (!this.isShown) {
 					return;
 				}
@@ -220,24 +197,8 @@ define(
 
 				urushi.removeEvent(this.rootNode, 'keydown', this, '_onKeydown');
 
-				if (urushi.hasTransitionSupport()) {
-					this.rootNode.classList.remove('in');
-					this.underlayNode.classList.remove('in');
-				} else {
-					transformOffset = $(this.dialogNode).height() / 2;
-					$(this.rootNode).animate({
-						opacity: materialConfig.DEFAULT_VALUE_OPACITY_MIN
-					}, materialConfig.DIALOG_ANIMATION_DURATION);
-					$(this.dialogNode).animate({'margin-top': materialConfig.DIALOG_POINT_WAITING - transformOffset}, {
-						duration: materialConfig.DIALOG_ANIMATION_DURATION,
-						complete: function() {
-							this.rootNode.classList.remove('in');
-						}.bind(this),
-					});
-					$(this.underlayNode).animate({
-						opacity: materialConfig.DEFAULT_VALUE_OPACITY_MIN
-					}, materialConfig.DIALOG_ANIMATION_DURATION);
-				}
+				this.rootNode.classList.remove('in');
+				this.underlayNode.classList.remove('in');
 
 				setTimeout((function() {
 					this.rootNode.style.display = 'none';

@@ -1,27 +1,34 @@
-/*eslint "vars-on-top" : 0*/
+/*eslint "vars-on-top": 0*/
 
 define(
 	'dialog.spec',
 	['Urushi', 'Dialog', 'templateEngine', 'templateConfig', 'materialConfig'],
-	function (Urushi, Dialog, templateEngine, templateConfig, materialConfig) {
+	function(Urushi, Dialog, templateEngine, templateConfig, materialConfig) {
 		'use strict';
 		var temp,
-			hasTransitionSupportTrue = function () {return true;},
-			hasTransitionSupportFalse = function () {return false;};
+			hasTransitionSupportTrue = function() { return true; },
+			hasTransitionSupportFalse = function() { return false; };
 
-		describe('Dialog test', function () {
+		function createElement(str) {
+			var d = document.createElement('div');
+			d.innerHTML = str;
+
+			return d.children[0];
+		}
+
+		describe('Dialog test', function() {
 			var dialog,
 				parentNode = document.getElementById('script-modules');
 
-			beforeEach(function(){
-				(new Dialog({content : 'content'})).destroy();
-				(new Dialog({content : 'content', parentNode : document.body})).destroy();
-				(new Dialog({content : 'content', isDisplayCloseIcon : false})).destroy();
-				(new Dialog({content : 'content', isDisplayCloseIcon : true})).destroy();
+			beforeEach(function() {
+				(new Dialog({content: 'content'})).destroy();
+				(new Dialog({content: 'content', parentNode: document.body})).destroy();
+				(new Dialog({content: 'content', isDisplayCloseIcon: false})).destroy();
+				(new Dialog({content: 'content', isDisplayCloseIcon: true})).destroy();
 
-				dialog = new Dialog({header : 'head', footer : 'foot', content : 'content'});
+				dialog = new Dialog({header: 'head', footer: 'foot', content: 'content'});
 			});
-			it('show on True', function (done) {
+			it('show on True', function(done) {
 				temp = Urushi.hasTransitionSupport;
 				Urushi.hasTransitionSupport = hasTransitionSupportTrue;
 				dialog.isShown = false;
@@ -30,7 +37,7 @@ define(
 				expect(dialog.show()).toBe();
 				done();
 			});
-			it('show on False', function (done) {
+			it('show on False', function(done) {
 				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
 				dialog.isShown = false;
 				expect(dialog.show()).toBe();
@@ -41,7 +48,7 @@ define(
 					done();
 				}, 200);
 			});
-			it('hide', function () {
+			it('hide', function() {
 				temp = Urushi.hasTransitionSupport;
 				Urushi.hasTransitionSupport = hasTransitionSupportTrue;
 				dialog.isShown = true;
@@ -55,7 +62,7 @@ define(
 				
 				Urushi.hasTransitionSupport = temp;
 			});
-			it('setHeader', function () {
+			it('setHeader', function() {
 				expect(dialog.setHeader()).toBe();
 				expect(dialog.setHeader(1)).toBe();
 				expect(dialog.setHeader(true)).toBe();
@@ -64,22 +71,22 @@ define(
 				expect(dialog.setHeader('')).toBe();
 				expect(dialog.setHeader('test')).toBe();
 			});
-			it('displayCloseIcon', function () {
+			it('displayCloseIcon', function() {
 				expect(dialog.displayCloseIcon()).toBe();
 				expect(dialog.displayCloseIcon(true)).toBe();
 				expect(dialog.displayCloseIcon(false)).toBe();
 			});
-			it('_onKeydown', function () {
-				var invalidEvent = {stopPropagation : function () {}, which : '10'},
-					validEvent = {stopPropagation : function () {}, which : '27'};
+			it('_onKeydown', function() {
+				var invalidEvent = {stopPropagation: function() {}, which: '10'},
+					validEvent = {stopPropagation: function() {}, which: '27'};
 
 				expect(dialog._onKeydown(invalidEvent)).toBe();
 				expect(dialog._onKeydown(validEvent)).toBe();
 			});
-			it('setHeader empty', function () {
-				var button = $('<button>setHeader empty</button>')[0];
+			it('setHeader empty', function() {
+				var button = createElement('<button>setHeader empty</button>');
 				parentNode.appendChild(button);
-				var dlg = new Dialog({header : '', footer : 'foot', content : 'content'});
+				var dlg = new Dialog({header: '', footer: 'foot', content: 'content'});
 				parentNode.appendChild(dlg.rootNode);
 				button.onclick = function() {
 					dlg.show();
@@ -102,10 +109,10 @@ define(
 				expect(dlg.headerNode.classList.contains('hidden')).toBe(true);
 			});
 
-			it('setHeader html escape', function () {
-				var button = $('<button>setHeader html escape</button>')[0];
+			it('setHeader html escape', function() {
+				var button = createElement('<button>setHeader html escape</button>');
 				parentNode.appendChild(button);
-				var dlg = new Dialog({header : '<div>escape init</div>', footer : 'foot', content : 'content'});
+				var dlg = new Dialog({header: '<div>escape init</div>', footer: 'foot', content: 'content'});
 				parentNode.appendChild(dlg.rootNode);
 				button.onclick = function() {
 					dlg.show();
@@ -116,26 +123,33 @@ define(
 				expect(dlg.titleNode.textContent).toBe('<div>escape</div>');
 			});
 
-			it('setHeader dom', function () {
-				var button = $('<button>setHeader dom</button>')[0];
+			it('setHeader dom', function() {
+				var button = createElement('<button>setHeader dom</button>');
 				parentNode.appendChild(button);
-				var dlg = new Dialog({header : $('<div style="color: blue;">dom</div>'), footer : 'foot', content : 'content'});
+				var dlg = new Dialog({
+					header: createElement('<div style="color: blue;">dom</div>'),
+					footer: 'foot',
+					content: 'content'});
 				parentNode.appendChild(dlg.rootNode);
 				button.onclick = function() {
 					dlg.show();
 				};
 				expect(dlg.titleNode.innerHTML).toBe('<div style="color: blue;">dom</div>');
 				
-				dlg.setHeader($('<div style="color: red;">dom</div>'));
+				dlg.setHeader(createElement('<div style="color: red;">dom</div>'));
 				expect(dlg.titleNode.innerHTML).toBe('<div style="color: red;">dom</div>');
 			});
 
-			it('materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = true', function () {
-				var button = $('<button>materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = true</button>')[0];
+			it('materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = true', function() {
+				var button = createElement('<button>materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = true</button>');
 				parentNode.appendChild(button);
 				materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = true;
 
-				var dlg = new Dialog({header : 'materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = true', footer : 'foot', content : 'content', isDisplayCloseIcon : true});
+				var dlg = new Dialog({
+					header: 'materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = true',
+					footer: 'foot',
+					content: 'content',
+					isDisplayCloseIcon: true});
 				parentNode.appendChild(dlg.rootNode);
 				button.onclick = function() {
 					dlg.show();
@@ -150,12 +164,16 @@ define(
 				expect(dlg.isShown).toBe(false);
 			});
 
-			it('materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = false', function () {
-				var button = $('<button>materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = false</button>')[0];
+			it('materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = false', function() {
+				var button = createElement('<button>materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = false</button>');
 				parentNode.appendChild(button);
 				materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = false;
 				try {
-					var dlg = new Dialog({header : 'materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = false', footer : 'foot', content : 'content', isDisplayCloseIcon : true});
+					var dlg = new Dialog({
+						header: 'materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE = false',
+						footer: 'foot',
+						content: 'content',
+						isDisplayCloseIcon: true});
 					parentNode.appendChild(dlg.rootNode);
 					button.onclick = function() {
 						dlg.show();
@@ -175,30 +193,30 @@ define(
 				}
 			});
 
-			it('destroy', function () {
+			it('destroy', function() {
 				expect(dialog.destroy()).toBe();
 			});
 
-			describe('Template engine', function () {
+			describe('Template engine', function() {
 				var flag = false;
-				beforeEach(function (done) {
-					templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
+				beforeEach(function(done) {
+					templateEngine.renderDocument(document.body, templateConfig).then(function(result) {
 						var modules = result.widgets;
-						Urushi.addEvent(modules.button1.getRootNode(), 'click', modules.button1, function () {
+						Urushi.addEvent(modules.button1.getRootNode(), 'click', modules.button1, function() {
 							modules.dialog1.show();
 						});
-						Urushi.addEvent(modules.button2.getRootNode(), 'click', modules.button2, function () {
+						Urushi.addEvent(modules.button2.getRootNode(), 'click', modules.button2, function() {
 							modules.dialog2.show();
 						});
 
 						flag = true;
 						done();
-					}).otherwise(function (error) {
+					}).otherwise(function(error) {
 						flag = false;
 						done();
 					});
 				});
-				it('template engine test', function () {
+				it('template engine test', function() {
 					expect(flag).toBe(true);
 				});
 			});
