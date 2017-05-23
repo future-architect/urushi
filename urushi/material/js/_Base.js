@@ -11,22 +11,17 @@
  * </pre>
  * @module _Base
  * @requires underscore.js
- * @requires jquery-2.1.1.js
  * @requires extend.js
  */
 define(
 	'_Base',
-	[
-		'underscore',
-		'jquery',
-		'extend'
-	],
+	['legacy', 'extend'],
 	/**
 	 * @class
 	 * @alias module:_Base
 	 * @returns {object} _Base instance.
 	 */
-	function(_, $, extend) {
+	function(legacy, extend) {
 		'use strict';
 
 		/**
@@ -48,6 +43,29 @@ define(
 		 * @type number
 		 */
 		var idNo = 0;
+
+		function template(str, args) {
+			var key, regexp, remain, i, error;
+			args = args || {};
+
+			str = str.replace(/[\r\t\n]/g, ' ');
+
+			for (key in args) {
+				regexp = new RegExp('<%=[ ]*' + key + '[ ]*%>', 'g');
+				str = str.replace(regexp, args[key]);
+			}
+
+			remain = str.match(/<%=[ a-zA-Z0-9]+%>/g);
+			if (remain) {
+				error = '';
+				for (i = 0; i < remain.length; i++) {
+					error += remain[i].replace(/<%=[ ]*/, '').replace(/[ ]*%>/, '') + ', ';
+				}
+				throw new Error('コンストラクタ引数エラー : ' + error.slice(2 - error.length));
+			}
+
+			return str;
+		}
 
 		return Class.extend(/** @lends module:_Base.prototype */ {
 			/**
@@ -168,13 +186,16 @@ define(
 			 * @returns none
 			 */
 			_render: function(/* object */ args) {
-				var _compiled = _.template(this.template),
-					_args = args || {};
+				var _args = args || {},
+					tmp;
 
-				_args = _.extend(_.clone(this.embedded), args);
+				_args = Object.assign(Object.assign({}, this.embedded), args);
 				this.id = _args && _args.id || this._getId();
-				_args = _.extend(_args, {id: this.id});
-				this.rootNode = $.parseHTML(_compiled(_args))[0];
+				_args = Object.assign(_args, {id: this.id});
+
+				tmp = document.createElement('div');
+				tmp.innerHTML = template(this.template, _args);
+				this.rootNode = tmp.children[0];
 			},
 			/**
 			 * <pre>
@@ -264,7 +285,9 @@ define(
 			 * @returns none
 			 */
 			destroy: function() {
-				$(this.rootNode).remove();
+				if (this.rootNode.parentNode) {
+					this.rootNode.parentNode.removeChild(this.rootNode);
+				}
 				this.destroyOption();
 			},
 			/**
