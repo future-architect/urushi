@@ -18,7 +18,7 @@ define(
 	function() {
 		'use strict';
 
-		// for IE8- Array.indexOf
+		// polyfill : Array.indexOf
 		if (!Array.prototype.indexOf) {
 			Array.prototype.indexOf = function(/* string */ target, /* number */ index) {
 				var i,
@@ -36,7 +36,7 @@ define(
 			};
 		}
 
-		// for IE9- lement.classList
+		// polyfill : lement.classList
 		if (typeof document !== 'undefined' && !('classList' in document.createElement('a'))) {
 
 			(function(view) {
@@ -182,6 +182,29 @@ define(
 					elemCtrProto.__defineGetter__(classListProp, classListGetter);
 				}
 			}(self));
+		}
+
+		// polyfill : Object.assign()
+		if (typeof Object.assign !== 'function') {
+			Object.assign = function(target) {
+				var output, index, source, nextKey;
+				if (undefined === target || null === target) {
+					throw new TypeError('Cannot convert undefined or null to object');
+				}
+
+				output = Object(target);
+				for (index = 1; index < arguments.length; index++) {
+					source = arguments[index];
+					if (source !== undefined && source !== null) {
+						for (nextKey in source) {
+							if (Object.prototype.hasOwnProperty.call(source, nextKey)) {
+								output[nextKey] = source[nextKey];
+							}
+						}
+					}
+				}
+				return output;
+			};
 		}
 	}
 );
