@@ -96,6 +96,9 @@ define(
 				dom.removeChild(dom.firstChild);
 			}
 		}
+		function getStyle(/* node */ dom) {
+			return dom.currentStyle || document.defaultView.getComputedStyle(dom, '');
+		}
 		/**
 		 * <pre>
 		 * Replaces content.
@@ -109,9 +112,8 @@ define(
 		function setDomContents(/* node */ dom, /* string|DomNode|Array|NodeList|DocumentFragment */ newContents) {
 			var index,
 				length,
-				content,
-				jqIndex,
-				jqLength;
+				content;
+			
 			if (!isElementNode(dom)) {
 				throw new Error('Not element node.');
 			}
@@ -119,7 +121,7 @@ define(
 				return false;
 			}
 
-			if (newContents instanceof Array || newContents instanceof jQuery) {
+			if (newContents instanceof Array) {
 				if (!newContents.length) {
 					return false;
 				}
@@ -150,10 +152,6 @@ define(
 						isFragmentNode(content)) {
 					
 					dom.appendChild(content);
-				} else if (content instanceof jQuery) {
-					for (jqIndex = 0, jqLength = content.length; jqIndex < jqLength; jqIndex++) {
-						dom.appendChild(content[jqIndex]);
-					}
 				} else {
 					dom.appendChild(document.createTextNode('' + content));
 				}
@@ -166,6 +164,7 @@ define(
 		node.isCommentNode = isCommentNode;
 		node.isFragmentNode = isFragmentNode;
 		node.setDomContents = setDomContents;
+		node.getStyle = getStyle;
 		node.clearDomContents = clearDomContents;
 
 		return node;
