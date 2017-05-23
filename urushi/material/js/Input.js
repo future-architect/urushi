@@ -93,9 +93,7 @@ define(
 		 */
 		var CONSTANTS = {
 			ID_PREFIX: 'urushi.input',
-			EMBEDDED: {inputClass: '', additionalClass: ''},
-			DATA_URUSHI_FOCUS: 'data-urushi-focus',
-			INPUTNODE_FLOATING_LABEL: '.floating-label'
+			EMBEDDED: {inputClass: '', additionalClass: ''}
 		};
 
 		/**
@@ -132,35 +130,6 @@ define(
 			callbacks: undefined,
 			/**
 			 * <pre>
-			 * TimeoutId for this.noBlurInput
-			 * </pre>
-			 * @type number
-			 * @default NaN
-			 * @private
-			 */
-			timeoutId: undefined,
-			/**
-			 * <pre>
-			 * Flag for the undescore control.
-			 * It's used if the browser does not support CSS3.0.
-			 * </pre>
-			 * @type boolean
-			 * @default false
-			 * @private
-			 */
-			underlineFixShown: false,
-			/**
-			 * <pre>
-			 * Style class for floating label element node.
-			 * It's used if the browser does not support CSS3.0.
-			 * </pre>
-			 * @type boolean
-			 * @default null
-			 * @private
-			 */
-			initFloatinglabelCss: null,
-			/**
-			 * <pre>
 			 * Initializes instance properties.
 			 * </pre>
 			 * @protected
@@ -171,9 +140,6 @@ define(
 				this.template = template;
 				this.embedded = CONSTANTS.EMBEDDED;
 				this.callbacks = {};
-				this.timeoutId = NaN;
-				this.underlineFixShown = false;
-				this.initFloatinglabelCss = null;
 			},
 			/**
 			 * <pre>
@@ -190,16 +156,6 @@ define(
 
 				this._createPraceholder(args.placeholder);
 				this._createHint(args.hint);
-
-				if (urushi.hasTransitionSupport()) {
-					return;
-				}
-				$(this.rootNode).find('.material-input').replaceWith(transitionUnit);
-				if (!urushi.hasTransitionSupport()) {
-					$(this.rootNode).find('.input-transition-unit-underline').css({
-						'margin-left': '50%'
-					});
-				}
 			},
 			/**
 			 * <pre>
@@ -241,12 +197,6 @@ define(
 				this.floatinglabelNode.className = 'floating-label';
 				this.floatinglabelNode.textContent = placeholder;
 				this._getInputNode().parentElement.appendChild(this.floatinglabelNode);
-
-				if (!urushi.hasTransitionSupport()) {
-					urushi.addEvent(this.floatinglabelNode, 'click', this, '_onClickFloatingLabel');
-
-					this.initFloatinglabelCss = {'top': 5, 'font-size': '14px'};
-				}
 			},
 			/**
 			 * <pre>
@@ -310,13 +260,6 @@ define(
 			 */
 			_attachNode: function() {
 				this.inputNode = this.rootNode.getElementsByTagName('input')[0];
-
-				if (urushi.hasTransitionSupport()) {
-					return;
-				}
-
-				this.underlineNode = this.rootNode.getElementsByClassName('input-transition-unit-underline')[0];
-				this.floatinglabelNode = this.rootNode.getElementsByClassName('floating-label')[0];
 			},
 			/**
 			 * @see {@link module:_Base}#_getId
@@ -336,43 +279,11 @@ define(
 			 * @returns none
 			 */
 			_onInput: function(/* object */ event) {
-				if (!urushi.hasTransitionSupport() && this.inputNode !== document.activeElement) {
-					if (this.inputNode.classList.contains('empty') && this.inputNode.value) {
-						this._moveOutPlaceholder();
-					} else if (!this.inputNode.classList.contains('empty') && !this.inputNode.value) {
-						this._moveInPlaceholder();
-					}
-				}
-
 				if (this.inputNode.value) {
 					this.inputNode.classList.remove('empty');
 				} else {
 					this.inputNode.classList.add('empty');
 				}
-			},
-			/**
-			 * <pre>
-			 * For the browser does not support CSS pointer-events : none.
-			 * Callback function for placeholder click event.
-			 * </pre>
-			 * @protected
-			 * @param {object} event Event object.
-			 * @returns none
-			 */
-			_onClickFloatingLabel: function(/* object */ event) {
-				if (urushi.hasTransitionSupport()) {
-					return;
-				}
-
-				if (!isNaN(this.timeoutId)) {
-					return;
-				}
-
-				if (!this.inputNode.classList.contains('empty')) {
-					return;
-				}
-
-				this.inputNode.focus();
 			},
 			/**
 			 * <pre>
@@ -386,15 +297,6 @@ define(
 			 */
 			_onFocus: function(/* object */ event) {
 				event.stopPropagation();
-
-				if (urushi.hasTransitionSupport()) {
-					return;
-				}
-				this._showUnderline();
-
-				this._showPlaceholder();
-
-				this._showHint();
 			},
 			/**
 			 * <pre>
@@ -408,151 +310,6 @@ define(
 			 */
 			_onBlur: function(/* object */ event) {
 				event.stopPropagation();
-
-				if (urushi.hasTransitionSupport()) {
-					return;
-				}
-
-				if (!this.underlineFixShown) {
-					this._hideUnderline();
-				}
-
-				this._hidePlaceholder();
-
-				this._hideHint();
-			},
-			/**
-			 * <pre>
-			 * Displays underscore using the animation.
-			 * For the browser does not support CSS3.0.
-			 * </pre>
-			 * @protected
-			 * @returns none
-			 */
-			_showUnderline: function() {
-				$(this.underlineNode).stop();
-				$(this.underlineNode).animate({
-					'margin-left': 0,
-					'width': '100%',
-				}, materialConfig.DEFAULT_VALUE_DURATION);
-			},
-			/**
-			 * <pre>
-			 * Hides underscore using the animation.
-			 * For the browser does not support CSS3.0.
-			 * </pre>
-			 * @protected
-			 * @returns none
-			 */
-			_hideUnderline: function() {
-				$(this.underlineNode).stop();
-				$(this.underlineNode).animate({
-					'margin-left': '50%',
-					'width': 0,
-				}, materialConfig.DEFAULT_VALUE_DURATION);
-			},
-			/**
-			 * <pre>
-			 * Displays placeholder using the animation.
-			 * For the browser does not support CSS3.0.
-			 * </pre>
-			 * @protected
-			 * @returns none
-			 */
-			_showPlaceholder: function() {
-				var $placeholderDiv = $(this.rootNode).find(CONSTANTS.INPUTNODE_FLOATING_LABEL);
-				this.inputNode.setAttribute(CONSTANTS.DATA_URUSHI_FOCUS, true);
-				if ($placeholderDiv.length && $(this.inputNode).hasClass('empty')) {
-					if (this.timeoutId) {
-						// Prevent focus and blur animation.
-						clearTimeout(this.timeoutId);
-						this.timeoutId = NaN;
-					} else {
-						if (!$placeholderDiv.is(':animated')) {
-							$placeholderDiv.css(this.initFloatinglabelCss);
-						}
-						this._moveOutPlaceholder();
-					}
-				}
-			},
-			/**
-			 * <pre>
-			 * Hides placeholder using the animation.
-			 * For the browser does not support CSS3.0.
-			 * </pre>
-			 * @protected
-			 * @returns none
-			 */
-			_hidePlaceholder: function() {
-				var $placeholderDiv = $(this.rootNode).find(CONSTANTS.INPUTNODE_FLOATING_LABEL);
-				if ($placeholderDiv.length) {
-					this.timeoutId = setTimeout((function() {
-						this.inputNode.removeAttribute(CONSTANTS.DATA_URUSHI_FOCUS);
-						this.timeoutId = NaN;
-						if (!$(this.inputNode).hasClass('empty')) {
-							return;
-						}
-						this._moveInPlaceholder();
-
-					}).bind(this), 150);
-				} else {
-					this.inputNode.removeAttribute(CONSTANTS.DATA_URUSHI_FOCUS);
-				}
-			},
-			/**
-			 * <pre>
-			 * Moves in placeholder using the animation.
-			 * For the browser does not support CSS3.0.
-			 * </pre>
-			 * @protected
-			 * @returns none
-			 */
-			_moveInPlaceholder: function() {
-				var $placeholderDiv = $(this.rootNode).find(CONSTANTS.INPUTNODE_FLOATING_LABEL);
-				$placeholderDiv.stop();
-				$placeholderDiv.animate(this.initFloatinglabelCss, materialConfig.DEFAULT_VALUE_DURATION);
-			},
-			/**
-			 * <pre>
-			 * Moves out placeholder using the animation.
-			 * For the browser does not support CSS3.0.
-			 * </pre>
-			 * @protected
-			 * @returns none
-			 */
-			_moveOutPlaceholder: function() {
-				var $placeholderDiv = $(this.rootNode).find(CONSTANTS.INPUTNODE_FLOATING_LABEL);
-				$placeholderDiv.stop();
-				$placeholderDiv.animate({
-					top: -16,
-					'font-size': '10px'
-				}, materialConfig.DEFAULT_VALUE_DURATION);
-			},
-			/**
-			 * <pre>
-			 * Shows hint message using the animation.
-			 * For the browser does not support CSS3.0.
-			 * </pre>
-			 * @protected
-			 * @returns none
-			 */
-			_showHint: function() {
-				$(this.rootNode).find('.hint').animate({
-					opacity: 1
-				}, materialConfig.DEFAULT_VALUE_DURATION);
-			},
-			/**
-			 * <pre>
-			 * Hides hint message using the animation.
-			 * For the browser does not support CSS3.0.
-			 * </pre>
-			 * @protected
-			 * @returns none
-			 */
-			_hideHint: function() {
-				$(this.rootNode).find('.hint').animate({
-					opacity: 0
-				}, materialConfig.DEFAULT_VALUE_DURATION);
 			},
 			/**
 			 * <pre>
