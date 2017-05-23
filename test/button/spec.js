@@ -1,31 +1,28 @@
 define(
 	'button.spec',
 	['Urushi', 'Button', 'templateEngine', 'templateConfig'],
-	function (Urushi, Button, templateEngine, templateConfig) {
+	function(Urushi, Button, templateEngine, templateConfig) {
 		'use strict';
 
 		var id = 'c-button',
-			button1 = new Button({id : id}),
+			button1 = new Button({id: id}),
 			button2,
-			buttons,
-			validMousedownEvent = {type : 'mousedown', pageX : 1000, pageY : 1000},
-			invalidMousedownEvent = {type : 'touchend', pageX : 1000, pageY : 1000},
-			unknownMousedownEvent = {type : 'mousedown'},
-			validTouchEvent = {originalEvent : {
-				type : 'touchstart',
-				touches : [{pageX : 1000, pageY : 1000}]
+			validMousedownEvent = {type: 'mousedown', pageX: 1000, pageY: 1000},
+			invalidMousedownEvent = {type: 'touchend', pageX: 1000, pageY: 1000},
+			unknownMousedownEvent = {type: 'mousedown'},
+			validTouchEvent = {originalEvent: {
+				type: 'touchstart',
+				touches: [{pageX: 1000, pageY: 1000}]
 			}},
-			invalidTouchEvent = {originalEvent : {
-				type : 'click',
-				touches : [{}, {}]
+			invalidTouchEvent = {originalEvent: {
+				type: 'click',
+				touches: [{}, {}]
 			}},
 			temp,
-			isTouchDummy = function () {return true;},
-			hasTransitionSupportTrue = function () {return true;},
-			hasTransitionSupportFalse = function () {return false;};
+			isTouchDummy = function() { return true; };
 
-		describe('Button test', function () {
-			it('button test', function () {
+		describe('Button test', function() {
+			it('button test', function() {
 				// creation.
 				button2 = new Button();
 				expect(button2.id).toBe('urushi.button0');
@@ -69,25 +66,25 @@ define(
 				expect(button1._createRippleWrapperElement()).toBe(wrapper);
 
 				// _getX()
-				expect(isNaN(button1._getX(button1.getRootNode(), validMousedownEvent))).toBe(false);
+				expect(isNaN(button1._getX(validMousedownEvent))).toBe(false);
 				temp = Urushi.isTouch;
 				Urushi.isTouch = isTouchDummy;
-				expect(isNaN(button1._getX(button1.getRootNode(), invalidTouchEvent))).toBe(true);
-				expect(isNaN(button1._getX(button1.getRootNode(), validTouchEvent))).toBe(false);
+				expect(isNaN(button1._getX(invalidTouchEvent))).toBe(true);
+				expect(isNaN(button1._getX(validTouchEvent))).toBe(false);
 				Urushi.isTouch = temp;
-				relX = button1._getX(button1.getRootNode(), validMousedownEvent);
+				relX = button1._getX(validMousedownEvent);
 
 				// _getY()
-				expect(isNaN(button1._getY(button1.getRootNode(), validMousedownEvent))).toBe(false);
+				expect(isNaN(button1._getY(validMousedownEvent))).toBe(false);
 				temp = Urushi.isTouch;
 				Urushi.isTouch = isTouchDummy;
-				expect(isNaN(button1._getY(button1.getRootNode(), invalidTouchEvent))).toBe(true);
-				expect(isNaN(button1._getY(button1.getRootNode(), validTouchEvent))).toBe(false);
+				expect(isNaN(button1._getY(invalidTouchEvent))).toBe(true);
+				expect(isNaN(button1._getY(validTouchEvent))).toBe(false);
 				Urushi.isTouch = temp;
-				relY = button1._getY(button1.getRootNode(), validMousedownEvent);
+				relY = button1._getY(validMousedownEvent);
 
 				// _getRippleColor()
-				expect(button1._getRippleColor()).toBe('rgba(5, 2, 0, 0.729412)');
+				expect(button1._getRippleColor()).toBe('rgba(5, 2, 0, 0.73)');
 				button1.getRootNode().setAttribute('data-ripple-color', 'test');
 				expect(button1._getRippleColor()).toBe('test');
 				button1.getRootNode().removeAttribute('data-ripple-color');
@@ -107,11 +104,11 @@ define(
 				Urushi.isTouch = temp;
 
 				// _onRippleMouseup()
-				validArgument = {ripple : ripple, wrapper : wrapper};
+				validArgument = {ripple: ripple, wrapper: wrapper};
 				wrapper.removeAttribute('data-ripple-mousedown');
 				expect(button1._onRippleMouseup()).toBe();
 				expect(button1._onRippleMouseup({})).toBe();
-				expect(button1._onRippleMouseup({ripple : ripple, wrapper : null})).toBe();
+				expect(button1._onRippleMouseup({ripple: ripple, wrapper: null})).toBe();
 				expect(button1._onRippleMouseup(validArgument)).toBe();
 				ripple.setAttribute('data-ripple-animate', 'off');
 				expect(button1._onRippleMouseup(validArgument)).toBe();
@@ -119,41 +116,31 @@ define(
 				ripple.removeAttribute('data-ripple-animate');
 
 				// _rippleOn()
-				temp = Urushi.hasTransitionSupport;
-				Urushi.hasTransitionSupport = hasTransitionSupportTrue;
-				expect(button1._rippleOn(ripple)).toBe();
-				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
-				expect(button1._rippleOn(ripple)).toBe();
-				Urushi.hasTransitionSupport = temp;
+				expect(button1._rippleOn(button1._createRippleElement(relX, relY, rippleColor))).toBe();
 
 				// _rippleOut()
-				temp = Urushi.hasTransitionSupport;
-				Urushi.hasTransitionSupport = hasTransitionSupportTrue;
-				expect(button1._rippleOut(ripple, wrapper)).toBe();
-				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
-				expect(button1._rippleOut(ripple, wrapper)).toBe();
-				Urushi.hasTransitionSupport = temp;
+				expect(button1._rippleOut(button1._createRippleElement(relX, relY, rippleColor), wrapper)).toBe();
 
 				// _rippleAnimationEnd()
 				ripple.removeAttribute('data-ripple-mousedown');
-				expect(button1._rippleAnimationEnd(ripple, wrapper)).toBe();
+				expect(button1._rippleAnimationEnd(button1._createRippleElement(relX, relY, rippleColor), wrapper)).toBe();
 				ripple.setAttribute('data-ripple-mousedown', 'off');
-				expect(button1._rippleAnimationEnd(ripple, wrapper)).toBe();
+				expect(button1._rippleAnimationEnd(button1._createRippleElement(relX, relY, rippleColor), wrapper)).toBe();
 				ripple.removeAttribute('data-ripple-mousedown');
 			});
 
-			describe('Template engine', function () {
+			describe('Template engine', function() {
 				var flag = false;
-				beforeEach(function (done) {
-					templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
+				beforeEach(function(done) {
+					templateEngine.renderDocument(document.body, templateConfig).then(function(result) {
 						flag = true;
 						done();
-					}).otherwise(function (error) {
+					}).otherwise(function(error) {
 						flag = false;
 						done();
 					});
 				});
-				it('template engine test', function () {
+				it('template engine test', function() {
 					expect(flag).toBe(true);
 				});
 			});
