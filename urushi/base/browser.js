@@ -1,12 +1,12 @@
 /**
- * @fileOverView broser tutilities for urushi.
+ * @fileOverView ESxxxx等の新実装のAPI実装判定を行うユーティリティ
  * @author Yuzo Hirakawa
- * @version 1.0
+ * @version 1.0.0
  */
 
 /**
  * <pre>
- * Provides utilities related browsers.
+ * ESxxxx等の新実装のAPI実装判定を行うユーティリティ
  * </pre>
  * @module browser
  */
@@ -56,24 +56,6 @@ define(
 			 */
 			isTouch: function() {
 				return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-			},
-			/**
-			 * <pre>
-			 * Returns whether browther supports CSS3 transition.
-			 * </pre>
-			 * @function
-			 * @returns {boolean} Whethr browser supports CSS3 transition or not.
-			 */
-			hasTransitionSupport: function() {
-				var style = (document.body || document.documentElement).style;
-
-				return (
-					style.transition !== undefined ||
-					style.WebkitTransition !== undefined ||
-					style.MozTransition !== undefined ||
-					style.MsTransition !== undefined ||
-					style.OTransition !== undefined
-				);
 			},
 			/**
 			 * <pre>
