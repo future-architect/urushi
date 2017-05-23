@@ -1,31 +1,34 @@
-/*eslint "vars-on-top" : 0*/
+/*eslint "vars-on-top": 0*/
 
 define(
 	'panel.spec',
 	['Urushi', 'Panel', 'templateEngine', 'templateConfig'],
-	function (Urushi, Panel, templateEngine, templateConfig) {
+	function(Urushi, Panel, templateEngine, templateConfig) {
 		'use strict';
-		// var temp,
-		// 	hasTransitionSupportTrue = function () {return true;},
-		// 	hasTransitionSupportFalse = function () {return false;};
 
-		describe('Panel test', function () {
+		function createElement(str) {
+			var d = document.createElement('div');
+			d.innerHTML = str;
+
+			return d.children[0];
+		}
+
+		describe('Panel test', function() {
 			var panel,
 				parentNode = document.getElementById('script-modules');
-				//dummyEvent = {stopPropagation : function () {}};
 
-			it('init', function () {
+			it('init', function() {
 				expect((new Panel()).destroy()).toBe();
 				panel = new Panel();
 				parentNode.appendChild(panel.getRootNode());
 			});
-			it('setHeader', function () {
+			it('setHeader', function() {
 				expect(panel.setHeader()).toBe();
 				expect(panel.setHeader({})).toBe();
 				expect(panel.setHeader('')).toBe();
 				expect(panel.setHeader('header')).toBe();
 			});
-			it('setContent', function () {
+			it('setContent', function() {
 				var nodeList = [document.createElement('div'), null],
 					fragment = document.createDocumentFragment();
 
@@ -38,15 +41,15 @@ define(
 				expect(panel.setContent(fragment)).toBe();
 				expect(panel.setContent(nodeList)).toBe();
 			});
-			it('setFooter', function () {
+			it('setFooter', function() {
 				expect(panel.setFooter()).toBe();
 				expect(panel.setFooter({})).toBe();
 				expect(panel.setFooter('')).toBe();
 				expect(panel.setFooter('footer')).toBe();
 			});
 
-			it('setHeader empty', function () {
-				var pnl = new Panel({header : '', footer : 'foot', content : 'setHeader empty'});
+			it('setHeader empty', function() {
+				var pnl = new Panel({header: '', footer: 'foot', content: 'setHeader empty'});
 				parentNode.appendChild(pnl.rootNode);
 				expect(pnl.headerNode.classList.contains('hidden')).toBe(true);
 
@@ -66,8 +69,11 @@ define(
 				expect(pnl.headerNode.classList.contains('hidden')).toBe(true);
 			});
 
-			it('setHeader html escape', function () {
-				var pnl = new Panel({header : '<div>escape init</div>', footer : 'foot', content : 'setHeader html escape'});
+			it('setHeader html escape', function() {
+				var pnl = new Panel({
+					header: '<div>escape init</div>',
+					footer: 'foot',
+					content: 'setHeader html escape'});
 				parentNode.appendChild(pnl.rootNode);
 				expect(pnl.headerNode.textContent).toBe('<div>escape init</div>');
 
@@ -75,17 +81,20 @@ define(
 				expect(pnl.headerNode.textContent).toBe('<div>escape</div>');
 			});
 
-			it('setHeader dom', function () {
-				var pnl = new Panel({header : $('<div style="color: blue;">dom</div>'), footer : 'foot', content : 'setHeader dom'});
+			it('setHeader dom', function() {
+				var pnl = new Panel({
+					header: createElement('<div style="color: blue;">dom</div>'),
+					footer: 'foot',
+					content: 'setHeader dom'});
 				parentNode.appendChild(pnl.rootNode);
 				expect(pnl.headerNode.innerHTML).toBe('<div style="color: blue;">dom</div>');
 				
-				pnl.setHeader($('<div style="color: red;">dom</div>'));
+				pnl.setHeader(createElement('<div style="color: red;">dom</div>'));
 				expect(pnl.headerNode.innerHTML).toBe('<div style="color: red;">dom</div>');
 			});
 
-			it('setFooter empty', function () {
-				var pnl = new Panel({header : 'head', footer : '', content : 'setFooter empty'});
+			it('setFooter empty', function() {
+				var pnl = new Panel({header: 'head', footer: '', content: 'setFooter empty'});
 				parentNode.appendChild(pnl.rootNode);
 				expect(pnl.footerNode.classList.contains('hidden')).toBe(true);
 
@@ -105,8 +114,11 @@ define(
 				expect(pnl.footerNode.classList.contains('hidden')).toBe(true);
 			});
 
-			it('setFooter html escape', function () {
-				var pnl = new Panel({header : 'head', footer : '<div>escape init</div>', content : 'setFooter html escape'});
+			it('setFooter html escape', function() {
+				var pnl = new Panel({
+					header: 'head',
+					footer: '<div>escape init</div>',
+					content: 'setFooter html escape'});
 				parentNode.appendChild(pnl.rootNode);
 				expect(pnl.footerNode.textContent).toBe('<div>escape init</div>');
 
@@ -114,16 +126,19 @@ define(
 				expect(pnl.footerNode.textContent).toBe('<div>escape</div>');
 			});
 
-			it('setFooter dom', function () {
-				var pnl = new Panel({header : 'head', footer : $('<div style="color: blue;">dom</div>'), content : 'setFooter dom'});
+			it('setFooter dom', function() {
+				var pnl = new Panel({
+					header: 'head',
+					footer: createElement('<div style="color: blue;">dom</div>'),
+					content: 'setFooter dom'});
 				parentNode.appendChild(pnl.rootNode);
 				expect(pnl.footerNode.innerHTML).toBe('<div style="color: blue;">dom</div>');
 				
-				pnl.setFooter($('<div style="color: red;">dom</div>'));
+				pnl.setFooter(createElement('<div style="color: red;">dom</div>'));
 				expect(pnl.footerNode.innerHTML).toBe('<div style="color: red;">dom</div>');
 			});
-			it('setContent empty', function () {
-				var pnl = new Panel({header : 'setContent empty', footer : 'foot', content : ''});
+			it('setContent empty', function() {
+				var pnl = new Panel({header: 'setContent empty', footer: 'foot', content: ''});
 				parentNode.appendChild(pnl.rootNode);
 				expect(pnl.contentNode.innerHTML).toBe('');
 
@@ -143,8 +158,11 @@ define(
 				expect(pnl.contentNode.innerHTML).toBe('');
 			});
 
-			it('setContent html escape', function () {
-				var pnl = new Panel({header : 'setContent html escape', footer : 'foot', content : '<div>escape init</div>'});
+			it('setContent html escape', function() {
+				var pnl = new Panel({
+					header: 'setContent html escape',
+					footer: 'foot',
+					content: '<div>escape init</div>'});
 				parentNode.appendChild(pnl.rootNode);
 				expect(pnl.contentNode.textContent).toBe('<div>escape init</div>');
 
@@ -152,39 +170,47 @@ define(
 				expect(pnl.contentNode.textContent).toBe('<div>escape</div>');
 			});
 
-			it('setContent dom', function () {
-				var pnl = new Panel({header : 'setContent dom', footer : 'foot', content : $('<div style="color: blue;">dom</div>')});
+			it('setContent dom', function() {
+				var pnl = new Panel({
+					header: 'setContent dom',
+					footer: 'foot',
+					content: createElement('<div style="color: blue;">dom</div>')});
 				parentNode.appendChild(pnl.rootNode);
 				expect(pnl.contentNode.innerHTML).toBe('<div style="color: blue;">dom</div>');
 				
-				pnl.setContent($('<div style="color: red;">dom</div><br><span>span</span>'));
-				expect(pnl.contentNode.innerHTML).toBe('<div style="color: red;">dom</div><br><span>span</span>');
+				pnl.setContent(createElement('<div><div style="color: red;">dom</div><br><span>span</span></div>'));
+				expect(pnl.contentNode.innerHTML).toBe(
+					'<div><div style="color: red;">dom</div><br><span>span</span></div>');
 			});
 
-			it('setContent function dom', function () {
-				var pnl = new Panel({header : 'setContent function dom', footer : 'foot', content : function() {
-					return $('<div style="color: blue;">dom</div>');
-				}});
+			it('setContent function dom', function() {
+				var pnl = new Panel({
+					header: 'setContent function dom',
+					footer: 'foot',
+					content: function() {
+						return createElement('<div style="color: blue;">dom</div>');
+					}
+				});
 				parentNode.appendChild(pnl.rootNode);
 				expect(pnl.contentNode.innerHTML).toBe('<div style="color: blue;">dom</div>');
 			});
 
-			it('destroy', function () {
+			it('destroy', function() {
 				expect(panel.destroy()).toBe();
 			});
 
-			describe('Template engine', function () {
+			describe('Template engine', function() {
 				var flag = false;
-				beforeEach(function (done) {
-					templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
+				beforeEach(function(done) {
+					templateEngine.renderDocument(document.body, templateConfig).then(function(result) {
 						flag = true;
 						done();
-					}).otherwise(function (error) {
+					}).otherwise(function(error) {
 						flag = false;
 						done();
 					});
 				});
-				it('template engine test', function () {
+				it('template engine test', function() {
 					expect(flag).toBe(true);
 				});
 			});
