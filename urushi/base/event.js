@@ -5,6 +5,18 @@
  */
 
 /**
+TODO:
+コールバックの管理案
+1. 管理しない 使う方で管理
+2. functinoObjectを指定されたエレメントに付与出来ないか検討
+3. 従来どおり
+
+改善
+function.bindは外でやりたい
+
+*/
+
+/**
  * <pre>
  * Provides utilities are related event.
  * </pre>
@@ -125,189 +137,98 @@ define(
 			};
 		
 		event.addEvent = (function() {
-			if (document.addEventListener) {
-				return function(
-						/* node */ element,
-						/* string */ eventName,
-						/* object */ scope,
-						/* string|function */ callback,
-						/* object */ preArgs) {
-					var fnc;
+			return function(
+					/* node */ element,
+					/* string */ eventName,
+					/* object */ scope,
+					/* string|function */ callback,
+					/* object */ preArgs) {
+				var fnc;
 
-					if (!element || !eventName || !callback) {
-						console.log(
-							'Callback function registration error.',
-							element && element.id || undefined,
-							eventName,
-							scope,
-							callback,
-							preArgs);
+				if (!element || !eventName || !callback) {
+					console.log(
+						'Callback function registration error.',
+						element && element.id || undefined,
+						eventName,
+						scope,
+						callback,
+						preArgs);
 
-						return;
-					}
-					if (scope &&
-						scope.id &&
-						'string' === typeof callback &&
-						eventName &&
-						element.id &&
-						callbacks[scope.id] &&
-						callbacks[scope.id][element.id] &&
-						callbacks[scope.id][element.id][eventName] &&
-						callbacks[scope.id][element.id][eventName][callback]) {
+					return;
+				}
+				if (scope &&
+					scope.id &&
+					'string' === typeof callback &&
+					eventName &&
+					element.id &&
+					callbacks[scope.id] &&
+					callbacks[scope.id][element.id] &&
+					callbacks[scope.id][element.id][eventName] &&
+					callbacks[scope.id][element.id][eventName][callback]) {
 
-						console.log(
-							'Duplicate registration error.',
-							element && element.id || undefined,
-							eventName,
-							scope,
-							callback,
-							preArgs);
+					console.trace();
+					console.log(
+						'Duplicate registration error.',
+						element && element.id || undefined,
+						eventName,
+						scope,
+						callback,
+						preArgs);
 
-						return;
-					}
+					return;
+				}
 
-					if ('string' === typeof callback) {
-						if (undefined !== preArgs) {
-							fnc = scope[callback].bind(scope, preArgs);
-						} else {
-							fnc = scope[callback].bind(scope);
-						}
+				if ('string' === typeof callback) {
+					if (undefined !== preArgs) {
+						fnc = scope[callback].bind(scope, preArgs);
 					} else {
-						if (undefined !== preArgs) {
-							fnc = callback.bind(scope, preArgs);
-						} else {
-							fnc = callback.bind(scope);
-						}
+						fnc = scope[callback].bind(scope);
 					}
-					element.addEventListener(eventName, fnc, false);
-
-					if (scope && scope.id && element.id && 'string' === typeof callback && eventName) {
-						callbacks[scope.id] = callbacks[scope.id] || {};
-						callbacks[scope.id][element.id] = callbacks[scope.id][element.id] || {};
-						callbacks[scope.id][element.id][eventName] = callbacks[scope.id][element.id][eventName] || {};
-						callbacks[scope.id][element.id][eventName][callback] = fnc;
+				} else {
+					if (undefined !== preArgs) {
+						fnc = callback.bind(scope, preArgs);
 					} else {
-						console.log(
-							'Regsiterd function can\'t be deleted.',
-							element && element.id || undefined,
-							eventName,
-							scope,
-							callback,
-							preArgs);
+						fnc = callback.bind(scope);
 					}
-				};
-			} else {
-				return function(
-						/* node */ element,
-						/* string */ eventName,
-						/* object */ scope,
-						/* string|function */ callback,
-						/* object */ preArgs) {
+				}
+				element.addEventListener(eventName, fnc, false);
 
-					var fnc;
-
-					if (!element || !eventName || !callback) {
-						console.log(
-							'Callback function registration error.',
-							element && element.id || undefined,
-							eventName,
-							scope,
-							callback,
-							preArgs);
-						return;
-					}
-					if (scope &&
-						scope.id &&
-						'string' === typeof callback &&
-						eventName &&
-						element.id &&
-						callbacks[scope.id] &&
-						callbacks[scope.id][element.id] &&
-						callbacks[scope.id][element.id][eventName] &&
-						callbacks[scope.id][element.id][eventName][callback]) {
-
-						console.log(
-							'Duplicate registration error.',
-							element && element.id || undefined,
-							eventName,
-							scope,
-							callback,
-							preArgs);
-						return;
-					}
-					if ('string' === typeof callback) {
-						if (undefined !== preArgs) {
-							fnc = scope[callback].bind(scope, preArgs);
-						} else {
-							fnc = scope[callback].bind(scope);
-						}
-					} else {
-						if (undefined !== preArgs) {
-							fnc = callback.bind(scope, preArgs);
-						} else {
-							fnc = callback.bind(scope);
-						}
-					}
-					element.attachEvent('on' + eventName, fnc);
-
-					if (scope && scope.id && element.id && 'string' === typeof callback && eventName) {
-						callbacks[scope.id] = callbacks[scope.id] || {};
-						callbacks[scope.id][element.id] = callbacks[scope.id][element.id] || {};
-						callbacks[scope.id][element.id][eventName] = callbacks[scope.id][element.id][eventName] || {};
-						callbacks[scope.id][element.id][eventName][callback] = fnc;
-					} else {
-						console.log(
-							'Regsiterd function can\'t be deleted.',
-							element && element.id || undefined,
-							eventName,
-							scope,
-							callback,
-							preArgs);
-					}
-				};
-			}
+				if (scope && scope.id && element.id && 'string' === typeof callback && eventName) {
+					callbacks[scope.id] = callbacks[scope.id] || {};
+					callbacks[scope.id][element.id] = callbacks[scope.id][element.id] || {};
+					callbacks[scope.id][element.id][eventName] = callbacks[scope.id][element.id][eventName] || {};
+					callbacks[scope.id][element.id][eventName][callback] = fnc;
+				} else {
+					console.log(
+						'Regsiterd function can\'t be deleted.',
+						element && element.id || undefined,
+						eventName,
+						scope,
+						callback,
+						preArgs);
+				}
+			};
 		})();
 
 		event.removeEvent = (function() {
-			if (document.addEventListener) {
-				return function(
-						/* node */ element,
-						/* string */ eventName,
-						/* object */ scope,
-						/* string */ callbackName) {
-					if (!scope ||
-							!element ||
-							!callbacks[scope.id] ||
-							!callbacks[scope.id][element.id] ||
-							!callbacks[scope.id][element.id][eventName] ||
-							!callbacks[scope.id][element.id][eventName][callbackName]) {
-						return;
-					}
+			return function(
+					/* node */ element,
+					/* string */ eventName,
+					/* object */ scope,
+					/* string */ callbackName) {
+				if (!scope ||
+						!element ||
+						!callbacks[scope.id] ||
+						!callbacks[scope.id][element.id] ||
+						!callbacks[scope.id][element.id][eventName] ||
+						!callbacks[scope.id][element.id][eventName][callbackName]) {
+					return;
+				}
 
-					element.removeEventListener(eventName, callbacks[scope.id][element.id][eventName][callbackName]);
-					callbacks[scope.id][element.id][eventName][callbackName] = null;
-					delete callbacks[scope.id][element.id][eventName][callbackName];
-				};
-			} else {
-				return function(
-						/* node */ element,
-						/* string */ eventName,
-						/* object */ scope,
-						/* string */ callbackName) {
-					if (!scope ||
-							!element ||
-							!callbacks[scope.id] ||
-							!callbacks[scope.id][element.id] ||
-							!callbacks[scope.id][element.id][eventName] ||
-							!callbacks[scope.id][element.id][eventName][callbackName]) {
-						return;
-					}
-					
-					element.detachEvent('on' + eventName, callbacks[scope.id][eventName][callbackName]);
-					callbacks[scope.id][element.id][eventName][callbackName] = null;
-					delete callbacks[scope.id][element.id][eventName][callbackName];
-				};
-			}
+				element.removeEventListener(eventName, callbacks[scope.id][element.id][eventName][callbackName]);
+				callbacks[scope.id][element.id][eventName][callbackName] = null;
+				delete callbacks[scope.id][element.id][eventName][callbackName];
+			};
 		})();
 
 		return event;
