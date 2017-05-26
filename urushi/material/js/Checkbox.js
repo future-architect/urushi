@@ -58,7 +58,6 @@
 define(
 	'Checkbox',
 	[
-		'jquery',
 		'Urushi',
 		'materialConfig',
 		'_Base',
@@ -72,7 +71,7 @@ define(
 	 * @alias module:Checkbox
 	 * @returns {object} Checkbox instance.
 	 */
-	function($, urushi, materialConfig, _Base, template, transitionUnit, rippleTransitionUnit) {
+	function(urushi, materialConfig, _Base, template, transitionUnit, rippleTransitionUnit) {
 		'use strict';
 
 		/**

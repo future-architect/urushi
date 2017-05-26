@@ -3,13 +3,9 @@ define(
 	['Urushi', 'Checkbox', 'templateEngine', 'templateConfig'],
 	function(Urushi, Checkbox, templateEngine, templateConfig) {
 		'use strict';
-		var temp,
-			hasTransitionSupportTrue = function() { return true; },
-			hasTransitionSupportFalse = function() { return false; };
 
 		describe('Checkbox test', function() {
 			var checkbox,
-				legacyCheckbox,
 				parentNode = document.getElementById('script-modules');
 
 			beforeEach(function() {
@@ -18,12 +14,6 @@ define(
 
 				checkbox = new Checkbox();
 				parentNode.appendChild(checkbox.getRootNode());
-
-				temp = Urushi.hasTransitionSupport;
-				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
-				legacyCheckbox = new Checkbox();
-				parentNode.appendChild(legacyCheckbox.getRootNode());
-				Urushi.hasTransitionSupport = temp;
 			});
 			it('getValue', function() {
 				expect(checkbox.getValue()).toBe(false);
@@ -34,16 +24,8 @@ define(
 			it('setChecked', function() {
 				expect(checkbox.setChecked()).toBe();
 
-				temp = Urushi.hasTransitionSupport;
-				Urushi.hasTransitionSupport = hasTransitionSupportTrue;
 				expect(checkbox.setChecked(true)).toBe();
 				expect(checkbox.setChecked(false)).toBe();
-
-				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
-				expect(legacyCheckbox.setChecked(true)).toBe();
-				expect(legacyCheckbox.setChecked(false)).toBe();
-
-				Urushi.hasTransitionSupport = temp;
 			});
 			it('clear', function() {
 				expect(checkbox.setChecked(true)).toBe();
@@ -66,7 +48,6 @@ define(
 			});
 			it('destroy', function() {
 				expect(checkbox.destroy()).toBe();
-				expect(legacyCheckbox.destroy()).toBe();
 			});
 
 			describe('Template engine', function() {
