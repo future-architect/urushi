@@ -1,5 +1,5 @@
 // You must import requireConfig.js before it.
-(function () {
+(function() {
 	'use strict';
 	var paths,
 		i,
@@ -12,7 +12,6 @@
 			'animation',
 			'xhr',
 
-			'alert',
 			'button',
 			'checkbox',
 			'contextMenu',

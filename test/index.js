@@ -1,8 +1,8 @@
-function createPage () {
+function createPage() {
 	'use strict';
 	var targets, i;
 
-	function createBox (name, uri) {
+	function createBox(name, uri) {
 		var span = document.createElement('span'),
 			a = document.createElement('a');
 
@@ -11,14 +11,13 @@ function createPage () {
 		a.href = uri;
 		a.target = '_blank';
 		span.appendChild(a);
-		span.onclick = function () {
+		span.onclick = function() {
 			a.click();
 		};
 		document.body.appendChild(span);
 	}
 
 	targets = [
-		'Alert',
 		'Button',
 		'Checkbox',
 		'ContextMenu',
