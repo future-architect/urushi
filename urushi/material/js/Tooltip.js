@@ -367,11 +367,7 @@ define(
 					var viewPosition = this._calculatePosition();
 					this.rootNode.style.top = viewPosition.top;
 					this.rootNode.style.left = viewPosition.left;
-					if (urushi.hasTransitionSupport()) {
-						this.rootNode.classList.add('in');
-					} else {
-						$(this.rootNode).animate({opacity: materialConfig.DEFAULT_VALUE_OPACITY_MAX}, this.duration);
-					}
+					this.rootNode.classList.add('in');
 				}).bind(this), 50);
 			},
 			/**
@@ -387,11 +383,7 @@ define(
 				}
 				this.isShown = false;
 
-				if (urushi.hasTransitionSupport()) {
-					this.rootNode.classList.remove('in');
-				} else {
-					$(this.rootNode).animate({opacity: materialConfig.DEFAULT_VALUE_OPACITY_MIN}, this.duration);
-				}
+				this.rootNode.classList.remove('in');
 
 				setTimeout((function() {
 					this.rootNode.style.display = 'none';
