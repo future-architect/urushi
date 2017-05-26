@@ -5,9 +5,6 @@ define(
 	['Urushi', 'Dialog', 'templateEngine', 'templateConfig', 'materialConfig'],
 	function(Urushi, Dialog, templateEngine, templateConfig, materialConfig) {
 		'use strict';
-		var temp,
-			hasTransitionSupportTrue = function() { return true; },
-			hasTransitionSupportFalse = function() { return false; };
 
 		function createElement(str) {
 			var d = document.createElement('div');
@@ -28,39 +25,17 @@ define(
 
 				dialog = new Dialog({header: 'head', footer: 'foot', content: 'content'});
 			});
-			it('show on True', function(done) {
-				temp = Urushi.hasTransitionSupport;
-				Urushi.hasTransitionSupport = hasTransitionSupportTrue;
+			it('show', function(done) {
 				dialog.isShown = false;
 				expect(dialog.show()).toBe();
 				Urushi.removeEvent(dialog.getRootNode(), 'keydown', dialog, 'onKeydown');
 				expect(dialog.show()).toBe();
 				done();
 			});
-			it('show on False', function(done) {
-				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
-				dialog.isShown = false;
-				expect(dialog.show()).toBe();
-				Urushi.removeEvent(dialog.getRootNode(), 'keydown', dialog, 'onKeydown');
-				expect(dialog.show()).toBe();
-				setTimeout(function() {
-					Urushi.hasTransitionSupport = temp;
-					done();
-				}, 200);
-			});
 			it('hide', function() {
-				temp = Urushi.hasTransitionSupport;
-				Urushi.hasTransitionSupport = hasTransitionSupportTrue;
 				dialog.isShown = true;
 				expect(dialog.hide()).toBe();
 				expect(dialog.hide()).toBe();
-
-				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
-				dialog.isShown = true;
-				expect(dialog.hide()).toBe();
-				expect(dialog.hide()).toBe();
-				
-				Urushi.hasTransitionSupport = temp;
 			});
 			it('setHeader', function() {
 				expect(dialog.setHeader()).toBe();
