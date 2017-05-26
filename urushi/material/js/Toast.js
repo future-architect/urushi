@@ -48,7 +48,6 @@
 define(
 	'Toast',
 	[
-		'jquery',
 		'Urushi',
 		'materialConfig',
 		'_Base',
@@ -59,7 +58,7 @@ define(
 	 * @alias module:Toast
 	 * @returns {object} Toast object.
 	*/
-	function($, urushi, materialConfig, _Base, Deferred, template) {
+	function(urushi, materialConfig, _Base, Deferred, template) {
 		'use strict';
 
 		/**
@@ -156,27 +155,9 @@ define(
 				this.isShown = true;
 
 				deferred = new Deferred();
-				if (urushi.hasTransitionSupport()) {
-					urushi.addEvent(this.rootNode, 'transitionend', this, '_onEndShow', deferred);
-					this.rootNode.classList.add(CONSTANTS.CLASS_NAME_TOAST_OPENED);
-				} else {
-					style = {
-						'position': 'relative',
-						'-ms-transform': 'translateY(100%)',
-						'height': 'auto',
-						'padding': '14px 15px',
-						'margin-bottom': '20px',
-						'opacity': 0
-					};
-					$(this.rootNode).css(style);
-					$(this.rootNode).animate(
-						{bottom: materialConfig.TOAST_STYLE_BOTTOM, opacity: materialConfig.DEFAULT_VALUE_OPACITY_MAX},
-						materialConfig.DEFAULT_VALUE_DURATION,
-						function() {
-							deferred.resolve();
-						}
-					);
-				}
+
+				urushi.addEvent(this.rootNode, 'transitionend', this, '_onEndShow', deferred);
+				this.rootNode.classList.add(CONSTANTS.CLASS_NAME_TOAST_OPENED);
 
 				return deferred;
 			},
@@ -195,19 +176,9 @@ define(
 				this.isShown = false;
 				
 				deferred = new Deferred();
-				if (urushi.hasTransitionSupport()) {
-					urushi.addEvent(this.rootNode, 'transitionend', this, '_onEndHide', deferred);
-					this.rootNode.classList.remove(CONSTANTS.CLASS_NAME_TOAST_OPENED);
-				} else {
-					$(this.rootNode).animate(
-						{bottom: 0, opacity: materialConfig.DEFAULT_VALUE_OPACITY_MIN},
-						materialConfig.DEFAULT_VALUE_DURATION,
-						(function() {
-							this.rootNode.classList.add('hidden');
-							deferred.resolve();
-						}).bind(this)
-					);
-				}
+				urushi.addEvent(this.rootNode, 'transitionend', this, '_onEndHide', deferred);
+				this.rootNode.classList.remove(CONSTANTS.CLASS_NAME_TOAST_OPENED);
+
 				return deferred;
 			},
 			/**
