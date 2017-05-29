@@ -1,7 +1,7 @@
 /**
  * @fileOverView Radiobox class definition.
  * @author Yuzo Hirakawa
- * @version b1.0
+ * @version 1.0.0
  */
 
 /**
@@ -75,7 +75,6 @@
 define(
 	'Radiobox',
 	[
-		'jquery',
 		'Urushi',
 		'_Base',
 		'text!radioboxTemplate'
@@ -86,7 +85,7 @@ define(
 	 * @alias module:Radiobox
 	 * @returns {object} Radiobox instance.
 	*/
-	function($, urushi, _Base, template) {
+	function(urushi, _Base, template) {
 		'use strict';
 
 		/**
@@ -98,19 +97,7 @@ define(
 		 */
 		var CONSTANTS = {
 			ID_PREFIX: 'urushi.Radiobox',
-			EMBEDDED: {radioboxClass: '', additionalClass: '', value: '', label: '', checked: false},
-			INTERVAL: 20,
-			RIPPLE_SCALE_MAX: 1,
-			RIPPLE_OPACITY_MAX: 0.2,
-			RIPPLE_SCALE_MIN: 0,
-			RIPPLE_OPACITY_MIN: 0,
-			CHECK_SCALE_MAX: 0.45,
-			CHECK_OPACITY_MAX: 1,
-			CHECK_SCALE_MIN: 0,
-			CHECK_OPACITY_MIN: 0,
-			DEFAULTS: {
-				DURATION: 300
-			}
+			EMBEDDED: {radioboxClass: '', additionalClass: '', value: '', label: '', checked: false}
 		};
 
 		/**
@@ -120,21 +107,6 @@ define(
 		 * @type number
 		 */
 		var idNo = 0;
-
-		/**
-		 * <pre>
-		 * For the browser does not support CSS3.0.
-		 * Controls same name radiobox.
-		 *	radioMap = {
-		 *		name: {
-		 *			checked: radioId,
-		 *			map: {id: instance}
-		 *		}
-		 *	}
-		 * </pre>
-		 * @type object
-		 */
-		var radioMap = {};
 
 		return _Base.extend(/** @lends module:Radiobox.prototype */ {
 
@@ -170,26 +142,6 @@ define(
 			},
 			/**
 			 * <pre>
-			 * Creates an object fot managing the associated radiobox.
-			 * For the browser does not support CSS3.0.
-			 * </pre>
-			 * @protected
-			 * @param {object} args Constructor arguments.
-			 * @returns none.
-			 */
-			initOption: function(/* object */ args) {
-				if (urushi.hasTransitionSupport()) {
-					return;
-				}
-				radioMap[args.name] = radioMap[args.name] || {};
-				radioMap[args.name].map = radioMap[args.name].map || {};
-				radioMap[args.name].checked = radioMap[args.name].checked || undefined;
-				radioMap[args.name].map[this.id] = this;
-
-				urushi.addEvent(this.inputNode, 'click', this, '_onClick');
-			},
-			/**
-			 * <pre>
 			 * Returns whether the radiobox is checked or not.
 			 * </pre>
 			 * @returns {boolean} Whether the radiobox is checked or not.
@@ -209,126 +161,6 @@ define(
 					return;
 				}
 				this.inputNode.checked = is;
-
-				if (urushi.hasTransitionSupport()) {
-					return;
-				}
-
-				if (is) {
-					this._checkOn();
-				} else {
-					this._checkOff();
-				}
-			},
-			/**
-			 * <pre>
-			 * For the browser does not support CSS3.0.
-			 * Runs the animation to put the check.
-			 * </pre>
-			 * @returns none.
-			 */
-			_checkOn: function() {
-				var counter = 0,
-					rippleScale = CONSTANTS.RIPPLE_SCALE_MIN,
-					rippleOpacity = CONSTANTS.RIPPLE_OPACITY_MIN,
-					onCheckScale = CONSTANTS.CHECK_SCALE_MIN,
-					onCheckOpacity = CONSTANTS.CHECK_OPACITY_MIN,
-					resolution = CONSTANTS.INTERVAL / CONSTANTS.DEFAULTS.DURATION,
-					$rippleNode = $(this.rippleNode),
-					$checkNode = $(this.checkNode),
-					_checkOnInner = function() {
-						if (counter * CONSTANTS.INTERVAL < CONSTANTS.DEFAULTS.DURATION) {
-							setTimeout(function() {
-								rippleScale += CONSTANTS.RIPPLE_SCALE_MAX * resolution;
-								rippleOpacity += CONSTANTS.RIPPLE_OPACITY_MAX * resolution;
-								onCheckScale += CONSTANTS.CHECK_SCALE_MAX * resolution;
-								onCheckOpacity += CONSTANTS.CHECK_OPACITY_MAX * resolution;
-
-								$rippleNode.css({
-									'msTransform': 'scale(' + rippleScale + ')',
-									'opacity': rippleOpacity
-								});
-								$checkNode.css({
-									'msTransform': 'scale(' + onCheckScale + ')',
-									'opacity': onCheckOpacity
-								});
-
-								counter++;
-								_checkOnInner();
-							}, CONSTANTS.INTERVAL);
-						} else {
-							setTimeout(function() {
-								$rippleNode.animate({
-									'msTransform': 'scale(' + CONSTANTS.CHECK_SCALE_MIN + ')',
-									'opacity': CONSTANTS.CHECK_OPACITY_MIN
-								}, CONSTANTS.DEFAULTS.DURATION - 100);
-							}, CONSTANTS.INTERVAL);
-						}
-					};
-
-				radioMap[this.inputNode.name].checked = this.id;
-				_checkOnInner();
-			},
-			/**
-			 * <pre>
-			 * For the browser does not support CSS3.0.
-			 * Runs the animation to remove the check.
-			 * </pre>
-			 * @returns none.
-			 */
-			_checkOff: function() {
-				var counter = 0,
-					offCheckScale = CONSTANTS.CHECK_SCALE_MAX,
-					offCheckOpacity = CONSTANTS.CHECK_OPACITY_MAX,
-					resolution = CONSTANTS.INTERVAL / CONSTANTS.DEFAULTS.DURATION,
-					$checkNode = $(this.checkNode),
-					_checkOffInner = function() {
-						if (counter * CONSTANTS.INTERVAL < CONSTANTS.DEFAULTS.DURATION) {
-							setTimeout(function() {
-								offCheckScale -= CONSTANTS.CHECK_SCALE_MAX * resolution;
-								offCheckOpacity -= CONSTANTS.CHECK_OPACITY_MAX * resolution;
-
-								$checkNode.css({
-									'msTransform': 'scale(' + offCheckScale + ')',
-									'opacity': offCheckOpacity
-								});
-
-								counter++;
-								_checkOffInner();
-							}, CONSTANTS.INTERVAL);
-						}
-					};
-
-				_checkOffInner();
-			},
-			/**
-			 * <pre>
-			 * Callback function for the input click event.
-			 * For the browser does not support CSS3.0.
-			 * </pre>
-			 * @param {object} event Event object.
-			 * @returns none.
-			 */
-			_onClick: function(/* object */ event) {
-				var name = this.inputNode.name,
-					id;
-
-				if (urushi.hasTransitionSupport()) {
-					return;
-				}
-
-				if (radioMap[name].checked === this.id) {
-					return;
-				}
-
-				for (id in radioMap[name].map) {
-					if (radioMap[name].checked === id) {
-						radioMap[name].map[id].setChecked(false);
-
-						break;
-					}
-				}
-				this.setChecked(true);
 			},
 			/**
 			 * <pre>
