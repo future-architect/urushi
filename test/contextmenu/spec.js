@@ -543,8 +543,10 @@ define(
 				expect(menu.listNode.children.length).toBe(1);
 				menu.onClickContext(clickEventMock);
 				fucusButton.focus();
-				expect(menu.itemsNode).not.toBe(document.activeElement);
-				expect(menu.itemsNode.tabIndex).toBe(-1);
+				window.requestAnimationFrame(function() {
+					expect(menu.itemsNode).not.toBe(document.activeElement);
+					expect(menu.itemsNode.getAttribute('tabindex')).toBe('-1');
+				});
 			});
 
 			it('onClickClose', function() {
