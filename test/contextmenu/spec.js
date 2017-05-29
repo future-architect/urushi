@@ -1,23 +1,15 @@
-﻿/*eslint "vars-on-top" : 0*/
+﻿/*eslint "vars-on-top": 0*/
 
 define(
 	'contextMenu.spec',
 	['Urushi', 'ContextMenu', 'templateEngine', 'templateConfig', 'animation'],
-	function (Urushi, ContextMenu, templateEngine, templateConfig, animation) {
+	function(Urushi, ContextMenu, templateEngine, templateConfig, animation) {
 		'use strict';
 
-		var hasTransitionSupport = Urushi.hasTransitionSupport,
-			hasTransitionSupportTrue = function () {return true;},
-			hasTransitionSupportFalse = function () {return false;};
-
-		describe('ContextMenu test', function () {
-			afterEach(function() {
-				Urushi.hasTransitionSupport = hasTransitionSupport;
-			});
-
+		describe('ContextMenu test', function() {
 			var parentNode = document.getElementById('script-modules');
 
-			it('init', function () {
+			it('init', function() {
 				parentNode.appendChild(document.createTextNode('init'));
 				var settingsCallback = function(id) {
 					alert('Action Settings ID=' + id);
@@ -26,19 +18,19 @@ define(
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'Alert', name : 'Alert', icon : 'mdi-content-mail'},
-						{label : 'Button', name : 'Button', icon : 'mdi-hardware-headset'},
-						{label : 'Checkbox', name : 'Checkbox', icon : 'mdi-editor-border-color'},
-						{label : 'Dialog', name : 'Dialog', icon : 'mdi-action-accessibility'},
-						{label : 'Dropdown', name : 'Dropdown', icon : 'mdi-communication-phone'},
-						{label : 'Hamburger', name : 'Hamburger', icon : 'mdi-image-camera-alt'},
-						{label : 'Input', name : 'Input', icon : 'mdi-action-settings'},
-						{label : 'Panel', name : 'Panel', icon : 'mdi-action-shopping-cart'},
-						{label : 'Radio', name : 'Radio', icon : 'mdi-maps-local-atm'},
-						{label : 'Settings', callback : settingsCallback, name : 'Settings', icon : 'mdi-maps-local-atm'},
+					items: [
+						{label: 'Alert', name: 'Alert', icon: 'mdi-content-mail'},
+						{label: 'Button', name: 'Button', icon: 'mdi-hardware-headset'},
+						{label: 'Checkbox', name: 'Checkbox', icon: 'mdi-editor-border-color'},
+						{label: 'Dialog', name: 'Dialog', icon: 'mdi-action-accessibility'},
+						{label: 'Dropdown', name: 'Dropdown', icon: 'mdi-communication-phone'},
+						{label: 'Hamburger', name: 'Hamburger', icon: 'mdi-image-camera-alt'},
+						{label: 'Input', name: 'Input', icon: 'mdi-action-settings'},
+						{label: 'Panel', name: 'Panel', icon: 'mdi-action-shopping-cart'},
+						{label: 'Radio', name: 'Radio', icon: 'mdi-maps-local-atm'},
+						{label: 'Settings', callback: settingsCallback, name: 'Settings', icon: 'mdi-maps-local-atm'},
 					],
-					defaultCallback : defaultCallback
+					defaultCallback: defaultCallback
 				};
 
 				var contextMenu1 = new ContextMenu(option);
@@ -58,25 +50,25 @@ define(
 				parentNode.appendChild(contextMenu4.rootNode);
 			});
 
-			it('Empty arg init', function () {
+			it('Empty arg init', function() {
 				parentNode.appendChild(document.createTextNode('Empty arg init'));
 				var menu = new ContextMenu();
 				parentNode.appendChild(menu.rootNode);
 				expect(menu.listNode.children.length).toBe(0);
 			});
 
-			it('Exception init', function () {
+			it('Exception init', function() {
 				parentNode.appendChild(document.createTextNode('Exception init'));
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'Alert', name : 'Alert', icon : 'mdi-content-mail'},
-						{label : 'Button', name : 'Dup', icon : 'mdi-hardware-headset'},
-						{label : 'Checkbox', name : 'Dup', icon : 'mdi-editor-border-color'},
+					items: [
+						{label: 'Alert', name: 'Alert', icon: 'mdi-content-mail'},
+						{label: 'Button', name: 'Dup', icon: 'mdi-hardware-headset'},
+						{label: 'Checkbox', name: 'Dup', icon: 'mdi-editor-border-color'},
 					],
-					defaultCallback : defaultCallback
+					defaultCallback: defaultCallback
 				};
 				expect(function() {
 					var menu = new ContextMenu(option);
@@ -85,13 +77,13 @@ define(
 
 			});
 
-			it('Empty items', function () {
+			it('Empty items', function() {
 				parentNode.appendChild(document.createTextNode('Empty items'));
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					defaultCallback : defaultCallback
+					defaultCallback: defaultCallback
 				};
 
 				var menu = new ContextMenu(option);
@@ -99,18 +91,18 @@ define(
 				expect(menu.listNode.children.length).toBe(0);
 			});
 
-			it('setHiddenItem for All', function () {
+			it('setHiddenItem for All', function() {
 				parentNode.appendChild(document.createTextNode('setHiddenItem for All'));
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'test1', name : 'name_test1'},
-						{label : 'test2', name : 'name_test2'},
-						{label : 'test3', name : 'name_test3'},
+					items: [
+						{label: 'test1', name: 'name_test1'},
+						{label: 'test2', name: 'name_test2'},
+						{label: 'test3', name: 'name_test3'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 
 				var menu = new ContextMenu(option);
@@ -122,18 +114,18 @@ define(
 				expect(menu.isHiddenItem('name_test3')).toBe(true);
 			});
 
-			it('setHiddenItem', function (done) {
+			it('setHiddenItem', function(done) {
 				parentNode.appendChild(document.createTextNode('setHiddenItem'));
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'test1', name : 'name_test1'},
-						{label : 'test2', name : 'name_test2'},
-						{label : 'test3', name : 'name_test3'},
+					items: [
+						{label: 'test1', name: 'name_test1'},
+						{label: 'test2', name: 'name_test2'},
+						{label: 'test3', name: 'name_test3'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 
 				var menu = new ContextMenu(option);
@@ -156,7 +148,7 @@ define(
 				expect(menu.isHiddenItem('name_test3')).toBe(false);
 
 				var clickEventMock = {
-					stopPropagation : jasmine.createSpy()
+					stopPropagation: jasmine.createSpy()
 				};
 				menu.onClickContext(clickEventMock);
 
@@ -168,18 +160,18 @@ define(
 				}, 300);
 			});
 
-			it('setupShowItems', function () {
+			it('setupShowItems', function() {
 				parentNode.appendChild(document.createTextNode('setupShowItems'));
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'test1', name : 'name_test1'},
-						{label : 'test2', name : 'name_test2'},
-						{label : 'test3', name : 'name_test3'},
+					items: [
+						{label: 'test1', name: 'name_test1'},
+						{label: 'test2', name: 'name_test2'},
+						{label: 'test3', name: 'name_test3'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 
 				var menu = new ContextMenu(option);
@@ -197,14 +189,14 @@ define(
 			});
 
 
-			it('addItems', function (done) {
+			it('addItems', function(done) {
 				parentNode.appendChild(document.createTextNode('addItems'));
 				var defaultCallback = jasmine.createSpy();
 				var option = {
-					items : [
-						{label : 'test1', name : 'test1'},
+					items: [
+						{label: 'test1', name: 'test1'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 
 				var itemCallback = jasmine.createSpy();
@@ -213,18 +205,18 @@ define(
 				parentNode.appendChild(menu.rootNode);
 				expect(menu.listNode.children.length).toBe(1);
 				menu.addItems([
-					{label : 'test2', name : 'test2'},
-					{label : 'test3', name : 'test3', callback : itemCallback},
+					{label: 'test2', name: 'test2'},
+					{label: 'test3', name: 'test3', callback: itemCallback},
 				]);
 				expect(menu.listNode.children.length).toBe(3);
 				menu.addItems({});
 				expect(menu.listNode.children.length).toBe(3);
 
 				expect(function() {
-					menu.addItems([{label : 'fail'}]);
+					menu.addItems([{label: 'fail'}]);
 				}).toThrow();
 				expect(function() {
-					menu.addItems([{name : 'fail'}]);
+					menu.addItems([{name: 'fail'}]);
 				}).toThrow();
 
 				for (var i = 0; i < menu.listNode.children.length; i++) {
@@ -238,18 +230,18 @@ define(
 				}, 200);
 			});
 
-			it('removeItems for All', function () {
+			it('removeItems for All', function() {
 				parentNode.appendChild(document.createTextNode('removeItems for All'));
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'test1', name : 'test1'},
-						{label : 'test2', name : 'test2'},
-						{label : 'test3', name : 'test3'},
+					items: [
+						{label: 'test1', name: 'test1'},
+						{label: 'test2', name: 'test2'},
+						{label: 'test3', name: 'test3'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 
 				var menu = new ContextMenu(option);
@@ -260,18 +252,18 @@ define(
 				expect(menu.listNode.children.length).toBe(0);
 			});
 
-			it('removeItems', function () {
+			it('removeItems', function() {
 				parentNode.appendChild(document.createTextNode('removeItems'));
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'test1', name : 'name_test1'},
-						{label : 'test2', name : 'name_test2'},
-						{label : 'test3', name : 'name_test3'},
+					items: [
+						{label: 'test1', name: 'name_test1'},
+						{label: 'test2', name: 'name_test2'},
+						{label: 'test3', name: 'name_test3'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 
 				var menu = new ContextMenu(option);
@@ -281,16 +273,16 @@ define(
 				menu.removeItems('name_test1', 'name_test2', 'ignore');
 				expect(menu.listNode.children.length).toBe(1);
 			});
-			it('setCallback for All', function (done) {
+			it('setCallback for All', function(done) {
 				parentNode.appendChild(document.createTextNode('setCallback for All'));
 				var beforeSpy = jasmine.createSpy();
 				var option = {
-					items : [
-						{label : 'test1', name : 'name_test1'},
-						{label : 'test2', name : 'name_test2'},
-						{label : 'test3', name : 'name_test3'},
+					items: [
+						{label: 'test1', name: 'name_test1'},
+						{label: 'test2', name: 'name_test2'},
+						{label: 'test3', name: 'name_test3'},
 					],
-					defaultCallback : beforeSpy,
+					defaultCallback: beforeSpy,
 				};
 
 				var menu = new ContextMenu(option);
@@ -311,16 +303,16 @@ define(
 				}, 200);
 			});
 
-			it('setCallback', function (done) {
+			it('setCallback', function(done) {
 				parentNode.appendChild(document.createTextNode('setCallback'));
 				var beforeSpy = jasmine.createSpy();
 				var option = {
-					items : [
-						{label : 'test1', name : 'name_test1'},
-						{label : 'test2', name : 'name_test2'},
-						{label : 'test3', name : 'name_test3'},
+					items: [
+						{label: 'test1', name: 'name_test1'},
+						{label: 'test2', name: 'name_test2'},
+						{label: 'test3', name: 'name_test3'},
 					],
-					defaultCallback : beforeSpy,
+					defaultCallback: beforeSpy,
 				};
 
 				var menu = new ContextMenu(option);
@@ -343,13 +335,13 @@ define(
 				}, 200);
 			});
 
-			it('empty callback', function () {
+			it('empty callback', function() {
 				parentNode.appendChild(document.createTextNode('empty callback'));
 				var option = {
-					items : [
-						{label : 'test1', name : 'name_test1'},
-						{label : 'test2', name : 'name_test2'},
-						{label : 'test3', name : 'name_test3'},
+					items: [
+						{label: 'test1', name: 'name_test1'},
+						{label: 'test2', name: 'name_test2'},
+						{label: 'test3', name: 'name_test3'},
 					],
 				};
 
@@ -362,16 +354,16 @@ define(
 				}
 			});
 
-			it('addOnClickItemCustomArgs', function (done) {
+			it('addOnClickItemCustomArgs', function(done) {
 				parentNode.appendChild(document.createTextNode('addOnClickItemCustomArgs'));
 				var spy = jasmine.createSpy();
 				var option = {
-					items : [
-						{label : 'test1', name : 'name_test1'},
-						{label : 'test2', name : 'name_test2'},
-						{label : 'test3', name : 'name_test3'},
+					items: [
+						{label: 'test1', name: 'name_test1'},
+						{label: 'test2', name: 'name_test2'},
+						{label: 'test3', name: 'name_test3'},
 					],
-					defaultCallback : spy,
+					defaultCallback: spy,
 				};
 
 				var menu = new ContextMenu(option);
@@ -405,22 +397,21 @@ define(
 				}, 400);
 			});
 
-			it('onClickContext', function () {
-				Urushi.hasTransitionSupport = hasTransitionSupportTrue;
+			it('onClickContext', function() {
 				parentNode.appendChild(document.createTextNode('onClickContext'));
 
 				var clickEventMock = {
-					stopPropagation : jasmine.createSpy()
+					stopPropagation: jasmine.createSpy()
 				};
 
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'test', name : 'test'},
+					items: [
+						{label: 'test', name: 'test'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 
 				var menu = new ContextMenu(option);
@@ -464,49 +455,20 @@ define(
 				expect(menu.itemsNode).not.toBe(document.activeElement);
 			});
 
-			it('onClickContext for IE', function () {
-				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
-				parentNode.appendChild(document.createTextNode('onClickContext for IE'));
-
-				var clickEventMock = {
-					stopPropagation : jasmine.createSpy()
-				};
-
-				var defaultCallback = function(id) {
-					alert('Action Default ID=' + id);
-				};
-				var option = {
-					items : [
-						{label : 'test', name : 'test'},
-					],
-					defaultCallback : defaultCallback,
-				};
-
-				var menu = new ContextMenu(option);
-				parentNode.appendChild(menu.rootNode);
-				menu.onClickContext(clickEventMock);
-				expect(clickEventMock.stopPropagation).toHaveBeenCalled();
-				expect(menu.itemsNode.classList.contains('items-open')).toBe(true);
-				expect(menu.itemsNode.tabIndex).toBe(0);
-				expect(menu.itemsNode).toBe(document.activeElement);
-				menu._close();
-				menu.onClickContext(clickEventMock);
-			});
-
-			it('addOnClickContextCallback', function () {
+			it('addOnClickContextCallback', function() {
 				parentNode.appendChild(document.createTextNode('addOnClickContextCallback'));
 				var clickEventMock = {
-					stopPropagation : jasmine.createSpy()
+					stopPropagation: jasmine.createSpy()
 				};
 
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'test', name : 'test'},
+					items: [
+						{label: 'test', name: 'test'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 				var spy = jasmine.createSpy();
 
@@ -520,20 +482,20 @@ define(
 					menu.addOnClickContextCallback();
 				}).toThrow();
 			});
-			it('type', function () {
+			it('type', function() {
 				parentNode.appendChild(document.createTextNode('type'));
 				var clickEventMock = {
-					stopPropagation : jasmine.createSpy()
+					stopPropagation: jasmine.createSpy()
 				};
 
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'test', name : 'test'},
+					items: [
+						{label: 'test', name: 'test'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 
 				//typeなし
@@ -557,24 +519,23 @@ define(
 				
 
 			});
-			it('_close', function () {
-				Urushi.hasTransitionSupport = hasTransitionSupportTrue;
+			it('_close', function() {
 				parentNode.appendChild(document.createTextNode('_close'));
-				var fucusButton = $('<button>フォーカス用</button>')[0];
+				var fucusButton = Urushi.createNode('<button>フォーカス用</button>');
 				parentNode.appendChild(fucusButton);
 
 				var clickEventMock = {
-					stopPropagation : jasmine.createSpy()
+					stopPropagation: jasmine.createSpy()
 				};
 
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'test', name : 'test'},
+					items: [
+						{label: 'test', name: 'test'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 
 				var menu = new ContextMenu(option);
@@ -585,104 +546,22 @@ define(
 				expect(menu.itemsNode).not.toBe(document.activeElement);
 				expect(menu.itemsNode.tabIndex).toBe(-1);
 			});
-			it('_close for IE', function () {
-				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
-				parentNode.appendChild(document.createTextNode('_close for IE'));
-				var fucusButton = $('<button>フォーカス用</button>')[0];
-				parentNode.appendChild(fucusButton);
 
-				var clickEventMock = {
-					stopPropagation : jasmine.createSpy()
-				};
-
-				var defaultCallback = function(id) {
-					alert('Action Default ID=' + id);
-				};
-				var option = {
-					items : [
-						{label : 'test', name : 'test'},
-					],
-					defaultCallback : defaultCallback,
-				};
-
-				var menu = new ContextMenu(option);
-				parentNode.appendChild(menu.rootNode);
-				expect(menu.listNode.children.length).toBe(1);
-				menu.onClickContext(clickEventMock);
-
-				fucusButton.focus();
-
-				expect(menu.itemsNode).not.toBe(document.activeElement);
-				expect(menu.itemsNode.tabIndex).toBe(-1);
-
-				menu.onClickContext(clickEventMock);
-				fucusButton.focus();
-
-				expect(menu.itemsNode).not.toBe(document.activeElement);
-				expect(menu.itemsNode.tabIndex).toBe(-1);
-			});
-			it('_onCloseIconMouseEnter _onCloseIconMouseLeave for IE', function (done) {
-				Urushi.hasTransitionSupport = hasTransitionSupportFalse;
-				parentNode.appendChild(document.createTextNode('_onCloseIconMouseEnter _onCloseIconMouseLeave for IE'));
-
-				var clickEventMock = {
-					stopPropagation : jasmine.createSpy()
-				};
-
-				var defaultCallback = function(id) {
-					alert('Action Default ID=' + id);
-				};
-				var option = {
-					items : [
-						{label : 'test', name : 'test'},
-					],
-					defaultCallback : defaultCallback,
-				};
-
-				var menu = new ContextMenu(option);
-				parentNode.appendChild(menu.rootNode);
-				expect(menu.listNode.children.length).toBe(1);
-				menu.onClickContext(clickEventMock);
-
-				setTimeout(function() {
-					menu._onCloseIconMouseEnter(clickEventMock);
-				}, 500);
-
-				setTimeout(function() {
-					expect(menu.closeIconNode.style[animation.STYLEKEYS.transform]).toBe('rotate(90deg)');
-					
-					menu._onCloseIconMouseLeave(clickEventMock);
-				}, 500 * 2);
-
-				setTimeout(function() {
-					expect(menu.closeIconNode.style[animation.STYLEKEYS.transform]).toBe('');
-
-					menu._onCloseIconMouseEnter(clickEventMock);
-					menu._onCloseIconMouseLeave(clickEventMock);
-					menu._onCloseIconMouseEnter(clickEventMock);
-				}, 500 * 3);
-
-				setTimeout(function() {
-					expect(menu.closeIconNode.style[animation.STYLEKEYS.transform]).toBe('rotate(90deg)');
-					done();
-				}, 500 * 4);
-			});
-
-			it('onClickClose', function () {
+			it('onClickClose', function() {
 				parentNode.appendChild(document.createTextNode('onClickClose'));
 
 				var clickEventMock = {
-					stopPropagation : jasmine.createSpy()
+					stopPropagation: jasmine.createSpy()
 				};
 
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'test', name : 'test'},
+					items: [
+						{label: 'test', name: 'test'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 
 				var menu = new ContextMenu(option);
@@ -694,22 +573,22 @@ define(
 				expect(menu.itemsNode.tabIndex).toBe(-1);
 			});
 
-			it('bubbling', function () {
+			it('bubbling', function() {
 				parentNode.appendChild(document.createTextNode('bubbling'));
 
 				var clickEventMock = {
-					stopPropagation : jasmine.createSpy()
+					stopPropagation: jasmine.createSpy()
 				};
 
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'test', name : 'test'},
+					items: [
+						{label: 'test', name: 'test'},
 					],
-					defaultCallback : defaultCallback,
-					bubbling : true,
+					defaultCallback: defaultCallback,
+					bubbling: true,
 				};
 
 				var menu = new ContextMenu(option);
@@ -719,11 +598,11 @@ define(
 
 
 				option = {
-					items : [
-						{label : 'test', name : 'test'},
+					items: [
+						{label: 'test', name: 'test'},
 					],
-					defaultCallback : defaultCallback,
-					bubbling : 123,
+					defaultCallback: defaultCallback,
+					bubbling: 123,
 				};
 
 				menu = new ContextMenu(option);
@@ -732,11 +611,11 @@ define(
 				expect(clickEventMock.stopPropagation).toHaveBeenCalled();
 			});
 
-			it('Empty label', function () {
+			it('Empty label', function() {
 				parentNode.appendChild(document.createTextNode('Empty label'));
 				var option = {
-					items : [
-						{label : 'label', id : 'empty', name : 'empty'},
+					items: [
+						{label: 'label', id: 'empty', name: 'empty'},
 					],
 				};
 
@@ -746,11 +625,11 @@ define(
 				expect(menu.rootNode.getElementsByClassName('label')[0].innerHTML).toBe('label');
 			});
 
-			it('html escape label', function () {
+			it('html escape label', function() {
 				parentNode.appendChild(document.createTextNode('html escape label'));
 				var option = {
-					items : [
-						{label : '<div>escape</div>', id : 'empty', name : 'empty'},
+					items: [
+						{label: '<div>escape</div>', id: 'empty', name: 'empty'},
 					],
 				};
 
@@ -760,31 +639,34 @@ define(
 				expect(menu.rootNode.getElementsByClassName('label')[0].textContent).toBe('<div>escape</div>');
 			});
 
-			it('dom label', function () {
+			it('dom label', function() {
 				parentNode.appendChild(document.createTextNode('dom label'));
 				var option = {
-					items : [
-						{label : $('<div style="color: red;">dom</div>'), id : 'empty', name : 'empty'},
+					items: [
+						{label: Urushi.createNode('<div style="color: red;">dom</div>'), id: 'empty', name: 'empty'},
 					],
 				};
 
 				var menu = new ContextMenu(option);
 				parentNode.appendChild(menu.rootNode);
 
-				expect(menu.rootNode.getElementsByClassName('label')[0].innerHTML).toBe('<div style="color: red;">dom</div>');
+				expect(
+					menu.rootNode.getElementsByClassName(
+						'label')[0].innerHTML).toBe(
+							'<div style="color: red;">dom</div>');
 			});
 
-			it('destroy', function () {
+			it('destroy', function() {
 				parentNode.appendChild(document.createTextNode('destroy'));
 				var defaultCallback = function(id) {
 					alert('Action Default ID=' + id);
 				};
 				var option = {
-					items : [
-						{label : 'test', name : 'test'},
-						{label : 'test2', name : 'test2'},
+					items: [
+						{label: 'test', name: 'test'},
+						{label: 'test2', name: 'test2'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 
 				var menu = new ContextMenu(option);
@@ -795,16 +677,16 @@ define(
 
 			});
 
-			it('_ContextMenuItem.setCallback', function (done) {
+			it('_ContextMenuItem.setCallback', function(done) {
 				parentNode.appendChild(document.createTextNode('_ContextMenuItem.setCallback'));
 				var defaultCallback = jasmine.createSpy();
 				var option = {
-					items : [
-						{label : 'test1', name : 'name_test1'},
-						{label : 'test2', name : 'name_test2'},
-						{label : 'test3', name : 'name_test3'},
+					items: [
+						{label: 'test1', name: 'name_test1'},
+						{label: 'test2', name: 'name_test2'},
+						{label: 'test3', name: 'name_test3'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 
 				var itemCallback = jasmine.createSpy();
@@ -827,16 +709,16 @@ define(
 				}, 200);
 			});
 
-			it('_ContextMenuItem.setHidden isHidden', function () {
+			it('_ContextMenuItem.setHidden isHidden', function() {
 				parentNode.appendChild(document.createTextNode('_ContextMenuItem.setHidden isHidden'));
 				var defaultCallback = jasmine.createSpy();
 				var option = {
-					items : [
-						{label : 'test1', name : 'name_test1'},
-						{label : 'test2', name : 'name_test2'},
-						{label : 'test3', name : 'name_test3'},
+					items: [
+						{label: 'test1', name: 'name_test1'},
+						{label: 'test2', name: 'name_test2'},
+						{label: 'test3', name: 'name_test3'},
 					],
-					defaultCallback : defaultCallback,
+					defaultCallback: defaultCallback,
 				};
 
 				var menu = new ContextMenu(option);
@@ -851,18 +733,18 @@ define(
 				expect(menu.isHiddenItem('name_test3')).toBe(false);
 			});
 
-			describe('Template engine', function () {
+			describe('Template engine', function() {
 				var flag = false;
-				beforeEach(function (done) {
-					templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
+				beforeEach(function(done) {
+					templateEngine.renderDocument(document.body, templateConfig).then(function(result) {
 						flag = true;
 						done();
-					}).otherwise(function (error) {
+					}).otherwise(function(error) {
 						flag = false;
 						done();
 					});
 				});
-				it('template engine test', function () {
+				it('template engine test', function() {
 					expect(flag).toBe(true);
 				});
 			});

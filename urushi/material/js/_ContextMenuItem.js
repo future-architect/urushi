@@ -156,6 +156,7 @@ define(
 					span,
 					label,
 					icon;
+
 				li = document.createElement('li');
 				span = document.createElement('span');
 				li.id = args.liId || this._getListItemId();
@@ -236,31 +237,28 @@ define(
 			 * @returns {number} width Width of men item.
 			 */
 			_getLabelWidth: function(/* string */ label) {
-				var $body = $(document.body),
-					$dummyWrapper = $('<div>'),
-					$dummy = $('<span>'),
+				var wrapper = document.createElement('div'),
+					dummy = document.createElement('span'),
 					width;
 
-				$dummy.text('&nbsp;');
+				wrapper.style.position = 'absolute';
+				wrapper.style.top = '0px';
+				wrapper.style.left = '0px';
+				wrapper.style.width = '9999px';
+				wrapper.style.zIndex = -1;
 
-				$dummyWrapper.css({
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					width: 9999,
-					'z-index': -1
-				});
-				$dummy.text(label);
-				$dummy.css({
-					'background-color': 'transparent',
-					'font-size': CONSTANTS.ITEM_FONT_SIZE + 'px',
-				});
-				$body.append($dummyWrapper.append($dummy));
+				dummy.innerText = label || '&nbsp;';
+				dummy.style.backgroundColor = 'transparent';
+				dummy.style.fontSize = CONSTANTS.ITEM_FONT_SIZE + 'px';
+				
+				wrapper.appendChild(dummy);
+				document.body.appendChild(wrapper);
 
-				width = $dummy.width();
+				width = dummy.getClientRects()[0].width;
 
-				$dummy.remove();
-				$dummyWrapper.remove();
+				wrapper.removeChild(dummy);
+				document.body.removeChild(wrapper);
+
 				return width;
 			},
 			/**
@@ -302,7 +300,7 @@ define(
 			 */
 			destroy: function() {
 				urushi.removeEvent(this.node, 'click', this, 'onClickItem');
-				$(this.node).remove();
+				urushi.remove(this.node);
 
 				this._super();
 			}

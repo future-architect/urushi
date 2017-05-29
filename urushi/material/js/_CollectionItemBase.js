@@ -25,7 +25,6 @@ define(
 	'_CollectionItemBase',
 	[
 		'underscore',
-		'jquery',
 		'extend',
 		'_collectionMixin',
 	],
@@ -33,7 +32,7 @@ define(
 	 * @alias module:_CollectionItemBase
 	 * @returns {Class} _CollectionItemBase class.
 	 */
-	function(_, $, extend, _collectionMixin) {
+	function(_, extend, _collectionMixin) {
 		'use strict';
 
 		/**

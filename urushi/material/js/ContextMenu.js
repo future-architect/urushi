@@ -89,7 +89,6 @@
 define(
 	'ContextMenu',
 	[
-		'jquery',
 		'Urushi',
 		'materialConfig',
 		'_CollectionWidgetBase',
@@ -102,7 +101,7 @@ define(
 	 * @alias module:ContextMenu
 	 * @returns {object} ContextMenu object.
 	 */
-	function($, urushi, materialConfig, _CollectionWidgetBase, ContextMenuItem, legacy, animation, template) {
+	function(urushi, materialConfig, _CollectionWidgetBase, ContextMenuItem, legacy, animation, template) {
 		'use strict';
 
 		/**
@@ -306,13 +305,6 @@ define(
 				urushi.addEvent(this.contextMenuIconNode, 'click', this, 'onClickContext');
 				urushi.addEvent(this.closeIconNode, 'click', this, 'onClickClose');
 				urushi.addEvent(this.itemsNode, 'blur', this, 'onBlurContext');
-
-				if (urushi.hasTransitionSupport()) {
-					return;
-				}
-
-				urushi.addEvent(this.closeIconNode, 'mouseenter', this, '_onCloseIconMouseEnter');
-				urushi.addEvent(this.closeIconNode, 'mouseleave', this, '_onCloseIconMouseLeave');
 			},
 			/**
 			 * <pre>
@@ -660,17 +652,6 @@ define(
 					delay = function(node) {
 						return function() {
 							node.classList.add('show');
-
-							if (!urushi.hasTransitionSupport()) {
-								// For the browser not support CSS3.0.
-								animation.animate(CONSTANTS.DURATION, function(/* number */ p) {
-									node.style[animation.STYLEKEYS.transform] = 'scale(' + p + ')';
-									node.style.opacity = p;
-								}).then(function() {
-									node.style[animation.STYLEKEYS.transform] = '';
-									node.style.opacity = '';
-								});
-							}
 						};
 					},
 					contextMenuSize;
@@ -700,8 +681,8 @@ define(
 
 				this.itemsNode.tabIndex = 0;
 
-				itemsHeight = length * $(displayTargets[0]).outerHeight();
-				closeIconWrapperHeight = $(this.closeIconWrapperNode).outerHeight();
+				itemsHeight = length * displayTargets[0].offsetHeight;
+				closeIconWrapperHeight = this.closeIconWrapperNode.offsetHeight;
 				height = itemsHeight + closeIconWrapperHeight;
 				this.itemsNode.style.maxHeight = height + 'px';
 				this.itemsNode.style.minWidth = this.contentWidth + 'px';
@@ -709,19 +690,6 @@ define(
 				this.itemsNode.style.right = (this.contentWidth - contextMenuSize) + 'px';
 
 				this.itemsNode.classList.add('items-open');
-				if (!urushi.hasTransitionSupport()) {
-					// For the browser not support CSS3.0.
-					if (this.animationDeferred) {
-						this.animationDeferred.cancel();
-						this.animationDeferred = undefined;
-					}
-					this.animationDeferred = animation.animate(CONSTANTS.DURATION, function(/* number */ p) {
-						this.itemsNode.style[animation.STYLEKEYS.transform] = 'scale(' + p + ')';
-					}.bind(this)).then(function() {
-						this.itemsNode.style[animation.STYLEKEYS.transform] = '';
-						this.animationDeferred = undefined;
-					}.bind(this));
-				}
 				for (index = 0, length = displayTargets.length; index < length; index++) {
 					show = delay(displayTargets[index]);
 					setTimeout(show, CONSTANTS.ITEMS_TRANSITION_DURATION + 30 * index);
@@ -753,19 +721,6 @@ define(
 
 				this.itemsNode.tabIndex = -1;
 				this.itemsNode.classList.remove('items-open');
-				if (!urushi.hasTransitionSupport()) {
-					//for IE
-					if (this.animationDeferred) {
-						this.animationDeferred.cancel();
-						this.animationDeferred = undefined;
-					}
-					this.animationDeferred = animation.animate(CONSTANTS.DURATION, function(/* number */ p) {
-						this.itemsNode.style[animation.STYLEKEYS.transform] = 'scale(' + (1 - p) + ')';
-					}.bind(this)).then(function() {
-						this.itemsNode.style[animation.STYLEKEYS.transform] = '';
-						this.animationDeferred = undefined;
-					}.bind(this));
-				}
 				for (index = 0; index < length; index++) {
 					items[index].classList.remove('show');
 				}
@@ -827,46 +782,6 @@ define(
 			},
 			/**
 			 * <pre>
-			 * Animates by JavaScript for the browser not support CSS3.0
-			 * </pre>
-			 * @function
-			 * @private
-			 * @returns none
-			 */
-			_onCloseIconMouseEnter: function() {
-				//for IE
-				if (this.closeIconAnimationDeferred) {
-					this.closeIconAnimationDeferred.cancel();
-					this.closeIconAnimationDeferred = undefined;
-				}
-				this.closeIconAnimationDeferred = animation.animate(CONSTANTS.DURATION, function(/* number */ p) {
-					this.closeIconNode.style[animation.STYLEKEYS.transform] = 'rotate(' + (90 * p) + 'deg)';
-				}.bind(this)).then(function() {
-					this.closeIconAnimationDeferred = undefined;
-				}.bind(this));
-			},
-			/**
-			 * <pre>
-			 * Animates by JavaScript for the browser not support CSS3.0
-			 * </pre>
-			 * @function
-			 * @private
-			 * @returns none
-			 */
-			_onCloseIconMouseLeave: function() {
-				if (this.closeIconAnimationDeferred) {
-					this.closeIconAnimationDeferred.cancel();
-					this.closeIconAnimationDeferred = undefined;
-				}
-				this.closeIconAnimationDeferred = animation.animate(CONSTANTS.DURATION, function(/* number */ p) {
-					this.closeIconNode.style[animation.STYLEKEYS.transform] = 'rotate(' + (90 - (90 * p)) + 'deg)';
-				}.bind(this)).then(function() {
-					this.closeIconNode.style[animation.STYLEKEYS.transform] = '';
-					this.closeIconAnimationDeferred = undefined;
-				}.bind(this));
-			},
-			/**
-			 * <pre>
 			 * Returns the identifier of a item.
 			 * </pre>
 			 * @function
@@ -888,11 +803,6 @@ define(
 				urushi.removeEvent(this.contextMenuIconNode, 'click', this, 'onClickContext');
 				urushi.removeEvent(this.closeIconNode, 'click', this, 'onClickClose');
 				urushi.removeEvent(this.itemsNode, 'blur', this, 'onBlurContext');
-
-				if (!urushi.hasTransitionSupport()) {
-					urushi.removeEvent(this.closeIconNode, 'mouseenter', this, '_onCloseIconMouseEnter');
-					urushi.removeEvent(this.closeIconNode, 'mouseleave', this, '_onCloseIconMouseLeave');
-				}
 
 				this._super();
 			}
