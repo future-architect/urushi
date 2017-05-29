@@ -99,6 +99,12 @@ define(
 		function getStyle(/* node */ dom) {
 			return dom.currentStyle || document.defaultView.getComputedStyle(dom, '');
 		}
+		function remove(/* Element|Text|Comment */ node) {
+			if (!node || !node.parentElement) {
+				return;
+			}
+			node.parentElement.removeChild(node);
+		}
 		/**
 		 * <pre>
 		 * Replaces content.
@@ -158,6 +164,39 @@ define(
 			}
 			return true;
 		}
+		/**
+		 * <pre>
+		 * NodeListを作成する。
+		 * </pre>
+		 * @member module:node#createNodes
+		 * @function
+		 * @param {string} nodes HTML構造を文字列にしたもの
+		 * @returns {NodeList} NodeListとして作成したElement, Text, Commentを返却する
+		 */
+		function createNodes(/* string */ nodes) {
+			var d = document.createElement('div');
+			d.innerHTML = nodes;
+
+			return d.childNodes;
+		}
+		/**
+		 * <pre>
+		 * 単一のElement, Text, Commentを作成する。
+		 * </pre>
+		 * @member module:node#createNode
+		 * @function
+		 * @param {string} node HTML構造を文字列にしたもの
+		 * @returns {Element|Text|Comment} 作成した単一のHTMLElement, Text等を返却する
+		 */
+		function createNode(/* string */ node) {
+			let nodeList = createNodes(node);
+
+			if (nodeList.length > 1) {
+				throw new Error('引数エラー：Root要素が' + nodeList.length + 'つ作成されました。');
+			}
+			return nodeList[0];
+		}
+
 		node.isNode = isNode;
 		node.isElementNode = isElementNode;
 		node.isTextNode = isTextNode;
@@ -165,7 +204,10 @@ define(
 		node.isFragmentNode = isFragmentNode;
 		node.setDomContents = setDomContents;
 		node.getStyle = getStyle;
+		node.remove = remove;
 		node.clearDomContents = clearDomContents;
+		node.createNodes = createNodes;
+		node.createNode = createNode;
 
 		return node;
 	}
