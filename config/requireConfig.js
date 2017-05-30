@@ -21,6 +21,7 @@ window.requireConfig = {
 		removeInputEventListener: 'urushi/base/removeInputEventListener',
 		templateEngine: 'urushi/base/templateEngine',
 		Urushi: 'urushi/Urushi',
+		util: 'urushi/base/util',
 		xhr: 'urushi/base/xhr',
 		// urushi classes.
 		templateConfig: 'urushi/material/js/templateConfig',

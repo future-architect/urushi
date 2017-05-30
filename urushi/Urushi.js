@@ -18,16 +18,16 @@
  */
 define(
 	'Urushi',
-	['legacy', 'browser', 'event', 'Deferred', 'xhr', 'node'],
+	['legacy', 'browser', 'event', 'Deferred', 'xhr', 'node', 'util'],
 	/**
 	 * @alias module:Urushi
 	 * @returns {object} Urushi object.
 	 */
-	function(legacy, browser, event, Deferred, xhr, node) {
+	function(legacy, browser, event, Deferred, xhr, node, util) {
 		'use strict';
 
 		var Urushi = {},
-			mixinObjects = [browser, event, node],
+			mixinObjects = [browser, event, node, util],
 			mixinObject,
 			index,
 			length,
