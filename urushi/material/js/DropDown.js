@@ -62,9 +62,8 @@
 define(
 	'DropDown',
 	[
-		'jquery',
-		'Urushi',
 		'legacy',
+		'Urushi',
 		'materialConfig',
 		'animation',
 		'_Base',
@@ -76,7 +75,7 @@ define(
 	 * @alias module:DropDown
 	 * @returns {object} Dropdown instance.
 	 */
-	function($, urushi, legacy, materialConfig, animation, _Base, template) {
+	function(legacy, urushi, materialConfig, animation, _Base, template) {
 		'use strict';
 
 		/**
@@ -459,9 +458,9 @@ define(
 
 				this.listNode.classList.remove('hidden');
 
-				dropDownHeight = length * $(items[0]).outerHeight();
-				inputNodeHeight = $(this.inputNode).outerHeight();
-				inputNodeTop = $(this.inputNode).offset().top;
+				dropDownHeight = length * items[0].offsetHeight;
+				inputNodeHeight = this.inputNode.offsetHeight;
+				inputNodeTop = window.pageYOffset + this.inputNode.getBoundingClientRect().top;
 				maxHeight = window.innerHeight / 2 - inputNodeHeight;
 
 				if (dropDownHeight < maxHeight) {
@@ -474,7 +473,7 @@ define(
 					height = maxHeight;
 				}
 
-				if ((inputNodeTop + height + inputNodeHeight) < $(document).scrollTop() + window.innerHeight) {
+				if ((inputNodeTop + height + inputNodeHeight) < document.body.scrollTop + window.innerHeight) {
 					this.listNode.setAttribute('data-placement', CONSTANTS.LIST_PLACE_TOP_RIGHT);
 				} else {
 					this.listNode.setAttribute('data-placement', CONSTANTS.LIST_PLACE_BOTTOM_RIGHT);
@@ -714,19 +713,22 @@ define(
 					select,
 					startWidth,
 					startHeight,
-					startOpacity;
+					startOpacity,
+					liList, i;
+
 				if (this.opened) {
 					return;
 				}
 				this.inputNode.classList.add('focus');
 
-				liWidth = Math.max($(this.mainNode).parent().width(), CONSTANTS.MENULIST_MIN_WIDTH);
-				liHeight = $(this.listNode.childNodes[0]).outerHeight();
+				liWidth = Math.max(this.mainNode.parentNode.offsetWidth, CONSTANTS.MENULIST_MIN_WIDTH);
+				liHeight = this.listNode.childNodes[0].offsetHight;
 
-				$(this.listNode).find('li').css({
-					width: liWidth,
-					height: liHeight,
-				});
+				liList = this.listNode.getElementsByClassName('li');
+				for (i = 0; i < liList.length; i++) {
+					liList[i].style.width = liWidth + 'px';
+					liList[i].style.height = liHeight + 'px';
+				}
 				this.listNode.style.minWidth = 0;
 
 				this.listNode.classList.remove('hidden');
