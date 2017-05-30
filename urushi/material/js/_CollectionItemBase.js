@@ -24,15 +24,15 @@
 define(
 	'_CollectionItemBase',
 	[
-		'underscore',
 		'extend',
+		'util',
 		'_collectionMixin',
 	],
 	/**
 	 * @alias module:_CollectionItemBase
 	 * @returns {Class} _CollectionItemBase class.
 	 */
-	function(_, extend, _collectionMixin) {
+	function(extend, util, _collectionMixin) {
 		'use strict';
 
 		/**
@@ -62,7 +62,7 @@ define(
 		 */
 		var idNo = 0;
 
-		return Class.extend(_.extend(_.clone(_collectionMixin), {
+		return Class.extend(util.deepCopy({
 			/**
 			 * @see {@link module:_Base}#idPrefix
 			 */
@@ -224,6 +224,6 @@ define(
 			 * @returns none
 			 */
 			destroyOption: function() {}
-		}));
+		}, _collectionMixin));
 	}
 );

@@ -16,15 +16,13 @@
 define(
 	'_collectionMixin',
 	[
-		'underscore',
-		'jquery',
 		'extend'
 	],
 	/**
 	 * @alias module:_collectionMixin
 	 * @returns {object} _collectionMixin.
 	 */
-	function(_, $, extend) {
+	function(extend) {
 		'use strict';
 
 		return {

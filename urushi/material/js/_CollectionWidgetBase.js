@@ -18,7 +18,7 @@
 define(
 	'_CollectionWidgetBase',
 	[
-		'underscore',
+		'util',
 		'_Base',
 		'_collectionMixin'
 	],
@@ -26,7 +26,7 @@ define(
 	 * @alias module:_CollectionWidgetBase
 	 * @returns {object} _CollectionWidgetBase object.
 	 */
-	function(_, _Base, _collectionMixin) {
+	function(util, _Base, _collectionMixin) {
 		'use strict';
 
 		/**
@@ -53,7 +53,7 @@ define(
 		 */
 		var idNo = 0;
 
-		return _Base.extend(_.extend(_.clone(_collectionMixin), {
+		return _Base.extend(util.deepCopy({
 			/**
 			 * @see {@link module:_Base}#_initProperties
 			 * @function
@@ -87,6 +87,6 @@ define(
 
 				this._super();
 			}
-		}));
+		}, _collectionMixin));
 	}
 );
