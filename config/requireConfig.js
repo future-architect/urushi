@@ -65,21 +65,6 @@ window.requireConfig = {
 		toggleButtonTemplate: 'urushi/material/template/toggle-button.html',
 		toggleButtonTransitionUnitTemplate: 'urushi/material/template/toggle-button-transition-unit.html',
 		tooltipTemplate: 'urushi/material/template/tooltip.html',
-		// beta.
-		FileInput: 'urushi/beta/js/FileInput',
-		fileInputTemplate: 'urushi/beta/template/fileInput.html',
-		Grid: 'urushi/beta/js/Grid',
-		gridTemplate: 'urushi/beta/template/grid.html',
-		GridModel: 'urushi/beta/js/GridModel',
-		_GridPagination: 'urushi/beta/js/_GridPagination',
-		gridPaginationTemplate: 'urushi/beta/template/gridPagination.html',
-		_GridOption: 'urushi/beta/js/_GridOption',
-		_GridOptionConfig: 'urushi/beta/js/_GridOptionConfig',
-		_GridColumnItem: 'urushi/beta/js/_GridColumnItem',
-		UploadManager: 'urushi/beta/js/UploadManager',
-		uploadManagerTemplate: 'urushi/beta/template/uploadManager.html',
-		_UploadManagerListItem: 'urushi/beta/js/_UploadManagerListItem',
-		uploadManagerListItemTemplate: 'urushi/beta/template/uploadManagerListItem.html',
 	},
 	shim: {
 		'jqueryUi': ['jquery']
