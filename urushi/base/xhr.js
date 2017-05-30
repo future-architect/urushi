@@ -12,12 +12,12 @@
  */
 define(
 	'xhr',
-	['underscore', 'Deferred'],
+	['util', 'Deferred'],
 	/**
 	 * @alias module:xhr
 	 * @returns {object} xhr object.
 	 */
-	function(_, Deferred) {
+	function(util, Deferred) {
 		'use strict';
 		/**
 		 * <pre>
@@ -186,12 +186,12 @@ define(
 			_xhr = function(/* string */ method, /* string */ uri, /* object */ options) {
 				var deferred = new Deferred(),
 					httpRequest,
-					xhrOptions,
+					xhrOptions = {},
 					header;
 				
 				try {
 					httpRequest = getHttpRequest();
-					xhrOptions = _.extend(defaultOptions, options);
+					xhrOptions = util.deepCopy(xhrOptions, defaultOptions, options);
 
 					httpRequest.open(method, uri, xhrOptions.async, xhrOptions.user, xhrOptions.password);
 					httpRequest.withCredentials = xhrOptions.withCredentials;
