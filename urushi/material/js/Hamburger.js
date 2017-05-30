@@ -47,7 +47,6 @@
 define(
 	'Hamburger',
 	[
-		'jquery',
 		'Urushi',
 		'_Base',
 		'legacy',
@@ -59,7 +58,7 @@ define(
 	 * @alias module:Hamburger
 	 * @returns {object} Hamburger instance.
 	 */
-	function($, urushi, _Base, legacy, template) {
+	function(urushi, _Base, legacy, template) {
 		'use strict';
 
 		/**

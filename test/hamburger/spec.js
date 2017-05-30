@@ -2,11 +2,11 @@
 define(
 	'hamburger.spec',
 	['Urushi', 'Hamburger', 'templateEngine', 'templateConfig'],
-	function (Urushi, Hamburger, templateEngine, templateConfig) {
+	function(Urushi, Hamburger, templateEngine, templateConfig) {
 		'use strict';
 
-		describe('hamburger test', function () {
-				var parentNode = document.getElementById('script-modules');
+		describe('hamburger test', function() {
+			var parentNode = document.getElementById('script-modules');
 
 			it('transform test', function() {
 				var hamburger = new Hamburger({});
@@ -42,8 +42,8 @@ define(
 			it('_onClickHamburger test', function(done) {
 				var hamburger = new Hamburger({});
 				parentNode.appendChild(hamburger.getRootNode());
-				var dummyEvent = {stopPropagation : function () {}};
-				var dummyFunction = function() {this.hamburgerLineNode.classList.add('callbacked');};
+				var dummyEvent = {stopPropagation: function() {}};
+				var dummyFunction = function() { this.hamburgerLineNode.classList.add('callbacked'); };
 
 				expect(hamburger.setCallback(dummyFunction)).toBe();
 				expect(hamburger._onClickHamburger(dummyEvent)).toBe();
@@ -60,18 +60,18 @@ define(
 				var hamburger = new Hamburger({});
 				expect(hamburger.destroy()).toBe();
 			});
-			describe('Template engine', function () {
+			describe('Template engine', function() {
 				var flag = false;
-				beforeEach(function (done) {
-					templateEngine.renderDocument(document.body, templateConfig).then(function (result) {
+				beforeEach(function(done) {
+					templateEngine.renderDocument(document.body, templateConfig).then(function(result) {
 						flag = true;
 						done();
-					}).otherwise(function (error) {
+					}).otherwise(function(error) {
 						flag = false;
 						done();
 					});
 				});
-				it('template engine test', function () {
+				it('template engine test', function() {
 					expect(flag).toBe(true);
 				});
 			});
