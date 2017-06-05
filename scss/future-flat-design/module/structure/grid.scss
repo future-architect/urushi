@@ -1,0 +1,198 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+@import "../structure/shadow.scss";
+
+
+
+.grid-wrapper {
+	position: relative;
+	width : 100%;
+	height : 100%;
+
+	.grid {
+		position: relative;
+		width : 100%;
+		height : 100%;
+
+		&.enablePagination {
+			height : $grid-height-with-pagination;
+		}
+
+		.row {
+			display: inline-table;
+			margin : 0px;
+			padding : 0px;
+			width: 100%;
+			height : auto;
+			table-layout: fixed;
+		}
+
+		.column {
+			padding : $grid-column-padding-default;
+			height : auto;
+			display: table-cell;
+			vertical-align : middle;
+			overflow : hidden;
+			white-space: nowrap;
+		}
+
+		.grid-header {
+			display : inline-table;
+			height : $grid-header-height;
+			background-color: $grid-background;
+			color: $grid-header-text;
+			box-shadow: $grid-header-shadow;
+
+			.column {
+				padding : $grid-column-padding-small;
+				height : $grid-header-height;
+				font-size : $grid-font-small;
+			}
+		}
+
+		.grid-body {
+			width: 100%;
+			height: $grid-body-height;
+			overflow-x : hidden;
+			overflow-y: scroll;
+			background-color: $grid-background;
+
+			.row {
+				@include transition(all 300ms ease);
+
+				.column {
+					text-overflow : ellipsis;
+				}
+
+				&:hover {
+					background-color: $grid-default-hover-background;
+					color : $grid-default-hover-text;
+
+					.button,
+					.contextMenu {
+						@include transition(all 300ms ease);
+						box-shadow : 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
+					}
+				}
+
+				&.selected {
+					background-color: $grid-default-selected-background;
+					color : $grid-default-selected-text;
+				}
+			}
+
+			.column {
+				&.ignoreOverflow {
+					overflow : visible;
+				}
+
+				.grid-icon {
+					font-size : 32px;
+					vertical-align : middle;
+
+					&:hover {
+						cursor : pointer;
+					}
+				}
+
+				.button {
+					margin : 0px 1px;
+					padding : 6px 30px;
+				}
+			}
+		}
+
+		&.font-small {
+			.column {
+				font-size : $grid-font-small;
+				padding : $grid-column-padding-small;
+			}
+		}
+	}
+
+	.grid-pagination-wrapper {
+		position : relative;
+		height : $grid-pagination-wrapper-height;
+		padding-bottom : 4px;
+		width : 100%;
+		text-align : center;
+		background-color : transparent;
+
+		.grid-pagination {
+			display : inline-block;
+			position : relative;
+			margin : auto;
+
+			.arrow {
+				float : left;
+				font-size : $grid-pagination-height;
+				cursor : pointer;
+				color : $grid-pagination-arrow-color;
+
+				&.disable {
+					color : $disabled-dark;
+					cursor : auto;
+				}
+			}
+
+
+			.links {
+				float : left;
+				height : 100%;
+
+				.link {
+					display : inline-block;
+					border-radius : 100%;
+					position : relative;
+					margin-left : $grid-pagination-links-margin;
+					margin-right : $grid-pagination-links-margin;
+					width : $grid-pagination-height;
+					height : $grid-pagination-height;
+					line-height : $grid-pagination-height;
+					text-align : center;
+					cursor : pointer;
+
+					@include transform(translateX(0px));
+					opacity : 1;
+					transition : all 200ms ease-out;
+				}
+
+				.invisible {
+					opacity : 0;
+				}
+
+				.move1-increase {
+					@include transform(translateX(-10px));
+				}
+
+				.move2-increase {
+					@include transform(translateX(20px));
+					transition-duration : 0ms;
+				}
+
+				.move1-decrease {
+					@include transform(translateX(10px));
+				}
+
+				.move2-decrease {
+					@include transform(translateX(-20px));
+					transition-duration : 0ms;
+				}
+			}
+
+			.current {
+				display : inline-block;
+				position : absolute;
+				border-radius : 100%;
+				width : $grid-pagination-height;
+				height : $grid-pagination-height;
+				text-align : center;
+				cursor : normal;
+				content : '';
+				background-color : $grid-pagination-current-background;
+				opacity : 0.4;
+				transition : all 300ms ease-in-out;
+			}
+		}
+	}
+}

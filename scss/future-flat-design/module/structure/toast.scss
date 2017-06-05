@@ -1,0 +1,55 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+@import "../structure/shadow.scss";
+
+.toast-manager {
+	position : fixed;
+	left : 20px;
+	bottom : 0;
+	z-index : $z-index-toast;
+
+	.toast {
+		border-radius : 2px;
+		padding : 14px 15px;
+		min-width : 288px;
+		max-width : 568px;
+		overflow : hidden;
+		clear : both;
+		background-color : $toast-default;
+		font-size : 14px;
+		cursor : pointer;
+		@extend .shadow-z-4;
+
+		color : $toast-default-text;
+		opacity : 0;
+		@include transform(translateY(200%));
+		transition :
+			transform $toast-duration ease-in-out,
+			opacity $toast-duration ease-in;
+
+		&.toast-opened {
+			margin-bottom : 20px;
+			opacity : 1;
+			@include transform(none);
+		}
+	}
+}
+
+.toast-default {
+	@include toast-variant($toast-default, $toast-default-text);
+}
+.toast-primary {
+	@include toast-variant($toast-primary, $toast-primary-text);
+}
+.toast-success {
+	@include toast-variant($toast-success, $toast-success-text);
+}
+.toast-info {
+	@include toast-variant($toast-info, $toast-info-text);
+}
+.toast-warning {
+	@include toast-variant($toast-warning, $toast-warning-text);
+}
+.toast-danger {
+	@include toast-variant($toast-danger, $toast-danger-text);
+}

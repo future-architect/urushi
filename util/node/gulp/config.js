@@ -3,7 +3,7 @@ module.exports = {
 		dest: '../../../dest',
 	},
 	scss: {
-		src: '../../../scss/materialDesign',
+		src: '../../../scss/future-flat-design',
 		dest: '../../../urushi/material/style',
 		buildDest: '../../../dest/urushi/material/style'
 	},
@@ -54,18 +54,12 @@ module.exports = {
 		},
 		rjs: {
 			baseUrl: './',
-			shim: {
-				'jqueryUi': ['jquery']
-			},
+			name: 'builtin',
+			out: 'all.js',
 			paths: {
 				// libraries
 				text: '../../../lib/js/text',
 				extend: '../../../lib/js/extend',
-				jquery: '../../../lib/js/jquery-3.1.0',
-				jqueryUi: '../../../lib/js/jquery-ui-1.11.4',
-				jqueryFileupload: '../../../lib/js/jquery.fileupload',
-				jqueryIframeTransport: '../../../lib/js/jquery.iframe-transport',
-				underscore: '../../../lib/js/underscore',
 				// urushi core objects.
 				addInputEventListener: '../../../urushi/base/addInputEventListener',
 				animation: '../../../urushi/base/animation',
@@ -79,6 +73,7 @@ module.exports = {
 				templateEngine: '../../../urushi/base/templateEngine',
 				xhr: '../../../urushi/base/xhr',
 				Urushi: '../../../urushi/Urushi',
+				util: '../../../urushi/base/util',
 				builtin: '../../../urushi/builtin',
 				// urushi module classes.
 				templateConfig: '../../../urushi/material/js/templateConfig',

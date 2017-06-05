@@ -1,0 +1,86 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+
+.hamburger {
+	position: relative;
+	padding: 21px 1px;
+	width:  $hamburger-size;
+	height: $hamburger-size;
+
+	cursor: pointer;
+
+	> .hamburger-line {
+		position: relative;
+		border-radius: $hamburger-border-radius;
+		width: $hamburger-line-width;
+		height: $hamburger-line-height;
+
+		content: '';
+		background-color: $hamburger-line-color;
+
+		transition-property: transform, left;
+		transition-duration: $hamburger-transition-duration;
+		transition-timing-function: $hamburger-timing-function;
+
+		@include transform(rotate(0deg));
+
+		&:before {
+			position: absolute;
+			border-radius: $hamburger-border-radius;
+			top: -$hamburger-line-between;
+			left: 0px;
+			width: inherit;
+			height: inherit;
+
+			content: '';
+			background-color: inherit;
+
+			transition-property: transform, left, top, width;
+			transition-duration: inherit;
+			transition-timing-function: inherit;
+			@include transform(rotate(0deg));
+		}
+
+		&:after {
+			position: absolute;
+			border-radius: $hamburger-border-radius;
+			top: $hamburger-line-between;
+			left: 0px;
+			width: inherit;
+			height: inherit;
+
+			content: '';
+			background-color: inherit;
+
+			transition-property: transform, left, top, width;
+			transition-duration: inherit;
+			transition-timing-function: inherit;
+			@include transform(rotate(0deg));
+		}
+
+		&.hamburger-transformed {
+			@include transform(rotate(180deg));
+
+			&:before {
+				top: $hamburger-arrow-top;
+				left: $hamburger-arrow-left;
+				width: $hamburger-arrow-width;
+
+				@include transform(rotate(30deg));
+			}
+
+			&:after {
+				top: -$hamburger-arrow-top;
+				left: $hamburger-arrow-left;
+				width: $hamburger-arrow-width;
+
+				@include transform(rotate(-30deg));
+			}
+		}
+	}
+}
+
+
+
+
+

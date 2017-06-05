@@ -1,0 +1,262 @@
+@mixin animation($animation) {
+	-webkit-animation : $animation;
+	-moz-animation : $animation;
+	animation : $animation;
+}
+@mixin animation-fill-mode($mode) {
+	-webkit-animation-fill-mode : $mode;
+	-moz-animation-fill-mode : $mode;
+	animation-fill-mode : $mode;
+}
+@mixin transform($transform) {
+	-webkit-transform : $transform;
+	-moz-transform : $transform;
+	-ms-transform : $transform;
+	transform : $transform;
+}
+@mixin transform-origin($position) {
+	-webkit-transform-origin : $position;
+	-moz-transform-origin : $position;
+	-ms-transform-origin : $position;
+	transform-origin : $position;
+}
+@mixin transition($transition) {
+	-webkit-transition : $transition;
+	-o-transition : $transition;
+	transition : $transition;
+}
+@mixin css3($property, $value) {
+	@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+		#{$prefix}#{$property}: $value;
+	}
+}
+
+@mixin keyframes($name) {
+	@-webkit-keyframes #{$name} {
+		@content;
+	}
+	@-moz-keyframes #{$name} {
+		@content;
+	}
+	@keyframes #{$name} {
+		@content;
+	}
+}
+
+@mixin ripple($ripple-background) {
+	position : relative;
+	display : inline-block;
+	float : right;
+	margin : 0;
+	border-radius : 100%;
+	width : 50px;
+	height : 50px;
+	background-color : $ripple-background;
+	opacity : 0;
+	content : "";
+
+	@include transform(scale(0));
+}
+
+@mixin card-variant($background, $color, $border) {
+	background-color: $background;
+	color: $color;
+
+	.card-footer, .card-header {
+		border-color: $border;
+	}
+
+	a {
+		color: $color;
+	}
+}
+
+@mixin button-variant($background-color, $color) {
+	background-color: $background-color;
+	color : $color;
+	&:hover {
+		background-color: $background-color;
+		color : $color;
+	}
+}
+
+@mixin checkbox-variant($color) {
+	color : $color;
+	&::before,
+	&::after {
+		color : $color;
+	}
+}
+@mixin checkbox-variant-transition-unit($color) {
+	border-color : $color;
+	> .checkbox-check-background {
+		background-color : $color;
+	}
+}
+
+@mixin radio-variant($color) {
+	~ .check {
+		background-color : $color;
+	}
+	~ .circle {
+		border-color : $color;
+	}
+}
+
+@mixin alert-variant($background-color, $color) {
+	color : $color;
+	background-color: $background-color;
+}
+
+@mixin toast-variant($background-color, $color) {
+	background-color: $color;
+	color : $color;
+}
+
+@mixin progress-bar-variant($color) {
+	background-color: $color;
+}
+
+@mixin panel-variant($background-color, $color) {
+	.panel-header {
+		background-color : $background-color;
+		color : $color;
+	}
+}
+
+@mixin dropdown-selected-variant($background-color, $color) {
+	> ul > li {
+		&.selected,
+		&:active {
+			background-color : $background-color;
+			color : $color;
+		}
+	}
+}
+@mixin dropdown-focus-variant($background-color, $color) {
+	> ul > li:focus {
+		background-color : $background-color;
+		color : $color;
+	}
+}
+
+@mixin navbar-variant($color) {
+	background-color: $color;
+}
+
+@mixin icon-variant($color) {
+	color : $color;
+}
+
+@mixin table-variant($background-color, $color) {
+	&:hover {
+		background-color: $background-color;
+		color : $color;
+	}
+}
+@mixin table-selected-variant($background-color, $color) {
+	&.selected,
+	&:active {
+		background-color: $background-color;
+		color : $color;
+	}	
+}
+
+@mixin toggle-button-on-variant($background-color, $button-color) {
+	label input[type=checkbox]:first-child:checked + .toggle {
+		background-color : $background-color;
+		&::after {
+			background-color : $button-color;
+		}
+	}
+}
+
+@mixin toggle-button-on-variant-not-CSS3($background-color, $button-color) {
+	label input[type=checkbox]:first-child:checked + .toggle-transition-unit {
+		background-color : $background-color;
+
+		> .toggle-button-unit {
+			background-color : $button-color;
+		}
+	}
+}
+
+@mixin toggle-button-on-variant-not-CSS3-tmp($background-color, $button-color) {
+	label input[type=checkbox]:first-child:checked {
+		.toggle-transition-unit-tmp {
+			background-color : $background-color;
+		}
+		.toggle-button-unit-tmp {
+			background-color : $button-color;
+		}
+	}
+}
+
+@mixin dialog-transition($transform, $duration, $type) {
+	-webkit-transition : -webkit-#{$transform} $duration $type;
+	-o-transition : -o-#{$transform} $duration $type;
+	transition : $transform $duration $type;
+}
+
+@mixin modal-close-button($color) {
+	margin-top : -6px;
+	-webkit-appearance : none;
+	padding : 0;
+	cursor : pointer;
+	background : 0;
+	border : 0;
+	float : right;
+	font-size : 32px;
+	font-weight : 700;
+	line-height : 1;
+	color : $color;
+}
+
+@mixin l-grid-system($name, $width, $margin) {
+	.l-grid-#{$name}-col {
+		float : left;
+		display : inline;
+		margin : auto $margin;
+
+		&.col1 {
+			width : calc(($width / 12 * 1) - ($margin * 2));
+		}
+		&.col2 {
+			width : calc(($width / 12 * 2) - ($margin * 2));
+		}
+		&.col3 {
+			width : calc(($width / 12 * 3) - ($margin * 2));
+		}
+		&.col4 {
+			width : calc(($width / 12 * 4) - ($margin * 2));
+		}
+		&.col5 {
+			width : calc(($width / 12 * 5) - ($margin * 2));
+		}
+		&.col6 {
+			width : calc(($width / 12 * 6) - ($margin * 2));
+		}
+		&.col7 {
+			width : calc(($width / 12 * 7) - ($margin * 2));
+		}
+		&.col8 {
+			width : calc(($width / 12 * 8) - ($margin * 2));
+		}
+		&.col9 {
+			width : calc(($width / 12 * 9) - ($margin * 2));
+		}
+		&.col10 {
+			width : calc(($width / 12 * 10) - ($margin * 2));
+		}
+		&.col11 {
+			width : calc(($width / 12 * 11) - ($margin * 2));
+		}
+		&.col12 {
+			width : calc(($width / 12 * 12));
+		}
+	}
+}
+
+@mixin context-menu-variant($color) {
+	background-color : $color;
+}

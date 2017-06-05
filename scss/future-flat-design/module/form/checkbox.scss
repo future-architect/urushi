@@ -1,0 +1,318 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+@import "../../behavior/animation.scss";
+
+.form-horizontal .checkbox {
+	padding-top : 20px;
+}
+
+.checkbox {
+	color : $checkbox-checked;
+
+	label {
+		cursor : pointer;
+		position : relative;
+		span {
+			display : block;
+			position : absolute;
+			left : 0px;
+			transition-duration : $checkbox-transition-duration;
+		}
+		.ripple {
+			display : block;
+			position : absolute;
+			margin : 0;
+			border-radius : 100%;
+			width : 50px;
+			height : 50px;
+			left : -5px;
+			top : -13px;
+			background-color : $checkbox-ripple-background;
+			z-index : 1;
+			opacity : 0;
+			content : "";
+
+			@include transform(scale(0));
+		}
+
+		input[type=checkbox]:focus ~ .check {
+			border-color : $checkbox-focus;
+		}
+		input[type=checkbox]:checked ~ .ripple {
+			@include animation(ripple-on $checkbox-animation-ripple-duration);
+			@include transform(scale(1));
+		}
+		input[type=checkbox]:not(:checked) ~ .ripple {
+			@include animation(ripple-off $checkbox-animation-ripple-duration);
+		}
+
+		.check {
+			display : inline-block;
+			position : relative;
+			overflow : hidden;
+			margin-right : 11px;
+			border : 2px solid;
+			border-radius : 2px;
+			width : 20px;
+			height : 20px;
+			left : -3px;
+			top : 5px;
+		}
+		.check::before {
+			display: block;
+			position : absolute;
+			margin-top : -4px;
+			margin-left : 6px;
+			width : 0px;
+			height : 0px;
+			content : "";
+			@include transform(rotate(45deg));
+			box-shadow :
+				0 0 0 0,
+				0 0 0 0,
+				0 0 0 0,
+				0 0 0 0,
+				0 0 0 0,
+				0 0 0 0,
+				0px 0px 0 0px inset;
+			@include animation(checkbox-off $checkbox-animation-duration forwards);
+		}
+
+		// for not support transitoin.
+		.checkbox-ripple-unit {
+			display : block;
+			position : absolute;
+			margin : 0;
+			border-radius : 100%;
+			width : 50px;
+			height : 50px;
+			left : -5px;
+			top : -12px;
+			background-color : $checkbox-ripple-background;
+			z-index : 1;
+			opacity : 0;
+			content : "";
+		}
+
+		// for not support transitoin.
+		.checkbox-transition-unit {
+			display : inline-block;
+			position : relative;
+			overflow : hidden;
+			margin-right : 11px;
+			border : 2px solid;
+			border-radius : 2px;
+			width : 20px;
+			height : 20px;
+			left : -3px;
+			vertical-align : middle;
+		}
+
+		// for not support transitoin.
+		.checkbox-check-background {
+			display : inline-block;
+			position : relative;
+			overflow : hidden;
+			margin-right : 11px;
+			border-radius : 2px;
+			width : 20px;
+			height : 20px;
+			top : -5px;
+			left : -2px;
+			vertical-align : middle;
+		}
+
+		// for not support transitoin.
+		.checkbox-check-unit {
+			display: block;
+			position : absolute;
+			margin-top : -4px;
+			margin-left : 5px;
+			width : 0px;
+			height : 0px;
+			content : "";
+			z-index : 2;
+			border-top : 0;
+			border-left : 0;
+			border-bottom : white solid 2px;
+			border-right : white solid 2px;
+			@include transform(rotate(45deg));
+		}
+	}
+
+	input[type=checkbox] {
+		opacity : 0;
+	}
+
+	input[type=checkbox]:checked ~ .check::before {
+		box-shadow:
+			0 0 0 10px,
+			10px -10px 0 10px,
+			32px 0px 0 20px,
+			0px 32px 0 20px,
+			-5px 5px 0 10px,
+			20px -12px 0 11px;
+		@include animation(checkbox-on $checkbox-animation-duration forwards);
+	}
+
+	input[type=checkbox][disabled]:not(:checked) ~ .check::before,
+	input[type=checkbox][disabled] ~ .circle {
+		opacity : 0.5;
+	}
+	input[type=checkbox][disabled] ~ .check::after {
+		background-color : $checkbox-checked-default;
+		@include transform(rotate(-45deg));
+	}
+}
+
+@include keyframes(checkbox-on) {
+	0% {
+		box-shadow:
+			0 0 0 10px,
+			10px -10px 0 10px,
+			32px 0px 0 20px,
+			0px 32px 0 20px,
+			-5px 5px 0 10px,
+			15px 2px 0 11px;
+	}
+	50% {
+		box-shadow:
+			0 0 0 10px,
+			10px -10px 0 10px,
+			32px 0px 0 20px,
+			0px 32px 0 20px,
+			-5px 5px 0 10px,
+			20px 2px 0 11px;
+	}
+	100% {
+		box-shadow:
+			0 0 0 10px,
+			10px -10px 0 10px,
+			32px 0px 0 20px,
+			0px 32px 0 20px,
+			-5px 5px 0 10px,
+			20px -12px 0 11px;
+	}
+}
+@include keyframes(checkbox-off) {
+	0% {
+		box-shadow:
+			0 0 0 10px,
+			10px -10px 0 10px,
+			32px 0px 0 20px,
+			0px 32px 0 20px,
+			-5px 5px 0 10px,
+			20px -12px 0 11px,
+			0 0 0 0 inset;
+	}
+
+	25% {
+		box-shadow:
+			0 0 0 10px,
+			10px -10px 0 10px,
+			32px 0px 0 20px,
+			0px 32px 0 20px,
+			-5px 5px 0 10px,
+			20px -12px 0 11px,
+			0 0 0 0 inset;
+	}
+	50% {
+		@include transform(rotate(45deg));
+		margin-top: -4px;
+		margin-left: 6px;
+		width: 0px;
+		height: 0px;
+		box-shadow:
+			0 0 0 10px,
+			10px -10px 0 10px,
+			32px 0px 0 20px,
+			0px 32px 0 20px,
+			-5px 5px 0 10px,
+			15px 2px 0 11px,
+			0 0 0 0 inset;
+	}
+	51% {
+		@include transform(rotate(0deg));
+		margin-top: -2px;
+		margin-left: -2px;
+		width: 20px;
+		height: 20px;
+		box-shadow:
+			0 0 0 0,
+			0 0 0 0,
+			0 0 0 0,
+			0 0 0 0,
+			0 0 0 0,
+			0 0 0 0,
+			0px 0px 0 10px inset;
+	}
+	100% {
+		@include transform(rotate(0deg));
+		margin-top: -2px;
+		margin-left: -2px;
+		width: 20px;
+		height: 20px;
+		box-shadow:
+			0 0 0 0,
+			0 0 0 0,
+			0 0 0 0,
+			0 0 0 0,
+			0 0 0 0,
+			0 0 0 0,
+			0px 0px 0 0px inset;
+	}
+}
+
+.checkbox input[type=checkbox]:checked {
+	~ .checkbox-transition-unit {
+		@include checkbox-variant-transition-unit($checkbox-checked);
+	}
+}
+.checkbox-default input[type=checkbox]:checked {
+	~ .checkbox-transition-unit {
+		@include checkbox-variant-transition-unit($checkbox-checked-default);
+	}
+	~ .check {
+		@include checkbox-variant($checkbox-checked-default);
+	}
+}
+.checkbox-primary input[type=checkbox]:checked {
+	~ .checkbox-transition-unit {
+		@include checkbox-variant-transition-unit($checkbox-checked-primary);
+	}
+	~ .check {
+		@include checkbox-variant($checkbox-checked-primary);
+	}
+}
+.checkbox-success input[type=checkbox]:checked {
+	~ .checkbox-transition-unit {
+		@include checkbox-variant-transition-unit($checkbox-checked-success);
+	}
+	~ .check {
+		@include checkbox-variant($checkbox-checked-success);
+	}
+}
+.checkbox-info input[type=checkbox]:checked {
+	~ .checkbox-transition-unit {
+		@include checkbox-variant-transition-unit($checkbox-checked-info);
+	}
+	~ .check {
+		@include checkbox-variant($checkbox-checked-info);
+	}
+}
+.checkbox-warning input[type=checkbox]:checked {
+	~ .checkbox-transition-unit {
+		@include checkbox-variant-transition-unit($checkbox-checked-warning);
+	}
+	~ .check {
+		@include checkbox-variant($checkbox-checked-warning);
+	}
+}
+.checkbox-danger input[type=checkbox]:checked {
+	~ .checkbox-transition-unit {
+		@include checkbox-variant-transition-unit($checkbox-checked-danger);
+	}
+	~ .check {
+		@include checkbox-variant($checkbox-checked-danger);
+	}
+}

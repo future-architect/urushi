@@ -1,0 +1,28 @@
+@import "../base/_mixin.scss";
+
+@media only screen and (max-width: 1023px) {
+	.l-grid-responsive {
+		width : 960px;
+		margin : 0 auto;
+	}
+	@include l-grid-system("responsive", 960px, 4px);
+}
+@media only screen and (min-width: 1024px) and (max-width: 1199px) {
+	.l-grid-responsive {
+		width : 1024px;
+		margin : 0 auto;
+	}
+	@include l-grid-system("responsive", 1024px, 8px);
+}
+@media only screen and (min-width: 1200px) {
+	.l-grid-responsive {
+		width : 1200px;
+		margin : 0 auto;
+	}
+	@include l-grid-system("responsive", 1200px, 8px);
+}
+
+.l-grid-liquid {
+	width : 100%;
+	@include l-grid-system("liquid", 100%, 8px);
+}

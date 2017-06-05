@@ -1,0 +1,78 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+
+
+table,
+.table {
+	width : 100%;
+	max-width : 100%;
+	background-color : $table-background;
+
+	> thead {
+		box-sizing : border-box;
+
+		> tr {
+			transition : all 0.3s ease;
+			color : $text-dark-secondary;
+
+			> th {
+				border-top : 0;
+				border-bottom : 1px solid $divider-dark;
+				padding : 1.2rem;
+				vertical-align : bottom;
+				text-align : left;
+				font-weight : 300;
+			}
+		}
+	}
+
+	> tbody {
+		> tr {
+			transition : all 0.3s ease;
+			box-sizing : border-box;
+			color : $text-dark;
+
+			> td {
+				border-top : 0;
+				padding : 1.2rem;
+				vertical-align : middle;
+				text-align : left;
+			}
+			&:hover {
+				background-color : $table-background-default;
+				color : $table-background-default-text;
+			}
+
+			&.selected,
+			&:active {
+				background-color : $table-selected-background-default;
+				color : $table-selected-background-default-text;
+			}
+		}
+	}
+}
+
+.table-default > tbody > tr {
+	@include table-variant($table-background-default, $table-background-default-text);
+	@include table-selected-variant($table-selected-background-default, $table-selected-background-default-text);
+}
+.table-primary > tbody > tr {
+	@include table-variant($table-background-primary, $table-background-primary-text);
+	@include table-selected-variant($table-selected-background-primary, $table-selected-background-primary-text);
+}
+.table-success > tbody > tr {
+	@include table-variant($table-background-success, $table-background-success-text);
+	@include table-selected-variant($table-selected-background-success, $table-selected-background-success-text);
+}
+.table-info > tbody > tr {
+	@include table-variant($table-background-info, $table-background-info-text);
+	@include table-selected-variant($table-selected-background-info, $table-selected-background-info-text);
+}
+.table-warning > tbody > tr {
+	@include table-variant($table-background-warning, $table-background-warning-text);
+	@include table-selected-variant($table-selected-background-warning, $table-selected-background-warning-text);
+}
+.table-danger > tbody > tr {
+	@include table-variant($table-background-danger, $table-background-danger-text);
+	@include table-selected-variant($table-selected-background-danger, $table-selected-background-danger-text);
+}

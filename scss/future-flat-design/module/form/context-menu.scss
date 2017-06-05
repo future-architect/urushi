@@ -1,0 +1,252 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+@import "../structure/shadow.scss";
+
+.context-menu-wrapper {
+	position: relative;
+	padding: 0px;
+	width:  $context-menu-size;
+	height: $context-menu-size;
+
+	> .context-menu {
+		position: relative;
+		padding: 19px 19px;
+		width:  $context-menu-size;
+		height: $context-menu-size;
+
+		cursor: pointer;
+
+		> .context-menu-dot {
+			position: relative;
+			border-radius: 34px;
+			width: 10px;
+			height: 10px;
+
+			content: '';
+			@include context-menu-variant($context-menu-color);
+
+			&:before {
+				position: absolute;
+				border-radius: inherit;
+				top: -$context-menu-dot-between;
+				width: inherit;
+				height: inherit;
+
+				content: '';
+				background-color: inherit;
+			}
+
+			&:after {
+				position: absolute;
+				border-radius: inherit;
+				top: $context-menu-dot-between;
+				width: inherit;
+				height: inherit;
+
+				content: '';
+				background-color: inherit;
+			}
+		}
+
+		&.context-menu-default {
+			> .context-menu-dot {
+				@include context-menu-variant($context-menu-default-color);
+			}
+		}
+		&.context-menu-primary {
+			> .context-menu-dot {
+				@include context-menu-variant($context-menu-primary-color);
+			}
+		}
+		&.context-menu-success {
+			> .context-menu-dot {
+				@include context-menu-variant($context-menu-success-color);
+			}
+		}
+		&.context-menu-info {
+			> .context-menu-dot {
+				@include context-menu-variant($context-menu-info-color);
+			}
+		}
+		&.context-menu-warning {
+			> .context-menu-dot {
+				@include context-menu-variant($context-menu-warning-color);
+			}
+		}
+		&.context-menu-danger {
+			> .context-menu-dot {
+				@include context-menu-variant($context-menu-danger-color);
+			}
+		}
+	}
+
+	&.type-grid {
+		width : 32px;
+		height : 32px;
+
+		.context-menu {
+			padding : 13px 13px;
+			border-radius : 100%;
+			width : 32px;
+			height : 32px;
+
+			.context-menu-dot {
+				width : 6px;
+				height : 6px;
+
+				&:before {
+					top : 0px;
+					left : -9.5px;
+				}
+
+				&:after {
+					top : 0px;
+					left : 9.5px;
+				}
+			}
+		}
+
+		> .items {
+			top : -32px;
+		}
+	}
+
+
+	> .items {
+		position : relative;
+		margin : 0px;
+		padding : 0px;
+		top: -48px;
+
+		@include transform(scale(0));
+		@include transform-origin(top right);
+		transition-property : transform;
+		transition-duration : $context-menu-transition-duration;
+		transition-timing-function : $context-menu-timing-function;
+
+		z-index : $z-index-context-menu;
+		background : $white;
+		@extend .shadow-z-2-hover;
+		overflow : hidden;
+		cursor: default;
+
+		&.items-open {
+			@include transform(scale(1));
+		}
+
+		> .close-icon-wrapper {
+			position: relative;
+			padding: 10px 10px;
+			width: 100%;
+			height: 40px;
+
+			> .close-icon {
+				position: relative;
+				width: 20px;
+				height: 20px;
+				float: right;
+
+				transition-property : transform, box-shadow;
+				transition-duration : $context-menu-transition-duration;
+				transition-timing-function : $context-menu-timing-function;
+				@include transform(scale(0));
+
+				content: '';
+				cursor: pointer;
+
+				&.show {
+					@include transform(scale(1));
+				}
+
+				&:before {
+					position: absolute;
+					border-radius: 34px;
+					left: 8px;
+					width: 5px;
+					height: inherit;
+
+					transition-property : inherit;
+					transition-duration : inherit;
+					transition-timing-function : inherit;
+
+					content: '';
+					background-color: $dark-900;
+
+					@include transform(rotate(45deg));
+				}
+
+				&:hover:before {
+					@include transform(rotate(135deg));
+				}
+
+				&:after {
+					position: absolute;
+					border-radius: 34px;
+					left: 8px;
+					width: 5px;
+					height: inherit;
+
+					transition-property : inherit;
+					transition-duration : inherit;
+					transition-timing-function : inherit;
+
+					content: '';
+					background-color: $dark-900;
+
+					@include transform(rotate(-45deg));
+				}
+
+				&:hover:after {
+					@include transform(rotate(45deg));
+				}
+			}
+		}
+
+		> .items-list {
+			margin-top: 0px;
+			margin-bottom: 0px;
+			padding: 0px;
+
+			> .item {
+				list-style : none;
+				padding : 10px 20px;
+				width: 100%;
+				white-space: nowrap;
+
+				@include transform(scale(0));
+				transform-origin : left;
+				opacity: 0;
+				transition-property : transform;
+				transition-duration : $context-menu-transition-duration;
+				transition-timing-function : $context-menu-timing-function;
+
+				font-size : 18px;
+				cursor : pointer;
+				overflow: hidden;
+
+				&:hover {
+					background-color : $context-menu-selected-info;
+					color : $context-menu-selected-info-text;
+				}
+
+				&.show {
+					@include transform(scale(1));
+					opacity : 1;
+				}
+
+				> .label {
+					white-space: nowrap;
+				}
+
+				> .icon {
+					margin-right : 16px;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+

@@ -1,0 +1,166 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+@import "../structure/shadow.scss";
+
+.toggle-button {
+	vertical-align : middle;
+
+	&,
+	* {
+		user-select : none;
+	}
+	label {
+		position : relative;
+		font-weight : 400;
+		cursor : pointer;
+		
+		input[type=checkbox]:first-child {
+			opacity : 0;
+			margin : 0;
+			border : 0;
+			padding : 0;
+			height : 0;
+			width : 0;
+		}
+		input[type=checkbox]:first-child:checked + .toggle {
+			background-color: $toggle-background-on;
+			&::after {
+				background-color : $toggle-button-on;
+			}
+		}
+
+		.toggle,
+		input[type=checkbox][disabled]:first-child + .toggle {
+			display : inline-block;
+			margin-right : 10px;
+			margin-left : 10px;
+			border-radius : 15px;
+			width : 30px;
+			height : 15px;
+			content : "";
+			vertical-align : middle;
+
+			background-color : $toggle-background-off;
+			transition : background $toggle-transition-duration ease-in-out;
+
+			&::before {
+				position : relative;
+				display : inline-block;
+				float : right;
+				margin : 0;
+				margin-right : -19px;
+				border-radius : 100%;
+				width : 50px;
+				height : 50px;
+				left : -20px;
+				top : -18px;
+				background-color : $checkbox-ripple-background;
+				opacity : 0;
+				content : "";
+
+				@include transform(scale(0));
+				transition : left $toggle-transition-duration ease-in-out;
+			}
+			&::after {
+				position : relative;
+				display : inline-block;
+				float : right;
+				margin-right : 10px;
+				border-radius : 20px;
+				left : -5px;
+				top : -53px;
+				width : 20px;
+				height : 20px;
+				content : "";
+
+				background-color : $toggle-button-off;
+				@extend .shadow-z-1;
+				transition : left, background, box-shadow;
+				transition-duration : $toggle-transition-duration;
+				transition-timing-function : ease-in-out;
+			}
+		}
+
+		// for not support transitoin.
+		.toggle-transition-unit,
+		input[type=checkbox][disabled]:first-child + .toggle-transition-unit {
+			display : inline-block;
+			margin-right : 10px;
+			margin-left : 10px;
+			border-radius : 15px;
+			width : 30px;
+			height : 15px;
+			content : "";
+			vertical-align : middle;
+
+			background-color : $toggle-background-off;
+			transition : background $toggle-transition-duration ease-in-out;
+		}
+		// for not support transitoin.
+		.toggle-transition-unit > .toggle-ripple-unit {
+			@include ripple($checkbox-ripple-background);
+			margin-right : -19px;
+			left : -20px;
+			top : -18px;
+		}
+		// for not support transitoin.
+		.toggle-button-unit,
+		.toggle-transition-unit > .toggle-button-unit {
+			position : relative;
+			display : inline-block;
+			float : right;
+			margin-right : 10px;
+			border-radius : 20px;
+			left : -5px;
+			top : -53px;
+			width : 20px;
+			height : 20px;
+			content : "";
+
+			background-color : $toggle-button-off;
+			@extend .shadow-z-1;
+		}
+
+		input[type=checkbox]:first-child:checked {
+			& + .toggle::before {
+				left : 1px;
+			}
+			& + .toggle::after {
+				left : 15px;
+			}
+		}
+		input[type=checkbox]:first-child:checked + .toggle::before {
+			@include animation(ripple-on $checkbox-animation-ripple-duration);
+		}
+		input[type=checkbox]:first-child:not(:checked) + .toggle::before {
+			@include animation(ripple-off $checkbox-animation-ripple-duration);
+		}
+	}
+}
+
+.toggle-button-default {
+	@include toggle-button-on-variant($toggle-background-on-default, $toggle-button-on-default);
+	@include toggle-button-on-variant-not-CSS3-tmp($toggle-background-on-default, $toggle-button-on-default);
+}
+.toggle-button-primary {
+	@include toggle-button-on-variant($toggle-background-on-primary, $toggle-button-on-primary);
+	@include toggle-button-on-variant-not-CSS3-tmp($toggle-background-on-primary, $toggle-button-on-primary);
+}
+.toggle-button-success {
+	@include toggle-button-on-variant($toggle-background-on-success, $toggle-button-on-success);
+	@include toggle-button-on-variant-not-CSS3-tmp($toggle-background-on-success, $toggle-button-on-success);
+}
+.toggle-button-info {
+	@include toggle-button-on-variant($toggle-background-on-info, $toggle-button-on-info);
+	@include toggle-button-on-variant-not-CSS3-tmp($toggle-background-on-info, $toggle-button-on-info);
+}
+.toggle-button-warning {
+	@include toggle-button-on-variant($toggle-background-on-warning, $toggle-button-on-warning);
+	@include toggle-button-on-variant-not-CSS3-tmp($toggle-background-on-warning, $toggle-button-on-warning);
+}
+.toggle-button-danger {
+	@include toggle-button-on-variant($toggle-background-on-danger, $toggle-button-on-danger);
+	@include toggle-button-on-variant-not-CSS3-tmp($toggle-background-on-danger, $toggle-button-on-danger);
+}
+
+

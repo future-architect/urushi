@@ -1,0 +1,312 @@
+@import "../theme/future.scss";
+
+// utility
+$duration: 200ms;
+
+// z-index
+$z-index-doropdown-menu: 10000;
+$z-index-dialog: 10000;
+$z-index-toast: 99999;
+$z-index-context-menu: 10000;
+
+// button
+$button-duration: $duration;
+
+$button: transparent;
+$button-text: $text-dark;
+$button-default: transparent;
+$button-default-text: $default;
+$button-primary: $primary;
+$button-primary-text: $primary-dark-text;
+$button-success: $success;
+$button-success-text: $success-text;
+$button-info: $info;
+$button-info-text: $info-text;
+$button-warning: $warning;
+$button-warning-text: $warning-dark-text;
+$button-danger: $danger;
+$button-danger-text: $danger-dark-text;
+$button-accent: $accent;
+$button-accent-text: $accent-dark-text;
+$button-default-accent: $background-color;
+$button-default-accent-text: $accent-dark;
+
+$button-flat-default: $background-color;
+$button-flat-default-text: $text-dark;
+$button-flat-primary: $background-color;
+$button-flat-primary-text: $primary-dark;
+$button-flat-success: $background-color;
+$button-flat-success-text: $success-dark;
+$button-flat-info: $background-color;
+$button-flat-info-text: $info-dark;
+$button-flat-warning: $background-color;
+$button-flat-warning-text: $warning-dark;
+$button-flat-danger: $background-color;
+$button-flat-danger-text: $danger-dark;
+$button-flat-accent: $background-color;
+$button-flat-accent-text: $accent-dark;
+
+// checkbox
+$checkbox-transition-duration: $duration;
+$checkbox-animation-duration: $duration;
+$checkbox-animation-ripple-duration: $duration * 2;
+
+$checkbox-focus: $default;
+
+$checkbox-checked: #4C4948;
+$checkbox-checked-default: $default;
+$checkbox-checked-primary: $primary;
+$checkbox-checked-success: $success;
+$checkbox-checked-info: $info;
+$checkbox-checked-warning: $warning-dark;
+$checkbox-checked-danger: $danger-dark;
+
+$checkbox-ripple-background: $text-dark;
+
+// radio
+$radio-transition-duration: $duration;
+$radio-animation-ripple-duration: $duration * 2;
+
+$radio-unselected: $text-dark;
+$radio-default: $default;
+$radio-primary: $primary;
+$radio-success: $success;
+$radio-info: $info;
+$radio-warning: $warning-dark;
+$radio-danger: $danger-dark;
+
+// input
+$input-transition-duration: $duration;
+$input-animation-duration: $duration;
+
+$input-background: $white;
+$input-border-color: #bbbbbb;
+$input-border-color-focus: $accent;
+
+$input-success: $success;
+$input-warning: $warning;
+$input-danger: $danger;
+
+// progress
+$progress-background: rgba(0, 0, 0, 0.26);
+$progress-background-dark: $progress-background;
+$progress-background-light: rgba(255, 255, 255, 0.30);
+$progress-default: $default;
+$progress-primary: $primary;
+$progress-success: $success;
+$progress-info: $info;
+$progress-warning: $warning-dark;
+$progress-danger: $danger-dark;
+
+// toast
+$toast-duration: $duration;
+$toast-delay: $duration;
+
+$toast-default: #323232;
+$toast-default-text: $text-light;
+$toast-primary: $primary-dark;
+$toast-primary-text: $text-light;
+$toast-success: $success-dark;
+$toast-success-text: $text-light;
+$toast-info: $info-dark;
+$toast-info-text: $text-light;
+$toast-warning: $warning-dark;
+$toast-warning-text: $text-light;
+$toast-danger: $danger-dark;
+$toast-danger-text: $text-light;
+
+// popover, tooltip
+$popup-background: #323232;
+$popup-animation-duration: 200ms;
+
+// panel
+$panel-background: $white;
+$panel-header-default: #DDDDDD;
+$panel-header-default-text: $text-dark;
+$panel-footer: $background-color;
+$panel-footer-text: $text-dark;
+$panel-footer-border-top: #DDDDDD;
+$panel-header-primary: $primary;
+$panel-header-primary-text: $primary-text;
+$panel-header-success: $success;
+$panel-header-success-text: $success-text;
+$panel-header-info: $info;
+$panel-header-info-text: $info-text;
+$panel-header-warning: $warning;
+$panel-header-warning-text: $warning-text;
+$panel-header-danger: $danger;
+$panel-header-danger-text: $danger-text;
+
+// dropdown
+$dropdown-transition-duration: $duration;
+
+$dropdown-background: $white;
+$dropdown-selected-default: $divider-dark;
+$dropdown-selected-default-text: $text-dark;
+$dropdown-selected-primary: $primary-light;
+$dropdown-selected-primary-text: $primary-light-text;
+$dropdown-selected-success: $success-light;
+$dropdown-selected-success-text: $success-light-text;
+$dropdown-selected-info: $info-light;
+$dropdown-selected-info-text: $info-light-text;
+$dropdown-selected-warning: $warning-light;
+$dropdown-selected-warning-text: $warning-light-text;
+$dropdown-selected-danger: $danger-light;
+$dropdown-selected-danger-text: $danger-light-text;
+
+$dropdown-focus-default: $text-dark-hint;
+$dropdown-focus-default-text: $text-dark;
+$dropdown-focus-primary: $primary;
+$dropdown-focus-primary-text: $primary-text;
+$dropdown-focus-success: $success;
+$dropdown-focus-success-text: $success-text;
+$dropdown-focus-info: $info;
+$dropdown-focus-info-text: $info-text;
+$dropdown-focus-warning: $warning;
+$dropdown-focus-warning-text: $warning-text;
+$dropdown-focus-danger: $danger;
+$dropdown-focus-danger-text: $danger-text;
+
+// table
+$table-background: $white;
+
+$table-background-default: $default-light;
+$table-background-default-text: $default-light-text;
+$table-background-primary: $primary-light;
+$table-background-primary-text: $primary-light-text;
+$table-background-success: $success-light;
+$table-background-success-text: $success-light-text;
+$table-background-info: $info-light;
+$table-background-info-text: $info-light-text;
+$table-background-warning: $warning-light;
+$table-background-warning-text: $warning-light-text;
+$table-background-danger: $danger-light;
+$table-background-danger-text: $danger-light-text;
+
+$table-selected-background-default: $default;
+$table-selected-background-default-text: $default-text;
+$table-selected-background-primary: $primary;
+$table-selected-background-primary-text: $primary-text;
+$table-selected-background-success: $success;
+$table-selected-background-success-text: $success-text;
+$table-selected-background-info: $info;
+$table-selected-background-info-text: $info-text;
+$table-selected-background-warning: $warning;
+$table-selected-background-warning-text: $warning-text;
+$table-selected-background-danger: $danger;
+$table-selected-background-danger-text: $danger-text;
+
+// icon
+$icon-default: $text-dark;
+$icon-primary: $primary;
+$icon-success: $success;
+$icon-info: $info;
+$icon-warning: $warning;
+$icon-danger: $danger;
+
+$icon-default-light: $text-light;
+$icon-primary-light: $primary-light;
+$icon-success-light: $success-light;
+$icon-info-light: $info-light;
+$icon-warning-light: $warning-light;
+$icon-danger-light: $danger-light;
+
+// toggle button
+$toggle-transition-duration: $duration;
+$toggle-transition-box-shadow-duration: 100ms;
+
+$toggle-button-off: #F1F1F1;
+$toggle-button-on: #4C4948;
+$toggle-button-on-default: $default;
+$toggle-button-on-primary: $primary;
+$toggle-button-on-success: $success;
+$toggle-button-on-info: $info;
+$toggle-button-on-warning: $warning;
+$toggle-button-on-danger: $danger;
+
+$toggle-background-off: #7F7F7F;
+$toggle-background-on: #7F7F7F;
+$toggle-background-on-default: $default-light;
+$toggle-background-on-primary: $primary-light;
+$toggle-background-on-success: $success-light;
+$toggle-background-on-info: $info-light;
+$toggle-background-on-warning: $warning-light;
+$toggle-background-on-danger: $danger-light;
+
+// dialog
+$dialog-duration: 500ms;
+
+$dialog-margin-vertical: 120px !default;
+$dialog-width: 640px !default;
+
+$dialog-underlay: $divider-dark;
+$dialog-background: $white;
+$dialog-header-text: $text-dark-secondary;
+$dialog-header-close: $icon-dark-inactive;
+$dialog-content-text: $text-dark;
+$dialog-footer-text: $text-dark-secondary;
+
+// hamburger
+$hamburger-transition-duration: $duration;
+$hamburger-timing-function: ease-in-out;
+
+$hamburger-size: 48px;
+
+$hamburger-line-between: 14px;
+$hamburger-line-width: $hamburger-size - 2px;
+$hamburger-line-height: 7px;
+
+$hamburger-line-color: $icon-light;
+
+$hamburger-arrow-top: -6px; 
+$hamburger-arrow-left: 17px; 
+$hamburger-arrow-width: 30px; 
+
+$hamburger-border-radius: 34px;
+
+// contextmenu
+$context-menu-transition-duration: 150ms;
+$context-menu-timing-function: ease-out;
+
+$context-menu-size: 48px;
+$context-menu-dot-between: 14.5px;
+
+$context-menu-selected-info: $info-light;
+$context-menu-selected-info-text: $info-light-text;
+
+$context-menu-color: $light-1000;
+$context-menu-default-color: $info;
+$context-menu-primary-color: $primary;
+$context-menu-success-color: $success;
+$context-menu-info-color: $info;
+$context-menu-warning-color: $warning;
+$context-menu-danger-color: $danger;
+
+// grid
+$grid-height-with-pagination: calc(100% - 34px);
+$grid-pagination-wrapper-height: 34px;
+$grid-pagination-height: 30px;
+$grid-pagination-links-margin: 16px;
+$grid-header-height: 52px;
+$grid-body-height: calc(100% - 52px);
+
+$grid-header-shadow: 0 4px 3px -3px rgba(0, 0, 0, .12), 0 3px 2px -2px rgba(0, 0, 0, .24);
+
+$grid-font-small: 14px;
+
+$grid-column-padding-default: 12px 16px;
+$grid-column-padding-small: 8px 16px;
+
+$grid-background: $white;
+$grid-header-text: $text-dark-secondary;
+$grid-header-border: $dark-300;
+
+$grid-default-hover-background: $default-light;
+$grid-default-hover-text: $default-light-text;
+
+$grid-default-selected-background: $default-light;
+$grid-default-selected-text: $default-light-text;
+
+$grid-pagination-arrow-color: $default;
+$grid-pagination-current-background: $default;
+

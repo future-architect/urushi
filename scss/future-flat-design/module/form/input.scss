@@ -1,0 +1,140 @@
+@import "../../base/_variables.scss";
+@import "../../base/_mixin.scss";
+@import "../../behavior/animation.scss";
+
+.form-control-wrapper .form-control,
+.form-control {
+	&:not(textarea):not(select) {
+		height: 28px;
+	}
+	border: 1px solid $input-border-color;
+	border-radius: 4px;
+	padding: 0;
+	padding-left: 8px;
+	float: none;
+	box-shadow: none;
+	&:disabled {
+		border-style: dashed;
+	}
+	&:focus, &:focus {
+		border-color: $input-border-color-focus;
+		box-shadow: 0 0px 0px rgba(0, 0, 0, .12), 0 0px 3px rgba(0, 0, 0, .24) inset;
+	}
+
+	@include transition(all $duration ease-out);
+}
+
+.form-control-wrapper {
+	position: relative;
+
+	.form-control:focus,
+	.form-control.focus {
+		outline: none;
+	}
+
+	.form-control {
+		background-color: $input-background;
+		display: block;
+		width: 100%;
+		line-height: 1.42857143;
+	}
+
+	// hint style, layout and transition.
+	.hint {
+		position: absolute;
+		display: block;
+		left: 8px;
+		font-size: 80%;
+		color: $text-dark-hint;
+		white-space: nowrap;
+
+		opacity: 0;
+		transition: opacity $input-transition-duration ease-in-out;
+	}
+	.form-control:focus ~ .hint,
+	.form-control.focus ~ .hint {
+		opacity: 1;
+	}
+
+	// floating label(placeholder) style, layout and transition.
+	.floating-label {
+		color: $text-dark-hint;
+		position: absolute;
+		pointer-events: none;
+
+		left: 8px;
+		top: 4px;
+		white-space: nowrap;
+		
+		opacity: 0;
+		transition: top, font-size, opacity;
+		transition-duration: $input-transition-duration;
+		transition-timing-function: ease-in-out;
+	}
+	.form-control:focus ~ .floating-label,
+	.form-control.focus ~ .floating-label,
+	.form-control:not(.empty) ~ .floating-label {
+		top: -16px;
+		font-size: 76%;
+		opacity: 1;
+	}
+	.form-control:focus:invalid ~ .floating-label,
+	.form-control .focus:invalid ~ .floating-label {
+		color: $input-danger;
+	}
+	.form-control.empty ~ .floating-label {
+		opacity: 1;
+	}
+
+	.input-lg ~ .material-input::after {
+		height: 26px;
+	}
+	textarea {
+		resize: none;
+	}
+	textarea ~ .form-control-highlight {
+		margin-top: -11px;
+	}
+}
+
+select.form-control {
+	border: 0;
+	border-bottom: 1px solid $input-border-color;
+	border-radius: 0;
+	box-shadow: none;
+	&:focus,
+	& .focus {
+		border-color: $input-border-color;
+		box-shadow: none;
+	}
+}
+
+@include keyframes(input-highlight) {
+	0% {
+		@include transform(scaleX(10%));
+		left: 20%;
+	}
+	98% {
+		@include transform(scaleX(0));
+		left: 0;
+		opacity: 1;
+	}
+	100% {
+		@include transform(scaleX(0));
+		left: 0;
+		opacity: 0;
+	}
+}
+
+// Input files (kinda hack)
+.form-control-wrapper input[type=file] {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 100;
+	opacity: 0;
+}
