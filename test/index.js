@@ -27,6 +27,7 @@ function createPage () {
 		'Hamburger',
 		'Input',
 		'Panel',
+		'Card',
 		'Radio',
 		'Toast',
 		'Toggle',

@@ -1,0 +1,1 @@
+define("CollectionWidgetBase",["underscore","Base","collectionMixin"],function(e,i,t){"use strict";var n={ID_PREFIX:"urushi._collectionWidgetBase",EMBEDDED:{}},o=0;return i.extend(e.extend(e.clone(t),{_initProperties:function(e){this._initPropertiesCollectionMixin(e)},_getId:function(){return n.ID_PREFIX+o++},destroy:function(){this._destroyCollectionMixin(),this._super()}}))});

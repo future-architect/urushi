@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Urushi</title>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0" />
+
+	<link rel="shortcut icon" href="./gh-pages-resoucres/favicon.ico" type="image/x-icon">
+
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<link rel="stylesheet" href="./gh-pages-resoucres/highlight/styles/default.css">
+	<link rel="stylesheet" href="./gh-pages-resoucres/highlight/styles/rainbow.css">
+	<link rel="stylesheet" href="./gh-pages-resoucres/material.css">
+	<link rel="stylesheet" href="./gh-pages-resoucres/style.css">
+
+	<script src="./gh-pages-resoucres/highlight/highlight.pack.js"></script>
+	<script type="text/javascript">
+		window.hljs.initHighlightingOnLoad();
+		window.requireRoot = './gh-pages-resoucres/';
+	</script>
+	<script src="./gh-pages-resoucres/config/requireConfig.js"></script>
+	<script src="./gh-pages-resoucres/lib/js/require.js" data-main="./gh-pages-resoucres/start"></script>
+</head>
+<body>
+	<header id="header" class="header md-bg-primary">
+		<div id="headerContextWide" class="headerContextWide">
+			<a class="button" href="./get-started.html" target="_self">GET STARTED</a>
+			<a class="button" href="./ja-jp/" target="_self">JAPANESE</a>
+		</div>
+		<div id="headerContextNarrow" class="headerContextNarrow">
+ 		</div>
+	</header>
+	<section class="concept md-bg-primary">
+		<div class="row">
+			<ul class="table">
+				<li class="urushi-logo-wrapper">
+					<img class="urushi-logo" src="./gh-pages-resoucres/urushi-icon.png">
+				</li>
+				<li class="message">
+					<h1>Urushi</h1>
+					<p>
+						Urushi is a web component framework which conformed to the policy of Google Material design.
+						It provides HTML. CSS, JavaScript as components.
+						It was created for large-scale development of interactive web components.
+						Besides providding web components, Urushi also enables users to create web components.
+					</p>
+				</li>
+			</ul>
+			<div class="button-area">
+				<a class="button button-raised button-download" href="https://github.com/future-architect/urushi/releases/download/0.5/urushi-0.5.zip"><i class="material-icons md-dark">file_download</i>GET URUSHI v0.5</a>
+				<a class="button button-raised button-github" href="https://github.com/future-architect/urushi" target="_blank"><img src=" ./gh-pages-resoucres/github.png">GITHUB</a>
+				<a class="button button-raised button-start hidden" href="./get-started.html" target="_blank">get started</a>
+			</div>
+		</div>
+	</section>
+	<section class="introduction">
+		<div class="row">
+			<div class="intro-box">
+				<h2>
+					<i class="material-icons md-dark md-36">card_giftcard</i>
+					<span>Framework for creators</span>
+				</h2>
+				<p>
+					Urushi has been made with creators in mind to create web components.
+					By expressing web components in one class, Web application can be easily created.
+					Users are able to use web components as one class based on the definition of HTML, CSS, functions in JavaScript set by creator.
+				</p>
+			</div>
+			<div class="intro-box">
+				<h2>
+					<i class="material-icons md-dark md-36">extension</i>
+					<span>Web component</span>
+				</h2>
+				<p>
+					Urushi provides web components as object-oriented class.
+					Therefore, all web components in HTML exist as instances.
+					Attributes and methods are integrated in instances to make large-scale development possible.
+				</p>
+			</div>
+			<div class="intro-box">
+				<h2>
+					<i class="material-icons md-dark md-36">build</i>
+					<span>Customization</span>
+				</h2>
+				<p>
+					Urushi provides the required HTML Template and JavaScript class mechanism to create web components.
+					Web components can be used easily by defining the configuration file of Template engine.
+				</p>
+			</div>
+		</div>
+	</section>
+	<section class="demo hidden">
+		<div class="row">
+		</div>
+	</section>
+	<section class="use reverse">
+		<div class="row">
+			<h2>How to use web components</h2>
+			<h3 class="white-text-secondary">HTML</h3>
+			<pre><code class="html">
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta charset="utf8"&gt;
+	&lt;link href="./urushi/material/style/material.css" rel="stylesheet"&gt;
+
+	&lt;script src="./config/requireConfig.js"&gt;&lt;/script&gt;
+	&lt;script src="./lib/js/require.js" data-main="./main"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div <span class="data-urushi">data-urushi-type="panel"</span> <span class="data-urushi">data-urushi-options='{"header" : "Header title"}</span>'&gt;
+		&lt;button <span class="data-urushi">data-urushi-type="button"</span>&gt;CLICK ME&lt;/button&gt;
+	&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+			<p>
+				By adding data-urushi-type attribute to tags, instance can be automatically created by Template engine.
+				Users can define the constructor arguments of data-urushi-options in json format.
+			</p>
+			<h3 class="white-text-secondary">JavaScript</h3>
+			<pre><code class="javascript dark">
+// main.js
+require.config(requireConfig);
+require(['templateEngine', 'templateConfig'], function (templateEngine, templateConfig) {
+	templateEngine.renderDocument(document.body, templateConfig);
+});
+
+</code></pre>
+			<p>
+				In order to start the Template engine, please create main.js and index.html in the same folder.
+				All data-urushi-type specified HTML tags will be replaced with Urushi web components.
+			</p>
+			<h3 class="white-text-secondary">Preview</h3>
+			<div data-urushi-type="panel" data-urushi-options='{"header" : "Header title"}'>
+				<button data-urushi-type="button">CLICK ME</button>
+			</div>
+		</div>
+	</section>
+	<section class="browser">
+		<div class="row">
+			<h2>Supported browsers</h2>
+<!-- 
+			<ul class="icon-list hidden">
+				<span class="icon-cell">
+					<span class="browser-icon ie"></span>
+				</span>
+				<span class="icon-cell">
+					<span class="browser-icon ff"></span>
+				</span>
+				<span class="icon-cell">
+					<span class="browser-icon chrome"></span>
+				</span>
+			</ul>
+ -->
+			<p>
+				Microsoft Internet Explorer, Google Chrome and Mozzila Firefox are supported.
+				Web components for Tablet devices will be added in the future updates. Therefore Android and Apple Safari will be supported in the near future.
+			</p>
+		</div>
+	</section>
+	<section class="customize">
+		<div class="row">
+		</div>
+	</section>
+	<footer class="footer reverse">
+		<div class="row">
+			© 2016 Future architect inc. Auther Yuzo Hirakawa. Code licensed under the MIT License.
+		</div>
+	</footer>
+</body>
+</html>
