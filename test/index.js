@@ -27,6 +27,7 @@ function createPage() {
 		'Input',
 		'Panel',
 		'Radio',
+		'Textarea',
 		'Toast',
 		'Toggle',
 		'Tooltip',

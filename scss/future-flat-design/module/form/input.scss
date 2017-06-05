@@ -2,6 +2,10 @@
 @import "../../base/_mixin.scss";
 @import "../../behavior/animation.scss";
 
+input::-ms-clear {
+	display: none;
+}
+
 .form-control-wrapper .form-control,
 .form-control {
 	&:not(textarea):not(select) {
