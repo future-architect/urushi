@@ -3,16 +3,16 @@
 @import "../structure/shadow.scss";
 
 .modal {
-	display : none;
-	position : fixed;
-	top : 0;
-	right : 0;
-	bottom : 0;
-	left : 0;
+	display: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 	z-index: 1040;
-	overflow : hidden;
-	outline : 0;
-	-webkit-overflow-scrolling : touch;
+	overflow: hidden;
+	outline: 0;
+	-webkit-overflow-scrolling: touch;
 
 	&.fade .modal-dialog {
 		@include css3(transform, translate(0, -50%));
@@ -22,70 +22,66 @@
 		@include css3(transform, translate(0, 0));
 	}
 	.modal-dialog {
-		margin : $dialog-margin-vertical auto;
-		width : $dialog-width;
+		margin: $dialog-margin-vertical auto;
+		width: $dialog-width;
 
 		.modal-content {
 			@extend .shadow-z-5;
 
-			border-radius : 2px;
-			border : none;
-			background-color : $dialog-background;
+			border-radius: 2px;
+			border: none;
+			background-color: $dialog-background;
 			.modal-header {
-				border-bottom : none;
-				padding : 24px;
-				padding-bottom : 0;
+				border-bottom: 1px solid $black-divider;
+				padding: 8px 12px;
 
 				.modal-title {
-					margin : 0;
-					line-height : 1.42857143;
-					color : $dialog-header-text;
+					margin: 0;
+					line-height: 1.42857143;
+					color: $dialog-header-text;
 				}
 				.close {
 					@include modal-close-button($dialog-header-close);
 				}
 			}
 			.modal-body {
-				padding: 24px;
-				color : $dialog-content-text
+				padding: 12px;
+				color: $dialog-content-text
 			}
 			.modal-footer {
-				border-top : none;
-				padding : 24px;
-				color : $dialog-footer-text;
+				border-top: 1px solid $black-divider;
+				padding: 12px;
+				color: $dialog-footer-text;
 
 				button {
-					margin : 0;
-					padding-left : 16px;
-					padding-right : 16px;
-					width : auto;
+					margin: 0;
+					padding-left: 16px;
+					padding-right: 16px;
+					width: auto;
 
 					&.pull-left {
-						position : relative;
-						padding-left : 5px;
-						padding-right : 5px;
+						position: relative;
+						padding-left: 5px;
+						padding-right: 5px;
 						left: -5px;
 					}
 				}
 				button + button {
-					margin-bottom : 16px;
+					margin-bottom: 16px;
 				}
-			}
-			.modal-body + .modal-footer {
-				padding-top : 0;
 			}
 		}
 	}
 	.modal-underlay {
-		position : absolute;
-		margin : 0;
-		border : 0;
-		padding : 0;
-		width : 100%;
-		height : 100%;
-		top : 0;
-		right : 0;
-		left : 0;
+		position: absolute;
+		margin: 0;
+		border: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		right: 0;
+		left: 0;
 		background: $dialog-underlay;
 	}
 }
