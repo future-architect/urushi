@@ -118,11 +118,11 @@ define(
 				}
 
 				if (!urushi.isTouch()) {
-					return event.pageX - rootNode.offsetLeft;
+					return event.pageX - rootNode.getBoundingClientRect().left;
 				} else {
 					event = event.originalEvent || event;
 					if (1 === event.touches.length) {
-						return event.touches[0].pageX - rootNode.offsetLeft;
+						return event.touches[0].pageX - rootNode.getBoundingClientRect().left;
 					}
 					return NaN;
 				}
@@ -142,11 +142,11 @@ define(
 				}
 
 				if (!urushi.isTouch()) {
-					return event.pageY - rootNode.offsetTop;
+					return event.pageY - rootNode.getBoundingClientRect().top;
 				} else {
 					event = event.originalEvent || event;
 					if (1 === event.touches.length) {
-						return event.touches[0].pageY - rootNode.offsetTop;
+						return event.touches[0].pageY - rootNode.getBoundingClientRect().top;
 					}
 					return NaN;
 				}
