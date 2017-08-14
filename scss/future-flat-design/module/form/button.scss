@@ -13,19 +13,11 @@
 		@extend .shadow-z-2-hover;
 	}
 }
-
-.button {
+.button, .icon-button {
 	position : relative;
-	margin : 10px 1px;
 	border : 0;
-	padding : 8px 30px;
-	font-weight : 600;
-
 	cursor : pointer;
-	border-radius : 4px;
-	text-transform : uppercase;
 	text-decoration : none;
-	@include button-variant($button, $button-text);
 
 	&:hover:not(.button-link) {
 		@extend .shadow-z-2-hover;
@@ -35,6 +27,16 @@
 		@extend .shadow-z-3;
 	}
 	outline : none !important;
+}
+
+.button {
+	margin : 10px 1px;
+	padding : 8px 30px;
+	font-weight : 600;
+
+	border-radius : 4px;
+	text-transform : uppercase;
+	@include button-variant($button, $button-text);
 
 	&.button-raised {
 		@include button-shadow();
@@ -52,6 +54,41 @@
 		&:hover {
 			color : $text-light;
 		}
+	}
+}
+.icon-button {
+	height: 46px;
+	width: 46px;
+	padding: 0;
+	font-size: 38px;
+
+	border-radius: 50%;
+
+	.ripple-wrapper {
+		border-radius: 50%;
+	}
+
+	@include button-shadow();
+	@include icon-button-variant($button, $button-text);
+
+	.label {
+		position: absolute;
+		display: inline-block;
+		pointer-events: none;
+
+		padding: 4px 8px;
+		background-color: $icon-button-label-background;
+		color: $text-light;
+		font-size: 12px;
+		z-index: 1;
+
+		opacity: 0;
+		@include css3(transform, translate(0, -50%));
+		@include icon-button-transition(transform, $duration, ease-out);
+	}
+	&:hover .label {
+		opacity: 1;
+		@include css3(transform, translate(0, 0));
 	}
 }
 	

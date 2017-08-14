@@ -80,6 +80,21 @@
 	}
 }
 
+@mixin icon-button-transition($transform, $duration, $type) {
+	-webkit-transition : opacity $duration $type, -webkit-#{$transform} $duration $type;
+	-o-transition : opacity $duration $type, -o-#{$transform} $duration $type;
+	transition : opacity $duration $type, $transform $duration $type;
+}
+
+@mixin icon-button-variant($background-color, $color) {
+	background-color: $background-color;
+	color : $color;
+	&:hover {
+		background-color: $background-color;
+		color : $color;
+	}
+}
+
 @mixin checkbox-variant($color) {
 	color : $color;
 	&::before,
@@ -258,5 +273,9 @@
 }
 
 @mixin context-menu-variant($color) {
-	background-color : $color;
+	color: $color;
+}
+
+@mixin calendar-variant($color) {
+	background-color: $color;
 }

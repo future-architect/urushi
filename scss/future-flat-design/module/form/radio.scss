@@ -40,6 +40,8 @@
 		}
 
 		.circle {
+			background-color: $color-ui-background;
+
 			border : 2px solid $radio-unselected;
 			border-radius : 100%;
 			height : 18px;

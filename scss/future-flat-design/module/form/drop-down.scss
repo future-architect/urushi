@@ -13,6 +13,7 @@
 	> input {
 		width : 100%;
 		&.focus ~ ul {
+			// animation: drop-open $dropdown-transition-duration ease-out alternate;
 			@include transform(scale(1));
 		}
 	}
@@ -27,7 +28,7 @@
 		z-index : $z-index-doropdown-menu;
 		background : $dropdown-background;
 		@extend .shadow-z-2-hover;
-		// ChromeでバグがあるのでJSで実装 transition : transform $dropdown-transition-duration ease-out;
+		transition : transform $dropdown-transition-duration ease-out;
 		overflow : hidden;
 		&[data-placement=top-right] {
 			@include transform-origin(top right);
@@ -87,6 +88,16 @@
 		pointer-events : none;
 	}
 }
+
+@include keyframes(drop-open) {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
 select[data-dropdown][disabled] + .dropdown > input[readonly] {
 	cursor : default;
 }

@@ -10,7 +10,6 @@
 
 	> .context-menu {
 		position: relative;
-		padding: 19px 19px;
 		width:  $context-menu-size;
 		height: $context-menu-size;
 
@@ -18,34 +17,8 @@
 
 		> .context-menu-dot {
 			position: relative;
-			border-radius: 34px;
-			width: 10px;
-			height: 10px;
-
-			content: '';
+			font-size: $context-menu-size;
 			@include context-menu-variant($context-menu-color);
-
-			&:before {
-				position: absolute;
-				border-radius: inherit;
-				top: -$context-menu-dot-between;
-				width: inherit;
-				height: inherit;
-
-				content: '';
-				background-color: inherit;
-			}
-
-			&:after {
-				position: absolute;
-				border-radius: inherit;
-				top: $context-menu-dot-between;
-				width: inherit;
-				height: inherit;
-
-				content: '';
-				background-color: inherit;
-			}
 		}
 
 		&.context-menu-default {
@@ -89,21 +62,6 @@
 			border-radius : 100%;
 			width : 32px;
 			height : 32px;
-
-			.context-menu-dot {
-				width : 6px;
-				height : 6px;
-
-				&:before {
-					top : 0px;
-					left : -9.5px;
-				}
-
-				&:after {
-					top : 0px;
-					left : 9.5px;
-				}
-			}
 		}
 
 		> .items {
@@ -116,7 +74,7 @@
 		position : relative;
 		margin : 0px;
 		padding : 0px;
-		top: -48px;
+		top: -36px;
 
 		@include transform(scale(0));
 		@include transform-origin(top right);

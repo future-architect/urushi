@@ -2,6 +2,7 @@
 
 // utility
 $duration: 200ms;
+$color-ui-background: #ffffff;
 
 // z-index
 $z-index-doropdown-menu: 10000;
@@ -10,7 +11,7 @@ $z-index-toast: 99999;
 $z-index-context-menu: 10000;
 
 // button
-$button-duration: $duration;
+$button-duration: 300ms;
 
 $button: transparent;
 $button-text: $text-dark;
@@ -45,6 +46,10 @@ $button-flat-danger: $background-color;
 $button-flat-danger-text: $danger-dark;
 $button-flat-accent: $background-color;
 $button-flat-accent-text: $accent-dark;
+
+// icon button
+$icon-button-label-background: #323232;
+$icon-button-label-animation-duration: $duration;
 
 // checkbox
 $checkbox-transition-duration: $duration;
@@ -117,7 +122,7 @@ $toast-danger-text: $text-light;
 
 // popover, tooltip
 $popup-background: #323232;
-$popup-animation-duration: 200ms;
+$popup-animation-duration: $duration;
 
 // panel
 $panel-background: $white;
@@ -234,7 +239,7 @@ $toggle-background-on-warning: $warning-light;
 $toggle-background-on-danger: $danger-light;
 
 // dialog
-$dialog-duration: 500ms;
+$dialog-duration: 300ms;
 
 $dialog-margin-vertical: 120px !default;
 $dialog-width: 640px !default;
@@ -268,7 +273,7 @@ $hamburger-border-radius: 34px;
 $context-menu-transition-duration: 150ms;
 $context-menu-timing-function: ease-out;
 
-$context-menu-size: 48px;
+$context-menu-size: 36px;
 $context-menu-dot-between: 14.5px;
 
 $context-menu-selected-info: $info-light;
@@ -310,3 +315,11 @@ $grid-default-selected-text: $default-light-text;
 $grid-pagination-arrow-color: $default;
 $grid-pagination-current-background: $default;
 
+// calendar
+$calendar-default-color: $default;
+$calendar-primary-color: $primary;
+$calendar-success-color: $success;
+$calendar-info-color: $info;
+$calendar-warning-color: $warning;
+$calendar-danger-color: $danger;
+$calendar-hover-color: $gray-400;

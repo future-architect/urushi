@@ -20,7 +20,7 @@ input::-ms-clear {
 	&:disabled {
 		border-style: dashed;
 	}
-	&:focus, &:focus {
+	&:focus, &.focus {
 		border-color: $input-border-color-focus;
 		box-shadow: 0 0px 0px rgba(0, 0, 0, .12), 0 0px 3px rgba(0, 0, 0, .24) inset;
 	}
@@ -98,6 +98,14 @@ input::-ms-clear {
 	}
 	textarea ~ .form-control-highlight {
 		margin-top: -11px;
+	}
+
+	&.caption-input {
+		display: table;
+		> div {
+			display: table-cell;
+			position: relative;
+		}
 	}
 }
 
