@@ -36,7 +36,7 @@
  * </pre>
  * @example
  *	require(['Textarea'], function(Textarea) {
- *		var textarea = new Textarea({
+ *		let textarea = new Textarea({
  *			id: 'myTextarea',
  *			textareaClass: '',
  *			additionalClass: '',
@@ -64,9 +64,9 @@
 define(
 	'Textarea',
 	[
-		'Urushi',
 		'Input',
 		'text!textareaTemplate',
+		'text!textareaWithCaptionTemplate'
 	],
 	/**
 	 * @class
@@ -74,7 +74,7 @@ define(
 	 * @alias module:Textarea
 	 * @returns {object} Textarea object.
 	 */
-	function(urushi, Input, template) {
+	function(Input, template, textareaWithCaptionTemplate) {
 		'use strict';
 
 		/**
@@ -84,10 +84,8 @@ define(
 		 * @type object
 		 * @constant
 		 */
-		var CONSTANTS = {
-			ID_PREFIX: 'urushi.Textarea',
-			EMBEDDED: {textareaClass: '', additionalClass: ''}
-		};
+		const ID_PREFIX = 'urushi.textarea';
+		const EMBEDDED = {};
 
 		/**
 		 * <pre>
@@ -95,7 +93,7 @@ define(
 		 * </pre>
 		 * @type number
 		 */
-		var idNo = 0;
+		let idNo = 0;
 
 		return Input.extend(/** @lends module:Textarea.prototype */ {
 			/**
@@ -106,16 +104,17 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template: undefined,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded: undefined,
+			embedded: EMBEDDED,
+
 			/**
 			 * <pre>
-			 * Initializes instance properties.
+			 * インスタンスの初期値を設定する。
 			 * </pre>
 			 * @protected
 			 * @param {object} args Constructor arguments.
@@ -123,8 +122,10 @@ define(
 			 */
 			_initProperties: function(/* object */ args) {
 				this._super(args);
-				this.template = template;
-				this.embedded = CONSTANTS.EMBEDDED;
+
+				if (args.caption) {
+					this.template = textareaWithCaptionTemplate;
+				}
 			},
 			/**
 			 * <pre>
@@ -147,6 +148,7 @@ define(
 			 * @returns The textarea element node.
 			 */
 			_getInputNode: function() {
+				console.log('_getInputNode', this.rootNode.getElementsByTagName('textarea')[0]);
 				return this.rootNode.getElementsByTagName('textarea')[0];
 			},
 			/**
@@ -155,7 +157,7 @@ define(
 			 * @returns {string} Instance id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
+				return ID_PREFIX + idNo++;
 			}
 		});
 	}

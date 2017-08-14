@@ -74,7 +74,8 @@
 define(
 	'Panel',
 	[
-		'Urushi',
+		'node',
+		'parser',
 		'_Base',
 		'text!panelTemplate'
 	],
@@ -84,7 +85,7 @@ define(
 	 * @alias module:Panel
 	 * @returns {object} Panel instance.
 	 */
-	function(urushi, _Base, template) {
+	function(node, parser, _Base, template) {
 		'use strict';
 
 		/**
@@ -94,10 +95,8 @@ define(
 		 * @type object
 		 * @constant
 		 */
-		var CONSTANTS = {
-			ID_PREFIX: 'urushi.Panel',
-			EMBEDDED: {panelClass: '', additionalClass: '', header: '', content: '', footer: ''}
-		};
+		const ID_PREFIX = 'urushi.Panel';
+		const EMBEDDED = {header: '', content: '', footer: ''};
 
 		/**
 		 * <pre>
@@ -117,24 +116,30 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template: undefined,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded: undefined,
+			embedded: EMBEDDED,
+
 			/**
 			 * <pre>
-			 * Initializes instance properties.
+			 * TemplateEngineで検出されたElementから、
+			 * インスタンス化に必要な定義を抽出する。
 			 * </pre>
 			 * @protected
-			 * @param {object} args Constructor arguments.
+			 * @param {Element} element 置換対象のエレメント。
 			 * @returns none.
 			 */
-			_initProperties: function(/* object */ args) {
-				this.template = template;
-				this.embedded = CONSTANTS.EMBEDDED;
+			_parse: function(/* Element */ element) {
+				let option = this._super(element);
+				
+				Object.assign(option, parser.getOption(element));
+				option.content = parser.getChildNodesFunction(element);
+
+				return option;
 			},
 			/**
 			 * <pre>
@@ -157,7 +162,7 @@ define(
 			 * @returns none.
 			 */
 			setHeader: function(/* string */ header) {
-				if (urushi.setDomContents(this.headerNode, header)) {
+				if (node.setDomContents(this.headerNode, header)) {
 					if (this.headerNode.textContent) {
 						this.headerNode.classList.remove('hidden');
 					} else {
@@ -178,8 +183,8 @@ define(
 				if ('function' === typeof contents) {
 					contents = contents();
 				}
-				if (!urushi.setDomContents(this.contentNode, contents)) {
-					urushi.clearDomContents(this.contentNode);
+				if (!node.setDomContents(this.contentNode, contents)) {
+					node.clearDomContents(this.contentNode);
 				}
 			},
 			/**
@@ -190,7 +195,7 @@ define(
 			 * @returns none.
 			 */
 			setFooter: function(/* string */ footer) {
-				if (urushi.setDomContents(this.footerNode, footer)) {
+				if (node.setDomContents(this.footerNode, footer)) {
 					if (this.footerNode.textContent) {
 						this.footerNode.classList.remove('hidden');
 					} else {
@@ -222,7 +227,7 @@ define(
 			 * @returns {string} Instance id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
+				return ID_PREFIX + idNo++;
 			}
 		});
 	}

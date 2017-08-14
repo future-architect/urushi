@@ -31,7 +31,7 @@
  * </pre>
  * @example
  *	require(['Checkbox'], function(Checkbox) {
- *		var checkbox = new Checkbox({
+ *		let checkbox = new Checkbox({
  *			id: 'myCheckbox',
  *			checkboxClass: 'checkbox-primary',
  *			additionalClass: '',
@@ -49,21 +49,16 @@
  *
  * @module Checkbox
  * @extends module:_Base
- * @requires module:Urushi
  * @requires module:_Base
  * @requires checkbox.html
- * @requires checkboxTransitionUnit.html
- * @requires checkboxRippleTransitionUnit.html
  */
 define(
 	'Checkbox',
 	[
-		'Urushi',
 		'materialConfig',
+		'parser',
 		'_Base',
-		'text!checkboxTemplate',
-		'text!checkboxTransitionUnitTemplate',
-		'text!checkboxRippleTransitionUnitTemplate'
+		'text!checkboxTemplate'
 	],
 	/**
 	 * @class
@@ -71,7 +66,7 @@ define(
 	 * @alias module:Checkbox
 	 * @returns {object} Checkbox instance.
 	 */
-	function(urushi, materialConfig, _Base, template, transitionUnit, rippleTransitionUnit) {
+	function(materialConfig, parser, _Base, template) {
 		'use strict';
 
 		/**
@@ -81,10 +76,8 @@ define(
 		 * @type object
 		 * @constant
 		 */
-		var CONSTANTS = {
-			ID_PREFIX: 'urushi.checkbox',
-			EMBEDDED: {checkboxClass: '', additionalClass: '', label: ''}
-		};
+		const ID_PREFIX = 'urushi.checkbox';
+		const EMBEDDED = {label: ''};
 
 		/**
 		 * <pre>
@@ -92,7 +85,7 @@ define(
 		 * </pre>
 		 * @type number
 		 */
-		var idNo = 0;
+		let idNo = 0;
 
 		return _Base.extend(/** @lends module:Checkbox.prototype */ {
 			/**
@@ -109,28 +102,28 @@ define(
 			 * @type object
 			 * @private
 			 */
-			embedded: CONSTANTS.EMBEDDED,
+			embedded: EMBEDDED,
+
 			/**
 			 * <pre>
-			 * Animation time.
-			 * It is used in browser that don't support CSS3.0.
-			 * </pre>
-			 * @type number
-			 * @private
-			 */
-			duration: undefined,
-			/**
-			 * <pre>
-			 * Initialize instance properties.
+			 * TemplateEngineで検出されたElementから、
+			 * インスタンス化に必要な定義を抽出する。
 			 * </pre>
 			 * @protected
-			 * @param {object} args Constructor arguments.
+			 * @param {Element} element 置換対象のエレメント。
 			 * @returns none.
 			 */
-			_initProperties: function(/* object */ args) {
-				this.template = template;
-				this.embedded = CONSTANTS.EMBEDDED;
-				this.duration = materialConfig.DEFAULT_VALUE_DURATION;
+			_parse: function(/* Element */ element) {
+				let option = this._super(element);
+
+				option.label = parser.getNextText(element);
+				if (option.label) {
+					parser.removeNextNode(element);
+				}
+				option.checked = !!element.checked;
+				option.disabled = !!element.disabled;
+
+				return option;
 			},
 			/**
 			 * <pre>
@@ -148,12 +141,38 @@ define(
 			},
 			/**
 			 * <pre>
-			 * Returns checkbox state that is checked or not.
+			 * コンストラクタ引数から初期値を設定する。
+			 * 下記を設定する。
+			 * - チェック状態
+			 * - disabledステータス
+			 * - readonlyステータス TODO
 			 * </pre>
-			 * @returns {boolean} Checkbox state.
+			 * @protected
+			 * @param {object} args コンストラクタ引数
+			 * @returns none.
+			 */
+			_setInitial: function(args) {
+				this.setValue(args.checked);
+				this.setDisabled(args.disabled);
+			},
+			/**
+			 * <pre>
+			 * チェックの付け外しをする。
+			 * </pre>
+			 * @param {boolean} is チェック状態
+			 * @returns 無し
+			 */
+			setValue: function(/* boolean */ is) {
+				return this.setChecked(is);
+			},
+			/**
+			 * <pre>
+			 * チェック状態を取得する。
+			 * </pre>
+			 * @returns {boolean} チェック状態
 			 */
 			getValue: function() {
-				return this.inputNode.checked;
+				return this.getChecked();
 			},
 			/**
 			 * <pre>
@@ -166,12 +185,10 @@ define(
 			},
 			/**
 			 * <pre>
-			 * Turn on / off checkbox with animation.
-			 * The browser supports CSS3.0, it animates by CSS3.0,
-			 * not support CSS3.0, it animates by javaScript.
+			 * チェックの付け外しをする。
 			 * </pre>
-			 * @param {boolean} is On or off checkbox.
-			 * @returns none.
+			 * @param {boolean} is チェック状態
+			 * @returns 無し
 			 */
 			setChecked: function(/* boolean */ is) {
 				if ('boolean' !== typeof is) {
@@ -179,6 +196,15 @@ define(
 				}
 
 				this.inputNode.checked = is;
+			},
+			/**
+			 * <pre>
+			 * チェック状態を取得する。
+			 * </pre>
+			 * @returns {boolean} チェック状態
+			 */
+			getChecked: function() {
+				return this.inputNode.checked;
 			},
 			/**
 			 * <pre>
@@ -202,7 +228,7 @@ define(
 			 * @returns {string} object's id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
+				return ID_PREFIX + idNo++;
 			},
 			/**
 			 * <pre>
@@ -243,7 +269,7 @@ define(
 					this.inputNode.removeAttribute('disabled');
 				}
 				return true;
-			},
+			}
 		});
 	}
 );

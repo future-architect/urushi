@@ -15,13 +15,13 @@
  */
 define(
 	'_Base',
-	['legacy', 'extend'],
+	['legacy', 'extend', 'parser'],
 	/**
 	 * @class
 	 * @alias module:_Base
 	 * @returns {object} _Base instance.
 	 */
-	function(legacy, extend) {
+	function(legacy, extend, parser) {
 		'use strict';
 
 		/**
@@ -31,10 +31,8 @@ define(
 		 * @type object
 		 * @constant
 		 */
-		var CONSTANTS = {
-			ID_PREFIX: 'urushi._base',
-			EMBEDDED: {}
-		};
+		const ID_PREFIX = 'urushi._base';
+		const EMBEDDED = {};
 
 		/**
 		 * <pre>
@@ -61,7 +59,7 @@ define(
 				for (i = 0; i < remain.length; i++) {
 					error += remain[i].replace(/<%=[ ]*/, '').replace(/[ ]*%>/, '') + ', ';
 				}
-				throw new Error('コンストラクタ引数エラー : ' + error.slice(2 - error.length));
+				throw new Error('コンストラクタ引数エラー : ' + error);
 			}
 
 			return str;
@@ -102,8 +100,55 @@ define(
 			 * @type object
 			 * @private
 			 */
-			embedded: undefined,
+			embedded: EMBEDDED,
+			/**
+			 * <pre>
+			 * templateEngineによるインスタンス生成の際に、
+			 * タグに記述しているAttributeのうち、インスタンスの先頭Nodeに継承しない要素
+			 * コンポーネントで予約されている属性等は記載しておく
+			 * </pre>
+			 * @type object
+			 * @private
+			 */
+			ignored: [
+				'data-urushi-type',
+				'data-u-type',
+				'data-urushi-options',
+				'data-u-options',
+				'id',
+				'class',
+			],
 
+			/**
+			 * <pre>
+			 * templateEngineで検出されたElementから、
+			 * インスタンス化に必要な定義を抽出する。
+			 * </pre>
+			 * @protected
+			 * @param {Element} element 置換対象のエレメント。
+			 * @returns インスタンス化に必要な定義情報
+			 */
+			_parse: function(/* Element */ element) {
+				return {
+					id: element.id || '',
+					styleClass: parser.getClassName(parser.getStyleClass(element))
+				};
+			},
+			/**
+			 * <pre>
+			 * 引数で指定された要素名がインスタンスの先頭タグにへ引き継ぐかどうかを返却する。
+			 * 引き継ぐ場合はtrue
+			 * 引き継がない場合はfalse
+			 *
+			 * templateEngineでのみ利用可能な関数。
+			 * </pre>
+			 * @protected
+			 * @param {string} name 対象のAttribute名
+			 * @returns 引き継ぐかどうかを返却する
+			 */
+			_isTakedOver: function(/* string */ name) {
+				return -1 === this.ignored.indexOf(name || '');
+			},
 			/**
 			 * <pre>
 			 * It's' constructor of class.
@@ -127,12 +172,13 @@ define(
 			 * @returns none.
 			 */
 			init: function(/* object */ args) {
-				var _args = args || {};
+				let _args = args || {};
 
 				this._initProperties(_args);
 				this._render(_args);
 				this._attachNode();
 				this.initOption(_args);
+				this._setInitial(_args);
 			},
 			/**
 			 * <pre>
@@ -145,8 +191,8 @@ define(
 			 * @returns none.
 			 */
 			_initProperties: function(/* object */ args) {
-				this.template = '';
-				this.embedded = CONSTANTS.EMBEDDED;
+				this.id = '';
+				this.rootNode = undefined;
 			},
 			/**
 			 * <pre>
@@ -161,6 +207,15 @@ define(
 			initOption: function(/* object */ args) {},
 			/**
 			 * <pre>
+			 * コンストラクタ引数から初期値を設定する。
+			 * </pre>
+			 * @protected
+			 * @param {object} args コンストラクタ引数
+			 * @returns none.
+			 */
+			_setInitial: function(/* object */ args) {},
+			/**
+			 * <pre>
 			 * Returns identifier.
 			 * Part of initialization functions.
 			 * When identifier is not specified with constructor arguments, it will run.
@@ -172,26 +227,25 @@ define(
 			 * @returns {string} Instance's id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
+				return ID_PREFIX + idNo++;
 			},
 			/**
 			 * <pre>
 			 * Part of initialization functions.
 			 * Creates nodes using template string.
-			 * Binds parameter to template string using undescore.js,
-			 * creates nodes using jQuery.
 			 * </pre>
 			 * @protected
-			 * @param {object} args Constructor argumetns.
+			 * @param {object} args Constructor arguments.
 			 * @returns none
 			 */
 			_render: function(/* object */ args) {
-				var _args = args || {},
+				let _args = args || {},
 					tmp;
 
 				_args = Object.assign(Object.assign({}, this.embedded), args);
 				this.id = _args && _args.id || this._getId();
-				_args = Object.assign(_args, {id: this.id});
+				_args.id = this.id;
+				_args.styleClass = _args.styleClass || '';
 
 				tmp = document.createElement('div');
 				tmp.innerHTML = template(this.template, _args);

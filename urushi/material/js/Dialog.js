@@ -46,7 +46,7 @@
  * </pre>
  * @example
  *	require(['Dialog'], function(Dialog) {
- *		var dialog = new Dialog({
+ *		let dialog = new Dialog({
  *			id: 'myDialog',
  *			dialogClass: 'dialog-primary',
  *			additionalClass: 'emphasis',
@@ -109,10 +109,8 @@ define(
 		 * @type object
 		 * @constant
 		 */
-		var CONSTANTS = {
-			EMBEDDED: {additionalClass: ''},
-			ID_PREFIX: 'urushi.dialog'
-		};
+		const ID_PREFIX = 'urushi.dialog';
+		const EMBEDDED = {};
 
 		/**
 		 * <pre>
@@ -120,7 +118,7 @@ define(
 		 * </pre>
 		 * @type number
 		 */
-		var idNo = 0;
+		let idNo = 0;
 
 		return Panel.extend(/** @lends module:Dialog.prototype */ {
 			/**
@@ -131,13 +129,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template: undefined,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded: undefined,
+			embedded: EMBEDDED,
 			/**
 			 * <pre>
 			 * Parent element node serving as a display range of the dialog.
@@ -172,7 +170,7 @@ define(
 
 				this._createUnderlay();
 
-				urushi.addEvent(this.rootNode, 'keydown', this, '_onKeydown');
+				urushi.addEvent(this.rootNode, 'keydown', this._onKeydown.bind(this));
 
 				this.rootNode.style.display = 'block';
 				setTimeout((function() {
@@ -288,9 +286,7 @@ define(
 			 * @returns none.
 			 */
 			_initProperties: function(/* object */ args) {
-				var parentNode = args.parentNode;
-				this.template = template;
-				this.embedded = CONSTANTS.EMBEDDED;
+				let parentNode = args.parentNode;
 				this.parentNode = urushi.isElementNode(parentNode) ? parentNode : materialConfig.DIALOG_PARENT_NODE;
 				this.isShown = false;
 			},
@@ -310,9 +306,9 @@ define(
 
 				this.displayCloseIcon(!!args.isDisplayCloseIcon);
 
-				urushi.addEvent(this.closeIconNode, 'click', this, 'hide');
+				urushi.addEvent(this.closeIconNode, 'click', this.hide.bind(this));
 				if (materialConfig.DIALOG_UNDERLAY_CLICK_CLOSE) {
-					urushi.addEvent(this.underlayNode, 'click', this, 'hide');
+					urushi.addEvent(this.underlayNode, 'click', this.hide.bind(this));
 				}
 			},
 			/**
@@ -344,7 +340,7 @@ define(
 			 * @returns {string} object's id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
+				return ID_PREFIX + idNo++;
 			},
 			/**
 			 * <pre>
@@ -354,10 +350,10 @@ define(
 			 * @returns none.
 			 */
 			destroy: function() {
-				urushi.removeEvent(this.rootNode, 'keydown', this, '_onKeydown');
+				urushi.removeEvent(this.rootNode, 'keydown');
 
-				urushi.removeEvent(this.closeIconNode, 'click', this, 'hide');
-				urushi.removeEvent(this.underlayNode, 'click', this, 'hide');
+				urushi.removeEvent(this.closeIconNode, 'click');
+				urushi.removeEvent(this.underlayNode, 'click');
 
 				this._super();
 			}

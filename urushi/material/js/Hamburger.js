@@ -25,7 +25,7 @@
  * </pre>
  * @example
  *	require(['Hamburger'], function(Hamburger) {
- *		var hamburger = new Hamburger({callback: function() {}});
+ *		let hamburger = new Hamburger({callback: function() {}});
  *		document.body.appendChild(hamburger.getRootNode());
  *	});
  *
@@ -47,9 +47,9 @@
 define(
 	'Hamburger',
 	[
-		'Urushi',
-		'_Base',
 		'legacy',
+		'event',
+		'_Base',
 		'text!hamburgerTemplate'
 	],
 	/**
@@ -58,7 +58,7 @@ define(
 	 * @alias module:Hamburger
 	 * @returns {object} Hamburger instance.
 	 */
-	function(urushi, _Base, legacy, template) {
+	function(legacy, event, _Base, template) {
 		'use strict';
 
 		/**
@@ -68,10 +68,8 @@ define(
 		 * @type object
 		 * @constant
 		 */
-		var CONSTANTS = {
-			ID_PREFIX: 'urushi.hamburger',
-			EMBEDDED: {hamburgerClass: '', additionalClass: ''}
-		};
+		const ID_PREFIX = 'urushi.hamburger';
+		const EMBEDDED = {};
 
 		/**
 		 * <pre>
@@ -79,7 +77,7 @@ define(
 		 * </pre>
 		 * @type number
 		 */
-		var idNo = 0;
+		let idNo = 0;
 		
 		return _Base.extend(/** @lends module:Hamburger.prototype */ {
 
@@ -91,13 +89,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template: undefined,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded: undefined,
+			embedded: EMBEDDED,
 			/**
 			 * <pre>
 			 * Callback function for hamburger click event.
@@ -115,8 +113,7 @@ define(
 			 * @returns none.
 			 */
 			_initProperties: function(/* object */ args) {
-				this.template = template;
-				this.embedded = CONSTANTS.EMBEDDED;
+				this._super(args);
 				this.setCallback(args.callback);
 			},
 			/**
@@ -128,7 +125,7 @@ define(
 			 * @returns none.
 			 */
 			initOption: function(/* object */ args) {
-				urushi.addEvent(this.hamburgerNode, 'click', this, '_onClickHamburger');
+				event.addEvent(this.hamburgerNode, 'click', this._onClickHamburger.bind(this));
 			},
 			/**
 			 * <pre>
@@ -213,7 +210,7 @@ define(
 			 * @returns {string} Instance id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
+				return ID_PREFIX + idNo++;
 			},
 			/**
 			 * <pre>
@@ -223,7 +220,7 @@ define(
 			 * @returns none.
 			 */
 			destroy: function() {
-				urushi.removeEvent(this.hamburgerNode, 'click', this, '_onClickHamburger');
+				event.removeEvent(this.hamburgerNode, 'click');
 
 				this._super();
 			}

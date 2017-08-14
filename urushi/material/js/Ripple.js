@@ -11,7 +11,7 @@
  * </pre>
  * @example
  *	require(['Ripple'], function(Ripple) {
- *		var Some = Ripple.extend({...});
+ *		let Some = Ripple.extend({...});
  *	});
  *
  * @module Ripple
@@ -36,25 +36,17 @@ define(
 	function(urushi, materialConfig, _Base) {
 		'use strict';
 
-		/**
-		 * <pre>
-		 * Constants.
-		 * </pre>
-		 * @type object
-		 * @constant
-		 */
-		var CONSTANTS = {
-				CLASS_NAME_RIPPLE_ON: 'ripple-on',
-				CLASS_NAME_RIPPLE_OUT: 'ripple-out',
-				ATTRIBUTE_RIPPLE_ANIMATE: 'data-ripple-animate',
-				ATTRIBUTE_RIPPLE_ANIMATE_ON: 'on',
-				ATTRIBUTE_RIPPLE_ANIMATE_OFF: 'off',
-				ATTRIBUTE_RIPPLE_MOUSE_DOWN: 'data-ripple-mousedown',
-				ATTRIBUTE_RIPPLE_MOUSE_DOWN_ON: 'on',
-				ATTRIBUTE_RIPPLE_MOUSE_DOWN_OFF: 'off',
-				ATTRIBUTE_RIPPLE_COLOR: 'data-ripple-color'
-			},
-			rippleIdSuffix = 0;
+		const CLASS_NAME_RIPPLE_ON = 'ripple-on',
+			CLASS_NAME_RIPPLE_OUT = 'ripple-out',
+			ATTRIBUTE_RIPPLE_ANIMATE = 'data-ripple-animate',
+			ATTRIBUTE_RIPPLE_ANIMATE_ON = 'on',
+			ATTRIBUTE_RIPPLE_ANIMATE_OFF = 'off',
+			ATTRIBUTE_RIPPLE_MOUSE_DOWN = 'data-ripple-mousedown',
+			ATTRIBUTE_RIPPLE_MOUSE_DOWN_ON = 'on',
+			ATTRIBUTE_RIPPLE_MOUSE_DOWN_OFF = 'off',
+			ATTRIBUTE_RIPPLE_COLOR = 'data-ripple-color';
+
+		let rippleIdSuffix = 0;
 
 		function getRippleId() {
 			return 'ripple' + rippleIdSuffix++;
@@ -69,8 +61,9 @@ define(
 			 * @returns none.
 			 */
 			initOption: function(/* object */ args) {
-				urushi.addEvent(this._getRippleRootNode(), 'mousedown', this, '_onRippleStart');
-				urushi.addEvent(this._getRippleRootNode(), 'touchstart', this, '_onRippleStart');
+				this._super(args);
+				urushi.addEvent(this._getRippleRootNode(), 'mousedown', this._onRippleStart.bind(this));
+				urushi.addEvent(this._getRippleRootNode(), 'touchstart', this._onRippleStart.bind(this));
 			},
 			/**
 			 * <pre>
@@ -90,7 +83,7 @@ define(
 			 * @returns {node} Wrapper element node.
 			 */
 			_createRippleWrapperElement: function() {
-				var children = this._getRippleRootNode().getElementsByClassName('ripple-wrapper'),
+				let children = this._getRippleRootNode().getElementsByClassName('ripple-wrapper'),
 					div;
 
 				if (children.length) {
@@ -105,51 +98,32 @@ define(
 			},
 			/**
 			 * <pre>
-			 * Returns x axiz for ripple animation start point.
+			 * Returns x, y axiz for ripple animation start point.
 			 * </pre>
 			 * @protected
 			 * @param {event} event Event object.
-			 * @returns {number} X axiz for ripple animation start point.
+			 * @returns {Object} x, y axiz for ripple animation start point.
 			 */
-			_getX: function(/* event */ event) {
-				var rootNode = this._getRippleRootNode();
+			_getRect: function(/* Event */ event) {
+				let rootNode = this._getRippleRootNode(),
+					rect = {x: NaN, y: NaN},
+					offset = urushi.getOffset(rootNode);
+
 				if ('none' === urushi.getStyle(rootNode).display) {
-					return NaN;
+					return rect;
 				}
 
 				if (!urushi.isTouch()) {
-					return event.pageX - rootNode.getBoundingClientRect().left;
+					rect.x = event.pageX - offset.x;
+					rect.y = event.pageY - offset.y;
 				} else {
 					event = event.originalEvent || event;
 					if (1 === event.touches.length) {
-						return event.touches[0].pageX - rootNode.getBoundingClientRect().left;
+						rect.x = event.touches[0].pageX - offset.x;
+						rect.y = event.touches[0].pageY - offset.y;
 					}
-					return NaN;
 				}
-			},
-			/**
-			 * <pre>
-			 * Returns y axiz for ripple animation start point.
-			 * </pre>
-			 * @protected
-			 * @param {event} event Event object.
-			 * @returns {number} Y axiz for ripple animation start point.
-			 */
-			_getY: function(/* object */ event) {
-				var rootNode = this._getRippleRootNode();
-				if ('none' === urushi.getStyle(rootNode).display) {
-					return NaN;
-				}
-
-				if (!urushi.isTouch()) {
-					return event.pageY - rootNode.getBoundingClientRect().top;
-				} else {
-					event = event.originalEvent || event;
-					if (1 === event.touches.length) {
-						return event.touches[0].pageY - rootNode.getBoundingClientRect().top;
-					}
-					return NaN;
-				}
+				return rect;
 			},
 			/**
 			 * <pre>
@@ -161,7 +135,7 @@ define(
 			 */
 			_getRippleColor: function() {
 				return this._getRippleRootNode().getAttribute(
-						CONSTANTS.ATTRIBUTE_RIPPLE_COLOR
+						ATTRIBUTE_RIPPLE_COLOR
 					) || window.getComputedStyle(this._getRippleRootNode()).color;
 			},
 			/**
@@ -173,15 +147,14 @@ define(
 			 * @returns Max size of ripple animation.
 			 */
 			_getNewSize: function(/* node */ ripple) {
-				var width = this._getRippleRootNode().clientWidth,
+				let width = this._getRippleRootNode().clientWidth,
 					height = this._getRippleRootNode().clientHeight;
 
 				if (!width || !height) {
 					return 0;
 				}
-                return (Math.max(width, height) / ripple.clientWidth) * 2.5;
 
-				// return (Math.max(width, height) / this._getRippleRootNode().clientWidth) * 2.5;
+				return (Math.max(width, height) / ripple.clientWidth) * 2.1;
 			},
 			/**
 			 * <pre>
@@ -194,7 +167,7 @@ define(
 			 * @returns Element node(div) that has ripple animation.
 			 */
 			_createRippleElement: function(/* number */ relX, /* number */ relY, /* string */ rippleColor) {
-				var ripple = document.createElement('div');
+				let ripple = document.createElement('div');
 
 				ripple.id = this.id + '-' + getRippleId();
 				ripple.className = 'ripple';
@@ -214,8 +187,8 @@ define(
 			 * @returns Element node(div) that has ripple animation.
 			 */
 			_onRippleStart: function(/* object */ event) {
-				var wrapper,
-					relX, relY,
+				let wrapper,
+					rel,
 					rippleColor,
 					ripple;
 
@@ -225,40 +198,31 @@ define(
 
 				wrapper = this._createRippleWrapperElement();
 
-				relX = this._getX(event);
-				relY = this._getY(event);
-				if (isNaN(relX) || isNaN(relY)) {
+				rel = this._getRect(event);
+				if (isNaN(rel.x) || isNaN(rel.y)) {
 					return false;
 				}
 
 				rippleColor = this._getRippleColor();
-				ripple = this._createRippleElement(relX, relY, rippleColor);
+				ripple = this._createRippleElement(rel.x, rel.y, rippleColor);
 				wrapper.appendChild(ripple);
-
-				//(function() { return window.getComputedStyle(ripple).opacity; })();
 
 				this._rippleOn(ripple);
 
-				setTimeout(this._rippleAnimationEnd.bind(this, ripple, wrapper), materialConfig.DEFAULT_VALUE_DURATION);
+				setTimeout(this._rippleAnimationEnd.bind(this, ripple, wrapper), 400);
 
 				urushi.addEvent(
 					this._getRippleRootNode(),
 					'mouseup',
-					this,
-					'_onRippleMouseup',
-					{ripple: ripple, wrapper: wrapper});
+					this._onRippleMouseup.bind(this, {ripple: ripple, wrapper: wrapper}));
 				urushi.addEvent(
 					this._getRippleRootNode(),
 					'mouseleave',
-					this,
-					'_onRippleMouseup',
-					{ripple: ripple, wrapper: wrapper});
+					this._onRippleMouseup.bind(this, {ripple: ripple, wrapper: wrapper}));
 				urushi.addEvent(
 					this._getRippleRootNode(),
 					'touchend',
-					this,
-					'_onRippleMouseup',
-					{ripple: ripple, wrapper: wrapper});
+					this._onRippleMouseup.bind(this, {ripple: ripple, wrapper: wrapper}));
 
 				return true;
 			},
@@ -273,11 +237,9 @@ define(
 			 * @returns none.
 			 */
 			_rippleAnimationEnd: function(/* node */ ripple, /* node */ wrapper) {
-				ripple.setAttribute(CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE, CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE_OFF);
+				ripple.setAttribute(ATTRIBUTE_RIPPLE_ANIMATE, ATTRIBUTE_RIPPLE_ANIMATE_OFF);
 
-				if (CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN_OFF === ripple.getAttribute(
-						CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN
-					)) {
+				if (ATTRIBUTE_RIPPLE_MOUSE_DOWN_OFF === ripple.getAttribute(ATTRIBUTE_RIPPLE_MOUSE_DOWN)) {
 					this._rippleOut(ripple, wrapper);
 				}
 			},
@@ -293,24 +255,11 @@ define(
 			 * @returns none.
 			 */
 			_onRippleMouseup: function(/* object */ args, /* object */ event) {
-				var ripple, wrapper;
+				let ripple, wrapper;
 
-				urushi.removeEvent(
-					this._getRippleRootNode(),
-					'mouseup',
-					this,
-					'_onRippleMouseup');
-				urushi.removeEvent(
-					this._getRippleRootNode(),
-					'mouseleave',
-					this,
-					'_onRippleMouseup',
-					{ripple: ripple, wrapper: wrapper});
-				urushi.removeEvent(
-					this._getRippleRootNode(),
-					'touchend',
-					this,
-					'_onRippleMouseup');
+				urushi.removeEvent(this._getRippleRootNode(), 'mouseup');
+				urushi.removeEvent(this._getRippleRootNode(), 'mouseleave');
+				urushi.removeEvent(this._getRippleRootNode(), 'touchend');
 
 				if (!args || !args.ripple || !args.wrapper) {
 					return;
@@ -319,11 +268,9 @@ define(
 				ripple = args.ripple;
 				wrapper = args.wrapper;
 
-				ripple.setAttribute(CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN, CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN_OFF);
+				ripple.setAttribute(ATTRIBUTE_RIPPLE_MOUSE_DOWN, ATTRIBUTE_RIPPLE_MOUSE_DOWN_OFF);
 
-				if (CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE_OFF === ripple.getAttribute(
-						CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE
-					)) {
+				if (ATTRIBUTE_RIPPLE_ANIMATE_OFF === ripple.getAttribute(ATTRIBUTE_RIPPLE_ANIMATE)) {
 					this._rippleOut(ripple, wrapper);
 				}
 			},
@@ -337,23 +284,17 @@ define(
 			 * @returns none.
 			 */
 			_rippleOn: function(/* node */ ripple) {
-				var size = this._getNewSize(ripple);
+				let size = this._getNewSize(ripple);
 
 				ripple.style['-ms-transform'] = 'scale(' + size + ')';
 				ripple.style['-moz-transform'] = 'scale(' + size + ')';
 				ripple.style['-webkit-transform'] = 'scale(' + size + ')';
 				ripple.style.transform = 'scale(' + size + ')';
 
-				ripple.classList.add(CONSTANTS.CLASS_NAME_RIPPLE_ON);
+				ripple.classList.add(CLASS_NAME_RIPPLE_ON);
 				
-				ripple.setAttribute(
-						CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE,
-						CONSTANTS.ATTRIBUTE_RIPPLE_ANIMATE_ON
-					);
-				ripple.setAttribute(
-						CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN,
-						CONSTANTS.ATTRIBUTE_RIPPLE_MOUSE_DOWN_ON
-					);
+				ripple.setAttribute(ATTRIBUTE_RIPPLE_ANIMATE, ATTRIBUTE_RIPPLE_ANIMATE_ON);
+				ripple.setAttribute(ATTRIBUTE_RIPPLE_MOUSE_DOWN, ATTRIBUTE_RIPPLE_MOUSE_DOWN_ON);
 			},
 			/**
 			 * <pre>
@@ -365,7 +306,7 @@ define(
 			 * @returns none.
 			 */
 			_rippleEnd: function(/* node */ ripple) {
-				urushi.removeEvent(ripple, 'transitionend', this, '_rippleEnd');
+				urushi.removeEvent(ripple, 'transitionend');
 
 				if (ripple.parentElement) {
 					ripple.parentElement.removeChild(ripple);
@@ -382,9 +323,9 @@ define(
 			 * @returns none.
 			 */
 			_rippleOut: function(/* node */ ripple, /* node */ wrapper) {
-				ripple.classList.add(CONSTANTS.CLASS_NAME_RIPPLE_OUT);
+				ripple.classList.add(CLASS_NAME_RIPPLE_OUT);
 
-				urushi.addEvent(ripple, 'transitionend', this, '_rippleEnd', ripple);
+				urushi.addEvent(ripple, 'transitionend', this._rippleEnd.bind(this, ripple));
 			},
 			/**
 			 * <pre>
@@ -393,8 +334,8 @@ define(
 			 * @returns none.
 			 */
 			destroy: function() {
-				urushi.removeEvent(this._getRippleRootNode(), 'mousedown', this, '_onRippleStart');
-				urushi.removeEvent(this._getRippleRootNode(), 'touchstart', this, '_onRippleStart');
+				urushi.removeEvent(this._getRippleRootNode(), 'mousedown');
+				urushi.removeEvent(this._getRippleRootNode(), 'touchstart');
 
 				this._super();
 			}

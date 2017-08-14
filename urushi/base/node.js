@@ -196,6 +196,48 @@ define(
 			}
 			return nodeList[0];
 		}
+		/**
+		 * <pre>
+		 * スクロール位置を取得する。（単位：px）
+		 * scrollS, scrollYが利用できないブラウザを考慮するための関数。
+		 * </pre>
+		 * @member module:node#getScroll
+		 * @function
+		 * @returns {Object} スクロール位置
+		 */
+		function getScroll() {
+			return {
+				x: (window.pageXOffset !== undefined)
+					? window.pageXOffset
+					: (document.documentElement || document.body.parentNode || document.body).scrollLeft,
+				y: (window.pageYOffset !== undefined)
+					? window.pageYOffset
+					: (document.documentElement || document.body.parentNode || document.body).scrollTop
+			};
+		}
+		/**
+		 * <pre>
+		 * 指定したElementの位置を取得する。
+		 * </pre>
+		 * @member module:node#getOffst
+		 * @function
+		 * @param {Element} element 位置を取得したいエレメント
+		 * @returns {Object} 位置
+		 */
+		function getOffset(/* Element */ element) {
+			let scroll = getScroll(),
+				rect;
+
+			if (!Element || !(element instanceof Element)) {
+				return {x: 0, y: 0};
+			}
+			rect = element.getBoundingClientRect();
+
+			return {
+				x: rect.left + scroll.x,
+				y: rect.top + scroll.y
+			};
+		}
 
 		node.isNode = isNode;
 		node.isElementNode = isElementNode;
@@ -208,6 +250,8 @@ define(
 		node.clearDomContents = clearDomContents;
 		node.createNodes = createNodes;
 		node.createNode = createNode;
+		node.getScroll = getScroll;
+		node.getOffset = getOffset;
 
 		return node;
 	}

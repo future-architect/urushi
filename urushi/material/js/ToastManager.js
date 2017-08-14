@@ -1,7 +1,7 @@
 /**
  * @fileOverView ToastManager class definition.
  * @author Yuzo Hirakawa
- * @version 1.0
+ * @version 1.0.0
  */
 
 /**
@@ -26,7 +26,7 @@
  * </pre>
  * @example
  *	require(['ToastManager'], function(ToastManager) {
- *		var toastManager = new ToastManager({
+ *		let toastManager = new ToastManager({
  *			id: 'toastManager',
  *			addtionalClass: '',
  *			displayTime: 5000
@@ -37,7 +37,6 @@
  *
  * @module ToastManager
  * @extends module:_Base
- * @requires module:Urushi
  * @requires module:_Base
  * @requires module:materialConfig
  * @requires module:Toast
@@ -46,7 +45,6 @@
 define(
 	'ToastManager',
 	[
-		'Urushi',
 		'_Base',
 		'materialConfig',
 		'Toast',
@@ -58,7 +56,7 @@ define(
 	 * @alias module:ToastManager
 	 * @returns {object} ToastManager instance.
 	*/
-	function(urushi, _Base, materialConfig, Toast, template) {
+	function(_Base, materialConfig, Toast, template) {
 		'use strict';
 
 		/**
@@ -68,9 +66,7 @@ define(
 		 * @type object
 		 * @constant
 		 */
-		var CONSTANTS = {
-			ID: 'urushi.toast-manager',
-		};
+		const ID = 'urushi.toast-manager';
 
 		/**
 		 * <pre>
@@ -78,7 +74,7 @@ define(
 		 * </pre>
 		 * @type boolean
 		 */
-		var isCreated = false;
+		let isCreated = false;
 
 		/**
 		 * <pre>
@@ -88,7 +84,7 @@ define(
 		 * </pre>
 		 * @type object
 		 */
-		var contents = {};
+		let contents = {};
 
 		return _Base.extend(/** @lends module:ToastManager.prototype */ {
 			/**
@@ -99,7 +95,7 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template: undefined,
+			template: template,
 			/**
 			 * <pre>
 			 * Default variables there are binded to template string.
@@ -143,8 +139,9 @@ define(
 			 * @returns none.
 			 */
 			_initProperties: function(/* object */ args) {
-				this.template = template;
-				this.id = CONSTANTS.ID;
+				this._super(args);
+
+				this.id = ID;
 				this.setDisplayTime(args.displayTime || materialConfig.TOAST_DISPLAY_TIME);
 			},
 			/**
@@ -155,7 +152,7 @@ define(
 			 * @returns {node} The toast element node.
 			 */
 			getToastNode: function(/* string */ id) {
-				var toast;
+				let toast;
 				if (!id) {
 					return null;
 				}
@@ -174,7 +171,7 @@ define(
 			 * @returns {string} The toast id.
 			 */
 			show: function(/* string|node */ content, /* number */ displayTime) {
-				var args, toast;
+				let args, toast;
 
 				content = content || '';
 				if ('string' !== typeof content &&
@@ -214,7 +211,7 @@ define(
 			 * @returns none.
 			 */
 			hide: function(/* string */ id) {
-				var toast;
+				let toast;
 				if (!id) {
 					return;
 				}
@@ -271,7 +268,7 @@ define(
 			 * @returns none
 			 */
 			destroy: function() {
-				var key;
+				let key;
 				for (key in contents) {
 					this._deleteToast(key);
 				}

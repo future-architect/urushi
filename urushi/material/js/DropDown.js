@@ -26,7 +26,7 @@
  * </pre>
  * @example
  *	require(['Dropdown'], function(Dropdown) {
- *		var dropdown = new Dropdown({
+ *		let dropdown = new Dropdown({
  *			id: 'myCheckbox',
  *			dropdownClass: 'dropdown-primary',
  *			additionalClass: ''
@@ -51,11 +51,9 @@
  *
  * @module DropDown
  * @extends module:_Base
- * @requires jquery-2.1.1.js
- * @requires module:Urushi
  * @requires module:legacy
- * @requires module:materialConfig
- * @requires module:animation
+ * @requires module:event
+ * @requires module:browser
  * @requires module:_Base
  * @requires dropDown.html
  */
@@ -63,9 +61,8 @@ define(
 	'DropDown',
 	[
 		'legacy',
-		'Urushi',
-		'materialConfig',
-		'animation',
+		'event',
+		'browser',
 		'_Base',
 		'text!dropDownTemplate'
 	],
@@ -75,7 +72,7 @@ define(
 	 * @alias module:DropDown
 	 * @returns {object} Dropdown instance.
 	 */
-	function(legacy, urushi, materialConfig, animation, _Base, template) {
+	function(legacy, event, browser, _Base, template) {
 		'use strict';
 
 		/**
@@ -85,19 +82,16 @@ define(
 		 * @type object
 		 * @constant
 		 */
-		var CONSTANTS = {
-			ID_PREFIX: 'urushi.DropDown',
-			ID_PREFIX_ITEM: 'urushi.DropDown.item',
-			EMBEDDED: {additionalClass: ''},
-			TIMEOUT_TRIGGER: 10,
-			LIST_PLACE_TOP_RIGHT: 'top-right',
-			LIST_PLACE_BOTTOM_RIGHT: 'bottom-right',
-			ATTRIBUTE_INPUT_ITEM_SELECTED_VALUE: 'data-value',
-			ATTRIBUTE_UL_ITEM_SELECTED_ID: 'data-selected-id',
-			ATTRIBUTE_LI_ITEM_VALUE: 'data-value',
-			CLASS_ITEM_SELECTED: 'selected',
-			MENULIST_MIN_WIDTH: 200,
-		};
+		const ID_PREFIX = 'urushi.DropDown';
+		const ID_PREFIX_ITEM = 'urushi.DropDown.item';
+		const EMBEDDED = {};
+		const LIST_PLACE_TOP_RIGHT = 'top-right';
+		const LIST_PLACE_BOTTOM_RIGHT = 'bottom-right';
+		const ATTRIBUTE_INPUT_ITEM_SELECTED_VALUE = 'data-value';
+		const ATTRIBUTE_UL_ITEM_SELECTED_ID = 'data-selected-id';
+		const ATTRIBUTE_LI_ITEM_VALUE = 'data-value';
+		const CLASS_ITEM_SELECTED = 'selected';
+		const MENULIST_MIN_WIDTH = 200;
 
 		/**
 		 * <pre>
@@ -105,7 +99,7 @@ define(
 		 * </pre>
 		 * @type number
 		 */
-		var idNo = 0;
+		let idNo = 0;
 
 		/**
 		 * <pre>
@@ -113,7 +107,7 @@ define(
 		 * </pre>
 		 * @type number
 		 */
-		var itemIdNo = 0;
+		let itemIdNo = 0;
 
 		return _Base.extend(/** @lends module:DropDown.prototype */ {
 			/**
@@ -124,13 +118,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template: undefined,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded: undefined,
+			embedded: EMBEDDED,
 			/**
 			 * <pre>
 			 * Dropdown menu is whether opend, or not.
@@ -159,14 +153,36 @@ define(
 			 * @private
 			 */
 			itemsByValue: undefined,
+
 			/**
 			 * <pre>
-			 * Deferred object for animation.
+			 * TemplateEngineで検出されたElementから、
+			 * インスタンス化に必要な定義を抽出する。
 			 * </pre>
-			 * @type object
-			 * @private
+			 * @protected
+			 * @param {Element} element 置換対象のエレメント。
+			 * @returns none.
 			 */
-			animDeferred: undefined,
+			_parse: function(/* Element */ element) {
+				let option = this._super(element),
+					children = element.children,
+					items = [],
+					item,
+					index,
+					length;
+
+				for (index = 0, length = children.length; index < length; index++) {
+					item = {};
+
+					item.label = (children[index].textContent || '').trim();
+					item.value = children[index].value || '';
+
+					items.push(item);
+				}
+				option.items = items;
+
+				return option;
+			},
 			/**
 			 * <pre>
 			 * Initializes instance properties.
@@ -176,12 +192,11 @@ define(
 			 * @returns none.
 			 */
 			_initProperties: function(/* object */ args) {
-				this.template = template;
-				this.embedded = CONSTANTS.EMBEDDED;
+				this._super(args);
+
 				this.items = {};
 				this.itemsByValue = {};
 				this.opened = false;
-				this.animDeferred = null;
 			},
 			/**
 			 * <pre>
@@ -197,11 +212,11 @@ define(
 					this.addItems(args.items);
 				}
 
-				urushi.addEvent(this.inputNode, 'click', this, '_onClickInput');
-				urushi.addEvent(this.inputNode, 'focus', this, '_onClickInput');
-				urushi.addEvent(this.inputNode, 'blur', this, '_onBlurInput');
-				urushi.addEvent(this.inputNode, 'keydown', this, '_onKeydownInput');
-				urushi.addEvent(this.listNode, 'mousedown', this, '_onMousedownList');
+				event.addEvent(this.inputNode, 'click', this._onClickInput.bind(this));
+				event.addEvent(this.inputNode, 'focus', this._onClickInput.bind(this));
+				event.addEvent(this.inputNode, 'blur', this._onBlurInput.bind(this));
+				event.addEvent(this.inputNode, 'keydown', this._onKeydownInput.bind(this));
+				event.addEvent(this.listNode, 'mousedown', this._onMousedownList.bind(this));
 
 				this.listNode.classList.add('hidden');
 			},
@@ -214,7 +229,7 @@ define(
 			 * @returns none.
 			 */
 			_addItem: function(/* object */ item) {
-				var li,
+				let li,
 					label,
 					value,
 					id,
@@ -229,8 +244,8 @@ define(
 				li.textContent = item.label || '\u00a0';//\u00a0 = &nbsp;
 				li.className = item.class || '';
 				value = item.value;
-				li.setAttribute(CONSTANTS.ATTRIBUTE_LI_ITEM_VALUE, item.value);
-				urushi.addEvent(li, 'click', this, '_onSelectItem', {target: li});
+				li.setAttribute(ATTRIBUTE_LI_ITEM_VALUE, item.value);
+				event.addEvent(li, 'click', this._onSelectItem.bind(this, {target: li}));
 
 				this.listNode.appendChild(li);
 
@@ -247,7 +262,7 @@ define(
 			 * Adds items to dropdown.
 			 * </pre>
 			 * @example
-			 *	var item = {
+			 *	let item = {
 			 *		value: 'selected value', // require
 			 *		label: 'item label', // recommend
 			 *		class: 'optional-class', / option
@@ -257,7 +272,7 @@ define(
 			 * @returns none.
 			 */
 			addItems: function(/* array */ items) {
-				var index, length;
+				let index, length;
 
 				if (!(items instanceof Array)) {
 					return;
@@ -274,7 +289,7 @@ define(
 			 * @returns none.
 			 */
 			removeItem: function(/* string */ value) {
-				var _item = this.itemsByValue[value],
+				let _item = this.itemsByValue[value],
 					id,
 					li,
 					sel;
@@ -286,7 +301,7 @@ define(
 				li = _item.node;
 				id = li.id;
 
-				urushi.removeEvent(li, 'click', this, '_onSelectItem');
+				event.removeEvent(li, 'click');
 
 				this.listNode.removeChild(li);
 				delete this.items[id];
@@ -304,7 +319,7 @@ define(
 			 * @returns none.
 			 */
 			removeAllItems: function() {
-				var value;
+				let value;
 				for (value in this.itemsByValue) {
 					this.removeItem(value);
 				}
@@ -318,13 +333,13 @@ define(
 			 * @returns none.
 			 */
 			_onSelect: function(/* node */ target) {
-				var id = target.id,
+				let id = target.id,
 					item = this.items[id];
 
-				target.classList.add(CONSTANTS.CLASS_ITEM_SELECTED);
-				this.listNode.setAttribute(CONSTANTS.ATTRIBUTE_UL_ITEM_SELECTED_ID, id);
+				target.classList.add(CLASS_ITEM_SELECTED);
+				this.listNode.setAttribute(ATTRIBUTE_UL_ITEM_SELECTED_ID, id);
 				this.inputNode.value = item.label;
-				this.inputNode.setAttribute(CONSTANTS.ATTRIBUTE_INPUT_ITEM_SELECTED_VALUE, item.value);
+				this.inputNode.setAttribute(ATTRIBUTE_INPUT_ITEM_SELECTED_VALUE, item.value);
 			},
 			/**
 			 * <pre>
@@ -336,7 +351,7 @@ define(
 			 * @returns none.
 			 */
 			_onSelectItem: function(/* object */ args, /* object */ event) {
-				var target = args.target;
+				let target = args.target;
 
 				this.onSelect(target);
 				this._closeDropDownMenu();
@@ -360,7 +375,7 @@ define(
 			 * @returns none.
 			 */
 			setSelected: function(/* any */ value) {
-				var item = this.itemsByValue[value];
+				let item = this.itemsByValue[value];
 
 				if (!item) {
 					return;
@@ -374,7 +389,7 @@ define(
 			 * @returns {object} Selected item.
 			 */
 			getSelectedItem: function() {
-				return this.items[this.listNode.getAttribute(CONSTANTS.ATTRIBUTE_UL_ITEM_SELECTED_ID) || ''];
+				return this.items[this.listNode.getAttribute(ATTRIBUTE_UL_ITEM_SELECTED_ID) || ''];
 			},
 			/**
 			 * <pre>
@@ -383,7 +398,7 @@ define(
 			 * @returns {node} Selected item element node.
 			 */
 			getSelectedNode: function() {
-				var item = this.getSelectedItem();
+				let item = this.getSelectedItem();
 				return item ? item.node : undefined;
 			},
 			/**
@@ -393,7 +408,7 @@ define(
 			 * @returns {any} Item value.
 			 */
 			getSelectedValue: function() {
-				var item = this.getSelectedItem();
+				let item = this.getSelectedItem();
 				return item ? item.value : undefined;
 			},
 			/**
@@ -403,13 +418,13 @@ define(
 			 * @returns none.
 			 */
 			clearSelected: function() {
-				var selectedNodes = this.listNode.getElementsByClassName(CONSTANTS.CLASS_ITEM_SELECTED),
+				let selectedNodes = this.listNode.getElementsByClassName(CLASS_ITEM_SELECTED),
 					selected = Array.prototype.slice.call(selectedNodes),
 					index,
 					length;
 
 				for (index = 0, length = selected.length; index < length; index++) {
-					selected[index].classList.remove(CONSTANTS.CLASS_ITEM_SELECTED);
+					selected[index].classList.remove(CLASS_ITEM_SELECTED);
 				}
 			},
 			/**
@@ -421,6 +436,7 @@ define(
 			 * @returns none.
 			 */
 			_onMousedownList: function(/* object */ event) {
+				console.log('_onMousedownList', event);
 				event.preventDefault();
 
 				this.cancelBlur = true;
@@ -438,13 +454,15 @@ define(
 			 * @returns none.
 			 */
 			_onClickInput: function(/* object */ event) {
-				var items = this.listNode.childNodes,
+				let items = this.listNode.childNodes,
 					length = items.length,
 					dropDownHeight,
 					inputNodeHeight,
 					inputNodeTop,
 					height,
 					maxHeight;
+
+				console.log('_onClickInput', event);
 
 				if (this.inputNode.getAttribute('disabled') || this.readonly) {
 					return;
@@ -474,9 +492,9 @@ define(
 				}
 
 				if ((inputNodeTop + height + inputNodeHeight) < document.body.scrollTop + window.innerHeight) {
-					this.listNode.setAttribute('data-placement', CONSTANTS.LIST_PLACE_TOP_RIGHT);
+					this.listNode.setAttribute('data-placement', LIST_PLACE_TOP_RIGHT);
 				} else {
-					this.listNode.setAttribute('data-placement', CONSTANTS.LIST_PLACE_BOTTOM_RIGHT);
+					this.listNode.setAttribute('data-placement', LIST_PLACE_BOTTOM_RIGHT);
 				}
 				this.listNode.style.maxHeight = height + 'px';
 
@@ -491,6 +509,7 @@ define(
 			 * @returns none.
 			 */
 			_onBlurInput: function(event) {
+				console.log('_onBlurInput', event, 'this.cancelBlur', this.cancelBlur);
 				if (this.cancelBlur) {
 					delete this.cancelBlur;
 					return;
@@ -507,37 +526,38 @@ define(
 			 * @returns none.
 			 */
 			_onKeydownInput: function(event) {
-				var keyCode = urushi.getKeyCode(event),
+				let keyCode = browser.getKeyCode(event),
 					pageOffset;
+				console.log('_onKeydownInput', event, 'keyCode', keyCode, 'this.opened', this.opened);
 				if (this.opened) {
-					if (keyCode === urushi.KEYCODE.ENTER) {
+					if (keyCode === browser.KEYCODE.ENTER) {
 						this._onBlurInput(event);
 						event.stopPropagation();
-					} else if (keyCode === urushi.KEYCODE.ESCAPE) {
+					} else if (keyCode === browser.KEYCODE.ESCAPE) {
 						this._onBlurInput(event);
 						event.stopPropagation();
-					} else if (keyCode === urushi.KEYCODE.UP) {
+					} else if (keyCode === browser.KEYCODE.UP) {
 						this._moveDisplayItems(-1, this.listNode.childNodes.length - 1, 0); // Selects previous item.
 						event.stopPropagation();
 						event.preventDefault(); // Stops the browser scrolling.
-					} else if (keyCode === urushi.KEYCODE.DOWN) {
+					} else if (keyCode === browser.KEYCODE.DOWN) {
 						this._moveDisplayItems(1, 0, this.listNode.childNodes.length - 1); // Selects next item.
 						event.stopPropagation();
 						event.preventDefault(); // Stops the browser scrolling.
-					} else if (keyCode === urushi.KEYCODE.HOME) {
+					} else if (keyCode === browser.KEYCODE.HOME) {
 						this._moveSelection(0); // Selects first item.
 						event.stopPropagation();
 						event.preventDefault(); // Stops the browser scrolling.
-					} else if (keyCode === urushi.KEYCODE.END) {
+					} else if (keyCode === browser.KEYCODE.END) {
 						this._moveSelection(this.listNode.childNodes.length - 1); // Selects last item.
 						event.stopPropagation();
 						event.preventDefault(); // Stops the browser scrolling.
-					} else if (keyCode === urushi.KEYCODE.PAGE_UP) {
+					} else if (keyCode === browser.KEYCODE.PAGE_UP) {
 						pageOffset = Math.floor(this.listNode.offsetHeight / this.listNode.childNodes[0].offsetHeight);
 						this._moveDisplayItems(-pageOffset, this.listNode.childNodes.length - 1, 0); // Shows previous items.
 						event.stopPropagation();
 						event.preventDefault(); // Stops the browser scrolling.
-					} else if (keyCode === urushi.KEYCODE.PAGE_DOWN) {
+					} else if (keyCode === browser.KEYCODE.PAGE_DOWN) {
 						pageOffset = Math.floor(this.listNode.offsetHeight / this.listNode.childNodes[0].offsetHeight);
 						this._moveDisplayItems(pageOffset, 0, this.listNode.childNodes.length - 1); // Shows next items.
 						event.stopPropagation();
@@ -545,10 +565,10 @@ define(
 					}
 				} else {
 					if ([
-						urushi.KEYCODE.ENTER,
-						urushi.KEYCODE.SPACE,
-						urushi.KEYCODE.UP,
-						urushi.KEYCODE.DOWN
+						browser.KEYCODE.ENTER,
+						browser.KEYCODE.SPACE,
+						browser.KEYCODE.UP,
+						browser.KEYCODE.DOWN
 					].indexOf(keyCode) > -1) {
 						this._onClickInput(event);
 						event.stopPropagation();
@@ -567,7 +587,7 @@ define(
 			 * @returns none.
 			 */
 			_moveDisplayItems: function(/* number */ distance, /* number */ initial, /* number */ overInitial) {
-				var prevNode,
+				let prevNode,
 					prevIndex = NaN,
 					nextIndex;
 				prevNode = this.getSelectedNode();
@@ -591,7 +611,7 @@ define(
 			 * @returns none.
 			 */
 			_moveSelection: function(/* number */ nextIndex) {
-				var prevNode,
+				let prevNode,
 					prevIndex = NaN,
 					nextNode;
 
@@ -638,7 +658,7 @@ define(
 					return;
 				}
 
-				if (this.listNode.getAttribute('data-placement') === CONSTANTS.LIST_PLACE_TOP_RIGHT) {
+				if (this.listNode.getAttribute('data-placement') === LIST_PLACE_TOP_RIGHT) {
 					this._setScrollVisibleTop(target);
 				} else {
 					this._setScrollVisibleBottom(target);
@@ -688,7 +708,7 @@ define(
 			 * @returns {string} Instance id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
+				return ID_PREFIX + idNo++;
 			},
 			/**
 			 * <pre>
@@ -698,7 +718,7 @@ define(
 			 * @returns none.
 			 */
 			_getItemId: function() {
-				return CONSTANTS.ID_PREFIX_ITEM + itemIdNo++;
+				return ID_PREFIX_ITEM + itemIdNo++;
 			},
 			/**
 			 * <pre>
@@ -708,20 +728,15 @@ define(
 			 * @returns none.
 			 */
 			_openDropDownMenu: function(/* number */ height) {
-				var liWidth,
+				let liWidth,
 					liHeight,
-					select,
-					startWidth,
-					startHeight,
-					startOpacity,
 					liList, i;
 
 				if (this.opened) {
 					return;
 				}
-				this.inputNode.classList.add('focus');
 
-				liWidth = Math.max(this.mainNode.parentNode.offsetWidth, CONSTANTS.MENULIST_MIN_WIDTH);
+				liWidth = Math.max(this.mainNode.parentNode.offsetWidth, MENULIST_MIN_WIDTH);
 				liHeight = this.listNode.childNodes[0].offsetHight;
 
 				liList = this.listNode.getElementsByClassName('li');
@@ -731,34 +746,7 @@ define(
 				}
 				this.listNode.style.minWidth = 0;
 
-				this.listNode.classList.remove('hidden');
-
-				if (this.animDeferred) {
-					this.animDeferred.cancel();
-					startWidth = this.listNode.offsetWidth;
-					startHeight = this.listNode.offsetHeight;
-					startOpacity = this.listNode.style.opacity;
-				} else {
-					this.listNode.style.width = 0;
-					this.listNode.style.height = 0;
-					startWidth = 0;
-					startHeight = 0;
-					startOpacity = 0;
-				}
-				select = this.getSelectedNode();
-				this.animDeferred = animation.animate(
-					materialConfig.DEFAULT_VALUE_DURATION,
-					function(p) {
-						this.listNode.style.width = animation.calcPoint(startWidth, liWidth, p) + 'px';
-						this.listNode.style.height = animation.calcPoint(startHeight, height, p) + 'px';
-						this.listNode.style.opacity = animation.calcPoint(startOpacity, 1, p);
-						this._makeVisibleItemForInit(select);
-					}.bind(this)
-				).then(function() {
-					this.listNode.style.minWidth = '';
-					this._makeVisibleItemForInit(select);
-					this.animDeferred = null;
-				}.bind(this));
+				this.inputNode.classList.add('focus');
 
 				this.opened = true;
 			},
@@ -770,30 +758,8 @@ define(
 			 * @returns none.
 			 */
 			_closeDropDownMenu: function() {
-				var startWidth,
-					startHeight,
-					startOpacity;
+				this.inputNode.classList.remove('focus');
 
-				this.listNode.style.minWidth = 0;
-				if (this.animDeferred) {
-					this.animDeferred.cancel();
-				}
-
-				startWidth = this.listNode.offsetWidth;
-				startHeight = this.listNode.offsetHeight;
-				startOpacity = this.listNode.style.opacity;
-				this.animDeferred = animation.animate(
-					materialConfig.DEFAULT_VALUE_DURATION,
-					function(p) {
-						this.listNode.style.width = animation.calcPoint(startWidth, 0, p) + 'px';
-						this.listNode.style.height = animation.calcPoint(startHeight, 0, p) + 'px';
-						this.listNode.style.opacity = animation.calcPoint(startOpacity, 0, p);
-					}.bind(this)
-				).then(function() {
-					this.listNode.classList.add('hidden');
-					this.inputNode.classList.remove('focus');
-					this.animDeferred = null;
-				}.bind(this));
 				this.opened = false;
 			},
 			/**
@@ -825,21 +791,21 @@ define(
 			 * @returns none
 			 */
 			destroy: function() {
-				var items = this.listNode.childNodes,
+				let items = this.listNode.childNodes,
 					index,
 					length = items.length,
 					li;
 
-				urushi.removeEvent(this.inputNode, 'click', this, '_onClickInput');
-				urushi.removeEvent(this.inputNode, 'focus', this, '_onClickInput');
-				urushi.removeEvent(this.inputNode, 'blur', this, '_onBlurInput');
-				urushi.removeEvent(this.inputNode, 'keydown', this, '_onKeydownInput');
+				event.removeEvent(this.inputNode, 'click');
+				event.removeEvent(this.inputNode, 'focus');
+				event.removeEvent(this.inputNode, 'blur');
+				event.removeEvent(this.inputNode, 'keydown');
 
-				urushi.removeEvent(this.listNode, 'mousedown', this, '_onMousedownList');
+				event.removeEvent(this.listNode, 'mousedown');
 
 				for (index = 0; index < length; index++) {
 					li = items[index];
-					urushi.removeEvent(li, 'click', this, '_onSelectItem');
+					event.removeEvent(li, 'click');
 				}
 
 				this._super();

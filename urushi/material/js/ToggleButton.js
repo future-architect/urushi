@@ -30,7 +30,7 @@
  * </pre>
  * @example
  *	require(['ToggleButton'], function(ToggleButton) {
- *		var toggleButton = new ToggleButton({
+ *		let toggleButton = new ToggleButton({
  *			id: 'myToggleButton',
  *			toggleButtonClass: 'toggle-primary',
  *			additionalClass: '',
@@ -48,22 +48,18 @@
  *
  * @module ToggleButton
  * @extends module:_Base
- * @requires jquery-2.1.1.js
- * @requires jquery-ui-1.11.4.js',
- * @requires module:urushi
+ * @requires module:parser
  * @requires module:materialConfig
  * @requires module:_Base
  * @requires toggleButton.html
- * @requires toggleButtonTransitionUnit.html
  */
 define(
 	'ToggleButton',
 	[
-		'Urushi',
+		'parser',
 		'materialConfig',
 		'_Base',
-		'text!toggleButtonTemplate',
-		'text!toggleButtonTransitionUnitTemplate'
+		'text!toggleButtonTemplate'
 	],
 	/**
 	 * @class
@@ -71,7 +67,7 @@ define(
 	 * @alias module:ToggleButton
 	 * @returns {object} ToggleButton object.
 	 */
-	function(Urushi, materialConfig, _Base, template, transitionUnit) {
+	function(parser, materialConfig, _Base, template) {
 		'use strict';
 		/**
 		 * <pre>
@@ -80,10 +76,8 @@ define(
 		 * @type object
 		 * @constant
 		 */
-		var CONSTANTS = {
-			ID_PREFIX: 'urushi.ToggleButton',
-			EMBEDDED: {toggleButtonClass: '', additionalClass: '', label: ''}
-		};
+		const ID_PREFIX = 'urushi.ToggleButton';
+		const EMBEDDED = {label: ''};
 
 		/**
 		 * <pre>
@@ -91,7 +85,7 @@ define(
 		 * </pre>
 		 * @type number
 		 */
-		var idNo = 0;
+		let idNo = 0;
 
 		return _Base.extend({
 			/**
@@ -102,23 +96,34 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template: undefined,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded: undefined,
+			embedded: EMBEDDED,
+
 			/**
 			 * <pre>
-			 * Initializes instance properties.
+			 * TemplateEngineで検出されたElementから、
+			 * インスタンス化に必要な定義を抽出する。
 			 * </pre>
-			 * @param {object} args Constructor arguments.
-			 * @returns none.
+			 * @protected
+			 * @param {Element} element 置換対象のエレメント。
+			 * @returns インスタンス化に必要な定義情報
 			 */
-			_initProperties: function(/* object */ args) {
-				this.template = template;
-				this.embedded = CONSTANTS.EMBEDDED;
+			_parse: function(/* Element */ element) {
+				let option = this._super(element);
+				
+				option.label = parser.getPreviousText(element);
+				if (option.label) {
+					parser.removePreviousNode(element);
+				}
+				option.checked = !!element.checked;
+				option.disabled = !!element.disabled;
+
+				return option;
 			},
 			/**
 			 * <pre>
@@ -131,6 +136,22 @@ define(
 			 */
 			initOption: function(/* object */ args) {
 				this.setValue(args.checked);
+			},
+			/**
+			 * <pre>
+			 * コンストラクタ引数から初期値を設定する。
+			 * 下記を設定する。
+			 * - チェック状態
+			 * - disabledステータス
+			 * - readonlyステータス TODO
+			 * </pre>
+			 * @protected
+			 * @param {object} args コンストラクタ引数
+			 * @returns none.
+			 */
+			_setInitial: function(/* object */ args) {
+				this.setValue(args.checked);
+				this.setDisabled(args.disabled);
 			},
 			/**
 			 * <pre>
@@ -156,7 +177,7 @@ define(
 			 * @returns {string} object's id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
+				return ID_PREFIX + idNo++;
 			},
 			/**
 			 * <pre>

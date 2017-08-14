@@ -133,8 +133,6 @@ define(
 		util.deepCopy = deepCopy;
 		util.cope = copy;
 
-		window.uu = util;
-
 		return util;
 	}
 );

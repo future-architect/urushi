@@ -1,7 +1,7 @@
 /**
  * @fileOverView Toast class definition.
  * @author Yuzo Hirakawa
- * @version 1.0
+ * @version 1.0.0
  */
 
 /**
@@ -25,40 +25,39 @@
  *		descriptoin		: Body contents.
  * </pre>
  * @example
- *	require(['Toast'], function(Toast) {
- *		var toast = new Toast({
- *			id: 'myToast',
- *			toastClass: '',
- *			additionalClass: '',
- *			content: 'message'
+ *	require(['ToastManager'], function(ToastManager) {
+ *		let toastManager = new ToastManager({
+ *			id: 'toastManager',
+ *			addtionalClass: '',
+ *			displayTime: 5000
  *		});
- *		document.body.appendChild(toast.getRootNode());
- *		toast.show();
+ *		document.body.appendChild(toastManager.getRootNode());
+ *		toastManager.add('toast mesaage.');
  *	});
  *
  * @module Toast
- * @extends module:_Base
- * @requires jquery-2.1.1.js
- * @requires module:Urushi
+ * @requires module:event
+ * @requires module:node
  * @requires module:materialConfig
  * @requires module:_Base
- * @requires module:Deferred
  * @requires toast.html
+ * @requires module:promse
  */
 define(
 	'Toast',
 	[
-		'Urushi',
+		'event',
+		'node',
 		'materialConfig',
 		'_Base',
-		'Deferred',
-		'text!toastTemplate'
+		'text!toastTemplate',
+		'promise'
 	],
 	/**
 	 * @alias module:Toast
 	 * @returns {object} Toast object.
 	*/
-	function(urushi, materialConfig, _Base, Deferred, template) {
+	function(event, node, materialConfig, _Base, template) {
 		'use strict';
 
 		/**
@@ -68,11 +67,9 @@ define(
 		 * @type object
 		 * @constant
 		 */
-		var CONSTANTS = {
-			ID_PREFIX: 'urushi.toast',
-			EMBEDDED: {additionalClass: '', content: ''},
-			CLASS_NAME_TOAST_OPENED: 'toast-opened'
-		};
+		const ID_PREFIX = 'urushi.toast';
+		const EMBEDDED = {content: ''};
+		const CLASS_NAME_TOAST_OPENED = 'toast-opened';
 
 		/**
 		 * <pre>
@@ -80,7 +77,7 @@ define(
 		 * </pre>
 		 * @type number
 		 */
-		var idNo = 0;
+		let idNo = 0;
 
 		return _Base.extend(/** @lends module:Input.prototype */ {
 			/**
@@ -91,13 +88,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template: undefined,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded: undefined,
+			embedded: EMBEDDED,
 			/**
 			 * <pre>
 			 * Indicates whether the toast is displayed.
@@ -114,8 +111,8 @@ define(
 			 * @returns none.
 			 */
 			_initProperties: function(/* object */ args) {
-				this.template = template;
-				this.embedded = CONSTANTS.EMBEDDED;
+				this._super(args);
+
 				this.isShown = false;
 			},
 			/**
@@ -136,7 +133,7 @@ define(
 			 * @returns none.
 			 */
 			setContent: function(/* string|node */content) {
-				if (!urushi.setDomContents(this.contentNode, content)) {
+				if (!node.setDomContents(this.contentNode, content)) {
 					throw new Error('Bad argument : content is required.');
 				}
 			},
@@ -147,19 +144,24 @@ define(
 			 * @returns none.
 			 */
 			show: function() {
-				var style, deferred;
+				let promise;
 
 				if (this.isShown) {
 					return null;
 				}
 				this.isShown = true;
 
-				deferred = new Deferred();
+				promise = new Promise((function(resolve, reject) {
+					event.addEvent(this.rootNode, 'transitionend', (function() {
+						event.removeEvent(this.rootNode, 'transitionend');
 
-				urushi.addEvent(this.rootNode, 'transitionend', this, '_onEndShow', deferred);
-				this.rootNode.classList.add(CONSTANTS.CLASS_NAME_TOAST_OPENED);
+						resolve();
+					}).bind(this));
+				}).bind(this));
 
-				return deferred;
+				this.rootNode.classList.add(CLASS_NAME_TOAST_OPENED);
+
+				return promise;
 			},
 			/**
 			 * <pre>
@@ -168,46 +170,25 @@ define(
 			 * @returns none.
 			 */
 			hide: function() {
-				var deferred;
+				let promise;
 
 				if (!this.isShown) {
 					return null;
 				}
 				this.isShown = false;
 				
-				deferred = new Deferred();
-				urushi.addEvent(this.rootNode, 'transitionend', this, '_onEndHide', deferred);
-				this.rootNode.classList.remove(CONSTANTS.CLASS_NAME_TOAST_OPENED);
+				promise = new Promise((function(resolve, reject) {
+					event.addEvent(this.rootNode, 'transitionend', (function() {
+						this.rootNode.classList.add('hidden');
+						event.removeEvent(this.rootNode, 'transitionend');
 
-				return deferred;
-			},
-			/**
-			 * <pre>
-			 * Callback function for the showing animation transitionend event.
-			 * Removes the callback function.
-			 * </pre>
-			 * @param {object} deferred
-			 * @protected
-			 * @returns none.
-			 */
-			_onEndShow: function(/* object */ deferred) {
-				deferred.resolve();
-				urushi.removeEvent(this.rootNode, 'transitionend', this, '_onEndShow');
-			},
-			/**
-			 * <pre>
-			 * Callback function for the hiding animation transitionend event.
-			 * Removes the callback function.
-			 * </pre>
-			 * @param {object} deferred
-			 * @protected
-			 * @returns none.
-			 */
-			_onEndHide: function(/* object */ deferred) {
-				this.rootNode.classList.add('hidden');
-				deferred.resolve();
+						resolve();
+					}).bind(this));
+				}).bind(this));
 
-				urushi.removeEvent(this.rootNode, 'transitionend', this, '_onEndHide');
+				this.rootNode.classList.remove(CLASS_NAME_TOAST_OPENED);
+
+				return promise;
 			},
 			/**
 			 * <pre>
@@ -227,7 +208,7 @@ define(
 			 * @returns {string} object's id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
+				return ID_PREFIX + idNo++;
 			}
 		});
 	}

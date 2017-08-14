@@ -18,12 +18,12 @@
  */
 define(
 	'Urushi',
-	['legacy', 'browser', 'event', 'Deferred', 'xhr', 'node', 'util'],
+	['legacy', 'browser', 'event', 'xhr', 'node', 'util'],
 	/**
 	 * @alias module:Urushi
 	 * @returns {object} Urushi object.
 	 */
-	function(legacy, browser, event, Deferred, xhr, node, util) {
+	function(legacy, browser, event, xhr, node, util) {
 		'use strict';
 
 		var Urushi = {},
@@ -40,9 +40,6 @@ define(
 				Urushi[key] = mixinObject[key];
 			}
 		}
-
-		// mixin Deferred Class.
-		Urushi.Deferred = Deferred;
 
 		// create xhr and register xhr method.
 		Urushi.xhr = {};

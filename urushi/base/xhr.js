@@ -12,12 +12,12 @@
  */
 define(
 	'xhr',
-	['util', 'Deferred'],
+	['util', 'promise'],
 	/**
 	 * @alias module:xhr
 	 * @returns {object} xhr object.
 	 */
-	function(util, Deferred) {
+	function(util) {
 		'use strict';
 		/**
 		 * <pre>
@@ -158,14 +158,14 @@ define(
 			 * @private
 			 * @returns none.
 			 */
-			response = function(/* object */ httpRequest, /* object */ deferred) {
+			response = function(/* object */ httpRequest, /* function */ resolve, /* function */ reject) {
 				var validStatus = [200, 201];
 				return function() {
 					if (CONSTANTS.READY_STATE_FINISHED === httpRequest.readyState) {
 						if (-1 !== validStatus.indexOf(httpRequest.status)) {
-							deferred.resolve(httpRequest.responseText);
+							resolve(httpRequest.responseText);
 						} else {
-							deferred.reject(httpRequest.responseText);
+							reject(httpRequest.responseText);
 						}
 					}
 				};
@@ -184,33 +184,33 @@ define(
 			 * @returns {object} Deferred.
 			 */
 			_xhr = function(/* string */ method, /* string */ uri, /* object */ options) {
-				var deferred = new Deferred(),
-					httpRequest,
+				let	httpRequest,
 					xhrOptions = {},
 					header;
-				
-				try {
-					httpRequest = getHttpRequest();
-					xhrOptions = util.deepCopy(xhrOptions, defaultOptions, options);
 
-					httpRequest.open(method, uri, xhrOptions.async, xhrOptions.user, xhrOptions.password);
-					httpRequest.withCredentials = xhrOptions.withCredentials;
-					httpRequest.onreadystatechange = xhrOptions.response
-						? xhrOptions.response(httpRequest, deferred)
-						: response(httpRequest, deferred);
-					
-					if (hasResponseType()) {
-						httpRequest.responseType = xhrOptions.responseType;
-					}
-					for (header in xhrOptions.headers) {
-						httpRequest.setRequestHeader(header, xhrOptions.headers[header]);
-					}
+				return new Promise(function(resolve, reject) {
+					try {
+						httpRequest = getHttpRequest();
+						xhrOptions = util.deepCopy(xhrOptions, defaultOptions, options);
 
-					httpRequest.send(xhrOptions.data);
-				} catch (e) {
-					deferred.reject(e);
-				}
-				return deferred;
+						httpRequest.open(method, uri, xhrOptions.async, xhrOptions.user, xhrOptions.password);
+						httpRequest.withCredentials = xhrOptions.withCredentials;
+						httpRequest.onreadystatechange = xhrOptions.response
+							? xhrOptions.response(httpRequest, resolve, reject)
+							: response(httpRequest, resolve, reject);
+						
+						if (hasResponseType()) {
+							httpRequest.responseType = xhrOptions.responseType;
+						}
+						for (header in xhrOptions.headers) {
+							httpRequest.setRequestHeader(header, xhrOptions.headers[header]);
+						}
+
+						httpRequest.send(xhrOptions.data);
+					} catch (e) {
+						reject(e);
+					}
+				});
 			},
 			xhr;
 

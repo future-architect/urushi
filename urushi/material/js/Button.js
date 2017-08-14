@@ -13,25 +13,20 @@
  *		type			: string
  *		specification	: optional
  *		descriptoin		: Instance identifier.
- *	buttonClass
- *		type			: string
- *		specification	: optional
- *		default value	: ''
- *		descriptoin		: Style class of theme color of button widget. For the theme color, read test/button/index.html.
- *	additionalClass
+ *	styleClass
  *		type			: string
  *		specification	: optional
  *		default value	: ''
  *		descriptoin		: Optional style class.
  *	label
  *		type			: string
- *		specification	: required
+ *		specification	: optional
  *		default value	: 'Button Name'
  *		descriptoin		: Label of button.
  * </pre>
  * @example
  *	require(['Button'], function(Button) {
- *		var button = new Button({
+ *		let button = new Button({
  *			id: 'myButton',
  *			buttonClass: 'button-raised button-primary',
  *			additionalClass: 'disabled',
@@ -56,6 +51,7 @@
 define(
 	'Button',
 	[
+		'parser',
 		'Ripple',
 		'text!buttonTemplate'
 	],
@@ -65,22 +61,11 @@ define(
 	 * @alias module:Button
 	 * @returns {object} Button object.
 	 */
-	function(Ripple, template) {
+	function(parser, Ripple, template) {
 		'use strict';
 
-		/**
-		 * <pre>
-		 * Constants.
-		 * </pre>
-		 * @member module:Button#CONSTANTS
-		 * @type object
-		 * @constant
-		 * @private
-		 */
-		var CONSTANTS = {
-			ID_PREFIX: 'urushi.button',
-			EMBEDDED: {buttonClass: '', additionalClass: '', label: 'Button Name'}
-		};
+		const ID_PREFIX = 'urushi.button';
+		const EMBEDDED = {label: ''};
 
 		/**
 		 * <pre>
@@ -90,10 +75,9 @@ define(
 		 * @type number
 		 * @private
 		 */
-		var idNo = 0;
+		let idNo = 0;
 		
 		return Ripple.extend(/** @lends module:Button.prototype */ {
-
 			/**
 			 * <pre>
 			 * HTML template for button class.
@@ -108,19 +92,23 @@ define(
 			 * @type object
 			 * @private
 			 */
-			embedded: CONSTANTS.EMBEDDED,
+			embedded: EMBEDDED,
+
 			/**
 			 * <pre>
-			 * Initialize instance properties.
+			 * TemplateEngineで検出されたElementから、
+			 * インスタンス化に必要な定義を抽出する。
 			 * </pre>
 			 * @protected
-			 * @param {object} args Constructor arguments.
+			 * @param {Element} element 置換対象のエレメント。
 			 * @returns none.
 			 */
-			_initProperties: function(/* object */ args) {
-				this._super(args);
-				this.template = template;
-				this.embedded = CONSTANTS.EMBEDDED;
+			_parse: function(/* Element */ element) {
+				let option = this._super(element);
+
+				option.label = element.innerText;
+
+				return option;
 			},
 			/**
 			 * @see {@link module:_Base}#_getId
@@ -128,7 +116,7 @@ define(
 			 * @returns {string} object's id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
+				return ID_PREFIX + idNo++;
 			},
 			/**
 			 * <pre>

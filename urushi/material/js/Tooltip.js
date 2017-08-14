@@ -36,7 +36,7 @@
  *		default value	: N/A
  *		descriptoin		: Tooltipに表示するコンテンツを設定する。
  *	parentNode
- *		type			: Domnode
+ *		type			: Element
  *		specification	: 必須
  *		default value	: N/A
  *		descriptoin		: Tooltipを表示する親ノードを指定する。
@@ -53,7 +53,7 @@
  * </pre>
  * @example
  *	require(['Tooltip'], function(Tooltip) {
- *		var tooltip = new Tooltip({
+ *		let tooltip = new Tooltip({
  *			id: 'myTooltip',
  *			tooltipClass: '',
  *			additionalClass: '',
@@ -70,7 +70,8 @@
  *
  * @module Tooltip
  * @extends module:_Base
- * @requires module:Urushi
+ * @requires module:event
+ * @requires module:node
  * @requires module:materialConfig
  * @requires module:_Base
  * @requires tooltip.html
@@ -78,7 +79,8 @@
 define(
 	'Tooltip',
 	[
-		'Urushi',
+		'event',
+		'node',
 		'materialConfig',
 		'_Base',
 		'text!tooltipTemplate'
@@ -87,7 +89,7 @@ define(
 	 * @alias module:Tooltip
 	 * @returns {Object} Tooltip object.
 	 */
-	function(urushi, materialConfig, _Base, template) {
+	function(event, node, materialConfig, _Base, template) {
 		'use strict';
 
 		/**
@@ -100,14 +102,15 @@ define(
 		 * @constant
 		 * @private
 		 */
-		var CONSTANTS = {
-			ID_PREFIX: 'urushi.Tooltip',
-			EMBEDDED: {tooltipClass: '', additionalClass: '', position: ''},
-			POSITION_VALID: {'left': true, 'right': true, 'top': true, 'bottom': true},
-			MARGIN: 2,
-			EVENT_ON: 'mouseover',
-			EVENT_OFF: 'mouseout'
-		};
+		const ATTR_URUSHI_TITLE = 'data-u-title',
+			ATTR_URUSHI_POSITION = 'data-u-position',
+			ID_PREFIX = 'urushi.Tooltip',
+			EMBEDDED = {position: ''},
+			POSITION_VALID = {'left': true, 'right': true, 'top': true, 'bottom': true},
+			MARGIN = 2,
+			EVENT_ON = 'mouseover',
+			EVENT_OFF = 'mouseout',
+			TOOLTIP_DEFAULT_DURATIOM = 200;
 
 		/**
 		 * <pre>
@@ -118,7 +121,7 @@ define(
 		 * @type number
 		 * @private
 		 */
-		var idNo = 0;
+		let idNo = 0;
 
 		return _Base.extend({
 
@@ -130,14 +133,14 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template: undefined,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type Object
 			 * @constant
 			 * @private
 			 */
-			embedded: undefined,
+			embedded: EMBEDDED,
 			/**
 			 * <pre>
 			 * Tooltipが表示中かどうかのフラグ。
@@ -178,13 +181,48 @@ define(
 			off: undefined,
 			/**
 			 * <pre>
-			 * tooltipを表示/非表示を切り替える時間。
+			 * 作成済ノードに引き継がないAttribute
 			 * </pre>
-			 * @type number
-			 * @default 300
+			 * @type Array
+			 * @default 'mouseout'
 			 * @private
 			 */
-			duration: undefined,
+			ignored: [ATTR_URUSHI_TITLE, ATTR_URUSHI_POSITION],
+
+			/**
+			 * <pre>
+			 * TooltipをTemplateEngineで利用する際の属性名を返却する。
+			 * </pre>
+			 * @returns TemplateEngineで利用するTooltipの属性名。
+			 */
+			getTypeName: function() {
+				return ATTR_URUSHI_TITLE;
+			},
+			/**
+			 * <pre>
+			 * TooltipをTemplateEngineで利用する際のTooltip表示位置を決定する属性名。
+			 * </pre>
+			 * @returns TemplateEngineで利用するTooltip表示位置を決定する属性名。
+			 */
+			getPositionName: function() {
+				return ATTR_URUSHI_POSITION;
+			},
+			/**
+			 * <pre>
+			 * templateEngineで検出されたElementから、
+			 * インスタンス化に必要な定義を抽出する。
+			 * </pre>
+			 * @protected
+			 * @param {Element} element 置換対象のエレメント。
+			 * @returns インスタンス化に必要な定義情報
+			 */
+			_parse: function(/* Element */ element) {
+				return {
+					parentNode: element,
+					content: element.getAttribute('data-u-title'),
+					position: element.getAttribute('data-u-position')
+				};
+			},
 			/**
 			 * <pre>
 			 * Toastの初期化処理。
@@ -199,6 +237,7 @@ define(
 				this._super(args);
 
 				this.setParent(args.parentNode);
+				this.removeParentAttribute(args.parentNode);
 				this.setContent(args.content);
 				this.setPosition(args.position);
 				this.setOn(args.on);
@@ -213,17 +252,16 @@ define(
 			 * @returns none.
 			 */
 			_initProperties: function(/* Object */ args) {
-				this.template = template;
-				this.embedded = CONSTANTS.EMBEDDED;
+				this._super(args);
+
 				this.isShown = false;
 				this.position = materialConfig.TOOLTIP_DEFAULT_POSITION;
-				this.on = CONSTANTS.EVENT_ON;
-				this.off = CONSTANTS.EVENT_OFF;
-				this.duration = materialConfig.TOOLTIP_DURATION;
+				this.on = EVENT_ON;
+				this.off = EVENT_OFF;
 			},
 			/**
 			 * <pre>
-			 * 必要なDomNodeへの参照を追加する。
+			 * 必要なElementへの参照を追加する。
 			 *
 			 * フィールドとしてアクセスできるノードは下記の通り。
 			 * inputNode : checkedの値を保持しているinputタグ
@@ -248,9 +286,9 @@ define(
 			 * @returns none.
 			 */
 			setPosition: function(/* string */ position) {
-				var _position = (('string' === typeof position) ? position : '').toLowerCase();
+				let _position = (('string' === typeof position) ? position : '').toLowerCase();
 
-				if (!CONSTANTS.POSITION_VALID[_position]) {
+				if (!POSITION_VALID[_position]) {
 					if (!this.rootNode.classList.contains(this.position)) {
 						this.position = materialConfig.TOOLTIP_DEFAULT_POSITION;
 						this.rootNode.classList.add(materialConfig.TOOLTIP_DEFAULT_POSITION);
@@ -267,14 +305,32 @@ define(
 			 * ツールチップを表示させる親となるノードを指定する。
 			 * </pre>
 			 * @function
-			 * @param {Domnode} paarent 親ノード
+			 * @param {Element} paarent 親ノード
 			 * @returns none.
 			 */
-			setParent: function(/* Domnode */ parent) {
+			setParent: function(/* Element */ parent) {
 				if (!parent || parent.nodeType !== document.ELEMENT_NODE) {
-					throw new Error('DomNode(ELEMENT_NODE)を指定してください。');
+					throw new Error('Element(ELEMENT_NODE)を指定してください。');
 				}
 				this.parentNode = parent;
+			},
+			/**
+			 * <pre>
+			 * Tooltipを表示する親ノードに指定されている下記属性を削除する。
+			 * data-u-title
+			 * data-u-position
+			 * </pre>
+			 * @function
+			 * @param {string} off イベント名
+			 * @returns none.
+			 */
+			removeParentAttribute: function(/* Element */ parent) {
+				if (parent && parent.hasAttribute(ATTR_URUSHI_TITLE)) {
+					parent.removeAttribute(ATTR_URUSHI_TITLE);
+				}
+				if (parent && parent.hasAttribute(ATTR_URUSHI_POSITION)) {
+					parent.removeAttribute(ATTR_URUSHI_POSITION);
+				}
 			},
 			/**
 			 * <pre>
@@ -287,12 +343,12 @@ define(
 			setOn: function(/* string */ on) {
 				this._clearOn();
 
-				this.on = 'string' === typeof on ? on : CONSTANTS.EVENT_ON;
+				this.on = 'string' === typeof on ? on : EVENT_ON;
 				if (!this.on) {
 					return;
 				}
 
-				urushi.addEvent(this.parentNode, this.on, this, 'show');
+				event.addEvent(this.parentNode, this.on, this.show.bind(this));
 			},
 			/**
 			 * <pre>
@@ -302,7 +358,7 @@ define(
 			 * @returns none.
 			 */
 			_clearOn: function() {
-				urushi.removeEvent(this.parentNode, this.on, this, 'show');
+				event.removeEvent(this.parentNode, this.on);
 			},
 			/**
 			 * <pre>
@@ -315,12 +371,12 @@ define(
 			setOff: function(/* string */ off) {
 				this._clearOff();
 
-				this.off = 'string' === typeof off ? off : CONSTANTS.EVENT_OFF;
+				this.off = 'string' === typeof off ? off : EVENT_OFF;
 				if (!this.off) {
 					return;
 				}
 
-				urushi.addEvent(this.parentNode, this.off, this, 'hide');
+				event.addEvent(this.parentNode, this.off, this.hide.bind(this));
 			},
 			/**
 			 * <pre>
@@ -330,7 +386,7 @@ define(
 			 * @returns none.
 			 */
 			_clearOff: function() {
-				urushi.removeEvent(this.parentNode, this.off, this, 'hide');
+				event.removeEvent(this.parentNode, this.off);
 			},
 			/**
 			 * <pre>
@@ -341,7 +397,7 @@ define(
 			 * @returns none.
 			 */
 			setContent: function(/* string */ content) {
-				if (!urushi.setDomContents(this.contentNode, content)) {
+				if (!node.setDomContents(this.contentNode, content)) {
 					throw new Error('ツールチップに表示するコンテンツを指定してください。');
 				}
 			},
@@ -353,6 +409,8 @@ define(
 			 * @returns none.
 			 */
 			show: function() {
+				let viewPosition;
+
 				if (this.isShown) {
 					return;
 				}
@@ -363,12 +421,11 @@ define(
 					document.body.appendChild(this.rootNode);
 				}
 				this.rootNode.style.display = 'block';
-				setTimeout((function() {
-					var viewPosition = this._calculatePosition();
-					this.rootNode.style.top = viewPosition.top;
-					this.rootNode.style.left = viewPosition.left;
-					this.rootNode.classList.add('in');
-				}).bind(this), 50);
+
+				viewPosition = this._calculatePosition();
+				this.rootNode.style.top = viewPosition.top;
+				this.rootNode.style.left = viewPosition.left;
+				this.rootNode.classList.add('in');
 			},
 			/**
 			 * <pre>
@@ -384,15 +441,26 @@ define(
 				this.isShown = false;
 
 				this.rootNode.classList.remove('in');
-
-				setTimeout((function() {
-					this.rootNode.style.display = 'none';
-					try {
+				setTimeout(this.remove.bind(this), TOOLTIP_DEFAULT_DURATIOM);
+			},
+			/**
+			 * <pre>
+			 * tooltipをDOMTree上から削除する。
+			 * </pre>
+			 * @function
+			 * @returns none.
+			 */
+			remove: function() {
+				this.rootNode.style.display = 'none';
+				try {
+					if (this.parentNode.parentElement) {
+						this.parentNode.parentElement.removeChild(this.rootNode);
+					} else {
 						document.body.removeChild(this.rootNode);
-					} catch (e) {
-						// do nothing.
 					}
-				}).bind(this), this.duration);
+				} catch (e) {
+					// do nothing.
+				}
 			},
 			/**
 			 * <pre>
@@ -403,7 +471,7 @@ define(
 			 * @returns {Object} {top: 'position : absoluteで表示するtop[px]', left: 'position : absoluteで表示するleft[px]'}
 			 */
 			_calculatePosition: function() {
-				var viewPosition = {top: '', left: ''},
+				let viewPosition = {top: '', left: ''},
 					parentRects,
 					parentOffset,
 					parentTop,
@@ -440,10 +508,10 @@ define(
 				};
 				rootNodeSize[arrow[this.position].where] += arrow[this.position].size;
 				viewPositionCalculator = {
-					left: {top: -(rootNodeSize.height / 2), left: -(rootNodeSize.width + CONSTANTS.MARGIN)},
-					right: {top: -(rootNodeSize.height / 2), left: CONSTANTS.MARGIN},
-					top: {top: -(rootNodeSize.height + CONSTANTS.MARGIN), left: -(rootNodeSize.width / 2)},
-					bottom: {top: CONSTANTS.MARGIN, left: -(rootNodeSize.width / 2)}
+					left: {top: -(rootNodeSize.height / 2), left: -(rootNodeSize.width + MARGIN)},
+					right: {top: -(rootNodeSize.height / 2), left: MARGIN},
+					top: {top: -(rootNodeSize.height + MARGIN), left: -(rootNodeSize.width / 2)},
+					bottom: {top: MARGIN, left: -(rootNodeSize.width / 2)}
 				};
 
 				viewPosition = {
@@ -495,18 +563,7 @@ define(
 			 * @returns {string} object's id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
-			},
-			/**
-			 * <pre>
-			 * durationを取得する。
-			 * 単位はms。
-			 * </pre>
-			 * @function
-			 * @returns {number} duration[ms].
-			 */
-			getDuration: function() {
-				return this.duration;
+				return ID_PREFIX + idNo++;
 			},
 			/**
 			 * <pre>

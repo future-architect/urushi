@@ -1,7 +1,7 @@
 /**
  * @fileOverView Input class definition.
  * @author Yuzo Hirakawa
- * @version b1.0
+ * @version 1.0.0
  */
 
 /**
@@ -33,10 +33,15 @@
  *		specification	: optional
  *		default value	: ''
  *		descriptoin		: Hint message for input. It is displayed at the bottom of input.
+ *	caption
+ *		type			: string
+ *		specification	: optional
+ *		default value	: ''
+ *		descriptoin		: 項目名。
  * </pre>
  * @example
  *	require(['Input'], function(Input) {
- *		var input = new Input({
+ *		let input = new Input({
  *			id: 'myInput',
  *			inputClass: '',
  *			additionalClass: 'disabled',
@@ -56,8 +61,8 @@
  *
  * @module Input
  * @extends module:_Base
- * @requires module:Urushi
- * @requires module:materialConfig
+ * @requires module:event
+ * @requires module:parser
  * @requires module:addInputEventListener
  * @requires module:removeInputEventListener
  * @requires module:_Base
@@ -67,13 +72,13 @@
 define(
 	'Input',
 	[
-		'Urushi',
-		'materialConfig',
+		'event',
+		'parser',
 		'addInputEventListener',
 		'removeInputEventListener',
 		'_Base',
 		'text!inputTemplate',
-		'text!inputTransitionUnitTemplate'
+		'text!inputWithCaptionTemplate'
 	],
 	/**
 	 * @class
@@ -81,7 +86,15 @@ define(
 	 * @alias module:Input
 	 * @returns {object} Input object.
 	 */
-	function(urushi, materialConfig, addInputEventListener, removeInputEventListener, _Base, template, transitionUnit) {
+	function(
+			event,
+			parser,
+			addInputEventListener,
+			removeInputEventListener,
+			_Base,
+			template,
+			inputWithCaptionTemplate) {
+
 		'use strict';
 
 		/**
@@ -91,10 +104,8 @@ define(
 		 * @type object
 		 * @constant
 		 */
-		var CONSTANTS = {
-			ID_PREFIX: 'urushi.input',
-			EMBEDDED: {inputClass: '', additionalClass: ''}
-		};
+		const ID_PREFIX = 'urushi.input';
+		const EMBEDDED = {};
 
 		/**
 		 * <pre>
@@ -102,7 +113,7 @@ define(
 		 * </pre>
 		 * @type number
 		 */
-		var idNo = 0;
+		let idNo = 0;
 
 		return _Base.extend(/** @lends module:Input.prototype */ {
 			/**
@@ -113,13 +124,13 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template: undefined,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded: undefined,
+			embedded: EMBEDDED,
 			/**
 			 * <pre>
 			 * Callback functions for input events.
@@ -128,18 +139,41 @@ define(
 			 * @private
 			 */
 			callbacks: undefined,
+
 			/**
 			 * <pre>
-			 * Initializes instance properties.
+			 * TemplateEngineで検出されたElementから、
+			 * インスタンス化に必要な定義を抽出する。
+			 * </pre>
+			 * @protected
+			 * @param {Element} element 置換対象のエレメント。
+			 * @returns none.
+			 */
+			_parse: function(/* Element */ element) {
+				let option = this._super(element);
+
+				Object.assign(option, parser.getOption(element));
+				option.placeholder = element.getAttribute('placeholder') || '';
+				option.value = element.getAttribute('value') || '';
+				option.disabled = !!element.disabled;
+				option.readonly = !!element.readOnly;
+
+				return option;
+			},
+			/**
+			 * <pre>
+			 * インスタンスの初期値を設定する。
 			 * </pre>
 			 * @protected
 			 * @param {object} args Constructor arguments.
 			 * @returns none.
 			 */
 			_initProperties: function(/* object */ args) {
-				this.template = template;
-				this.embedded = CONSTANTS.EMBEDDED;
 				this.callbacks = {};
+
+				if (args.caption) {
+					this.template = inputWithCaptionTemplate;
+				}
 			},
 			/**
 			 * <pre>
@@ -167,8 +201,24 @@ define(
 			 */
 			initOption: function(/* object */ args) {
 				this.callbacks = addInputEventListener(this.inputNode, this._onInput.bind(this));
-				urushi.addEvent(this.inputNode, 'focus', this, '_onFocus');
-				urushi.addEvent(this.inputNode, 'blur', this, '_onBlur');
+				event.addEvent(this.inputNode, 'focus', this._onFocus.bind(this));
+				event.addEvent(this.inputNode, 'blur', this._onBlur.bind(this));
+			},
+			/**
+			 * <pre>
+			 * コンストラクタ引数から初期値を設定する。
+			 * 下記を設定する。
+			 * - 入力済テキスト
+			 * - disabledステータス
+			 * - readonlyステータス TODO
+			 * </pre>
+			 * @protected
+			 * @param {object} args コンストラクタ引数
+			 * @returns none.
+			 */
+			_setInitial: function(/* object */ args) {
+				this.setValue(args.value);
+				this.setDisabled(args.disabled);
 			},
 			/**
 			 * <pre>
@@ -207,7 +257,7 @@ define(
 			 * @returns none.
 			 */
 			_createHint: function(/* string */ hint) {
-				var div;
+				let div;
 				if (!hint) {
 					return;
 				}
@@ -267,7 +317,7 @@ define(
 			 * @returns {string} Instance id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
+				return ID_PREFIX + idNo++;
 			},
 			/**
 			 * <pre>
@@ -340,8 +390,8 @@ define(
 			 * @returns none
 			 */
 			destroy: function() {
-				urushi.removeEvent(this.inputNode, 'focus', this, '_onFocus');
-				urushi.removeEvent(this.inputNode, 'blur', this, '_onBlur');
+				event.removeEvent(this.inputNode, 'focus');
+				event.removeEvent(this.inputNode, 'blur');
 
 				removeInputEventListener(this.inputNode, this.callbacks);
 

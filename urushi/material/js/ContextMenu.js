@@ -83,25 +83,24 @@
  * @requires module:materialConfig
  * @requires module:_CollectionWidgetBase
  * @requires module:legacy
- * @requires module:animation
  * @requires contextMenu.html
  */
 define(
 	'ContextMenu',
 	[
-		'Urushi',
+		'event',
+		'parser',
 		'materialConfig',
 		'_CollectionWidgetBase',
 		'_ContextMenuItem',
 		'legacy',
-		'animation',
 		'text!contextMenuTemplate'
 	],
 	/**
 	 * @alias module:ContextMenu
 	 * @returns {object} ContextMenu object.
 	 */
-	function(urushi, materialConfig, _CollectionWidgetBase, ContextMenuItem, legacy, animation, template) {
+	function(event, parser, materialConfig, _CollectionWidgetBase, ContextMenuItem, legacy, template) {
 		'use strict';
 
 		/**
@@ -113,16 +112,12 @@ define(
 		 * @constant
 		 * @private
 		 */
-		var CONSTANTS = {
-			ID_PREFIX: 'urushi.context-menu',
-			ITEM_ID_PREFIX: '.item',
-			EMBEDDED: {contextMenuClass: '', additionalClass: ''},
-			DURATION: 150,
-			ITEMS_TRANSITION_DURATION: 150,
-			ITEMS_LI_MARGIN: 20,
-			MINIMUM_WIDTH: 100,
-			CONTEXTMENU_WIDTH: 48,
-		};
+		const ID_PREFIX = 'urushi.context-menu';
+		const ITEM_ID_PREFIX = '.item';
+		const EMBEDDED = {};
+		const ITEMS_LI_MARGIN = 20;
+		const MINIMUM_WIDTH = 100;
+		const CONTEXTMENU_WIDTH = 36;
 
 		/**
 		 * <pre>
@@ -144,14 +139,14 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template: undefined,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @constant
 			 * @private
 			 */
-			embedded: undefined,
+			embedded: EMBEDDED,
 			/**
 			 * <pre>
 			 * Width of menu items.
@@ -212,22 +207,43 @@ define(
 			 * @private
 			 */
 			itemIdNo: undefined,
+
 			/**
 			 * <pre>
-			 * It manages the end of display animation of context menu.
+			 * TemplateEngineで検出されたElementから、
+			 * インスタンス化に必要な定義を抽出する。
 			 * </pre>
-			 * @type object
-			 * @private
+			 * @protected
+			 * @param {Element} element 置換対象のエレメント。
+			 * @returns none.
 			 */
-			animationDeferred: undefined,
-			/**
-			 * <pre>
-			 * It manages the end of transform animation of close icon.
-			 * </pre>
-			 * @type Deferred
-			 * @private
-			 */
-			closeIconAnimationDeferred: undefined,
+			_parse: function(/* Element */ element) {
+				let option = this._super(element),
+					getItems = function() {
+						let children = element.children,
+							items = [],
+							index,
+							length,
+							item;
+
+						for (index = 0, length = children.length; index < length; index++) {
+							item = {};
+
+							item.liId = children[index].id;
+							item.name = children[index].getAttribute('name');
+							item.label = (children[index].textContent || '').trim();
+							item.icon = children[index].className || '';
+
+							items.push(item);
+						}
+						return items;
+					};
+
+				Object.assign(option, parser.getOption(element));
+				option.items = getItems();
+
+				return option;
+			},
 			/**
 			 * <pre>
 			 * Initialize instance property.
@@ -240,13 +256,10 @@ define(
 			_initProperties: function(/* object */ args) {
 				this._super(args);
 
-				this.template = template;
-				this.embedded = CONSTANTS.EMBEDDED;
 				this.contentWidth = -1;
 				this.onClickContextCallbacks = [];
 				this.onClickItemCustomArgs = [];
 				this.itemIdNo = 0;
-				this.animationDeferred = undefined;
 				this.defaultCallback = args.defaultCallback;
 				this._setBubbling(args.bubbling);
 			},
@@ -302,9 +315,9 @@ define(
 					this.addItems(args.items);
 				}
 
-				urushi.addEvent(this.contextMenuIconNode, 'click', this, 'onClickContext');
-				urushi.addEvent(this.closeIconNode, 'click', this, 'onClickClose');
-				urushi.addEvent(this.itemsNode, 'blur', this, 'onBlurContext');
+				event.addEvent(this.contextMenuIconNode, 'click', this.onClickContext.bind(this));
+				event.addEvent(this.closeIconNode, 'click', this.onClickClose.bind(this));
+				event.addEvent(this.itemsNode, 'blur', this.onBlurContext.bind(this));
 			},
 			/**
 			 * <pre>
@@ -462,7 +475,7 @@ define(
 			 * @returns none.
 			 */
 			_removeItem: function(/* string */ itemName) {
-				urushi.removeEvent(this.itemsMap[itemName].node, 'click', this, 'onClickItem');
+				event.removeEvent(this.itemsMap[itemName].node, 'click');
 				this.listNode.removeChild(this.itemsMap[itemName].node);
 				delete this.itemsMap[itemName];
 			},
@@ -518,8 +531,8 @@ define(
 						maxWidth = item.width;
 					}
 				}
-				this.contentWidth = maxWidth + CONSTANTS.ITEMS_LI_MARGIN * 2;
-				this.contentWidth = Math.max(this.contentWidth, CONSTANTS.MINIMUM_WIDTH);
+				this.contentWidth = maxWidth + ITEMS_LI_MARGIN * 2;
+				this.contentWidth = Math.max(this.contentWidth, MINIMUM_WIDTH);
 			},
 			/**
 			 * <pre>
@@ -615,7 +628,7 @@ define(
 				fnc = function() {
 					item.callback.apply(this, args);
 				};
-				setTimeout(fnc, CONSTANTS.ITEMS_TRANSITION_DURATION);
+				setTimeout(fnc, materialConfig.DEFAULT_VALUE_DURATION);
 			},
 			/**
 			 * <pre>
@@ -686,16 +699,16 @@ define(
 				height = itemsHeight + closeIconWrapperHeight;
 				this.itemsNode.style.maxHeight = height + 'px';
 				this.itemsNode.style.minWidth = this.contentWidth + 'px';
-				contextMenuSize = 'grid' === this.type ? 32 : CONSTANTS.CONTEXTMENU_WIDTH;
+				contextMenuSize = 'grid' === this.type ? 32 : CONTEXTMENU_WIDTH;
 				this.itemsNode.style.right = (this.contentWidth - contextMenuSize) + 'px';
 
 				this.itemsNode.classList.add('items-open');
 				for (index = 0, length = displayTargets.length; index < length; index++) {
 					show = delay(displayTargets[index]);
-					setTimeout(show, CONSTANTS.ITEMS_TRANSITION_DURATION + 30 * index);
+					setTimeout(show, materialConfig.DEFAULT_VALUE_DURATION + 30 * index);
 				}
 				show = delay(this.closeIconNode);
-				setTimeout(show, CONSTANTS.ITEMS_TRANSITION_DURATION + 30 * (displayTargets.length - 1));
+				setTimeout(show, materialConfig.DEFAULT_VALUE_DURATION + 30 * (displayTargets.length - 1));
 
 				this.itemsNode.focus();
 				for (index = 0, length = this.onClickContextCallbacks.length; index < length; index++) {
@@ -778,7 +791,7 @@ define(
 			 * @returns {string} object's id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
+				return ID_PREFIX + idNo++;
 			},
 			/**
 			 * <pre>
@@ -789,7 +802,7 @@ define(
 			 * @returns {string} object's id.
 			 */
 			_getItemId: function() {
-				return this.id + CONSTANTS.ITEM_ID_PREFIX + this.itemIdNo++;
+				return this.id + ITEM_ID_PREFIX + this.itemIdNo++;
 			},
 			/**
 			 * <pre>
@@ -800,9 +813,9 @@ define(
 			 * @returns none.
 			 */
 			destroy: function() {
-				urushi.removeEvent(this.contextMenuIconNode, 'click', this, 'onClickContext');
-				urushi.removeEvent(this.closeIconNode, 'click', this, 'onClickClose');
-				urushi.removeEvent(this.itemsNode, 'blur', this, 'onBlurContext');
+				event.removeEvent(this.contextMenuIconNode, 'click');
+				event.removeEvent(this.closeIconNode, 'click');
+				event.removeEvent(this.itemsNode, 'blur');
 
 				this._super();
 			}

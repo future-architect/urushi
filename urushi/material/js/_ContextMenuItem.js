@@ -123,7 +123,7 @@ define(
 				args = args || {};
 				this._super(args);
 
-				urushi.addEvent(this.node, 'click', this, 'onClickItem');
+				urushi.addEvent(this.node, 'click', this.onClickItem.bind(this));
 			},
 			/**
 			 * <pre>
@@ -299,7 +299,7 @@ define(
 			 * @returns none.
 			 */
 			destroy: function() {
-				urushi.removeEvent(this.node, 'click', this, 'onClickItem');
+				urushi.removeEvent(this.node, 'click');
 				urushi.remove(this.node);
 
 				this._super();

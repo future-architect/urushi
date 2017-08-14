@@ -45,7 +45,7 @@
  * </pre>
  * @example
  *	require(['Radiobox'], function(Radiobox) {
- *		var radiobox = new Radiobox({
+ *		let radiobox = new Radiobox({
  *			id: 'myRadio',
  *			radioboxClass: 'radio-default',
  *			additionalClass: 'disabled',
@@ -67,15 +67,14 @@
  *
  * @module Radiobox
  * @extends module:_Base
- * @requires jquery-2.1.1.js
- * @requires module:Urushi
+ * @requires module:parser
  * @requires module:_Base
  * @requires radiobox.html
  */
 define(
 	'Radiobox',
 	[
-		'Urushi',
+		'parser',
 		'_Base',
 		'text!radioboxTemplate'
 	],
@@ -85,7 +84,7 @@ define(
 	 * @alias module:Radiobox
 	 * @returns {object} Radiobox instance.
 	*/
-	function(urushi, _Base, template) {
+	function(parser, _Base, template) {
 		'use strict';
 
 		/**
@@ -95,10 +94,8 @@ define(
 		 * @type object
 		 * @constant
 		 */
-		var CONSTANTS = {
-			ID_PREFIX: 'urushi.Radiobox',
-			EMBEDDED: {radioboxClass: '', additionalClass: '', value: '', label: '', checked: false}
-		};
+		const ID_PREFIX = 'urushi.Radiobox';
+		const EMBEDDED = {value: '', label: ''};
 
 		/**
 		 * <pre>
@@ -106,7 +103,7 @@ define(
 		 * </pre>
 		 * @type number
 		 */
-		var idNo = 0;
+		let idNo = 0;
 
 		return _Base.extend(/** @lends module:Radiobox.prototype */ {
 
@@ -118,13 +115,37 @@ define(
 			 * @type string
 			 * @private
 			 */
-			template: undefined,
+			template: template,
 			/**
 			 * @see {@link module:_Base}#embedded
 			 * @type object
 			 * @private
 			 */
-			embedded: undefined,
+			embedded: EMBEDDED,
+
+			/**
+			 * <pre>
+			 * TemplateEngineで検出されたElementから、
+			 * インスタンス化に必要な定義を抽出する。
+			 * </pre>
+			 * @protected
+			 * @param {Element} element 置換対象のエレメント。
+			 * @returns none.
+			 */
+			_parse: function(/* Element */ element) {
+				let option = this._super(element);
+
+				option.name = element.getAttribute('name');
+				option.value = element.getAttribute('value');
+				option.checked = !!element.checked;
+				option.disabled = !!element.disabled;
+				option.label = parser.getNextText(element);
+				if (option.label) {
+					parser.removeNextNode(element);
+				}
+
+				return option;
+			},
 			/**
 			 * <pre>
 			 * Initializes instance properties.
@@ -137,8 +158,23 @@ define(
 				if (!args.name) {
 					throw new Error('Name is required.');
 				}
-				this.template = template;
-				this.embedded = CONSTANTS.EMBEDDED;
+				this._super(args);
+			},
+			/**
+			 * <pre>
+			 * コンストラクタ引数から初期値を設定する。
+			 * 下記を設定する。
+			 * - チェック状態
+			 * - disabledステータス
+			 * - readonlyステータス TODO
+			 * </pre>
+			 * @protected
+			 * @param {object} args コンストラクタ引数
+			 * @returns none.
+			 */
+			_setInitial: function(args) {
+				this.setValue(args.checked);
+				this.setDisabled(args.disabled);
 			},
 			/**
 			 * <pre>
@@ -147,6 +183,12 @@ define(
 			 * @returns {boolean} Whether the radiobox is checked or not.
 			 */
 			getValue: function() {
+				return this.getChecked();
+			},
+			setValue: function(/* boolean */ is) {
+				return this.setChecked(is);
+			},
+			getChecked: function() {
 				return this.inputNode.checked;
 			},
 			/**
@@ -183,7 +225,7 @@ define(
 			 * @returns {string} Instance id.
 			 */
 			_getId: function() {
-				return CONSTANTS.ID_PREFIX + idNo++;
+				return ID_PREFIX + idNo++;
 			},
 			/**
 			 * <pre>

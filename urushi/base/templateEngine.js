@@ -1,298 +1,37 @@
 /**
- * @fileOverView urushi object for urushi.
+ * @fileOverView templateEngine Object.
  * @author Yuzo Hirakawa
- * @version 1.0
+ * @version 1.0.0
  */
 
 /**
  * <pre>
- * Provides utility to generate urushi modules from html element.
+ * Urushiのコンポーネントをマークアップで利用可能にするための、Template Engineです。
  * </pre>
  * @module templateEngine
  */
 define(
 	'templateEngine',
-	['node', 'Deferred'],
+	['node', 'promise'],
 	/**
 	 * @alias module:templateEngine
 	 * @returns {object} templateEngine object.
 	 */
-	function(node, Deferred) {
+	function(node) {
 		'use strict';
 
 		/**
 		 * <pre>
-		 * Constants
+		 * TemplateEngineでのみ利用する定数定義。
 		 * </pre>
 		 * @member module:templateEngine#CONSTANTS
 		 * @type Obejct
 		 * @constant
 		 * @private
 		 */
-		var CONSTANTS = {
-				TEMPLATE_NAME_TYPE: 'data-urushi-type',
-				TEMPLATE_NAME_OPTIONS: 'data-urushi-options',
-				TEMPLATE_NAME_ADDITION_TYPE: 'data-urushi-addition-type',
-				TEMPLATE_NAME_ADDITION_OPTIONS: 'data-urushi-addition-options'
-			},
-			generics = {};
+		const ATTRIBUTE_NAME_URUSHI_TYPE = 'data-urushi-type';
 
-		/**
-		 * <pre>
-		 * Get style classes from html other than it defined by the module.
-		 * </pre>
-		 * @member module:templateEngine#getOptionalClasses
-		 * @function
-		 * @private
-		 * @param {node} doc Document element that converted by the template engine.
-		 * @param {string} key Style class name is used module.
-		 * @param {string} accessor not used.
-		 * @returns {string} style classes from html other than it defined by the module.
-		 */
-		generics.getOptionalClasses = function(/* node */ doc, /* string */ key, /* string */ accessor) {
-			var tempClass = doc.className,
-				classList,
-				className,
-				index,
-				length;
-
-			tempClass = tempClass.replace(key, '');
-			classList = tempClass.trim().split(/[ ]+/);
-
-			className = '';
-			for (index = 0, length = classList.length; index < length; index++) {
-				className += classList[index];
-				className += ' ';
-			}
-
-			return className.trim();
-		};
-		/**
-		 * <pre>
-		 * Get text in the location specified by [accessor] from [doc].
-		 * </pre>
-		 * @member module:templateEngine#getAdjacentLabel
-		 * @function
-		 * @private
-		 * @param {node} doc Document element that converted by the template engine.
-		 * @param {string} key Not used.
-		 * @param {string} accessor Place name.
-		 * @returns {string} text.
-		 */
-		generics.getAdjacentLabel = function(/* node */ doc, /* string */ key, /* string */ accessor) {
-			var textNode = doc[accessor] || {};
-			return (textNode.wholeText || '').trim();
-		};
-		/**
-		 * <pre>
-		 * Get attribute with name specified by [accessor] from [doc].
-		 * </pre>
-		 * @member module:templateEngine#getAttribute
-		 * @function
-		 * @private
-		 * @param {node} doc Document element that converted by the template engine.
-		 * @param {string} key Not used.
-		 * @param {string} accessor Attribute key name.
-		 * @returns {string} attribute.
-		 */
-		generics.getAttribute = function(/* node */ doc, /* string */ key, /* string */ accessor) {
-			return doc.getAttribute(accessor);
-		};
-		/**
-		 * <pre>
-		 * Get field with name specified by [accessor] from [doc].
-		 * </pre>
-		 * @member module:templateEngine#getField
-		 * @function
-		 * @private
-		 * @param {node} doc Document element that converted by the template engine.
-		 * @param {string} key Not used.
-		 * @param {string} accessor Field key name.
-		 * @returns {string} value in field
-		 */
-		generics.getField = function(/* node */ doc, /* string */ key, /* string */ accessor) {
-			return doc[accessor];
-		};
-		/**
-		 * <pre>
-		 * From the constructor argument of the module that is defined in the data-urushi-options,
-		 * to get the set value of the specified key.
-		 * </pre>
-		 * @member module:templateEngine#getUrushiOption
-		 * @function
-		 * @private
-		 * @param {node} doc Document element that converted by the template engine.
-		 * @param {string} key data-urushi-options field key name.
-		 * @param {string} accessor Not used.
-		 * @returns {string} data-urushi-options value.
-		 */
-		generics.getUrushiOption = function(/* node */ doc, /* string */ key, /* string */ accessor) {
-			var options = doc.getAttribute(CONSTANTS.TEMPLATE_NAME_OPTIONS);
-			try {
-				options = JSON.parse(options) || {};
-			} catch (e) {
-				throw new Error('It\'s wrong syntax in ' +
-					CONSTANTS.TEMPLATE_NAME_OPTIONS +
-					': ID = ' +
-					doc.id +
-					', key = ' +
-					key);
-			}
-
-			return options[key];
-		};
-		/**
-		 * <pre>
-		 * From the constructor argument of the additional module that is defined in the data-urushi-addition-options,
-		 * to get the set value of the specified key.
-		 * Additional module is defined with name data-urushi-addition-type.
-		 * </pre>
-		 * @member module:templateEngine#getUrushiAdditionOption
-		 * @function
-		 * @private
-		 * @param {node} doc Document element that converted by the template engine.
-		 * @param {string} key data-urushi-options field key name.
-		 * @param {string} accessor Not used.
-		 * @returns {string} data-urushi-addition-options value.
-		 */
-		generics.getUrushiAdditionOption = function(/* node */ doc, /* string */ key, /* string */ accessor) {
-			var options = doc.getAttribute(CONSTANTS.TEMPLATE_NAME_ADDITION_OPTIONS);
-			try {
-				options = JSON.parse(options) || {};
-			} catch (e) {
-				throw new Error(
-					'It\'s wrong syntax in ' +
-					CONSTANTS.TEMPLATE_NAME_ADDITION_OPTIONS +
-					': ID = ' +
-					doc.id +
-					', key = ' +
-					key);
-			}
-			return options[key] || '';
-		};
-		/**
-		 * <pre>
-		 * Get text that is in front of [doc].
-		 * </pre>
-		 * @member module:templateEngine#getPreviousText
-		 * @function
-		 * @private
-		 * @param {node} doc Document element that converted by the template engine.
-		 * @param {string} key Not used.
-		 * @param {string} accessor Not used.
-		 * @returns {string} Text.
-		 */
-		generics.getPreviousText = function(/* node */ doc, /* string */ key, /* string */ accessor) {
-			var textNode = doc.previousSibling || {};
-			return (textNode.wholeText || '').trim();
-		};
-		/**
-		 * <pre>
-		 * Get text that is on back of [doc].
-		 * </pre>
-		 * @member module:templateEngine#getNextText
-		 * @function
-		 * @private
-		 * @param {node} doc Document element that converted by the template engine.
-		 * @param {string} key Not used.
-		 * @param {string} accessor Not used.
-		 * @returns {string} Text.
-		 */
-		generics.getNextText = function(/* node */ doc, /* string */ key, /* string */ accessor) {
-			var textNode = doc.nextSibling || {};
-			return (textNode.wholeText || '').trim();
-		};
-		/**
-		 * <pre>
-		 * Get document element and text element from [doc].
-		 * </pre>
-		 * @member module:templateEngine#getChildNodes
-		 * @function
-		 * @private
-		 * @param {node} doc Document element that converted by the template engine.
-		 * @param {string} key Not used.
-		 * @param {string} accessor Not used.
-		 * @returns {Array} Element list.
-		 */
-		generics.getChildNodes = function(/* node */ doc, /* string */ key, /* string */ accessor) {
-			var nodes = [],
-				childNodes = doc.childNodes,
-				childNode,
-				index,
-				length;
-
-			for (index = 0, length = childNodes.length; index < length; index++) {
-				childNode = childNodes[index];
-				if (!node.isNode(childNode)) {
-					continue;
-				}
-				if (node.isTextNode(childNode) && !childNode.wholeText.trim()) {
-					continue;
-				}
-				nodes.push(childNode);
-			}
-			return nodes;
-		};
-		/**
-		 * <pre>
-		 * Get function that provide to get child nodes.
-		 * </pre>
-		 * @member module:templateEngine#getChildNodesFunction
-		 * @function
-		 * @private
-		 * @param {node} doc Document element that converted by the template engine.
-		 * @param {string} key
-		 * @param {string} accessor
-		 * @returns {function} function that provide to get child nodes.
-		 */
-		generics.getChildNodesFunction = function(/* node */ doc, /* string */ key, /* string */ accessor) {
-			return function() {
-				return generics.getChildNodes(doc, key, accessor);
-			};
-		};
-		/**
-		 * <pre>
-		 * Delete element taht is in front of [doc].
-		 * </pre>
-		 * @member module:templateEngine#removePreviousNode
-		 * @function
-		 * @private
-		 * @param {node} doc Document element that converted by the template engine.
-		 * @returns none.
-		 */
-		generics.removePreviousNode = function(/* node */ doc) {
-			if (!doc || !doc.previousSibling || !doc.previousSibling.wholeText.trime()) {
-				return;
-			}
-			if (doc.nextSibling.remove) {
-				doc.previousSibling.remove();
-			} else {
-				doc.previousSibling.parentNode.removeChild(doc.previousSibling);
-			}
-		};
-		/**
-		 * <pre>
-		 * Delete element taht is on back of [doc].
-		 * </pre>
-		 * @member module:templateEngine#removeNextNode
-		 * @function
-		 * @private
-		 * @param {node} doc 変換対象のモジュールのnode
-		 * @param {string} key 変換対象のクラス名
-		 * @param {string} accessor 変換対象
-		 * @returns none.
-		 */
-		generics.removeNextNode = function(/* node */ doc) {
-			if (!doc || !doc.nextSibling || !doc.nextSibling) {
-				return;
-			}
-			if (doc.nextSibling.remove) {
-				doc.nextSibling.remove();
-			} else {
-				doc.nextSibling.parentNode.removeChild(doc.nextSibling);
-			}
-
-		};
+		let Tooltip;
 
 		return {
 			/**
@@ -308,148 +47,115 @@ define(
 			 * @returns {object} Translated [docTree] and, created modules.
 			 */
 			renderDocument: function(/* node */ docTree, /* object */ configMap, /* object */ presetOptions) {
-				var deferred = new Deferred(),
+				let promise,
 					widgets = {},
 					ret = {compiled: docTree, widgets: widgets},
-					renderingCount = NaN;
+					renderingCount = NaN,
+					tooltipArgs = [];
 
 				presetOptions = presetOptions || {};
 
-				function setAddition(/* object */ module, /* object */ config, /* string */ additionOptions) {
-					try {
-						additionOptions = JSON.parse(additionOptions) || {};
-					} catch (e) {
-						throw new Error('It\'s wrong syntax in ' + CONSTANTS.TEMPLATE_NAME_ADDITION_OPTIONS);
+				function registTooltip(/* Element */ element) {
+					tooltipArgs.push(Tooltip.prototype._parse(element));
+				}
+				function renderTooltip() {
+					let i;
+					for (i = 0; i < tooltipArgs.length; i++) {
+						new Tooltip(tooltipArgs[i]);
 					}
-					additionOptions.parentNode = module.rootNode;
-					require([config.name], function(Module) {
-						new Module(additionOptions);
-					});
 				}
 				function startRender() {
 					renderingCount = renderingCount || 0;
 					renderingCount++;
 				}
-				function finishRender() {
+				function finishRender(resolve, reject) {
 					renderingCount--;
 
 					if (0 === renderingCount) {
-						deferred.resolve(ret);
+						renderTooltip();
+						resolve(ret);
 					}
 				}
-				function render(/* node */ doc, /* object */ config) {
-					var options,
-						methods,
-						method,
-						option,
-						key,
-						args = {},
-						additionType = doc.getAttribute(CONSTANTS.TEMPLATE_NAME_ADDITION_TYPE),
-						additionOption = doc.getAttribute(CONSTANTS.TEMPLATE_NAME_ADDITION_OPTIONS);
-					
+				function render(/* node */ doc, /* object */ config, resolve, reject) {
 					if (!config) {
 						throw new Error('Invalid module type. set valid module type(data-urushi-type).');
 					}
 					startRender();
 
-					methods = config.method;
-					options = config.options;
-					for (key in methods) {
-						method = methods[key];
-						option = options[key];
-
-						if ('string' === typeof method) {
-							args[key] = generics[method](doc, key, option);
-						} else if ('function' === typeof method) {
-							args[key] = method(doc, key, option);
-						}
-						if (config.requires.indexOf(key) && undefined === key) {
-							throw new Error('Require option is not defined.: ' + key);
-						}
-					}
-
-					for (key in presetOptions) {
-						if (!args.hasOwnProperty(key)) {
-							args[key] = presetOptions[key];
-						}
-					}
-
 					require([config.name], function(/* Class */ Module) {
-						var module = new Module(args),
-							target,
-							method,
+						let key,
+							args,
+							module,
 							attributes,
-							attrIndex,
-							attrLength,
+							index,
+							length,
 							name,
 							value;
 
-						if (additionType) {
-							setAddition(module, configMap[additionType], additionOption);
+						args = Module.prototype._parse(doc);
+						for (key in presetOptions) {
+							if (!args.hasOwnProperty(key)) {
+								args[key] = presetOptions[key];
+							}
 						}
+						module = new Module(args);
 
 						attributes = doc.attributes;
-						for (attrIndex = 0, attrLength = attributes.length; attrIndex < attrLength; attrIndex++) {
-							name = attributes[attrIndex].name;
-							value = attributes[attrIndex].value;
+						for (index = 0, length = attributes.length; index < length; index++) {
+							name = attributes[index].name;
+							value = attributes[index].value;
 
-							if (-1 === configMap.base.attributes.ignore.indexOf(name) &&
-									-1 === config.attributes.ignore.indexOf(name)) {
-								module[config.attributes.target].setAttribute(name, value);
-							}
-							if (config.setValue && 'value' === name) {
-								module[config.setValue.name](value);
-							}
-							if ('disabled' === name) {
-								module.setDisabled(true);
-							}
-							if ('readonly' === name && 'function' === typeof module.setReadonly) {
-								module.setReadonly(true);
+							// 先頭ノードへ属性を引き継ぐ。
+							if (Module.prototype._isTakedOver(name)) {
+								module.getRootNode().setAttribute(name, value);
 							}
 						}
 
 						widgets[module.id] = module;
 
-						for (target in config.remove) {
-							method = config.remove[target];
-							if ('string' === typeof method) {
-								args[key] = generics[method](doc);
-							} else if ('function' === typeof method) {
-								args[key] = method(doc, key, option);
-							}
-						}
+						doc.parentNode.replaceChild(module.getRootNode(), doc);
+						if (module.getRootNode() &&
+							module.getRootNode().getAttribute(Tooltip.prototype.getTypeName())) {
 
-						doc.parentNode.replaceChild(module.rootNode, doc);
-						finishRender();
+							registTooltip(module.getRootNode());
+						}
+						finishRender(resolve, reject);
 					});
 				}
-				function circulate(/* node */ doc) {
-					var type = (doc.getAttribute(CONSTANTS.TEMPLATE_NAME_TYPE) || '').toLowerCase(),
+				function circulate(/* node */ doc, resolve, reject) {
+					let type = (doc.getAttribute(ATTRIBUTE_NAME_URUSHI_TYPE) || '').toLowerCase(),
 						children = doc.children || [],
 						index,
 						length;
 
 					if (type) {
-						render(doc, configMap[type]);
+						render(doc, configMap[type], resolve, reject);
+					} else if (doc.getAttribute(Tooltip.prototype.getTypeName())) {
+						registTooltip(doc);
 					}
 					for (index = 0, length = children.length; index < length; index++) {
-						circulate(children[index]);
+						circulate(children[index], resolve, reject);
 					}
 				}
 
-				if (!configMap) {
-					throw new Error('Set configuration of urushi template engine.');
-				}
-				docTree = docTree || document.body;
-				circulate(docTree);
+				promise = new Promise(function(resolve, reject) {
+					if (!configMap) {
+						throw new Error('Set configuration of urushi template engine.');
+					}
+					require([configMap.post.tooltip], function(/* Class */ Module) {
+						Tooltip = Module;
+						docTree = docTree || document.body;
+						circulate(docTree, resolve, reject);
 
-				if (isNaN(renderingCount)) {
-					setTimeout(function() {
-						deferred.resolve(ret);
-					}, 10);
-				}
+						if (isNaN(renderingCount)) {
+							setTimeout(function() {
+								resolve(ret);
+							}, 10);
+						}
+					});
+				});
 
-				return deferred;
+				return promise;
 			}
 		};
 	}
