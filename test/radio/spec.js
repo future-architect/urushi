@@ -5,7 +5,7 @@ define(
 		'use strict';
 
 		describe('Radiobox test', function() {
-			var radio1,
+			let radio1,
 				radio2,
 				parentNode = document.getElementById('script-modules');
 
@@ -47,13 +47,34 @@ define(
 				expect(radio2.destroy()).toBe();
 			});
 
+			it('_parse', function() {
+				let tags = document.getElementsByName('radio1'),
+					i, args, key, are = [
+						{id: 'r1', name: 'radio1', label: '1', value: '1', styleClass: 'testClass', 'checked': false, 'disabled': false},
+						{id: 'r2', name: 'radio1', label: '2', value: '2', styleClass: '', 'checked': true, 'disabled': false},
+						{id: 'r3', name: 'radio1', label: '3', value: '3', styleClass: '', 'checked': false, 'disabled': false}
+					];
+
+				for (i = 0; i < tags.length; i++) {
+					args = Radiobox.prototype._parse(tags[i]);
+					for (key in args) {
+						console.log('key in args', key, args[key], are[i][key]);
+						expect(args[key]).toBe(are[i][key]);
+					}
+					for (key in are[i]) {
+						console.log('key in are[' + i + ']', key, args[key], are[i][key]);
+						expect(args[key]).toBe(are[i][key]);
+					}
+
+				}
+			});
 			describe('Template engine', function() {
-				var flag = false;
+				let flag = false;
 				beforeEach(function(done) {
 					templateEngine.renderDocument(document.body, templateConfig).then(function(result) {
 						flag = true;
 						done();
-					}).otherwise(function(error) {
+					}).catch(function(error) {
 						flag = false;
 						done();
 					});

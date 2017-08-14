@@ -1,5 +1,5 @@
 require.config(requireConfig);
-require(['dialog.spec'], function() {
+require(['event.spec'], function() {
 	'use strict';
 	startJasmine();
 });

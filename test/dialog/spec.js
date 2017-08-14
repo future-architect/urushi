@@ -177,16 +177,16 @@ define(
 				beforeEach(function(done) {
 					templateEngine.renderDocument(document.body, templateConfig).then(function(result) {
 						var modules = result.widgets;
-						Urushi.addEvent(modules.button1.getRootNode(), 'click', modules.button1, function() {
+						Urushi.addEvent(modules.button1.getRootNode(), 'click', function() {
 							modules.dialog1.show();
 						});
-						Urushi.addEvent(modules.button2.getRootNode(), 'click', modules.button2, function() {
+						Urushi.addEvent(modules.button2.getRootNode(), 'click', function() {
 							modules.dialog2.show();
 						});
 
 						flag = true;
 						done();
-					}).otherwise(function(error) {
+					}).catch(function(error) {
 						flag = false;
 						done();
 					});

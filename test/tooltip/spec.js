@@ -105,9 +105,6 @@ define(
 
 				tooltip1.position = position;
 			});
-			it('getDuration', function() {
-				expect(tooltip1.getDuration()).toBe(200);
-			});
 			it('destroy', function() {
 				expect(tooltip1.destroy()).toBe();
 			});
@@ -118,7 +115,7 @@ define(
 					templateEngine.renderDocument(document.body, templateConfig).then(function(result) {
 						flag = true;
 						done();
-					}).otherwise(function(error) {
+					}).catch(function(error) {
 						flag = false;
 						done();
 					});

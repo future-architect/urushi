@@ -137,10 +137,12 @@ define(
 
 						manager = new ToastManager();
 						document.body.appendChild(manager.getRootNode());
-						Urushi.addEvent(modules.button.getRootNode(), 'click', manager, 'show', 'toast demo');
+						Urushi.addEvent(modules.button.getRootNode(), 'click', function() {
+							manager.show('toast demo');
+						});
 						flag = true;
 						done();
-					}).otherwise(function(error) {
+					}).catch(function(error) {
 						flag = false;
 						done();
 					});

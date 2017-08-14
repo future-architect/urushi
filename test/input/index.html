@@ -29,8 +29,20 @@
 	<div class="test-area">
 		<input id="input1" data-urushi-type="input">
 		<input id="input2" data-urushi-type="input" placeholder="example value." data-urushi-options='{"hint" : "hint"}'>
-		<input id="input2" data-urushi-type="input" disabled value="some message">
-		<input id="input2" data-urushi-type="input" readonly value="some message">
+		<input id="input3" data-urushi-type="input" disabled value="some message">
+		<input id="input4" data-urushi-type="input" readonly value="some message">
+	</div>
+	<div class="test-area" id="parse">
+		<input data-urushi-type="input">
+		<input 
+			id="testId"
+			class="testClass"
+			data-urushi-type="input"
+			data-urushi-options='{"caption":"test caption", "hint":"hint"}'
+			value="test message"
+			placeholder="placeholder"
+			disabled
+			readonly>
 	</div>
 	<div class="test-area" id="script-modules"></div>
 </body>

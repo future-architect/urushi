@@ -13,6 +13,7 @@
 			'xhr',
 
 			'button',
+			'calendar',
 			'checkbox',
 			'contextMenu',
 			'dialog',

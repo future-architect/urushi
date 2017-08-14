@@ -205,7 +205,7 @@ define(
 					templateEngine.renderDocument(document.body, templateConfig).then(function(result) {
 						flag = true;
 						done();
-					}).otherwise(function(error) {
+					}).catch(function(error) {
 						flag = false;
 						done();
 					});

@@ -2,8 +2,8 @@
 
 define(
 	'contextMenu.spec',
-	['Urushi', 'ContextMenu', 'templateEngine', 'templateConfig', 'animation'],
-	function(Urushi, ContextMenu, templateEngine, templateConfig, animation) {
+	['Urushi', 'ContextMenu', 'templateEngine', 'templateConfig'],
+	function(Urushi, ContextMenu, templateEngine, templateConfig) {
 		'use strict';
 
 		describe('ContextMenu test', function() {
@@ -741,7 +741,7 @@ define(
 					templateEngine.renderDocument(document.body, templateConfig).then(function(result) {
 						flag = true;
 						done();
-					}).otherwise(function(error) {
+					}).catch(function(error) {
 						flag = false;
 						done();
 					});

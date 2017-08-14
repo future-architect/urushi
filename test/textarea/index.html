@@ -28,9 +28,30 @@
 	<h1>Textarea unit test.</h1>
 	<div class="test-area">
 		<textarea id="textarea1" data-urushi-type="textarea"></textarea>
-		<textarea id="textarea2" value="some value.
-test message." data-urushi-type="textarea" data-urushi-options='{"hint" : "hint message."}' placeholder="placeholder message."></textarea>
-		<textarea id="textarea3" value="" data-urushi-type="textarea" data-urushi-options='{"hint" : "hint message."}' placeholder="placeholder message."></textarea>
+		<textarea 
+			id="textarea2"
+			value="some value. test message."
+			data-urushi-type="textarea"
+			data-urushi-options='{"hint" : "hint message."}'
+			placeholder="placeholder message."></textarea>
+		<textarea 
+			id="textarea3"
+			value=""
+			data-urushi-type="textarea"
+			data-urushi-options='{"hint" : "hint message."}'
+			placeholder="placeholder message."></textarea>
+	</div>
+	<div class="test-area" id="parse">
+		<textarea data-urushi-type="textarea"></textarea>
+		<textarea 
+			id="testId"
+			class="testClass"
+			data-urushi-type="textarea"
+			data-urushi-options='{"caption":"test caption", "hint":"hint"}'
+			value="test message"
+			placeholder="placeholder"
+			disabled
+			readonly></textarea>
 	</div>
 	<div class="test-area" id="script-modules"></div>
 </body>

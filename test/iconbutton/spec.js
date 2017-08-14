@@ -65,10 +65,26 @@ define(
 				expect(wrapper.tagName).toBe('DIV');
 				expect(button1._createRippleWrapperElement()).toBe(wrapper);
 
-				// _getRect() TODO
+				// _getX()
+				expect(isNaN(button1._getX(validMousedownEvent))).toBe(false);
+				temp = Urushi.isTouch;
+				Urushi.isTouch = isTouchDummy;
+				expect(isNaN(button1._getX(invalidTouchEvent))).toBe(true);
+				expect(isNaN(button1._getX(validTouchEvent))).toBe(false);
+				Urushi.isTouch = temp;
+				relX = button1._getX(validMousedownEvent);
+
+				// _getY()
+				expect(isNaN(button1._getY(validMousedownEvent))).toBe(false);
+				temp = Urushi.isTouch;
+				Urushi.isTouch = isTouchDummy;
+				expect(isNaN(button1._getY(invalidTouchEvent))).toBe(true);
+				expect(isNaN(button1._getY(validTouchEvent))).toBe(false);
+				Urushi.isTouch = temp;
+				relY = button1._getY(validMousedownEvent);
 
 				// _getRippleColor()
-				expect(button1._getRippleColor()).not.toThrow();
+				expect(button1._getRippleColor()).toBe('rgba(5, 2, 0, 0.73)');
 				button1.getRootNode().setAttribute('data-ripple-color', 'test');
 				expect(button1._getRippleColor()).toBe('test');
 				button1.getRootNode().removeAttribute('data-ripple-color');

@@ -33,16 +33,10 @@ function createPage() {
 		'Tooltip',
 
 		'browser',
-		'Deferred',
 		'event',
 		'node',
 		'templateEngine',
-		'animation',
-		'xhr',
-		
-		'Grid',
-		'FileInput',
-		'UploadManager',
+		'xhr'
 	];
 
 	for (i = 0; i < targets.length; i++) {
